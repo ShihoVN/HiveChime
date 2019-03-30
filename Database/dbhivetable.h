@@ -17,7 +17,7 @@ protected:
     std::string sql_select_all;
     std::string sql_update_row;
     std::string sql_select;
-    int column =5;
+    int column =3;
 public:
 
     dbhivetable();
@@ -33,11 +33,8 @@ public:
     // insert command for your child class.
     virtual void store_add_row_sql();
 
-    bool add_row_p(int id, std::string f_name,std::string l_name,
-                 std::string game, std::string   score);
-
-    bool update_row_p(int id, std::string game, std::string   score);
-    char** select_row_p();
+    bool add_row(int id, std::string hive_name, std::string owner,std::string model_table);
+    char** select_row();
     bool select_all();
 };
 
@@ -45,11 +42,6 @@ public:
 // This is a callback function that is sent to the library and used
 // to parse the sql request being sent to the database.
 int cb_add_row(void  *data,
-               int    argc,
-               char **argv,
-               char **azColName);
-
-int cb_update_row(void  *data,
                int    argc,
                char **argv,
                char **azColName);

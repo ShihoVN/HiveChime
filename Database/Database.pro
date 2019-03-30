@@ -15,3 +15,4 @@ HEADERS += \
     dbmodeltable.h \
     dbhivetable.h \
     tool.h
+LIBS += -lsqlite3

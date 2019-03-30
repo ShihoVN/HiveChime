@@ -64,16 +64,13 @@ void dbmodeltable::store_create_sql() {
     sql_create += table_name;
     sql_create += " ( ";
     sql_create += " id INT PRIMARY KEY NOT NULL, ";
-    sql_create += "  f_name TEXT NOT NULL, ";
-    sql_create += "  l_name TEXT NOT NULL, ";
-    sql_create += "  game TEXT NOT NULL,";
-    sql_create += "  score TEXT  NOT NULL ";
+    sql_create += "  model_name TEXT NOT NULL, ";
+    sql_create += "  entry_vector TEXT NOT NULL, ";
     sql_create += " );";
 
 }
 
-bool dbmodeltable::add_row_p(int id, std::string f_name,std::string l_name,
-                             std::string game, std::string   score) {
+bool dbmodeltable::add_row(int id, std::string model_name, std::string entry_vector_table) {
     int   retCode = 0;
     char *zErrMsg = 0;
 
@@ -81,7 +78,7 @@ bool dbmodeltable::add_row_p(int id, std::string f_name,std::string l_name,
 
     sql_add_row  = "INSERT INTO ";
     sql_add_row += table_name;
-    sql_add_row += " ( id, f_name, l_name, game, score) ";
+    sql_add_row += " ( id, model_name, entry_vector_table) ";
     sql_add_row += "VALUES (";
 
     sprintf(tempval, "%d", id);
@@ -89,19 +86,12 @@ bool dbmodeltable::add_row_p(int id, std::string f_name,std::string l_name,
     sql_add_row += ", ";
 
     sql_add_row += "\"";
-    sql_add_row += std::string(f_name);
+    sql_add_row += std::string(model_name);
     sql_add_row += "\", ";
 
     sql_add_row += "\"";
-    sql_add_row += std::string(l_name);
+    sql_add_row += std::string(entry_vector_table);
     sql_add_row += "\", ";
-
-    sql_add_row += "\"";
-    sql_add_row += std::string(game);
-    sql_add_row += "\", ";
-
-    sql_add_row += std::string(score);
-    sql_add_row += " ";
 
     sql_add_row += " );";
 
@@ -127,77 +117,7 @@ bool dbmodeltable::add_row_p(int id, std::string f_name,std::string l_name,
     return retCode;
 }
 
-bool dbmodeltable::update_row_p(int id, std::string game, std::string   score){
-        int   retCode = 0;
-        char *zErrMsg = 0;
-
-        char tempval[128];
-        sql_update_row  = "UPDATE ";
-        sql_update_row += table_name;
-        sql_update_row += " SET game = ";
-
-        sql_update_row += "\"";
-        sql_update_row += std::string(game);
-        sql_update_row += "\" ";
-
-        sql_update_row += "WHERE id = ";
-
-
-        sprintf(tempval, "%d", id);
-        sql_update_row += tempval;
-
-        std::cout << sql_update_row << std::endl;
-
-        retCode = sqlite3_exec(curr_db->db_ref(),
-                               sql_update_row.c_str(),
-                               cb_update_row,
-                               this,
-                               &zErrMsg          );
-
-        if( retCode != SQLITE_OK ){
-
-            std::cerr << table_name
-                      << " template ::"
-                      << std::endl
-                      << "SQL error: "
-                      << zErrMsg;
-
-            sqlite3_free(zErrMsg);
-        }
-        sql_update_row  = "UPDATE ";
-        sql_update_row += table_name;
-        sql_update_row += " SET score = ";
-
-        sql_update_row += std::string(score);
-
-        sql_update_row += " WHERE id = ";
-
-
-        sprintf(tempval, "%d", id);
-        sql_update_row += tempval;
-
-        std::cout << sql_update_row << std::endl;
-
-        retCode = sqlite3_exec(curr_db->db_ref(),
-                               sql_update_row.c_str(),
-                               cb_update_row,
-                               this,
-                               &zErrMsg          );
-
-        if( retCode != SQLITE_OK ){
-
-            std::cerr << table_name
-                      << " template ::"
-                      << std::endl
-                      << "SQL error: "
-                      << zErrMsg;
-
-            sqlite3_free(zErrMsg);
-        }
-        return retCode;
-}
-
-char** dbmodeltable::select_row_p(){
+char** dbmodeltable::select_row(){
         int   retCode = 0;
         char *zErrMsg = 0;
 
