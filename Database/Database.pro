@@ -4,4 +4,14 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+    dbtable.cpp \
+    dbmodeltable.cpp \
+    dbhivetable.cpp \
+    tool.cpp
+
+HEADERS += \
+    dbtable.h \
+    dbmodeltable.h \
+    dbhivetable.h \
+    tool.h
