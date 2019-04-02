@@ -7,7 +7,7 @@
 using namespace std;
 
 
-struct data{
+struct Data{
     string hiveId;
     string date;
     string time;
@@ -20,15 +20,12 @@ class DataContainer
 {
 public:
     DataContainer();
-
-private:
-    void addData(data d);
-
+    void addData(Data d);
 
 
 private:
 
-    vector<data> recent;
+    vector<Data> recent; //recently inputted data
 
 };
 
