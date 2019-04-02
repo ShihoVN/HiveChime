@@ -24,6 +24,8 @@ public:
 private:
     void addData(data d);
 
+
+
 private:
 
     vector<data> recent;
