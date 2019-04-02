@@ -70,7 +70,7 @@ void dbmodeltable::store_create_sql() {
 
 }
 
-bool dbmodeltable::add_row(int id, std::string model_name, std::string entry_vector_table) {
+bool dbmodeltable::add_row_m(int id, std::string model_name, std::string entry_vector_table) {
     int   retCode = 0;
     char *zErrMsg = 0;
 
@@ -117,7 +117,7 @@ bool dbmodeltable::add_row(int id, std::string model_name, std::string entry_vec
     return retCode;
 }
 
-char** dbmodeltable::select_row(){
+char** dbmodeltable::select_row_m(){
         int   retCode = 0;
         char *zErrMsg = 0;
 
