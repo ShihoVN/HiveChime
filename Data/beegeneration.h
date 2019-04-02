@@ -15,7 +15,6 @@
 
 
 
-using namespace std::chrono;
 using namespace std;
 
 
@@ -23,18 +22,23 @@ class BeeGeneration
 {
 public:
     BeeGeneration(string filename);
-    BeeGeneration(string filename, string id);
+    BeeGeneration(string id, string filename);
     ~BeeGeneration();
 
     string makeBee();
     void generateTime();
     void setID(string id);
+    void setID(string id, string filename);
 private:
+    std::default_random_engine generator;
     vector<int> lambda;
+    int current;
+    int n;
     string id;
-    string year, month, day;
-    auto date;
-    string hour, min, sec, milli;
+    long milli;
+    int time[6];
+    void add(long ms);
+
 
 };
 

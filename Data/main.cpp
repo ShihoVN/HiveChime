@@ -12,5 +12,7 @@ int main()
     d.decode("HC0002-D18.12.19T13.43.16000-B0B1B16B0B0B0B0B0B0B0");
 
 
+
+
     return 0;
 }
