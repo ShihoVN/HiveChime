@@ -7,9 +7,11 @@ SOURCES += \
         main.cpp \
     datadecoder.cpp \
     datacontainer.cpp \
-    datagenerator.cpp
+    datagenerator.cpp \
+    beegeneration.cpp
 
 HEADERS += \
     datadecoder.h \
     datacontainer.h \
-    datagenerator.h
+    datagenerator.h \
+    beegeneration.h
