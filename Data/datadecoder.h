@@ -11,7 +11,6 @@ class DataDecoder
 {
 public:
     DataDecoder();
-   //DataDecoder(string hex);
     void decode(string hex);//decodes the string
     string getDecoded();
     DataContainer d;
@@ -19,7 +18,6 @@ public:
 
 private:
     string hex;//The string before it is decompiled
-    string decoded;//the string of the decoded data
 };
 
 #endif // DATADECODER_H
