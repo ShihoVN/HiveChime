@@ -6,6 +6,9 @@ class DataContainer
 {
 public:
     DataContainer();
+
+private:
+
 };
 
 #endif // DATACONTAINER_H

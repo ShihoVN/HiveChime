@@ -33,8 +33,8 @@ public:
     // insert command for your child class.
     virtual void store_add_row_sql();
 
-    bool add_row(int id, std::string model_name, std::string entry_vector_table);
-    char** select_row();
+    bool add_row_m(int id, std::string model_name, std::string entry_vector_table);
+    char** select_row_m();
     bool select_all();
 };
 

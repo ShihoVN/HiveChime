@@ -71,7 +71,7 @@ void dbhivetable::store_create_sql() {
 
 }
 
-bool dbhivetable::add_row(int id, std::string hive_name, std::string owner,std::string model_table){
+bool dbhivetable::add_row_h(int id, std::string hive_name, std::string owner,std::string model_table){
 
     int   retCode = 0;
     char *zErrMsg = 0;
@@ -123,7 +123,7 @@ bool dbhivetable::add_row(int id, std::string hive_name, std::string owner,std::
     return retCode;
 }
 
-char** dbhivetable::select_row(){
+char** dbhivetable::select_row_h(){
         int   retCode = 0;
         char *zErrMsg = 0;
 
