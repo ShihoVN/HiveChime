@@ -17,7 +17,7 @@ protected:
     std::string sql_select_all;
     std::string sql_update_row;
     std::string sql_select;
-    int column =5;
+    int column = 5;
 public:
 
     dbmodeltable();
