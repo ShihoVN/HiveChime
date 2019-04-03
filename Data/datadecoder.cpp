@@ -40,20 +40,25 @@ string DataDecoder:: activityDecoder(string _act){
 
 }
 
-/**
- * @brief converts a decimal number to binary
- * @param hiveNum
- * @return bianry number
- */
-int DataDecoder:: decimalToBinary(int hiveNum){
-    int *binary = new int[32];
-    //an interger is only 32 bits long
-    //counter for binary array
-    int i =0;
-    while(hiveNum>0){
-        binary[i] = hiveNum%2;
-        hiveNum= hiveNum/2;
-        i++;
-    }
-    //must be added in the arry backwards though!!!!!
+///**
+// * @brief converts a decimal number to binary
+// * @param hiveNum
+// * @return bianry number
+// */
+//int DataDecoder:: decimalToBinary(int hiveNum){
+//    int *binary = new int[32];
+//    //an interger is only 32 bits long
+//    //counter for binary array
+//    int i =0;
+//    while(hiveNum>0){
+//        binary[i] = hiveNum%2;
+//        hiveNum= hiveNum/2;
+//        i++;
+//    }
+//    //must be added in the arry backwards though!!!!!
+//}
+
+
+int DataDecoder::decimalToBinary(int hiveNumber){
+
 }

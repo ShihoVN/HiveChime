@@ -17,7 +17,7 @@ public:
     string getDecoded();
     string timeDecoder(string time);
     string activityDecoder(string act);
-    int decimalToBinary(int n);
+    int decimalToBinary(int hiveNumber);
 
 
 
@@ -25,6 +25,7 @@ private:
     string hex;//The string before it is decompiled
     DataContainer dContainer;
     vector <string> hexArr; //array of data string entries
+    vector <string> activityMessage;
 
 };
 
