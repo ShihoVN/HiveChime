@@ -12,7 +12,7 @@ public:
 
 
 private:
-    vector<data> generated;//
+    vector<Data> generated;//
 
 };
 
