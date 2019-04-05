@@ -40,7 +40,7 @@ string DataDecoder:: activityDecoder(string _act){
 
 }
 
-///**
+//**
 // * @brief converts a decimal number to binary
 // * @param hiveNum
 // * @return bianry number
