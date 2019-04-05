@@ -2,7 +2,8 @@
 #define DATADECODER_H
 #include <string>
 #include <vector>
-
+#include <iostream>
+#include <sstream>
 #include <datacontainer.h>
 
 
