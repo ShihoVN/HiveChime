@@ -105,7 +105,7 @@ bool dbhivetable::add_row_h(int id, std::string hive_name, std::string owner,std
 
     retCode = sqlite3_exec(curr_db->db_ref(),
                            sql_add_row.c_str(),
-                           cb_add_row,
+                           cb_add_row_h,
                            this,
                            &zErrMsg          );
 
@@ -161,7 +161,7 @@ bool dbhivetable::select_all() {
 
     retCode = sqlite3_exec(curr_db->db_ref(),
                            sql_select_all.c_str(),
-                           cb_select_all,
+                           cb_select_all_h,
                            this,
                            &zErrMsg          );
 
@@ -180,7 +180,7 @@ bool dbhivetable::select_all() {
 }
 
 
-int cb_add_row(void  *data,
+int cb_add_row_h(void  *data,
                int    argc,
                char **argv,
                char **azColName)
@@ -214,7 +214,7 @@ int cb_add_row(void  *data,
     return 0;
 }
 
-int cb_select_all(void  *data,
+int cb_select_all_h(void  *data,
                   int    argc,
                   char **argv,
                   char **azColName)

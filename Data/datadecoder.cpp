@@ -24,7 +24,7 @@ void DataDecoder::decode(string _hex){
         d.type = type;
 
 
-        dContainer.addData(d);
+//        dContainer.addData(d);
 
 
 }

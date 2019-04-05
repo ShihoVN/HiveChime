@@ -41,7 +41,7 @@ public:
 
 // This is a callback function that is sent to the library and used
 // to parse the sql request being sent to the database.
-int cb_add_row(void  *data,
+int cb_add_row_h(void  *data,
                int    argc,
                char **argv,
                char **azColName);
@@ -49,7 +49,7 @@ int cb_add_row(void  *data,
 
 // This is a callback function that is sent to the library and used
 // to parse the sql request being sent to the database.
-int cb_select_all(void  *data,
+int cb_select_all_h(void  *data,
                   int    argc,
                   char **argv,
                   char **azColName);
