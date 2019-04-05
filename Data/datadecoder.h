@@ -4,7 +4,10 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 420866f54cad501e228606778a8b15224cdf62ee
 #include <datacontainer.h>
 
 

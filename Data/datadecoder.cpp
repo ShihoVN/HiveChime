@@ -72,9 +72,19 @@ string DataDecoder:: timeDecoder(string s){
 }
 
 string DataDecoder:: activityDecoder(string _act){
+<<<<<<< HEAD
     string act = _act;
     string delimiter = "B"; // set the delimeter
 
+=======
+        stringstream act(_act);
+        string delimiter = "B"; // set the delimeter
+        vector<string> seglist;
+        while(std::getline(act, delimiter, 'B'))
+        {
+           seglist.push_back(delimiter);
+        }
+>>>>>>> 420866f54cad501e228606778a8b15224cdf62ee
 
 
 
@@ -87,20 +97,20 @@ string DataDecoder:: activityDecoder(string _act){
 // * @param hiveNum
 // * @return bianry number
 // */
-//int DataDecoder:: decimalToBinary(int hiveNum){
-//    int *binary = new int[32];
-//    //an interger is only 32 bits long
-//    //counter for binary array
-//    int i =0;
-//    while(hiveNum>0){
-//        binary[i] = hiveNum%2;
-//        hiveNum= hiveNum/2;
-//        i++;
-//    }
-//    //must be added in the arry backwards though!!!!!
-//}
-
-
-int DataDecoder::decimalToBinary(int hiveNumber){
-
+int DataDecoder:: decimalToBinary(int hiveNum){
+    int *binary = new int[32];
+    //an interger is only 32 bits long
+    //counter for binary array
+    int i =0;
+    while(hiveNum>0){
+        binary[i] = hiveNum%2;
+        hiveNum= hiveNum/2;
+        i++;
+    }
+    //must be added in the arry backwards though!!!!!
 }
+
+
+//int DataDecoder::decimalToBinary(int hiveNumber){
+
+//}
