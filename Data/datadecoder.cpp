@@ -6,32 +6,74 @@ DataDecoder::DataDecoder()
 }
 
 void DataDecoder::decode(string _hex){
-    hex = _hex;
+
+    vector<string> fragments; //vector containing each segment
+    stringstream ss(_hex); // Turn the string into a stream.
+    string tok;
+
+    while(getline(ss, tok, '-')) {
+        fragments.push_back(tok);
+        //cout << tok << endl;
+    }
 
 
-    string hiveId = "bbdsd";
-    string date =  "09099";
-    string time = "0897";
+
+
+    string hiveId = fragments.at(0);
+    string date = dateDecoder(fragments.at(1));
+    string time = timeDecoder(fragments.at(1));
     int  gate =  7;
     bool type = true;
 
 
     Data d;
-        d.hiveId = hiveId;
-        d.date = date;
-        d.time = time;
-        d.gate = gate;
-        d.type = type;
+    d.hiveId = hiveId;
+    d.date = date;
+    d.time = time;
+    d.gate = gate;
+    d.type = type;
 
 
-//        dContainer.addData(d);
+    //        dContainer.addData(d);
 
 
 }
 
+
+string DataDecoder:: dateDecoder(string s){
+    stringstream ss(s); // Turn the string into a stream.
+    string tok;
+
+    getline(ss, tok, 'T');
+    tok.erase(tok.begin());
+
+     cout << tok << endl;
+
+
+
+    return tok;
+}
+
+
+
+string DataDecoder:: timeDecoder(string s){
+    stringstream ss(s); // Turn the string into a stream.
+    string tok;
+    string time;
+
+    while(getline(ss, tok, 'T')) {
+     time = tok;
+    }
+
+
+     cout << tok << endl;
+    return tok;
+
+}
+
 string DataDecoder:: activityDecoder(string _act){
-        string act = _act;
-        string delimiter = "B"; // set the delimeter
+    string act = _act;
+    string delimiter = "B"; // set the delimeter
 
 
 

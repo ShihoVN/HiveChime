@@ -2,6 +2,8 @@
 #define DATADECODER_H
 #include <string>
 #include <vector>
+#include <iostream>
+#include <sstream>
 
 #include <datacontainer.h>
 
@@ -15,7 +17,8 @@ public:
     DataDecoder();
     void decode(string hex);//decodes the string
     string getDecoded();
-    string timeDecoder(string time);
+    string timeDecoder(string s);//take the time info from
+    string dateDecoder(string s);
     string activityDecoder(string act);
     int decimalToBinary(int hiveNumber);
 
