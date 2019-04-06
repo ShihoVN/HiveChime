@@ -27,6 +27,8 @@ void DataDecoder::decode(string _hex){
 
     activityDecoder(fragments.at(2));
 
+    cout << "sensor array" <<sensorArray.size() << endl;
+
 
     bool type = entry; //this isnt rigth
 
@@ -68,21 +70,31 @@ string DataDecoder:: timeDecoder(string s){
     string tok2;
     int count = 0;
     string time;
-    int t  [3];
+    int t;
+    vector <string> timeList;
 
 
     while(getline(ss, tok, 'T')) {
+     //time = tok;
+     getline(ss, tok, 'T');
      time = tok;
 
+     cout << "THE TIMES "<< time << endl;
+
      //this doesnt work  i just need to get the miliseconds
-     while(!getline(ss, tok2, '.')){
-        t[count] = count;
+    int pos = time.find('.');
 
-     }
-      cout << "tiem at 2 "<< t[2] << endl;
+
+    string sub = time.substr(pos+3);
+     sub.erase(sub.begin());
+
+    cout << "sub " <<sub << endl;
+       int milisec = std::stoi(sub);
+
+
      //set sensor time to
-     sa.sensorTime = t[2];
-
+     sa.sensorTime = milisec;
+     cout << "sensor time " <<sa.sensorTime << endl;
     }
 
 
@@ -110,7 +122,6 @@ void DataDecoder:: activityDecoder(string _act){
 
             int board = std::atoi(delimiter.c_str()); //convert the delimiter to an int
 
-
             //get rid of any 0s for complexity purpose
             if(board != 0){
 
@@ -120,10 +131,11 @@ void DataDecoder:: activityDecoder(string _act){
 
                sa.sensorBoard = boardIndex;
 
+                cout << "board " << board << endl;
                decimalToBinary(board); //pass the board activity to binary decoder
 
 
-               cout << "\n board Activity hex "  << board<< endl;
+               cout << "\n board Activity decimal "  << board<< endl;
                cout << "board Index "  << boardIndex<< endl;
 
 
@@ -136,29 +148,123 @@ void DataDecoder:: activityDecoder(string _act){
 
 }
 
-void DataDecoder:: decimalToBinary(int boardAct){
+void DataDecoder:: decimalToBinary2(int boardAct){
     //the higest gate we can have it 2^8
     //binary is read in backwards
-    for(int i = 31; i>=0; i--){
-        int temp = boardAct >>i; //bitwise operator
+
+    cout << "board act " << boardAct << endl;
+
+    for(unsigned i = 32; i>0; i--){
+        int temp = boardAct >> i; //bitwise operator
+        cout << "this is temp" <<temp <<endl;
+        //cout << "this is i " << i << endl;
+        //cout << " LINE 155" << temp <<endl;
         //set struct sensor equal to i
 
         if(temp & 1) //and the bits with 1--to determine if they are one
         {
+            cout << "this is i" <<i <<endl;
+
+             cout << 1 <<endl;
             sa.sensors = i;
-            sensorArray.push_back(sa);  //add the struct to the vector of structs
-            cout << sa.sensors;
+            compareSensors(sa);
+             // sensorArray.push_back(sa); //add the struct to the vector of structs
+            //cout <<"hellloo " << sa.sensors;
 
         }
-        else{
-            sa.sensors = i;
-            sensorArray.push_back(sa); //add the struct to the vector of structs
-            cout << sa.sensors;
-        }
+//        else{
+//            //cout << "0" << endl;
+//            cout << 0 <<endl;
+//            sa.sensors = i;
+//            compareSensors(sa);
+//           // sensorArray.push_back(sa); //add the struct to the vector of structs
+//            //cout << sa.sensors;
+//        }
     }
 
 
 }
+
+void DataDecoder:: compareSensors(sensorActivity thisSensor){
+    for(unsigned i = 0; i<sensorArray.size(); i++){
+        if(thisSensor.sensorTime - sensorArray.at(i).sensorTime < 500) //check if the sensor time < 500 ms
+        {
+            if(thisSensor.sensorBoard == sensorArray.at(i).sensorBoard) //check only sensors of the same board
+            {
+                //checks for sensors 8 & 1 and deletes sensor if its a match
+                if(thisSensor.sensors == 8 || thisSensor.sensors ==1){
+                    if(sensorArray.at(i).sensors ==1 || sensorArray.at(i).sensors ==8);
+                        sensorArray.erase(sensorArray.begin() +(i)); //remove the struct in array
+                        return;
+
+                }
+                //checks for sensors 2 & 7 and deletes sensor if its a match
+                else if(thisSensor.sensors == 2 || thisSensor.sensors ==7){
+                    if(sensorArray.at(i).sensors ==2 || sensorArray.at(i).sensors ==7);
+                        sensorArray.erase(sensorArray.begin() +(i)); //remove the struct in array
+                        return;
+
+            }
+                //checks for sensors 3 & 6 and deletes sensor if its a match
+                else if(thisSensor.sensors == 3 || thisSensor.sensors ==6){
+                    if(sensorArray.at(i).sensors ==6 || sensorArray.at(i).sensors ==3);
+                        sensorArray.erase(sensorArray.begin() +(i)); //remove the struct in array
+                        return;
+
+                }
+                //checks for sensors 4 & 5 and deletes sensor if its a match
+                else if(thisSensor.sensors == 4 || thisSensor.sensors ==5){
+                    if(sensorArray.at(i).sensors ==5 || sensorArray.at(i).sensors ==4);
+                        sensorArray.erase(sensorArray.begin() +(i)); //remove the struct in array
+                        return;
+
+                }
+                else{
+                    sensorArray.push_back(thisSensor);
+                }
+            }
+
+        }
+        //if the time is more than 500 ms delete sensor .. bee turned back
+        else{
+                sensorArray.erase(sensorArray.begin() +i);
+        }
+        \
+
+    }
+}
+
+
+
+void DataDecoder:: decimalToBinary(int boardAct){
+    //the higest gate we can have it 2^8
+    //binary is read in backwards
+    int _boardAct = boardAct;
+    int binary[32];
+    unsigned count =0;
+    while (_boardAct > 0){
+           binary[count] = _boardAct %2;
+           _boardAct = boardAct/2;
+
+           count++;
+
+
+        }
+
+    for(int i = count-1; i >=0; i--){
+        cout << binary[i];
+       //   cout << "before if"<< endl;
+         // cout << "count" <<count << endl;
+          //cout << "i" <<i << endl;
+        if(binary[i] == 1){
+             cout << "helloo"<< endl;
+            sa.sensors = i+1;
+
+            cout << "DA SENSORS " <<sa.sensors;
+        }
+    }
+}
+
 
 
 

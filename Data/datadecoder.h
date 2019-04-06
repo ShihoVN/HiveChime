@@ -26,6 +26,8 @@ public:
     string dateDecoder(string s);
     void activityDecoder(string act);
     void decimalToBinary(int hiveNumber);
+     void decimalToBinary2(int hiveNumber);
+    void compareSensors(sensorActivity sen);
 
 
 
