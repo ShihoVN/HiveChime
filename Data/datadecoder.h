@@ -2,12 +2,19 @@
 #define DATADECODER_H
 #include <string>
 #include <vector>
+#include <iostream>
+#include <sstream>
 
 #include <datacontainer.h>
 
 
 using namespace std;
 
+struct sensorActivity {
+    int sensorTime;
+    int sensorBoard;
+    int sensors;
+};
 
 class DataDecoder
 {
@@ -15,9 +22,10 @@ public:
     DataDecoder();
     void decode(string hex);//decodes the string
     string getDecoded();
-    string timeDecoder(string time);
-    string activityDecoder(string act);
-    int decimalToBinary(int hiveNumber);
+    string timeDecoder(string s);//take the time info from
+    string dateDecoder(string s);
+    void activityDecoder(string act);
+    void decimalToBinary(int hiveNumber);
 
 
 
@@ -25,7 +33,15 @@ private:
     string hex;//The string before it is decompiled
     DataContainer dContainer;
     vector <string> hexArr; //array of data string entries
-    vector <string> activityMessage;
+    //vector <string> sensorArr; //arry of which sensors are activated
+    int* gateArr;
+    int* boardArr;
+    vector <int> binaryMessage;
+    int miliseconds;
+    sensorActivity sa;
+    vector <sensorActivity> sensorArray;
+    bool entry;
+
 
 };
 
