@@ -65,26 +65,24 @@ string DataDecoder:: dateDecoder(string s){
 string DataDecoder:: timeDecoder(string s){
     stringstream ss(s); // Turn the string into a stream.
     string tok;
-    string tok2;
+    string tok2[3];
     int count = 0;
     string time;
-    int t  [3];
 
 
     while(getline(ss, tok, 'T')) {
      time = tok;
-
+}
      //this doesnt work  i just need to get the miliseconds
-     while(!getline(ss, tok2, '.')){
-        t[count] = count;
-
+     for(char m : tok){
+         if(m=='.')
+             count++;
+         else
+             tok2[count]=tok2[count]+m;
      }
-      cout << "tiem at 2 "<< t[2] << endl;
+     sa.sensorTime = atoi(tok2[count].c_str());
+      cout << "time at 2 "<< sa.sensorTime << endl;
      //set sensor time to
-     sa.sensorTime = t[2];
-
-    }
-
 
      cout << "time decoder " << tok << endl;
     return tok;
