@@ -19,14 +19,27 @@
 
 
 
+
 using namespace std;
 
 struct nextBee{
     int now[6];
-    long m;
+    int m;
     int board;
     int sensor;
 } ;
+
+struct Compare{
+  bool operator()(nextBee const& first, nextBee const& second)
+  {
+      for(int i = 0; i < 6; i ++){
+              if(first.now[i] != second.now[i] ){
+                  return first.now[i] < second.now[i];
+              }
+          }
+          return first.m < second.m  ;
+  }
+};
 
 
 class BeeGeneration
@@ -45,12 +58,12 @@ private:
     void generateTime();
     void generateTime(int _time);
     void setActivity(int size);
-    int compare();
-    int* calculate(long ms);
-    string generate();
+    int* calculate(double ms);
+    string generate(int* next);
     string pairGenerate();
     string overGenerate( string udp);
     int findPair(int s);
+    int btod(string b);
 
 
     std::default_random_engine generator;
@@ -58,10 +71,9 @@ private:
     int current;
     int n, x;
     string id;
-    long milli, m;
+    int milli, m;
     int time[6];
-    priority_queue<nextBee> nextBees;
-
+    priority_queue<nextBee, vector<nextBee>, Compare> nextBees;
 
 
 
