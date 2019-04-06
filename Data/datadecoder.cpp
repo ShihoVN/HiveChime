@@ -2,7 +2,11 @@
 
 DataDecoder::DataDecoder()
 {
-
+    sa.sensors = 0;
+    sa.sensorTime =0;
+    sa.sensorBoard = 0;
+    gateArr= new int[32]; //initalize gate ar
+    boardArr = new int[10];
 }
 
 void DataDecoder::decode(string _hex){
@@ -13,24 +17,26 @@ void DataDecoder::decode(string _hex){
 
     while(getline(ss, tok, '-')) {
         fragments.push_back(tok);
-        //cout << tok << endl;
+        cout << "fragements_pushback  " <<tok << endl;
     }
-
-
 
 
     string hiveId = fragments.at(0);
     string date = dateDecoder(fragments.at(1));
     string time = timeDecoder(fragments.at(1));
-    int  gate =  7;
-    bool type = true;
+
+    activityDecoder(fragments.at(2));
+
+
+    bool type = entry; //this isnt rigth
 
 
     Data d;
     d.hiveId = hiveId;
     d.date = date;
     d.time = time;
-    d.gate = gate;
+    d.gate = gateArr;
+    d.board = boardArr;
     d.type = type;
 
 
@@ -44,10 +50,10 @@ string DataDecoder:: dateDecoder(string s){
     stringstream ss(s); // Turn the string into a stream.
     string tok;
 
-    getline(ss, tok, 'T');
-    tok.erase(tok.begin());
+    getline(ss, tok, 'T'); //gets line up to character T
+    tok.erase(tok.begin());  //erases D in the begining of string
 
-     cout << tok << endl;
+     cout << "date decoder  " << tok << endl;
 
 
 
@@ -59,58 +65,100 @@ string DataDecoder:: dateDecoder(string s){
 string DataDecoder:: timeDecoder(string s){
     stringstream ss(s); // Turn the string into a stream.
     string tok;
+    string tok2;
+    int count = 0;
     string time;
+    int t  [3];
+
 
     while(getline(ss, tok, 'T')) {
      time = tok;
+
+     //this doesnt work  i just need to get the miliseconds
+     while(!getline(ss, tok2, '.')){
+        t[count] = count;
+
+     }
+      cout << "tiem at 2 "<< t[2] << endl;
+     //set sensor time to
+     sa.sensorTime = t[2];
+
     }
 
 
-     cout << tok << endl;
+     cout << "time decoder " << tok << endl;
     return tok;
 
 }
 
-string DataDecoder:: activityDecoder(string _act){
-<<<<<<< HEAD
-    string act = _act;
-    string delimiter = "B"; // set the delimeter
+void DataDecoder:: activityDecoder(string _act){
 
-=======
         stringstream act(_act);
         string delimiter = "B"; // set the delimeter
-        vector<string> seglist;
+        vector<int> boardNum;
+
+        int boardIndex=0;
+
+        //HELLO OKAY FOR SOME REASON THE FIRST INDEX OF THIS STRING
+        //IS " " --- IM NOT SURE WHY-- BUT IF WE FIGURE OUT WHY
+        //WE NEED TO CHANGE THE BOARD INDEX FROM 0 TO 1
+
         while(std::getline(act, delimiter, 'B'))
         {
-           seglist.push_back(delimiter);
+
+           //seglist.push_back(delimiter); //LIA COMMENTED IT OUT
+
+            int board = std::atoi(delimiter.c_str()); //convert the delimiter to an int
+
+
+            //get rid of any 0s for complexity purpose
+            if(board != 0){
+
+
+               boardNum.push_back(boardIndex); //this vector stores which board showed activity-- not sure if we need to know
+               //make struct sensors equal to this board
+
+               sa.sensorBoard = boardIndex;
+
+               decimalToBinary(board); //pass the board activity to binary decoder
+
+
+               cout << "\n board Activity hex "  << board<< endl;
+               cout << "board Index "  << boardIndex<< endl;
+
+
+            }
+
+           boardIndex ++; //increase index for each loop
         }
->>>>>>> 420866f54cad501e228606778a8b15224cdf62ee
-
-
 
 
 
 }
 
-//**
-// * @brief converts a decimal number to binary
-// * @param hiveNum
-// * @return bianry number
-// */
-int DataDecoder:: decimalToBinary(int hiveNum){
-    int *binary = new int[32];
-    //an interger is only 32 bits long
-    //counter for binary array
-    int i =0;
-    while(hiveNum>0){
-        binary[i] = hiveNum%2;
-        hiveNum= hiveNum/2;
-        i++;
+void DataDecoder:: decimalToBinary(int boardAct){
+    //the higest gate we can have it 2^8
+    //binary is read in backwards
+    for(int i = 31; i>=0; i--){
+        int temp = boardAct >>i; //bitwise operator
+        //set struct sensor equal to i
+
+        if(temp & 1) //and the bits with 1--to determine if they are one
+        {
+            sa.sensors = i;
+            sensorArray.push_back(sa);  //add the struct to the vector of structs
+            cout << sa.sensors;
+
+        }
+        else{
+            sa.sensors = i;
+            sensorArray.push_back(sa); //add the struct to the vector of structs
+            cout << sa.sensors;
+        }
     }
-    //must be added in the arry backwards though!!!!!
+
+
 }
 
 
-//int DataDecoder::decimalToBinary(int hiveNumber){
 
-//}

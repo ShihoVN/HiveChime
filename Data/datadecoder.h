@@ -4,15 +4,17 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
-<<<<<<< HEAD
 
-=======
->>>>>>> 420866f54cad501e228606778a8b15224cdf62ee
 #include <datacontainer.h>
 
 
 using namespace std;
 
+struct sensorActivity {
+    int sensorTime;
+    int sensorBoard;
+    int sensors;
+};
 
 class DataDecoder
 {
@@ -22,8 +24,8 @@ public:
     string getDecoded();
     string timeDecoder(string s);//take the time info from
     string dateDecoder(string s);
-    string activityDecoder(string act);
-    int decimalToBinary(int hiveNumber);
+    void activityDecoder(string act);
+    void decimalToBinary(int hiveNumber);
 
 
 
@@ -31,7 +33,15 @@ private:
     string hex;//The string before it is decompiled
     DataContainer dContainer;
     vector <string> hexArr; //array of data string entries
-    vector <string> activityMessage;
+    //vector <string> sensorArr; //arry of which sensors are activated
+    int* gateArr;
+    int* boardArr;
+    vector <int> binaryMessage;
+    int miliseconds;
+    sensorActivity sa;
+    vector <sensorActivity> sensorArray;
+    bool entry;
+
 
 };
 
