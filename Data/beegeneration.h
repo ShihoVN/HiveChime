@@ -12,33 +12,58 @@
 #include <thread>
 #include <functional>
 #include <cstring>
+#include <fstream>
+#include <iostream>
+#include <time.h>
+#include <queue>
 
 
 
 using namespace std;
 
+struct nextBee{
+    int now[6];
+    long m;
+    int board;
+    int sensor;
+    bool operator<(const nextBee& bee) const {
+        return bee.now < this->now || (bee.now == this->now && bee.m < this->m);
+    }
+} ;
+
 
 class BeeGeneration
 {
 public:
-    BeeGeneration(string filename);
-    BeeGeneration(string id, string filename);
+    BeeGeneration(int size);
+    BeeGeneration(string _id, int size);
+    BeeGeneration(string _id, int size, int time);
     ~BeeGeneration();
 
     string makeBee();
-    void generateTime();
-    void setID(string id);
-    void setID(string id, string filename);
+
+    void setID(string _id, int size);
+    void setID(string _id, int size, int time);
 private:
+    void generateTime();
+    void generateTime(int _time);
+    void setActivity(int size);
+    int compare();
+    int* calculate(long ms);
+    string generate();
+    string pairGenerate();
+    string overGenerate( string udp);
+    int findPair(int s);
+
+
     std::default_random_engine generator;
     vector<int> lambda;
     int current;
-    int n;
+    int n, x;
     string id;
-    long milli;
+    long milli, m;
     int time[6];
-    void add(long ms);
-
+    priority_queue<nextBee> nextBees;
 
 };
 

@@ -20,12 +20,13 @@ void DataDecoder::decode(string _hex){
         cout << "fragements_pushback  " <<tok << endl;
     }
 
-
+ cout << "Fragement" <<fragments.at(2)<< endl;
     string _hiveId = fragments.at(0);
     string _date = dateDecoder(fragments.at(1));
     string _time = timeDecoder(fragments.at(1));
 
     activityDecoder(fragments.at(2));
+
 
 
     Data d;
@@ -62,36 +63,35 @@ string DataDecoder:: dateDecoder(string s){
 string DataDecoder:: timeDecoder(string s){
     stringstream ss(s); // Turn the string into a stream.
     string tok;
-    string tok2;
     string time;
     vector <string> timeList;
 
 
+
     while(getline(ss, tok, 'T')) {
-     getline(ss, tok, 'T');
+    getline(ss, tok, 'T');
      time = tok;
 
 
     int pos = time.find('.');
     string sub = time.substr(pos+3);
-
+    cout << "sub" << sub<< endl;
     sub.erase(sub.begin());
 
     int milisec = std::stoi(sub);
 
      //set sensor time to
      sa.sensorTime = milisec;
-     cout << "sensor time " <<sa.sensorTime << endl;
+
     }
-
-
-     cout << "time decoder " << tok << endl;
-    return tok;
+cout << "sensor time " <<sa.sensorTime << endl;
+ return time;
 
 }
 
-void DataDecoder:: activityDecoder(string _act){
 
+void DataDecoder:: activityDecoder(string _act){
+    cout << "HEREE" << endl;
         stringstream act(_act);
         string delimiter = "B"; // set the delimeter
         vector<int> boardNum;
