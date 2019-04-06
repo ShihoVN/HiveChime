@@ -28,6 +28,7 @@ public:
     void decimalToBinary(int hiveNumber);
      void decimalToBinary2(int hiveNumber);
     void compareSensors(sensorActivity sen);
+    int getPair(int sensorNum);
 
 
 
@@ -35,14 +36,13 @@ private:
     string hex;//The string before it is decompiled
     DataContainer dContainer;
     vector <string> hexArr; //array of data string entries
-    //vector <string> sensorArr; //arry of which sensors are activated
     int* gateArr;
     int* boardArr;
     vector <int> binaryMessage;
     int miliseconds;
     sensorActivity sa;
     vector <sensorActivity> sensorArray;
-    bool entry;
+    bool _type;
 
 
 };
