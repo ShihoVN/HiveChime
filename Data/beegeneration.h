@@ -27,6 +27,9 @@ struct nextBee{
     int m;
     int board;
     int sensor;
+    bool operator<(const nextBee& bee) const {
+        return bee.now < this->now || (bee.now == this->now && bee.m < this->m);
+    }
 } ;
 
 struct Compare{
@@ -74,6 +77,7 @@ private:
     int milli, m;
     int time[6];
     priority_queue<nextBee, vector<nextBee>, Compare> nextBees;
+
 
 
 
