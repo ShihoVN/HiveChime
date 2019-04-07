@@ -20,7 +20,6 @@ void DataDecoder::decode(string _hex){
         cout << "fragements_pushback  " <<tok << endl;
     }
 
- cout << "Fragement" <<fragments.at(2)<< endl;
     string _hiveId = fragments.at(0);
     string _date = dateDecoder(fragments.at(1));
     string _time = timeDecoder(fragments.at(1));
@@ -38,7 +37,7 @@ void DataDecoder::decode(string _hex){
     d.type = _type;
 
  cout << "sensor array" <<sensorArray.size() << endl;
-    //        dContainer.addData(d);
+   //dContainer.addData(d);
 
 
 }
@@ -91,33 +90,24 @@ cout << "sensor time " <<sa.sensorTime << endl;
 
 
 void DataDecoder:: activityDecoder(string _act){
-    cout << "HEREE" << endl;
         stringstream act(_act);
         string delimiter = "B"; // set the delimeter
         vector<int> boardNum;
 
         int boardIndex=0;
 
-        //HELLO OKAY FOR SOME REASON THE FIRST INDEX OF THIS STRING
-        //IS " " --- IM NOT SURE WHY-- BUT IF WE FIGURE OUT WHY
-        //WE NEED TO CHANGE THE BOARD INDEX FROM 0 TO 1
-
         while(std::getline(act, delimiter, 'B'))
         {
-
-           //seglist.push_back(delimiter); //LIA COMMENTED IT OUT
 
             int board = std::atoi(delimiter.c_str()); //convert the delimiter to an int
 
             //get rid of any 0s for complexity purpose
             if(board != 0){
 
-
                boardNum.push_back(boardIndex); //this vector stores which board showed activity-- not sure if we need to know
                //make struct sensors equal to this board
                sa.sensorBoard = boardIndex;
 
-               cout << "board " << board << endl;
                decimalToBinary(board); //pass the board activity to binary decoder
 
 
