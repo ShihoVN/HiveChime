@@ -1,16 +1,22 @@
 #include "beegeneration.h"
 
 
+/**
+ * @brief BeeGeneration::BeeGeneration constructor that takes in the number of bees in the hive
+ * @param size is the number of bees in a hive
+ */
 BeeGeneration::BeeGeneration(int size)
 {
-
     id = "0000";
     generateTime();
     setActivity(size);
-
-
 }
 
+/**
+ * @brief BeeGeneration::BeeGeneration constructor that takes the a specific HiveId and the number of bees in the hive
+ * @param _id is the HiveId
+ * @param size is the number of bees in a hive
+ */
 BeeGeneration::BeeGeneration(string _id, int size){
 
 
@@ -19,6 +25,12 @@ BeeGeneration::BeeGeneration(string _id, int size){
     setActivity(size);
 }
 
+/**
+ * @brief BeeGeneration::BeeGeneration constructor that takes the a specific HiveId and the number of bees in the hive and a specific starting time in the day
+ * @param _id is the HiveId
+ * @param size is the number of bees in a hive
+ * @param time is the time in hours
+ */
 BeeGeneration::BeeGeneration(string _id, int size, int time){
 
     id = _id;
@@ -26,7 +38,11 @@ BeeGeneration::BeeGeneration(string _id, int size, int time){
     setActivity(size);
 }
 
-
+/**
+ * @brief BeeGeneration::setID sets and restarts new ID for a specfic hive and a new size. Particulary useful for reserching purposes.
+ * @param _id is the HiveId
+ * @param size is the number of bees in a hive
+ */
 void BeeGeneration::setID(string _id, int size){
 
     id = _id;
@@ -36,7 +52,12 @@ void BeeGeneration::setID(string _id, int size){
     return;
 }
 
-
+/**
+ * @brief BeeGeneration::setID sets and restarts new ID for a specfic hive, a new size, and a new starting time.Particulary useful for reserching purposes.
+ * @param _id is the HiveId
+ * @param size is the number of bees in a hive
+ * @param time is the time in hours
+ */
 void BeeGeneration::setID(string _id, int size, int time){
 
     id = _id;
@@ -46,37 +67,41 @@ void BeeGeneration::setID(string _id, int size, int time){
     return;
 }
 
-
+/**
+ * @brief BeeGeneration::~BeeGeneration is the deconstrucutor which will cleans out previous memory allocation
+ */
 BeeGeneration::~BeeGeneration()
 {
 
 }
 
+/**
+ * @brief BeeGeneration::makeBee creates a single bee aka a single UDP message. COME BACK TO THIS FOR COMMENTS
+ * @return a string which is the UDP message
+ */
 string BeeGeneration::makeBee()
 {
-
-
 //    //std::binomial_distribution<int, double> binom(5, 1.0/6.0);
-    if(current >24){
+    if(current > 24){ // This if statement checks to see if a day has elapsed and adjusts the time records acordingly
         time[2] ++;
         time[3] -=24;
         current -= 24;
     }
-
-
-       while(n == 0){
+       while(n == 0){ // This while loop checks to see there is reamaning expected bee activity
            current ++;
-           std::poisson_distribution<int> poissDistbn(lambda.at(current-1));
+           std::poisson_distribution<int> poissDistbn(lambda.at(current-1)); //Creates a distuction for that hour based on the activty level
            x = poissDistbn(generator);
            n = x;
            if(x == 0){
                time[3]++;
+               current++;
            }
        }
 
-       std::exponential_distribution<double> expDistbn(double(60/x));
-       int* next = calculate(60000*expDistbn(generator));
-       if(!nextBees.empty()){
+       std::exponential_distribution<double> expDistbn(double(60/x)); //Calculates the next expected activity
+       int* next = calculate(60000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
+
+       if(!nextBees.empty()){ //Checks the priorty queue to see if there are any pairs to complete
             for(int i = 0; i < 6; i ++){
                if(nextBees.top().now[i] < next[i] ){
                    return pairGenerate();
@@ -92,17 +117,17 @@ string BeeGeneration::makeBee()
 
        n--;
        return generate(next);
-
-
-
 }
 
 
-
+/**
+ * @brief BeeGeneration::pairGenerate generates and formats a UDP message from the priority queue
+ * @return string of UDP message
+ */
 string BeeGeneration::pairGenerate(){
     string udp;
     udp = "HC" + id + "-D";
-    for(int i = 0; i < 6; i++){
+    for(int i = 0; i < 6; i++){ //Format of UDP message
         if(nextBees.top().now[i] < 10){
             udp += "0";
         }
@@ -145,7 +170,7 @@ string BeeGeneration::pairGenerate(){
 
     nextBees.pop();
 
-    if(!nextBees.empty()){
+    if(!nextBees.empty()){ //Checks to see if gates were triggered at the same time
     if(nextBees.top().m == udpm){
     for(int i = 0; i < 6; i++){
         if(nextBees.top().now[i] != udpTime[i]){
@@ -161,11 +186,13 @@ string BeeGeneration::pairGenerate(){
     return udp;
 
 
-
-
-
 }
 
+/**
+ * @brief BeeGeneration::Generates a new UDP and stores the pair in a priority queue
+ * @param next is the expected time a UDP message specifies
+ * @return string which is a UDP message
+ */
 string BeeGeneration::generate(int* next){
     for(int i = 0; i < 6; i++){
         time[i] = next[i];
@@ -196,14 +223,14 @@ string BeeGeneration::generate(int* next){
     udp+= to_string(milli) + "-";
 
     //FIX THIS
-    nextBee pairBee;
+    nextBee pairBee; //Generates random baord
     int board = rand() % 10+1;
     pairBee.board = board;
 
-    int sensor = rand() % 8+1;
+    int sensor = rand() % 8+1; //Generates random sensor
     pairBee.sensor = findPair(sensor);
 
-    std::poisson_distribution<int> poissDistbn(490);
+    std::poisson_distribution<int> poissDistbn(490); //Randomly generates the pair UDP message (not in proper format)
     int* elpst =  calculate(poissDistbn(generator));
     pairBee.m = m;
     for(int i = 0; i < 6; i++){
@@ -211,7 +238,7 @@ string BeeGeneration::generate(int* next){
     }
 
 
-    nextBees.push(pairBee);
+    nextBees.push(pairBee); //Stores in priority queue
 
 
     //HEREEEEE
@@ -246,6 +273,11 @@ string BeeGeneration::generate(int* next){
 
 }
 
+/**
+ * @brief BeeGeneration::overGenerate accounts for more than one UDP message
+ * @param udp
+ * @return
+ */
 string BeeGeneration::overGenerate(string udp){
     int sensor = nextBees.top().sensor;
     int board = nextBees.top().board;
@@ -306,6 +338,11 @@ string BeeGeneration::overGenerate(string udp){
     return udp;
 }
 
+/**
+ * @brief BeeGeneration::findPair matches the triggered sensor to the pair gate sensor
+ * @param int is the triggered sensor
+ * @return is the pair sesnor to the gate
+ */
 int BeeGeneration::findPair(int s){
     switch(s){
     case 1: {return 8; }
@@ -322,7 +359,11 @@ int BeeGeneration::findPair(int s){
 
 
 
-
+/**
+ * @brief BeeGeneration::calculate which calulates what time it will be if you add the paramter to the current time COME BACK TO THIS
+ * @param ms takes in milliseconds
+ * @return int* points to the calacu array of resulting times, once the param is added
+ */
 int* BeeGeneration::calculate(double ms){
 
     int ntime[6];
@@ -376,6 +417,9 @@ int* BeeGeneration::calculate(double ms){
 
 }
 
+/**
+ * @brief BeeGeneration::generateTime resets the time to default 01/01/2019 at time 00:00 (Very start of day). Called in constructor.
+ */
 void BeeGeneration::generateTime(){
 
     time[0] = 19;
@@ -396,6 +440,10 @@ void BeeGeneration::generateTime(){
 
 }
 
+/**
+ * @brief BeeGeneration::generateTime resets the time to default 01/01/2019 at specfied time. Called in constructor.
+ * @param _time which is the hour you want to set the start. (00-24) - 8:00PM = 20
+ */
 void BeeGeneration::generateTime(int _time){
 
     time[0] = 19;
@@ -414,6 +462,10 @@ void BeeGeneration::generateTime(int _time){
     return;
 }
 
+/**
+ * @brief BeeGeneration::setActivity sets the activity levels of a hive based on the HiveSize. Called in the constructor.
+ * @param size which is the size of the hive
+ */
 void BeeGeneration::setActivity(int size){
     double rate = 0;
     for(int i = 0; i<24 ; i++){
@@ -452,6 +504,11 @@ void BeeGeneration::setActivity(int size){
     }
 }
 
+/**
+ * @brief BeeGeneration::btod changes the string in bianry to an integer. Used to generate the UDP represention of sesnors.
+ * @param b which is the binary representation in a string
+ * @return int which is the integer representation of the bianry
+ */
 int BeeGeneration::btod(string b){
         int num = stoi(b);
         int dec_value = 0;
@@ -470,12 +527,3 @@ int BeeGeneration::btod(string b){
 
         return dec_value;
 }
-
-
-
-
-
-
-
-
-
