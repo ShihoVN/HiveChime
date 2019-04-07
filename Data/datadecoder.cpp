@@ -12,7 +12,7 @@ DataDecoder::DataDecoder()
 /**
  * @brief The dcode method takes in the UDP address and splits it into seperate strings.
  * It then passes each of these strings into various methods.
- * @param _hex
+ * @param _hex is the represenation of the UDP message
  */
 void DataDecoder::decode(string _hex){
 
@@ -48,8 +48,8 @@ void DataDecoder::decode(string _hex){
 }
 
 /**
- * @brief DataDecoder::dateDecoder The method reads in the UDP message and returns the date the event occured.
- * @param s
+ * @brief DataDecoder::dateDecoder The method reads in the UDP date and time and returns the date the event occured.
+ * @param is the second part of the UDP message which is the date
  * @return string that represents the date of UDP message
  */
 string DataDecoder:: dateDecoder(string s){
@@ -68,10 +68,10 @@ string DataDecoder:: dateDecoder(string s){
 
 
 /**
- * @brief DataDecoder::timeDecoder The method reads in the UDP message and returns the time the event occured.
+ * @brief DataDecoder::timeDecoder The method reads in the UDP date and time and returns the time the event occured.
  * The methos also sets the value of milliseconds for the UPD message, for comparison in future methods.
- * @param s
- * @return
+ * @param s is the second part of the UDP message
+ * @return string that repreents the time in (hh.mm.ssmmm)
  */
 string DataDecoder:: timeDecoder(string s){
     stringstream ss(s); // Turn the string into a stream.
@@ -105,7 +105,7 @@ cout << "sensor time " <<sa.sensorTime << endl;
 /**
  * @brief DataDecoder::activityDecoder The method gets rid of the 'B's in the UDP message in order to decode the
  * acivity that occured. The method sets the boardNumber to the variable of struct sensorActivity.
- * @param _act
+ * @param _act is the third part of the UDP message
  */
 void DataDecoder:: activityDecoder(string _act){
         stringstream act(_act);
