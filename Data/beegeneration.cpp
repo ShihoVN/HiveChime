@@ -76,7 +76,7 @@ BeeGeneration::~BeeGeneration()
 }
 
 /**
- * @brief BeeGeneration::makeBee creates a single bee aka a single UDP message. COME BACK TO THIS FOR COMMENTS
+ * @brief BeeGeneration::makeBee creates a single bee aka a single UDP message.
  * @return a string which is the UDP message
  */
 string BeeGeneration::makeBee()
@@ -360,7 +360,7 @@ int BeeGeneration::findPair(int s){
 
 
 /**
- * @brief BeeGeneration::calculate which calulates what time it will be if you add the paramter to the current time COME BACK TO THIS
+ * @brief BeeGeneration::calculate which calulates what time it will be if you add the paramter to the current time
  * @param ms takes in milliseconds
  * @return int* points to the calacu array of resulting times, once the param is added
  */
