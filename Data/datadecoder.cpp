@@ -33,13 +33,14 @@ void DataDecoder::decode(string _hex){
 
 
 
-    Data d;
+
     d.hiveId = _hiveId;
     d.date = _date;
     d.time = _time;
-    d.gate = gateArr;
-    d.board = boardArr;
+    d.gate = _gate;
+    d.board = _board;
     d.type = _type;
+
 
  cout << "sensor array" <<sensorArray.size() << endl;
    //dContainer.addData(d);
@@ -125,6 +126,8 @@ void DataDecoder:: activityDecoder(string _act){
                boardNum.push_back(boardIndex); //this vector stores which board showed activity-- not sure if we need to know
                //make struct sensors equal to this board
                sa.sensorBoard = boardIndex;
+               _board = sa.sensorBoard;
+
 
                decimalToBinary(board); //pass the board activity to binary decoder
 
@@ -174,9 +177,12 @@ void DataDecoder:: compareSensors(sensorActivity thisSensor){
                     //send info into data base
                     if(getPair(thisSensor.sensors) >=4){
                          _type = 1;  //bee entered the hive
+                         dContainer.addData(d);
+
                     }
                     else if(getPair(thisSensor.sensors) <=8){
                          _type = 0; // bee left the hive
+                        dContainer.addData(d);
                     }
                     cout << "removed " << sensorArray.at(i).sensors << endl;
                     sensorArray.erase(sensorArray.begin() +(i)); //remove the struct in array
@@ -217,7 +223,10 @@ void DataDecoder:: decimalToBinary(int boardAct){
     for(int i = count-1; i >=0; i--){
         if(binary[i] == 1){
             sa.sensors = i+1; //set the sensor to the index == 1
+            _gate = sa.sensors;
             compareSensors(sa);
+
+
 
 
         }

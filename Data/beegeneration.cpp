@@ -211,7 +211,9 @@ string BeeGeneration::generate(int* next){
             udp += "T";
         }
         else{
+            if(i != 5){
             udp += ".";
+            }
         }
     }
     if(milli<100){

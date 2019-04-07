@@ -36,13 +36,14 @@ private:
     string hex;//The string before it is decompiled
     DataContainer dContainer;
     vector <string> hexArr; //array of data string entries
-    int* gateArr;
-    int* boardArr;
-    vector <int> binaryMessage;
+    int _gate;
+    int _board;
+    //vector <int> binaryMessage;
     int miliseconds;
     sensorActivity sa;
     vector <sensorActivity> sensorArray;
     bool _type;
+    Data d;
 
 
 };
