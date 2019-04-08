@@ -61,7 +61,7 @@ private:
     void generateTime();
     void generateTime(int _time);
     void setActivity(int size);
-    int* calculate(double ms);
+    int* calculate(int ms);
     string generate(int* next);
     string pairGenerate();
     string overGenerate( string udp);
