@@ -284,8 +284,8 @@ string BeeGeneration::generate(int* next){
  * @return
  */
 string BeeGeneration::overGenerate(string udp){
-    int sensor = nextBees.top().sensor;
-    int board = nextBees.top().board;
+//    int sensor = nextBees.top().sensor;
+//    int board = nextBees.top().board;
 
 
 
@@ -369,9 +369,9 @@ int BeeGeneration::findPair(int s){
  * @param ms takes in milliseconds
  * @return int* points to the calacu array of resulting times, once the param is added
  */
-int* BeeGeneration::calculate(double ms){
+int* BeeGeneration::calculate(int ms){
 
-    int ntime[6];
+    int* ntime=new int;
     for(int i = 0; i<6; i++){
         ntime[i] = time[i];
     }
