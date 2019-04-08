@@ -154,9 +154,11 @@ string BeeGeneration::pairGenerate(){
     for(int i =0; i < 10; i++){
         udp+= "B";
         if(i+1 == nextBees.top().board){
-            unsigned int s = 1;
-            s << (nextBees.top().sensor-1);
-            udp += to_string(s);
+            string s = "1";
+            for(int i = 1; i < nextBees.top().sensor; i++){
+                s += "0";
+            }
+            udp += to_string(btod(s));
         }
         else{
             udp += "0";
@@ -232,6 +234,10 @@ string BeeGeneration::generate(int* next){
 
     int sensor = rand() % 8+1; //Generates random sensor
     pairBee.sensor = findPair(sensor);
+    string s = "1";
+    for(int i = 1; i < sensor; i++){
+        s += "0";
+    }
 
     std::poisson_distribution<int> poissDistbn(490); //Randomly generates the pair UDP message (not in proper format)
     int* elpst =  calculate(poissDistbn(generator));
@@ -248,10 +254,6 @@ string BeeGeneration::generate(int* next){
     for(int i =0; i < 10; i++){
         udp+= "B";
         if(i+1 == board){
-            string s = "1";
-            for(int i = 1; i < sensor; i++){
-                s += "0";
-            }
             udp += to_string(btod(s));
         }
         else{
