@@ -19,7 +19,7 @@ struct sensorActivity {
 class DataDecoder
 {
 public:
-    DataDecoder();
+    DataDecoder( DataContainer *container);
     void decode(string hex);//decodes the string
     string getDecoded();
     string timeDecoder(string s);//take the time info from
@@ -34,15 +34,16 @@ public:
 
 private:
     string hex;//The string before it is decompiled
-    DataContainer dContainer;
+    DataContainer *dContainer;
     vector <string> hexArr; //array of data string entries
-    int* gateArr;
-    int* boardArr;
-    vector <int> binaryMessage;
+    int _gate;
+    int _board;
+    //vector <int> binaryMessage;
     int miliseconds;
     sensorActivity sa;
     vector <sensorActivity> sensorArray;
     bool _type;
+    Data *d;
 
 
 };

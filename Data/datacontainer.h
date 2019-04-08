@@ -11,8 +11,8 @@ struct Data{
     string hiveId;
     string date;
     string time;
-    int *gate; //might be needed-- Lia changed this to an array
-    int* board; // i think we neeed this - Lia
+    int gate; //might be needed-- Lia changed this to an array
+    int board; // i think we neeed this - Lia
     bool type; //entry or exit with entry being 1 and exit being 0
 
 };
@@ -21,12 +21,13 @@ class DataContainer
 {
 public:
     DataContainer();
-    void addData(Data d);
+    void addData(Data* d);
+    vector<Data*> getUdpMessages();
 
 
 private:
 
-    vector<Data> recent; //recently inputted data
+    vector<Data*> udpMessages; //recently inputted data
 
 };
 
