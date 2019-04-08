@@ -21,13 +21,13 @@ class DataContainer
 {
 public:
     DataContainer();
-    void addData(Data d);
-    vector<Data> getUdpMessages();
+    void addData(Data* d);
+    vector<Data*> getUdpMessages();
 
 
 private:
 
-    vector<Data> udpMessages; //recently inputted data
+    vector<Data*> udpMessages; //recently inputted data
 
 };
 
