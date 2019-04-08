@@ -71,6 +71,7 @@ string BeeGeneration::makeBee()
            n = x;
            if(x == 0){
                time[3]++;
+
            }
        }
 
