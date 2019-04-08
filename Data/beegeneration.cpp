@@ -136,7 +136,9 @@ string BeeGeneration::pairGenerate(){
             udp += "T";
         }
         else{
+            if(i != 5){
             udp += ".";
+            }
         }
     }
 
