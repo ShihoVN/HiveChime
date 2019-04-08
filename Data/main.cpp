@@ -17,7 +17,7 @@ int main()
 
     BeeGeneration* BG = new BeeGeneration("0002", 500);
 
-  for(int i = 0; i < 100; i++){
+   for(int i = 0; i < 100; i++){
     d.decode(BG->makeBee());
 
 
@@ -31,9 +31,9 @@ int main()
         cout << "Type: " << container.getUdpMessages().at(i)->type << endl ;
         cout << "\n" << endl;
 
-    }
   cout << "Size of array in container: " << container.getUdpMessages().size() << endl;
 
+   }
    }
 
 
