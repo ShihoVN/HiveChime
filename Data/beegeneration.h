@@ -64,7 +64,6 @@ private:
     int* calculate(int ms);
     string generate(int* next);
     string pairGenerate();
-    string overGenerate( string udp);
     int findPair(int s);
     int btod(string b);
 
