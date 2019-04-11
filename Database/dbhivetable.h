@@ -1,5 +1,5 @@
-#ifndef dbhivetable_H
-#define dbhivetable_H
+#ifndef DBHiveTable_H
+#define DBHiveTable_H
 #include <iostream>
 #include <string>
 #include <sqlite3.h>
@@ -11,7 +11,7 @@
 #include "tool.h"
 #include "dbtable.h"
 
-class dbhivetable: public DBTable
+class DBHiveTable: public DBTable
 {
 protected:
     std::string sql_select_all;
@@ -20,10 +20,10 @@ protected:
     int column =3;
 public:
 
-    dbhivetable();
-    dbhivetable(Tool *db, std::string name);
+    DBHiveTable();
+    DBHiveTable(Tool *db, std::string name);
 
-    ~dbhivetable();
+    ~DBHiveTable();
 
     // An overloaded method to generate a new
     // create command for your child class.
@@ -34,7 +34,7 @@ public:
     virtual void store_add_row_sql();
 
     bool add_row_h(int id, std::string hive_name, std::string owner,std::string model_table);
-    char** select_row_h();
+    char** select_table_h();
     bool select_all();
 };
 
@@ -54,4 +54,4 @@ int cb_select_all_h(void  *data,
                   char **argv,
                   char **azColName);
 
-#endif // dbhivetable_H
+#endif // DBHiveTable_H

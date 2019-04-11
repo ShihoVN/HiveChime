@@ -22,12 +22,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "dbbeelog.h"
 
 // Default constructor.
-dbbeelog::dbbeelog() {
+DBBeeLog::DBBeeLog() {
 
 }
 
 // Constructor for identying the dbtool and table name.
-dbbeelog::dbbeelog(Tool     *db,
+DBBeeLog::DBBeeLog(Tool     *db,
                      std::string name   ) :
     DBTable (db, name)
 {
@@ -41,11 +41,11 @@ dbbeelog::dbbeelog(Tool     *db,
     build_table();
 }
 
-dbbeelog::~dbbeelog() {
+DBBeeLog::~DBBeeLog() {
 
 }
 
-void dbbeelog::store_add_row_sql() {
+void DBBeeLog::store_add_row_sql() {
 
     sql_template =  "SELECT name ";
     sql_template += "FROM   sqlite_master ";
@@ -56,7 +56,7 @@ void dbbeelog::store_add_row_sql() {
 }
 
 
-void dbbeelog::store_create_sql() {
+void DBBeeLog::store_create_sql() {
 
     //std::cerr << "calling store_create_sql from DBTableEx\n";
 
@@ -65,14 +65,14 @@ void dbbeelog::store_create_sql() {
     sql_create += " ( ";
     sql_create += " id INT PRIMARY KEY NOT NULL, ";
     sql_create += "  board INT NOT NULL, ";
-    sql_create += "  gate INT NOT NULL, ";
+    sql_create += "  gate TEXT NOT NULL, ";
     sql_create += "  date TEXT NOT NULL, ";
-    sql_create += "  entry TEXT NOT NULL, ";
+    sql_create += "  entry TEXT NOT NULL ";
     sql_create += " );";
 
 }
 
-bool dbbeelog::add_row_m(int id, int board, int gate,std::string date, std::string entry_exit) {
+bool DBBeeLog::add_row_m(int id, int board, std::string gate,std::string date, std::string entry_exit) {
     int   retCode = 0;
     char *zErrMsg = 0;
 
@@ -91,9 +91,9 @@ bool dbbeelog::add_row_m(int id, int board, int gate,std::string date, std::stri
     sql_add_row += tempval;
     sql_add_row += ", ";
 
-    sprintf(tempval, "%d", gate);
-    sql_add_row += tempval;
-    sql_add_row += ", ";
+    sql_add_row += "\"";
+    sql_add_row += std::string(gate);
+    sql_add_row += "\", ";
 
     sql_add_row += "\"";
     sql_add_row += std::string(date);
@@ -101,7 +101,7 @@ bool dbbeelog::add_row_m(int id, int board, int gate,std::string date, std::stri
 
     sql_add_row += "\"";
     sql_add_row += std::string(entry_exit);
-    sql_add_row += "\", ";
+    sql_add_row += "\" ";
 
     sql_add_row += " );";
 
@@ -109,7 +109,7 @@ bool dbbeelog::add_row_m(int id, int board, int gate,std::string date, std::stri
 
     retCode = sqlite3_exec(curr_db->db_ref(),
                            sql_add_row.c_str(),
-                           cb_add_row,
+                           cb_add_row_b,
                            this,
                            &zErrMsg          );
 
@@ -127,7 +127,7 @@ bool dbbeelog::add_row_m(int id, int board, int gate,std::string date, std::stri
     return retCode;
 }
 
-char** dbbeelog::select_row_m(){
+char** DBBeeLog::select_table_m(){
         int   retCode = 0;
         char *zErrMsg = 0;
 
@@ -154,7 +154,7 @@ char** dbbeelog::select_row_m(){
         return tempval;
 }
 
-bool dbbeelog::select_all() {
+bool DBBeeLog::select_all() {
 
     int   retCode = 0;
     char *zErrMsg = 0;
@@ -165,7 +165,7 @@ bool dbbeelog::select_all() {
 
     retCode = sqlite3_exec(curr_db->db_ref(),
                            sql_select_all.c_str(),
-                           cb_select_all,
+                           cb_select_all_b,
                            this,
                            &zErrMsg          );
 
@@ -184,7 +184,7 @@ bool dbbeelog::select_all() {
 }
 
 
-int cb_add_row(void  *data,
+int cb_add_row_b(void  *data,
                int    argc,
                char **argv,
                char **azColName)
@@ -202,7 +202,7 @@ int cb_add_row(void  *data,
 
     int i;
 
-    dbbeelog *obj = (dbbeelog *) data;
+    DBBeeLog *obj = (DBBeeLog *) data;
 
     std::cout << "------------------------------\n";
     std::cout << obj->get_name()
@@ -218,41 +218,8 @@ int cb_add_row(void  *data,
     return 0;
 }
 
-int cb_update_row(void  *data,
-               int    argc,
-               char **argv,
-               char **azColName)
-{
 
-
-
-    std::cerr << "cb_update_row being called\n";
-
-    if(argc < 1) {
-        std::cerr << "No data presented to callback "
-                  << "argc = " << argc
-                  << std::endl;
-    }
-
-    int i;
-
-    dbbeelog *obj = (dbbeelog *) data;
-
-    std::cout << "------------------------------\n";
-    std::cout << obj->get_name()
-              << std::endl;
-
-    for(i = 0; i < argc; i++){
-        std::cout << azColName[i]
-                  << " = "
-                  <<  (argv[i] ? argv[i] : "NULL")
-                  << std::endl;
-    }
-
-    return 0;
-}
-
-int cb_select_all(void  *data,
+int cb_select_all_b(void  *data,
                   int    argc,
                   char **argv,
                   char **azColName)
@@ -270,7 +237,7 @@ int cb_select_all(void  *data,
 
     int i;
 
-    dbbeelog *obj = (dbbeelog *) data;
+    DBBeeLog *obj = (DBBeeLog *) data;
 
     std::cout << "------------------------------\n";
     std::cout << obj->get_name()

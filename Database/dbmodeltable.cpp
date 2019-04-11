@@ -22,12 +22,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "dbmodeltable.h"
 
 // Default constructor.
-dbmodeltable::dbmodeltable() {
+DBModelTable::DBModelTable() {
 
 }
 
 // Constructor for identying the dbtool and table name.
-dbmodeltable::dbmodeltable(Tool     *db,
+DBModelTable::DBModelTable(Tool     *db,
                      std::string name   ) :
     DBTable (db, name)
 {
@@ -41,11 +41,11 @@ dbmodeltable::dbmodeltable(Tool     *db,
     build_table();
 }
 
-dbmodeltable::~dbmodeltable() {
+DBModelTable::~DBModelTable() {
 
 }
 
-void dbmodeltable::store_add_row_sql() {
+void DBModelTable::store_add_row_sql() {
 
     sql_template =  "SELECT name ";
     sql_template += "FROM   sqlite_master ";
@@ -56,7 +56,7 @@ void dbmodeltable::store_add_row_sql() {
 }
 
 
-void dbmodeltable::store_create_sql() {
+void DBModelTable::store_create_sql() {
 
     //std::cerr << "calling store_create_sql from DBTableEx\n";
 
@@ -65,12 +65,12 @@ void dbmodeltable::store_create_sql() {
     sql_create += " ( ";
     sql_create += " id INT PRIMARY KEY NOT NULL, ";
     sql_create += "  model_name TEXT NOT NULL, ";
-    sql_create += "  entry_vector TEXT NOT NULL, ";
+    sql_create += "  entry_vector_table TEXT NOT NULL ";
     sql_create += " );";
 
 }
 
-bool dbmodeltable::add_row_m(int id, std::string model_name, std::string entry_vector_table) {
+bool DBModelTable::add_row_m(int id, std::string model_name, std::string entry_vector_table) {
     int   retCode = 0;
     char *zErrMsg = 0;
 
@@ -91,7 +91,7 @@ bool dbmodeltable::add_row_m(int id, std::string model_name, std::string entry_v
 
     sql_add_row += "\"";
     sql_add_row += std::string(entry_vector_table);
-    sql_add_row += "\", ";
+    sql_add_row += "\" ";
 
     sql_add_row += " );";
 
@@ -117,7 +117,7 @@ bool dbmodeltable::add_row_m(int id, std::string model_name, std::string entry_v
     return retCode;
 }
 
-char** dbmodeltable::select_row_m(){
+char** DBModelTable::select_table_m(){
         int   retCode = 0;
         char *zErrMsg = 0;
 
@@ -144,7 +144,7 @@ char** dbmodeltable::select_row_m(){
         return tempval;
 }
 
-bool dbmodeltable::select_all() {
+bool DBModelTable::select_all() {
 
     int   retCode = 0;
     char *zErrMsg = 0;
@@ -192,7 +192,7 @@ int cb_add_row(void  *data,
 
     int i;
 
-    dbmodeltable *obj = (dbmodeltable *) data;
+    DBModelTable *obj = (DBModelTable *) data;
 
     std::cout << "------------------------------\n";
     std::cout << obj->get_name()
@@ -226,7 +226,7 @@ int cb_update_row(void  *data,
 
     int i;
 
-    dbmodeltable *obj = (dbmodeltable *) data;
+    DBModelTable *obj = (DBModelTable *) data;
 
     std::cout << "------------------------------\n";
     std::cout << obj->get_name()
@@ -260,7 +260,7 @@ int cb_select_all(void  *data,
 
     int i;
 
-    dbmodeltable *obj = (dbmodeltable *) data;
+    DBModelTable *obj = (DBModelTable *) data;
 
     std::cout << "------------------------------\n";
     std::cout << obj->get_name()

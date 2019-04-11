@@ -1,5 +1,7 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    #Database\
+    Database\
     Data\
+    unittest \
+    Weather

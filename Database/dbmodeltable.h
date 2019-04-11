@@ -1,5 +1,5 @@
-#ifndef dbmodeltable_H
-#define dbmodeltable_H
+#ifndef DBModelTable_H
+#define DBModelTable_H
 #include <iostream>
 #include <string>
 #include <sqlite3.h>
@@ -11,7 +11,7 @@
 #include "tool.h"
 #include "dbtable.h"
 
-class dbmodeltable: public DBTable
+class DBModelTable: public DBTable
 {
 protected:
     std::string sql_select_all;
@@ -20,10 +20,10 @@ protected:
     int column = 5;
 public:
 
-    dbmodeltable();
-    dbmodeltable(Tool *db, std::string name);
+    DBModelTable();
+    DBModelTable(Tool *db, std::string name);
 
-    ~dbmodeltable();
+    ~DBModelTable();
 
     // An overloaded method to generate a new
     // create command for your child class.
@@ -34,7 +34,7 @@ public:
     virtual void store_add_row_sql();
 
     bool add_row_m(int id, std::string model_name, std::string entry_vector_table);
-    char** select_row_m();
+    char** select_table_m();
     bool select_all();
 };
 
@@ -54,4 +54,4 @@ int cb_select_all(void  *data,
                   char **argv,
                   char **azColName);
 
-#endif // dbmodeltable_H
+#endif // DBModelTable_H
