@@ -30,3 +30,6 @@ SOURCES += ../Database/tool.cpp
 
 HEADERS += ../Database/dbtable.h
 SOURCES += ../Database/dbtable.cpp
+
+
+LIBS += -lsqlite3
