@@ -1,5 +1,5 @@
-#ifndef DBModelTable_H
-#define DBModelTable_H
+#ifndef DBBEELOG_H
+#define DBBEELOG_H
 #include <iostream>
 #include <string>
 #include <sqlite3.h>
@@ -11,7 +11,7 @@
 #include "tool.h"
 #include "dbtable.h"
 
-class DBModelTable: public DBTable
+class DBBeeLog: public DBTable
 {
 protected:
     std::string sql_select_all;
@@ -20,10 +20,10 @@ protected:
     int column = 5;
 public:
 
-    DBModelTable();
-    DBModelTable(Tool *db, std::string name);
+    DBBeeLog();
+    DBBeeLog(Tool *db, std::string name);
 
-    ~DBModelTable();
+    ~DBBeeLog();
 
     // An overloaded method to generate a new
     // create command for your child class.
@@ -33,7 +33,7 @@ public:
     // insert command for your child class.
     virtual void store_add_row_sql();
 
-    bool add_row_m(int id, std::string model_name, std::string entry_vector_table);
+    bool add_row_m(int id, int board, std::string gate,std::string date, std::string entry_exit);
     char** select_table_m();
     bool select_all();
 };
@@ -41,7 +41,7 @@ public:
 
 // This is a callback function that is sent to the library and used
 // to parse the sql request being sent to the database.
-int cb_add_row(void  *data,
+int cb_add_row_b(void  *data,
                int    argc,
                char **argv,
                char **azColName);
@@ -49,9 +49,9 @@ int cb_add_row(void  *data,
 
 // This is a callback function that is sent to the library and used
 // to parse the sql request being sent to the database.
-int cb_select_all(void  *data,
+int cb_select_all_b(void  *data,
                   int    argc,
                   char **argv,
                   char **azColName);
 
-#endif // DBModelTable_H
+#endif // DBBEELOG_H

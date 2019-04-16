@@ -19,15 +19,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 *********************************************************************/
 
-#include "dbmodeltable.h"
+#include "dbbeelog.h"
 
 // Default constructor.
-DBModelTable::DBModelTable() {
+DBBeeLog::DBBeeLog() {
 
 }
 
 // Constructor for identying the dbtool and table name.
-DBModelTable::DBModelTable(Tool     *db,
+DBBeeLog::DBBeeLog(Tool     *db,
                      std::string name   ) :
     DBTable (db, name)
 {
@@ -41,11 +41,11 @@ DBModelTable::DBModelTable(Tool     *db,
     build_table();
 }
 
-DBModelTable::~DBModelTable() {
+DBBeeLog::~DBBeeLog() {
 
 }
 
-void DBModelTable::store_add_row_sql() {
+void DBBeeLog::store_add_row_sql() {
 
     sql_template =  "SELECT name ";
     sql_template += "FROM   sqlite_master ";
@@ -56,7 +56,7 @@ void DBModelTable::store_add_row_sql() {
 }
 
 
-void DBModelTable::store_create_sql() {
+void DBBeeLog::store_create_sql() {
 
     //std::cerr << "calling store_create_sql from DBTableEx\n";
 
@@ -64,13 +64,15 @@ void DBModelTable::store_create_sql() {
     sql_create += table_name;
     sql_create += " ( ";
     sql_create += " id INT PRIMARY KEY NOT NULL, ";
-    sql_create += "  model_name TEXT NOT NULL, ";
-    sql_create += "  entry_vector_table TEXT NOT NULL ";
+    sql_create += "  board INT NOT NULL, ";
+    sql_create += "  gate TEXT NOT NULL, ";
+    sql_create += "  date TEXT NOT NULL, ";
+    sql_create += "  entry TEXT NOT NULL ";
     sql_create += " );";
 
 }
 
-bool DBModelTable::add_row_m(int id, std::string model_name, std::string entry_vector_table) {
+bool DBBeeLog::add_row_m(int id, int board, std::string gate,std::string date, std::string entry_exit) {
     int   retCode = 0;
     char *zErrMsg = 0;
 
@@ -78,19 +80,27 @@ bool DBModelTable::add_row_m(int id, std::string model_name, std::string entry_v
 
     sql_add_row  = "INSERT INTO ";
     sql_add_row += table_name;
-    sql_add_row += " ( id, model_name, entry_vector_table) ";
+    sql_add_row += " ( id, board, gate, date, entry) ";
     sql_add_row += "VALUES (";
 
     sprintf(tempval, "%d", id);
     sql_add_row += tempval;
     sql_add_row += ", ";
 
+    sprintf(tempval, "%d", board);
+    sql_add_row += tempval;
+    sql_add_row += ", ";
+
     sql_add_row += "\"";
-    sql_add_row += std::string(model_name);
+    sql_add_row += std::string(gate);
     sql_add_row += "\", ";
 
     sql_add_row += "\"";
-    sql_add_row += std::string(entry_vector_table);
+    sql_add_row += std::string(date);
+    sql_add_row += "\", ";
+
+    sql_add_row += "\"";
+    sql_add_row += std::string(entry_exit);
     sql_add_row += "\" ";
 
     sql_add_row += " );";
@@ -99,7 +109,7 @@ bool DBModelTable::add_row_m(int id, std::string model_name, std::string entry_v
 
     retCode = sqlite3_exec(curr_db->db_ref(),
                            sql_add_row.c_str(),
-                           cb_add_row,
+                           cb_add_row_b,
                            this,
                            &zErrMsg          );
 
@@ -117,7 +127,7 @@ bool DBModelTable::add_row_m(int id, std::string model_name, std::string entry_v
     return retCode;
 }
 
-char** DBModelTable::select_table_m(){
+char** DBBeeLog::select_table_m(){
         int   retCode = 0;
         char *zErrMsg = 0;
 
@@ -144,7 +154,7 @@ char** DBModelTable::select_table_m(){
         return tempval;
 }
 
-bool DBModelTable::select_all() {
+bool DBBeeLog::select_all() {
 
     int   retCode = 0;
     char *zErrMsg = 0;
@@ -155,7 +165,7 @@ bool DBModelTable::select_all() {
 
     retCode = sqlite3_exec(curr_db->db_ref(),
                            sql_select_all.c_str(),
-                           cb_select_all,
+                           cb_select_all_b,
                            this,
                            &zErrMsg          );
 
@@ -174,7 +184,7 @@ bool DBModelTable::select_all() {
 }
 
 
-int cb_add_row(void  *data,
+int cb_add_row_b(void  *data,
                int    argc,
                char **argv,
                char **azColName)
@@ -192,7 +202,7 @@ int cb_add_row(void  *data,
 
     int i;
 
-    DBModelTable *obj = (DBModelTable *) data;
+    DBBeeLog *obj = (DBBeeLog *) data;
 
     std::cout << "------------------------------\n";
     std::cout << obj->get_name()
@@ -208,41 +218,8 @@ int cb_add_row(void  *data,
     return 0;
 }
 
-int cb_update_row(void  *data,
-               int    argc,
-               char **argv,
-               char **azColName)
-{
 
-
-
-    std::cerr << "cb_update_row being called\n";
-
-    if(argc < 1) {
-        std::cerr << "No data presented to callback "
-                  << "argc = " << argc
-                  << std::endl;
-    }
-
-    int i;
-
-    DBModelTable *obj = (DBModelTable *) data;
-
-    std::cout << "------------------------------\n";
-    std::cout << obj->get_name()
-              << std::endl;
-
-    for(i = 0; i < argc; i++){
-        std::cout << azColName[i]
-                  << " = "
-                  <<  (argv[i] ? argv[i] : "NULL")
-                  << std::endl;
-    }
-
-    return 0;
-}
-
-int cb_select_all(void  *data,
+int cb_select_all_b(void  *data,
                   int    argc,
                   char **argv,
                   char **azColName)
@@ -260,7 +237,7 @@ int cb_select_all(void  *data,
 
     int i;
 
-    DBModelTable *obj = (DBModelTable *) data;
+    DBBeeLog *obj = (DBBeeLog *) data;
 
     std::cout << "------------------------------\n";
     std::cout << obj->get_name()

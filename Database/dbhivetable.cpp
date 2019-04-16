@@ -22,12 +22,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "dbhivetable.h"
 
 // Default constructor.
-dbhivetable::dbhivetable() {
+DBHiveTable::DBHiveTable() {
 
 }
 
 // Constructor for identying the dbtool and table name.
-dbhivetable::dbhivetable(Tool     *db,
+DBHiveTable::DBHiveTable(Tool     *db,
                      std::string name   ) :
     DBTable (db, name)
 {
@@ -41,11 +41,11 @@ dbhivetable::dbhivetable(Tool     *db,
     build_table();
 }
 
-dbhivetable::~dbhivetable() {
+DBHiveTable::~DBHiveTable() {
 
 }
 
-void dbhivetable::store_add_row_sql() {
+void DBHiveTable::store_add_row_sql() {
 
     sql_template =  "SELECT name ";
     sql_template += "FROM   sqlite_master ";
@@ -56,7 +56,7 @@ void dbhivetable::store_add_row_sql() {
 }
 
 
-void dbhivetable::store_create_sql() {
+void DBHiveTable::store_create_sql() {
 
     //std::cerr << "calling store_create_sql from DBTableEx\n";
 
@@ -66,12 +66,12 @@ void dbhivetable::store_create_sql() {
     sql_create += " id INT PRIMARY KEY NOT NULL, ";
     sql_create += "  hive_name TEXT NOT NULL, ";
     sql_create += "  owner TEXT NOT NULL, ";
-    sql_create += "  model_table TEXT NOT NULL,";
+    sql_create += "  model_table TEXT NOT NULL";
     sql_create += " );";
 
 }
 
-bool dbhivetable::add_row_h(int id, std::string hive_name, std::string owner,std::string model_table){
+bool DBHiveTable::add_row_h(int id, std::string hive_name, std::string owner,std::string model_table){
 
     int   retCode = 0;
     char *zErrMsg = 0;
@@ -97,7 +97,7 @@ bool dbhivetable::add_row_h(int id, std::string hive_name, std::string owner,std
 
     sql_add_row += "\"";
     sql_add_row += std::string(model_table);
-    sql_add_row += "\", ";
+    sql_add_row += "\" ";
 
     sql_add_row += " );";
 
@@ -123,7 +123,7 @@ bool dbhivetable::add_row_h(int id, std::string hive_name, std::string owner,std
     return retCode;
 }
 
-char** dbhivetable::select_row_h(){
+char** DBHiveTable::select_table_h(){
         int   retCode = 0;
         char *zErrMsg = 0;
 
@@ -150,7 +150,7 @@ char** dbhivetable::select_row_h(){
         return tempval;
 }
 
-bool dbhivetable::select_all() {
+bool DBHiveTable::select_all() {
 
     int   retCode = 0;
     char *zErrMsg = 0;
@@ -198,7 +198,7 @@ int cb_add_row_h(void  *data,
 
     int i;
 
-    dbhivetable *obj = (dbhivetable *) data;
+    DBHiveTable *obj = (DBHiveTable *) data;
 
     std::cout << "------------------------------\n";
     std::cout << obj->get_name()
@@ -232,7 +232,7 @@ int cb_select_all_h(void  *data,
 
     int i;
 
-    dbhivetable *obj = (dbhivetable *) data;
+    DBHiveTable *obj = (DBHiveTable *) data;
 
     std::cout << "------------------------------\n";
     std::cout << obj->get_name()

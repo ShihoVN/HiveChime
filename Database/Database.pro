@@ -8,11 +8,13 @@ SOURCES += \
     dbtable.cpp \
     dbmodeltable.cpp \
     dbhivetable.cpp \
-    tool.cpp
+    tool.cpp \
+    dbbeelog.cpp
 
 HEADERS += \
     dbtable.h \
     dbmodeltable.h \
     dbhivetable.h \
-    tool.h
+    tool.h \
+    dbbeelog.h
 LIBS += -lsqlite3

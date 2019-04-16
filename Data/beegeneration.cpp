@@ -48,7 +48,6 @@ void BeeGeneration::setID(string _id, int size){
     id = _id;
     generateTime();
     setActivity(size);
-
     return;
 }
 
@@ -84,8 +83,8 @@ string BeeGeneration::makeBee()
 //    //std::binomial_distribution<int, double> binom(5, 1.0/6.0);
     if(current > 24){ // This if statement checks to see if a day has elapsed and adjusts the time records acordingly
         time[2] ++;
-        time[3] -=24;
-        current -= 24;
+        time[3] = 1;
+        current = 1;
     }
        while(n == 0){ // This while loop checks to see there is reamaning expected bee activity
            current ++;
@@ -99,7 +98,7 @@ string BeeGeneration::makeBee()
 
        std::exponential_distribution<double> expDistbn(double(60/x)); //Calculates the next expected activity
        int* next = calculate(60000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
-
+       cout << "Hive ID: 23"<< endl;
        if(!nextBees.empty()){ //Checks the priorty queue to see if there are any pairs to complete
             for(int i = 0; i < 6; i ++){
                if(nextBees.top().now[i] < next[i] ){
@@ -180,7 +179,7 @@ string BeeGeneration::pairGenerate(){
             break;
         }
         if(i==5){
-            return overGenerate(udp);
+            return udp;
         }
     }
     }
@@ -250,7 +249,6 @@ string BeeGeneration::generate(int* next){
     nextBees.push(pairBee); //Stores in priority queue
 
 
-    //HEREEEEE
     for(int i =0; i < 10; i++){
         udp+= "B";
         if(i+1 == board){
@@ -270,77 +268,12 @@ string BeeGeneration::generate(int* next){
             break;
         }
         if(i==5){
-            return overGenerate(udp);
+            return udp;
         }
     }
 
     return udp;
 
-}
-
-/**
- * @brief BeeGeneration::overGenerate accounts for more than one UDP message
- * @param udp
- * @return
- */
-string BeeGeneration::overGenerate(string udp){
-    int sensor = nextBees.top().sensor;
-    int board = nextBees.top().board;
-
-
-
-    //string UDP = udp.substr(0,29);
-
-//    for(int i =0; i < 10; i++){
-
-//        ////HEREEEEE
-//        if(i+1 == nextBees.top().board){
-//            if(udp.substr(29+(2*board),1) == "0"){
-//                    string s = "1";
-//                    for(int i = 1; i < nextBees.top().sensor; i++){
-//                        s += "0";
-//                    }
-
-//                UDP += "B" + to_string(btod(s));
-//            }
-//            else{
-
-//                unsigned int S= stoi(udp.substr(29+(2*board),1)) ;
-//                S += (1 << (nextBees.top().sensor-1));
-
-//            }
-//        }
-//        else{
-//            UDP += udp.substr(28+(2*board),2);
-//        }
-//    }
-
-
-
-
-//    int udpTime[6];
-//    for(int i = 0; i < 6; i++){
-//        udpTime[i] = nextBees.top().now[i];
-//    }
-//    long udpm = nextBees.top().m;
-//    nextBees.pop();
-
-//    if(!nextBees.empty()){
-
-
-//    if(nextBees.top().m == udpm){
-//    for(int i = 0; i < 6; i++){
-//        if(nextBees.top().now[i] != udpTime[i]){
-//            break;
-//        }
-//        if(i==5){
-//            return overGenerate(udp);
-//        }
-//    }
-//    }
-//    }
-
-    return udp;
 }
 
 /**
@@ -369,9 +302,9 @@ int BeeGeneration::findPair(int s){
  * @param ms takes in milliseconds
  * @return int* points to the calacu array of resulting times, once the param is added
  */
-int* BeeGeneration::calculate(double ms){
+int* BeeGeneration::calculate(int ms){
 
-    int ntime[6];
+    int* ntime=new int;
     for(int i = 0; i<6; i++){
         ntime[i] = time[i];
     }
@@ -382,36 +315,36 @@ int* BeeGeneration::calculate(double ms){
         m -=1000;
         ntime[5]++;
         while(ntime[5] >60){
-            ntime[5]-=60;
+            ntime[5]=0;
             ntime[4] ++;
         }
         if(ntime[4] >60){
-            ntime[4]-=60;
+            ntime[4]=0;
             ntime[3]++;
         }
         if(ntime[3]>24){
-            ntime[3]-=24;
-            current -=24;
+            ntime[3]=0;
+            current =0;
             ntime[2]++;
         }
         if(ntime[2]>28){
             if(ntime[1]==2){
-                ntime[2]-=28;
+                ntime[2]=0;
                 ntime[1]++;
             }
             else if(ntime[2]>30){
                 if(ntime[1]==4 ||ntime[1]==6||ntime[1]==9||ntime[1]==11){
-                    ntime[2]-=30;
+                    ntime[2]=0;
                     ntime[1]++;
                 }
             }
             if(ntime[2] > 31){
-                ntime[2]-=31;
+                ntime[2]=0;
                 ntime[1]++;
             }
         }
         if(ntime[1]>12){
-            ntime[1]-=12;
+            ntime[1]=0;
             ntime[0]++;
         }
 
