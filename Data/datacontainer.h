@@ -2,7 +2,10 @@
 #define DATACONTAINER_H
 #include <vector>
 #include <string>
-
+#include "../Database/dbhivetable.h"
+#include "../Database/dbmodeltable.h"
+#include "../Database/dbbeelog.h"
+#include "../Database/tool.h"
 
 using namespace std;
 
@@ -26,9 +29,9 @@ public:
 
 
 private:
-
+    Tool* dbtool=new Tool("dbtable");
+    DBBeeLog * beelog=new DBBeeLog(dbtool,"dbeelog");
     vector<Data*> udpMessages; //recently inputted data
-
 };
 
 #endif // DATACONTAINER_H
