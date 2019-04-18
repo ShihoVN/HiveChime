@@ -4,4 +4,5 @@ SUBDIRS += \
     Database\
     Data\
     unittest \
-    Weather
+    Weather \
+    GUI
