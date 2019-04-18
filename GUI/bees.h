@@ -6,7 +6,9 @@
 //#include "../Data/datacontainer.h"
 //#include "../Data/datadecoder.h"
 namespace Ui {
-class Bees;
+
+    class Bees;
+
 }
 
 class Bees : public QMainWindow

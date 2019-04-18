@@ -13,7 +13,10 @@ int main()
     DBBeeLog* beelog= new DBBeeLog(dbtool,"beelog");
 
     dbhove->add_row_h(0,"hive 12","me","model1");
-
+    dbhove->add_row_h(1,"hive 18","me","model1");
+    dbhove->add_row_h(2,"hive 10","me","model1");
+    dbhove->add_row_h(3,"hive 13","me","model1");
+    dbhove->select_all();
     cout << "Hello World!" << endl;
     return 0;
 }
