@@ -23,25 +23,13 @@ int main()
     for(int i = 0; i < 100; i++){
         d.decode(BG->makeBee());
 
-
-        for (int j = 0; j < container.getUdpMessages().size(); ++j) {
-
-            cout << "Hive ID: " << container.getUdpMessages().at(j)->hiveId << endl;
-            cout << "Date: " << container.getUdpMessages().at(j)->date << endl ;
-            cout << "Time: " << container.getUdpMessages().at(j)->time  << endl;
-            cout << "Board: " << container.getUdpMessages().at(j)->board  << endl;
-            cout << "Gate: " << container.getUdpMessages().at(j)->gate  << endl;
-            cout << "Type: " << container.getUdpMessages().at(j)->type << endl ;
-            cout << "\n" << endl;
-
-            cout << "Size of array in container: " << container.getUdpMessages().size() << endl;
-
         }
     }
+    container.getUdpMessages();
 
 //        for (int i = 0; i < container.getUdpMessages().size(); ++i) {
 
-//            cout << "Hive ID: " << container.getUdpMessages().at(i)->hiveId << endl;
+//            cout << "Hive ID: " << .at(i)->hiveId << endl;
 //            cout << "Date: " << container.getUdpMessages().at(i)->date << endl ;
 //            cout << "Time: " << container.getUdpMessages().at(i)->time  << endl;
 //            cout << "Board: " << container.getUdpMessages().at(i)->board  << endl;
@@ -52,5 +40,4 @@ int main()
 //        cout << "Size of array in container: " << container.getUdpMessages().size() << endl;
 
 //    }
-}
 }
