@@ -16,14 +16,6 @@ int main()
     for(int i = 0; i < 100; i++){
         d.decode(BG->makeBee());
 
-    DataContainer container;
-    DataDecoder d(&container);
-    BeeGeneration* BG = new BeeGeneration("0002", 500);
-
-    for(int i = 0; i < 100; i++){
-        d.decode(BG->makeBee());
-
-        }
     }
     container.getUdpMessages();
 
