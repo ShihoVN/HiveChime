@@ -8,7 +8,7 @@
 #include "../Data/datacontainer.h"
 #include "../Data/datadecoder.h"
 #include "../Data/datagenerator.h"
-//#include "../Database/dbhivetable.h"
+//#include "../Database/DBHiveTable.h"
 
   // The fixture for testing class Foo.
   class FooTest : public ::testing::Test {
@@ -40,30 +40,30 @@
     // Objects declared here can be used by all tests in the test case for Foo.
 
     /** replace with your own **/
-    //dbhivetable t1;
-    //dbhivetable t2;
+    //DBHiveTable t1;
+    //DBHiveTable t2;
 //    BeeGeneration* b1 = new BeeGeneration(2);
 //    BeeGeneration* b2 = new BeeGeneration(2);
-    DataDecoder d1;
-    DataDecoder d2;
-    DataContainer c1;
-    DataContainer c2;
+//    DataDecoder d1;
+//    DataDecoder d2;
+//    DataContainer c1;
+//    DataContainer c2;
   };
   //DATABASE TEST SECTION
 
-    TEST(general, GETDATE) {
-        /** replace with your own **/
-        DataDecoder d1;
-       ASSERT_EQ(d1.dateDecoder("D18.12.19T13.43.16000"), "18.12.19")
-               << d1.dateDecoder("D18.12.19T13.43.16000")
-               << " and "
-               << ("18.12.19")
-               << " should match!";
-    }
-TEST_F(FooTest, GETTIME) {
-   ASSERT_EQ(d1.timeDecoder("D18.12.19T13.43.16000"), "13.43.16000")
-           << "These should match!";
-}
+//    TEST(general, GETDATE) {
+//        /** replace with your own **/
+//        //DataDecoder d1;
+//       ASSERT_EQ(d1.dateDecoder("D18.12.19T13.43.16000"), "18.12.19")
+//               << d1.dateDecoder("D18.12.19T13.43.16000")
+//               << " and "
+//               << ("18.12.19")
+//               << " should match!";
+//    }
+//TEST_F(FooTest, GETTIME) {
+//   ASSERT_EQ(d1.timeDecoder("D18.12.19T13.43.16000"), "13.43.16000")
+//           << "These should match!";
+//}
 
   int main(int argc, char **argv) {
 

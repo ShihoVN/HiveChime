@@ -33,6 +33,7 @@ int main()
 
         }
     }
+    container.track_db();
 
     return 0;
 }

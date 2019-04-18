@@ -15,3 +15,19 @@ HEADERS += \
     datacontainer.h \
     datagenerator.h \
     beegeneration.h
+
+HEADERS += ../Database/dbtable.h
+SOURCES += ../Database/dbtable.cpp
+
+HEADERS += ../Database/tool.h
+SOURCES += ../Database/tool.cpp
+
+HEADERS += ../Database/dbhivetable.h
+SOURCES += ../Database/dbhivetable.cpp
+
+HEADERS += ../Database/dbmodeltable.h
+SOURCES += ../Database/dbmodeltable.cpp
+
+HEADERS += ../Database/dbbeelog.h
+SOURCES += ../Database/dbbeelog.cpp
+LIBS += -lsqlite3

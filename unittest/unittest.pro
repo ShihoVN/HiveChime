@@ -18,12 +18,21 @@ INCLUDEPATH +=  ../gtest                                   \
                 ../gtest/googletest/include/gtest
 
 
-### add any other source or header files you may need
-#HEADERS += ../Database/dbhivetable.h
-#SOURCES += ../Database/dbhivetable.cpp
+HEADERS += ../Database/dbtable.h
+SOURCES += ../Database/dbtable.cpp
 
-#HEADERS += ../Database/dbmodeltable.h
-#SOURCES += ../Database/dbmodelteable.cpp
+HEADERS += ../Database/tool.h
+SOURCES += ../Database/tool.cpp
+
+HEADERS += ../Database/dbhivetable.h
+SOURCES += ../Database/dbhivetable.cpp
+
+HEADERS += ../Database/dbmodeltable.h
+SOURCES += ../Database/dbmodeltable.cpp
+
+HEADERS += ../Database/dbbeelog.h
+SOURCES += ../Database/dbbeelog.cpp
+LIBS += -lsqlite3
 
 
 HEADERS += ../Data/beegeneration.h
