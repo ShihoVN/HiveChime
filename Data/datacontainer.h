@@ -24,6 +24,8 @@ class DataContainer
 {
 public:
     DataContainer();
+    ~DataContainer();
+
     void addData(Data* d);
     vector<Data*> getUdpMessages();
 
