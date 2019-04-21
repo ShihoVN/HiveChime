@@ -2,14 +2,11 @@
 
 DataContainer::DataContainer()
 {
-    for (int i=0;beelog->size();) {
-
-    }
 }
 
 DataContainer::DataContainer(string db_name)
 {
-   beelog=new DBBeeLog(dbtool,db_name);
+   //beelog=new DBBeeLog(dbtool,db_name);
 }
 
 DataContainer::~DataContainer()
