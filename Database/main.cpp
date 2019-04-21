@@ -14,7 +14,7 @@ int main()
 
    hivedb->add_row_h(0,"HD002","shiho","MODELDB");
    modeldb->add_row_m(0,"storing bees","BEELOG");
-   bee_logdb->add_row_m(0,1,"A","07/21/1111","exit");
+   bee_logdb->add_row_m(0,1,"A","07/21/1111","00:00:0000","exit");
 
 hivedb->select_all();
 modeldb->select_all();

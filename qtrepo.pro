@@ -5,4 +5,5 @@ SUBDIRS += \
     Data\
     unittest \
     Weather \
-    GUI
+    GUI \
+    Bee_Visual

@@ -34,6 +34,11 @@ HEADERS += \
 FORMS += \
         weather.ui
 
+HEADERS += ../Bee_Visual/bees.h
+SOURCES += ../Bee_Visual/bees.cpp
+HEADERS += ../Bee_Visual/engine.h
+SOURCES += ../Bee_Visual/engine.cpp
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

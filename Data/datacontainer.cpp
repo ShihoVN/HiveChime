@@ -29,7 +29,7 @@ DataContainer::~DataContainer()
 }
 
 void DataContainer::addData(Data *udpMsg){
-    beelog->add_row_m(int(udpMessages.size()),udpMsg->board,to_string(udpMsg->gate),udpMsg->date,to_string(udpMsg->type));
+    beelog->add_row_m(int(udpMessages.size()),udpMsg->board,to_string(udpMsg->gate),udpMsg->date,udpMsg->time,to_string(udpMsg->type));
     udpMessages.push_back(udpMsg);
 
 }
