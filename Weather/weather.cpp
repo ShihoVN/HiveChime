@@ -6,8 +6,10 @@ Weather::Weather(QWidget *parent) :
     ui(new Ui::Weather)
 {
     ui->setupUi(this);
-        manager = new QNetworkAccessManager(this);
-
+    manager = new QNetworkAccessManager(this);
+    temp_board="";
+    createBoard();
+    loadLabel();
 }
 
 
@@ -61,4 +63,12 @@ void Weather::cleanUpForMove(){
     temp_board = "";
     createBoard();
     loadLabel();
+}
+
+void Weather::on_pushButton_clicked()
+{
+    temp_board=to_string(bee_test.get_score()).c_str();
+    ui->label->setText(temp_board);
+    bee_test.step();
+    cleanUpForMove();
 }
