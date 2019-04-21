@@ -16,6 +16,8 @@ public:
     ~Weather();
 
 private:
+    void get_Temp();
+    QNetworkAccessManager* manager;
     Ui::Weather *ui;
 };
 
