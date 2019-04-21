@@ -67,12 +67,13 @@ void DBBeeLog::store_create_sql() {
     sql_create += "  board INT NOT NULL, ";
     sql_create += "  gate TEXT NOT NULL, ";
     sql_create += "  date TEXT NOT NULL, ";
+    sql_create += "  time TEXT NOT NULL, ";
     sql_create += "  entry TEXT NOT NULL ";
     sql_create += " );";
 
 }
 
-bool DBBeeLog::add_row_m(int id, int board, std::string gate,std::string date, std::string entry_exit) {
+bool DBBeeLog::add_row_m(int id, int board, std::string gate,std::string date, std::string time, std::string entry_exit) {
     int   retCode = 0;
     char *zErrMsg = 0;
 
@@ -97,6 +98,10 @@ bool DBBeeLog::add_row_m(int id, int board, std::string gate,std::string date, s
 
     sql_add_row += "\"";
     sql_add_row += std::string(date);
+    sql_add_row += "\", ";
+
+    sql_add_row += "\"";
+    sql_add_row += std::string(time);
     sql_add_row += "\", ";
 
     sql_add_row += "\"";
