@@ -29,7 +29,7 @@ public:
     void track_db();
 
 private:
-    Tool *dbtool=new Tool("dbtabl1");
+    Tool *dbtool=new Tool("dbtable");
     DBBeeLog* beelog=new DBBeeLog(dbtool,"BEES");
     vector<Data*> udpMessages; //recently inputted data
 

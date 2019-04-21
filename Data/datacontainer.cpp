@@ -2,6 +2,7 @@
 
 DataContainer::DataContainer()
 {
+
     char** P_rows =beelog->select_table_m();
     Data *added;
     if(P_rows!=nullptr){
@@ -20,7 +21,7 @@ DataContainer::DataContainer()
 
 DataContainer::DataContainer(string db_name)
 {
-   beelog=new DBBeeLog(dbtool,db_name);
+   //beelog=new DBBeeLog(dbtool,db_name);
 }
 
 DataContainer::~DataContainer()
