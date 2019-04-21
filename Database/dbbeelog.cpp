@@ -81,7 +81,7 @@ bool DBBeeLog::add_row_m(int id, int board, std::string gate,std::string date, s
 
     sql_add_row  = "INSERT INTO ";
     sql_add_row += table_name;
-    sql_add_row += " ( id, board, gate, date, entry) ";
+    sql_add_row += " ( id, board, gate, date, time, entry) ";
     sql_add_row += "VALUES (";
 
     sprintf(tempval, "%d", id);
