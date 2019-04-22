@@ -100,6 +100,7 @@ Bee engine::add_random(char item){//Need to finish
     board[rows1][cols1] = item;
     thing.col = cols1;
     thing.row = rows1;
+    thing.gate=pair<int,int>(num_rows/2,num_cols/2); // This should be the hive location
     return thing;
 }
 

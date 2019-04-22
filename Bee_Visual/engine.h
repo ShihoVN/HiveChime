@@ -38,7 +38,7 @@ public:
 
     //---Engines like his//
     void reset_gameboard();
-    Bee add_thing(char item, int row, int col,    bool enter_exit, pair<int,int> gate);
+    Bee add_thing(char item, int row, int col,bool enter_exit, pair<int,int> gate);
     Bee add_random(char item);
     void remove_thing(int row, int col);
     char get_thing(int row, int col);

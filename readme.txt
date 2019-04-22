@@ -1,38 +1,5 @@
-						***How to run program as of April 07, 2019***
 
-In the main.cpp file copy then run the following code depending on what you want to check:
+		                  ****How to run program as of April 21, 2019***
+In the main.cpp of the Data class
 	
-	1) Generate 20 UDP messages in the Terminal Window with a HiveId of 0002 and a HiveSize of 500 (Number of Bees)
-		    BeeGeneration* BG = new BeeGeneration("0002", 500);
-    				for(int i = 0; i < 20; i++){
-    				cout << BG->makeBee() << endl;}
-
-
-	2) Generate one UDP message
-		    BeeGeneration* BG = new BeeGeneration("0002", 500);
-			cout << BG->makeBee() << endl;
-
-
-	3) Read in UDP messages and convert them to a vector of structs containing entry exit information and datetimes 
-			   	DataContainer container;
-    				DataDecoder d(&container);
-    				BeeGeneration* BG = new BeeGeneration("0002", 500);
-
-   				for(int i = 0; i < 100; i++){
-    				d.decode(BG->makeBee());
-
-
-    				for (int jj= 0; j < container.getUdpMessages().size(); ++j) {
-
-        				cout << "Hive ID: " << container.getUdpMessages().at(j)->hiveId << endl;
-        				cout << "Date: " << container.getUdpMessages().at(j)->date << endl ;
-        				cout << "Time: " << container.getUdpMessages().at(j)->time  << endl;
-        				cout << "Board: " << container.getUdpMessages().at(j)->board  << endl;
-        				cout << "Gate: " << container.getUdpMessages().at(j)->gate  << endl;
-        				cout << "Type: " << container.getUdpMessages().at(j)->type << endl ;
-        				cout << "\n" << endl;
-
-  					cout << "Size of array in container: " << container.getUdpMessages().size() << endl;
-
-   				}
-   			}
+1) Check if the database is working: First, open the program and run the main.cpp of the dataClass. This creates UDP messages and stores it in the database. Then, close the program, reopen it back up and re-run the main.cpp in the Data class. This time, the program will show the previous set of database entries, at the top of the terminal output, and the new set of database entries and the bottom of the terminal output. In some cases, there’s a “Unique error”, this is because the data being generated is the same as the data previously stored. 
