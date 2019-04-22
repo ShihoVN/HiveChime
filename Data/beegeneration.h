@@ -16,6 +16,7 @@
 #include <iostream>
 #include <time.h>
 #include <queue>
+#include <string.h>
 
 
 
@@ -27,9 +28,16 @@ struct nextBee{
     int m;
     int board;
     int sensor;
-    bool operator<(const nextBee& bee) const {
-        return bee.now < this->now || (bee.now == this->now && bee.m < this->m);
-    }
+//    bool operator<(const nextBee& bee) const {
+////        return bee.now < this->now || (bee.now == this->now && bee.m < this->m);
+//        for(int i = 0; i < 6; i ++){
+//                if(this->now[i] != bee.now[i] ){
+//                    return this->now[i] < bee.now[i];
+//                }
+//            }
+//            return this->m < bee.m  ;
+//    }
+
 } ;
 
 struct Compare{
@@ -37,10 +45,10 @@ struct Compare{
   {
       for(int i = 0; i < 6; i ++){
               if(first.now[i] != second.now[i] ){
-                  return first.now[i] < second.now[i];
+                  return first.now[i] > second.now[i];
               }
           }
-          return first.m < second.m  ;
+          return first.m > second.m  ;
   }
 };
 
@@ -61,16 +69,19 @@ private:
     void generateTime();
     void generateTime(int _time);
     void setActivity(int size);
+    void update(int ms);
     int* calculate(int ms);
-    string generate(int* next);
-    string pairGenerate();
+    void generate();
+    string generateUDP();
+    string anotherActivity(string _udp, int _udpTime[], int _m);
     int findPair(int s);
     int btod(string b);
 
 
+
     std::default_random_engine generator;
     vector<int> lambda;
-    int current;
+    //int current;
     int n, x;
     string id;
     int milli, m;
