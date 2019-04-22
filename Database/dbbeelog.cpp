@@ -67,12 +67,13 @@ void DBBeeLog::store_create_sql() {
     sql_create += "  board INT NOT NULL, ";
     sql_create += "  gate TEXT NOT NULL, ";
     sql_create += "  date TEXT NOT NULL, ";
+    sql_create += "  time TEXT NOT NULL, ";
     sql_create += "  entry TEXT NOT NULL ";
     sql_create += " );";
 
 }
 
-bool DBBeeLog::add_row_m(int id, int board, int gate,std::string date, std::string entry_exit) {
+bool DBBeeLog::add_row_m(int id, int board, std::string gate,std::string date, std::string time, std::string entry_exit) {
     int   retCode = 0;
     char *zErrMsg = 0;
 
@@ -80,7 +81,7 @@ bool DBBeeLog::add_row_m(int id, int board, int gate,std::string date, std::stri
 
     sql_add_row  = "INSERT INTO ";
     sql_add_row += table_name;
-    sql_add_row += " ( id, board, gate, date, entry) ";
+    sql_add_row += " ( id, board, gate, date, time, entry) ";
     sql_add_row += "VALUES (";
 
     sprintf(tempval, "%d", id);
@@ -91,12 +92,16 @@ bool DBBeeLog::add_row_m(int id, int board, int gate,std::string date, std::stri
     sql_add_row += tempval;
     sql_add_row += ", ";
 
-    sprintf(tempval, "%d", gate);
-    sql_add_row += tempval;
-    sql_add_row += ", ";
+    sql_add_row += "\"";
+    sql_add_row += std::string(gate);
+    sql_add_row += "\", ";
 
     sql_add_row += "\"";
     sql_add_row += std::string(date);
+    sql_add_row += "\", ";
+
+    sql_add_row += "\"";
+    sql_add_row += std::string(time);
     sql_add_row += "\", ";
 
     sql_add_row += "\"";

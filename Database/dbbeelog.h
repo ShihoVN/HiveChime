@@ -17,7 +17,7 @@ protected:
     std::string sql_select_all;
     std::string sql_update_row;
     std::string sql_select;
-    int column = 5;
+    int column = 6;
 public:
 
     DBBeeLog();
@@ -33,7 +33,7 @@ public:
     // insert command for your child class.
     virtual void store_add_row_sql();
 
-    bool add_row_m(int id, int board, int gate,std::string date, std::string entry_exit);
+    bool add_row_m(int id, int board, std::string gate,std::string date,std::string time,std::string entry_exit);
     char** select_table_m();
     bool select_all();
 };

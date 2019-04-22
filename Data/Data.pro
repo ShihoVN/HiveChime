@@ -16,6 +16,12 @@ HEADERS += \
     datagenerator.h \
     beegeneration.h
 
+HEADERS += ../Database/dbtable.h
+SOURCES += ../Database/dbtable.cpp
+
+HEADERS += ../Database/tool.h
+SOURCES += ../Database/tool.cpp
+
 HEADERS += ../Database/dbhivetable.h
 SOURCES += ../Database/dbhivetable.cpp
 
@@ -24,12 +30,4 @@ SOURCES += ../Database/dbmodeltable.cpp
 
 HEADERS += ../Database/dbbeelog.h
 SOURCES += ../Database/dbbeelog.cpp
-
-HEADERS += ../Database/tool.h
-SOURCES += ../Database/tool.cpp
-
-HEADERS += ../Database/dbtable.h
-SOURCES += ../Database/dbtable.cpp
-
-
 LIBS += -lsqlite3

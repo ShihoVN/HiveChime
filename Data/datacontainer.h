@@ -2,8 +2,6 @@
 #define DATACONTAINER_H
 #include <vector>
 #include <string>
-#include "../Database/dbhivetable.h"
-#include "../Database/dbmodeltable.h"
 #include "../Database/dbbeelog.h"
 #include "../Database/tool.h"
 
@@ -24,16 +22,17 @@ class DataContainer
 {
 public:
     DataContainer();
+    DataContainer(string db_name);
     ~DataContainer();
-
     void addData(Data* d);
     vector<Data*> getUdpMessages();
-
+    void track_db();
 
 private:
-    Tool* dbtool=new Tool("dbtable");
-    DBBeeLog * beelog=new DBBeeLog(dbtool,"dbeelog");
+    Tool *dbtool=new Tool("dbtable");
+    DBBeeLog* beelog=new DBBeeLog(dbtool,"BEES");
     vector<Data*> udpMessages; //recently inputted data
+
 };
 
 #endif // DATACONTAINER_H

@@ -1,0 +1,10 @@
+Deliverable no.1
+
+The readme should be something that that a regular person could read. There shouldn't be so much code. You may refer to line numbers in a main file and ask me (or a CS-adroit customer) to comment various chunks in and out.
+
+Move on to writing to text file rather than Terminal, and give clear instructions on where that file will be created. Then give instructions on how to read in that file using the analysis code.
+
+The terminal output is readable, looks good.
+
+Grade:4/5
+
