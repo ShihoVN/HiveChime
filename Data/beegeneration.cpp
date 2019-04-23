@@ -92,10 +92,10 @@ string BeeGeneration::makeBee()
            }
        }
 
-       std::exponential_distribution<double> expDistbn(double(60/x)); //Calculates the next expected activity
+       std::exponential_distribution<double> expDistbn(double(600/x)); //Calculates the next expected activity
        cout << "Hive ID: 23"<< endl;
        while(nextBees.size() < 8){
-           update(60000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
+           update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
 
        generate();
        }
@@ -176,7 +176,7 @@ string BeeGeneration::generateUDP(){
     int udpm = m;
 
 
-    nextBees.pop();
+    //nextBees.pop();
 
 
     if(!nextBees.empty()){ //Checks to see if gates were triggered at the same time
@@ -209,26 +209,27 @@ string BeeGeneration::anotherActivity(string _udp, int udpTime[], int _m){
     char *cstr = &_udp[0u];
 //    char *cstr = new char[_udp.length() + 1];
 //    strcpy(cstr, _udp.c_str());
-    char * p;
-    p = std::strtok (cstr,"B");
+    char * p=std::strtok (cstr,"B");;
     udp += p;
     int i = 0;
+    string s;
+    p = strtok (NULL, "B");
     while (p != NULL)
     {
         udp += "B";
         i++;
-        p = strtok (NULL, "B");
+
         if(i == nextBees.top().board){
-            if(p == "0"){
-                string s = "1";
-                for(int i = 1; i < nextBees.top().sensor; i++){
+            if(std::strncmp( p,"0",1)==0){
+                s="1";
+                for(int j = 1; j < nextBees.top().sensor; j++){
                     s += "0";
                 }
                 udp += to_string(btod(s));
             }
             else{
-                string s = "1";
-                for(int i = 1; i < nextBees.top().sensor; i++){
+                s = "1";
+                for(int k = 1; k < nextBees.top().sensor; k++){
                     s += "0";
                 }
                 udp += to_string(stoi(p) + btod(s));
@@ -238,14 +239,18 @@ string BeeGeneration::anotherActivity(string _udp, int udpTime[], int _m){
         else{
             udp += p;
         }
+        p = strtok (NULL, "B");
     }
 
+    nextBees.pop();
 
-
-    if(!nextBees.empty()){ //Checks to see if gates were triggered at the same time
+    if(nextBees.empty()){ //Checks to see if gates were triggered at the same time
+        return udp;
+    }
         for(int i = 0; i < 6; i ++){
             if(i == 5 && _m == 0 && nextBees.top().m >950 && nextBees.top().m <1000){
-                if(nextBees.top().now[i]+1 == udpTime[i]){
+                if((nextBees.top().now[i]-1) == udpTime[i]){
+                            cout << "another activity part 2" << endl;
                     return anotherActivity(udp, udpTime, _m);
                 }
                 break;
@@ -255,12 +260,11 @@ string BeeGeneration::anotherActivity(string _udp, int udpTime[], int _m){
             }
             if(i == 5){
                 if(nextBees.top().m < _m && nextBees.top().m > _m-50){
+
                     return anotherActivity(udp, udpTime, _m);
                 }
             }
-
         }
-    }
     return udp;
 }
 
