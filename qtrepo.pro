@@ -7,4 +7,5 @@ SUBDIRS += \
     Weather \
     GUI \
     Bee_Visual \
-    RealTimeStream
+    RealTimeStream \
+    WeatherStream
