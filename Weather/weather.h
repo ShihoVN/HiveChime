@@ -7,6 +7,11 @@
 #include "../Bee_Visual/engine.h"
 #include <thread>
 #include <functional>
+#include <QApplication>
+#include <QGraphicsScene>
+#include <QGraphicsRectItem>
+
+
 namespace Ui {
 class Weather;
 }

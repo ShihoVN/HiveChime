@@ -11,3 +11,9 @@ SOURCES += \
 HEADERS +=\
         engine.h \
     bees.h
+
+QT += gui
+
+QTPLUGIN += qjpeg \
+    qgif \
+    qtiff
