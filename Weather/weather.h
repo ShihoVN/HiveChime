@@ -10,6 +10,7 @@
 #include <QApplication>
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
+#include <QImage>
 
 
 namespace Ui {
@@ -40,6 +41,8 @@ private:
     void createBoard();
     void loadLabel();
     void clearBoard();
+    //bool QImage::load(const QString &, const char *format = Q_NULLPTR)
+    QImage *bee = new QImage("/User/Jon/qtrepo_grp_01/Weather/Indiv_Bee.png");
 };
 
 #endif // WEATHER_H

@@ -7,7 +7,6 @@
 #include <sstream>
 #include <string>
 #include <stdlib.h>
-//#include <QImage>
 
 using namespace std;
 
