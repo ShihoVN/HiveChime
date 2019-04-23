@@ -5,12 +5,12 @@ using namespace std;
 
 /**
  * Default constructor
- * Sets rows & columns to 30
+ * Sets rows & columns to 20
  * */
 Bees::Bees(){
     numberOfBees = NUM_BEES;
-    num_rows = 20;
-    num_cols = 20;
+    num_rows = 10;
+    num_cols = 60;
     init_game();
 }
 
@@ -87,11 +87,10 @@ void Bees::move_bees(){
     }
 }
 
-
 /**
  * Checks to see if a bee has entered a hive through a gate.
  * */
-void Bees::check_bees(){
+void Bees::check_bees(){ //Should this be a bool
     //for = myvector.begin() ; it != myvector.end(); ++it)
     std::vector<Bee>::iterator itr= bee.begin();
     for (int i = 0; i <  bee.size(); i++) { //Checks to see if a bees hit a will
@@ -101,9 +100,12 @@ void Bees::check_bees(){
             bee.erase(itr); //Erases bees in bees vector based on index
             numberOfBees=numberOfBees-1;
             score = score+1; //Number of bees which have enetered the hive
+            //return true;
         }
     }
 }
+
+
 
 
 /**

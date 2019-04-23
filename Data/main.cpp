@@ -18,6 +18,16 @@ int main()
 //    for(int i = 0; i<50;i++){
 //        cout << BG->makeBee() << endl;
 //    }
+    //DataContainer container;
+    //DataDecoder d(&container);
+//    BeeGeneration* BG = new BeeGeneration("0002", 500, 15);
+
+//    for(int i = 0; i<50;i++){
+//        cout << BG->makeBee() << endl;
+//    }
+
+    //container.getUdpMessages();
+
 
     for(int i = 0; i < 100; i++){
         d.decode(BG->makeBee());
