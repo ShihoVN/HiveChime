@@ -31,15 +31,15 @@ void DataDecoder::decode(string _hex){
     string _hiveId = fragments.at(0);
     string _date = dateDecoder(fragments.at(1));
     string _time = timeDecoder(fragments.at(1));
-
+    d->hiveId = _hiveId;
+    d->date = _date;
+    d->time = _time;
 
     activityDecoder(fragments.at(2));
 
 
 
-    d->hiveId = _hiveId;
-    d->date = _date;
-    d->time = _time;
+
 
 
     //cout << "SIZE OF SENSOR SARRYA " << sensorArray.size() << endl;

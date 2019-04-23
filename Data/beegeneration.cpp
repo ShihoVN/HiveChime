@@ -19,7 +19,6 @@ BeeGeneration::BeeGeneration(int size)
  */
 BeeGeneration::BeeGeneration(string _id, int size){
 
-
     id = _id;
     generateTime();
     setActivity(size);
@@ -80,15 +79,12 @@ BeeGeneration::~BeeGeneration()
  */
 string BeeGeneration::makeBee()
 {
-//    //std::binomial_distribution<int, double> binom(5, 1.0/6.0);
-    if(current > 24){ // This if statement checks to see if a day has elapsed and adjusts the time records acordingly
+    if(time[3] == 24){ // This if statement checks to see if a day has elapsed and adjusts the time records acordingly
         time[2] ++;
-        time[3] = 1;
-        current = 1;
+        time[3] = 0;
     }
        while(n == 0){ // This while loop checks to see there is reamaning expected bee activity
-           current ++;
-           std::poisson_distribution<int> poissDistbn(lambda.at(current-1)); //Creates a distuction for that hour based on the activty level
+           std::poisson_distribution<int> poissDistbn(lambda.at(time[3])); //Creates a distuction for that hour based on the activty level
            x = poissDistbn(generator);
            n = x;
            if(x == 0){
@@ -96,25 +92,16 @@ string BeeGeneration::makeBee()
            }
        }
 
-       std::exponential_distribution<double> expDistbn(double(60/x)); //Calculates the next expected activity
-       int* next = calculate(60000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
+       std::exponential_distribution<double> expDistbn(double(600/x)); //Calculates the next expected activity
        cout << "Hive ID: 23"<< endl;
-       if(!nextBees.empty()){ //Checks the priorty queue to see if there are any pairs to complete
-            for(int i = 0; i < 6; i ++){
-               if(nextBees.top().now[i] < next[i] ){
-                   return pairGenerate();
+       while(nextBees.size() < 8){
+           update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
 
-               }
-               if(i ==5&& nextBees.top().now[i] == next[i]&&nextBees.top().m < m){
-                    return pairGenerate();
-               }
-
-            }
-
+       generate();
        }
 
        n--;
-       return generate(next);
+       return generateUDP();
 }
 
 
@@ -122,10 +109,26 @@ string BeeGeneration::makeBee()
  * @brief BeeGeneration::pairGenerate generates and formats a UDP message from the priority queue
  * @return string of UDP message
  */
-string BeeGeneration::pairGenerate(){
+
+string BeeGeneration::generateUDP(){
+    if(nextBees.empty()){
+        cout << "this is why" << endl;
+    }
+
+    m = nextBees.top().m;
+    m += 50-(nextBees.top().m % 50);
+
     string udp;
     udp = "HC" + id + "-D";
     for(int i = 0; i < 6; i++){ //Format of UDP message
+        if(i==5 && m == 1000){
+            if(nextBees.top().now[i] < 9){
+                udp += "0";
+            }
+            udp += to_string(nextBees.top().now[i]+1);
+            m = 0;
+            break;
+        }
         if(nextBees.top().now[i] < 10){
             udp += "0";
         }
@@ -133,18 +136,17 @@ string BeeGeneration::pairGenerate(){
 
         if(i == 2){
             udp += "T";
+
         }
-        else{
-            if(i != 5){
+        if(i != 5){
             udp += ".";
-            }
         }
     }
 
-    if(nextBees.top().m<100){
+    if(m<100){
         udp += "0";
     }
-    if(nextBees.top().m <10){
+    if(m <10){
         udp += "0";
     }
     udp += to_string(m) + "-";
@@ -168,77 +170,127 @@ string BeeGeneration::pairGenerate(){
     for(int i = 0; i < 6; i++){
         udpTime[i] = nextBees.top().now[i];
     }
-    long udpm = nextBees.top().m;
+    if(m == 0){
+        udpTime[5] ++;
+    }
+    int udpm = m;
+
+
+    //nextBees.pop();
+
+
+    if(!nextBees.empty()){ //Checks to see if gates were triggered at the same time
+        for(int i = 0; i < 6; i ++){
+            if(i == 5 && udpm == 0 && nextBees.top().m >950 && nextBees.top().m <1000){
+                if(nextBees.top().now[i]+1 == udpTime[i]){
+                    return anotherActivity(udp, udpTime, m);
+                }
+                break;
+            }
+            if(nextBees.top().now[i] != udpTime[i]){
+                break;
+            }
+            if(i == 5){
+                if(nextBees.top().m < udpm && nextBees.top().m > udpm-50){
+                    return anotherActivity(udp, udpTime, m);
+                }
+            }
+
+        }
+    }
+    return udp;
+
+}
+
+string BeeGeneration::anotherActivity(string _udp, int udpTime[], int _m){
+    cout << "another activity?" << endl;
+    string udp = "";
+
+    char *cstr = &_udp[0u];
+//    char *cstr = new char[_udp.length() + 1];
+//    strcpy(cstr, _udp.c_str());
+    char * p=std::strtok (cstr,"B");;
+    udp += p;
+    int i = 0;
+    string s;
+    p = strtok (NULL, "B");
+    while (p != NULL)
+    {
+        udp += "B";
+        i++;
+
+        if(i == nextBees.top().board){
+            if(std::strncmp( p,"0",1)==0){
+                s="1";
+                for(int j = 1; j < nextBees.top().sensor; j++){
+                    s += "0";
+                }
+                udp += to_string(btod(s));
+            }
+            else{
+                s = "1";
+                for(int k = 1; k < nextBees.top().sensor; k++){
+                    s += "0";
+                }
+                udp += to_string(stoi(p) + btod(s));
+
+            }
+        }
+        else{
+            udp += p;
+        }
+        p = strtok (NULL, "B");
+    }
 
     nextBees.pop();
 
-    if(!nextBees.empty()){ //Checks to see if gates were triggered at the same time
-    if(nextBees.top().m == udpm){
-    for(int i = 0; i < 6; i++){
-        if(nextBees.top().now[i] != udpTime[i]){
-            break;
-        }
-        if(i==5){
-            return udp;
-        }
+    if(nextBees.empty()){ //Checks to see if gates were triggered at the same time
+        return udp;
     }
-    }
-    }
+        for(int i = 0; i < 6; i ++){
+            if(i == 5 && _m == 0 && nextBees.top().m >950 && nextBees.top().m <1000){
+                if((nextBees.top().now[i]-1) == udpTime[i]){
+                            cout << "another activity part 2" << endl;
+                    return anotherActivity(udp, udpTime, _m);
+                }
+                break;
+            }
+            if(nextBees.top().now[i] != udpTime[i]){
+                break;
+            }
+            if(i == 5){
+                if(nextBees.top().m < _m && nextBees.top().m > _m-50){
 
+                    return anotherActivity(udp, udpTime, _m);
+                }
+            }
+        }
     return udp;
-
-
 }
+
 
 /**
  * @brief BeeGeneration::Generates a new UDP and stores the pair in a priority queue
  * @param next is the expected time a UDP message specifies
  * @return string which is a UDP message
  */
-string BeeGeneration::generate(int* next){
-    for(int i = 0; i < 6; i++){
-        time[i] = next[i];
-    }
-    milli = m;
-
-
-
-    string udp;
-    udp = "HC" + id + "-D";
-    for(int i = 0; i < 6; i++){
-        if(time[i] < 10){
-            udp += "0";
-        }
-        udp += to_string(time[i]);
-        if(i == 2){
-            udp += "T";
-        }
-        else{
-            if(i != 5){
-            udp += ".";
-            }
-        }
-    }
-    if(milli<100){
-        udp += "0";}
-    if(milli <10){
-        udp += "0";
-    }
-    udp+= to_string(milli) + "-";
+void BeeGeneration::generate(){
 
     //FIX THIS
+    nextBee bee;
     nextBee pairBee; //Generates random baord
-    int board = rand() % 10+1;
-    pairBee.board = board;
+    bee.board = rand() % 10+1;
+    pairBee.board = bee.board;
 
-    int sensor = rand() % 8+1; //Generates random sensor
-    pairBee.sensor = findPair(sensor);
-    string s = "1";
-    for(int i = 1; i < sensor; i++){
-        s += "0";
-    }
+    bee.sensor = rand() % 8+1; //Generates random sensor
+    pairBee.sensor = findPair(bee.sensor);
 
-    std::poisson_distribution<int> poissDistbn(490); //Randomly generates the pair UDP message (not in proper format)
+        for(int i = 0; i < 6; i++){
+            bee.now[i] = time[i];
+        }
+        bee.m = milli;
+
+    std::poisson_distribution<int> poissDistbn(450); //Randomly generates the pair UDP message (not in proper format)
     int* elpst =  calculate(poissDistbn(generator));
     pairBee.m = m;
     for(int i = 0; i < 6; i++){
@@ -249,30 +301,12 @@ string BeeGeneration::generate(int* next){
     nextBees.push(pairBee); //Stores in priority queue
 
 
-    for(int i =0; i < 10; i++){
-        udp+= "B";
-        if(i+1 == board){
-            udp += to_string(btod(s));
-        }
-        else{
-            udp += "0";
-        }
+    nextBees.push(bee);
 
-    }
 
-    if(nextBees.top().m != milli){
-        return udp;
-    }
-    for(int i = 0; i < 6; i++){
-        if(nextBees.top().now[i] != time[i]){
-            break;
-        }
-        if(i==5){
-            return udp;
-        }
-    }
 
-    return udp;
+
+    return;
 
 }
 
@@ -294,6 +328,55 @@ int BeeGeneration::findPair(int s){
     }
     return 0;
 }
+
+void BeeGeneration::update(int ms){
+
+        milli += ms;
+
+
+        while(milli > 1000){
+            milli -=1000;
+            time[5]++;
+            while(time[5] >60){
+                time[5]=0;
+                time[4] ++;
+            }
+            if(time[4] >60){
+                time[4]=0;
+                time[3]++;
+            }
+            if(time[3]>24){
+                time[3]=0;
+                time[2]++;
+            }
+            if(time[2]>28){
+                if(time[1]==2){
+                    time[2]=0;
+                    time[1]++;
+                }
+                else if(time[2]>30){
+                    if(time[1]==4 ||time[1]==6||time[1]==9||time[1]==11){
+                        time[2]=0;
+                        time[1]++;
+                    }
+                }
+                if(time[2] > 31){
+                    time[2]=0;
+                    time[1]++;
+                }
+            }
+            if(time[1]>12){
+                time[1]=0;
+                time[0]++;
+            }
+
+        }
+
+
+        return;
+
+    }
+
 
 
 
@@ -324,7 +407,6 @@ int* BeeGeneration::calculate(int ms){
         }
         if(ntime[3]>24){
             ntime[3]=0;
-            current =0;
             ntime[2]++;
         }
         if(ntime[2]>28){
@@ -370,9 +452,6 @@ void BeeGeneration::generateTime(){
 
     milli = 0;
     n = 0;
-    current = 0;
-
-
 
     return;
 
@@ -394,7 +473,6 @@ void BeeGeneration::generateTime(int _time){
 
     milli = 0;
     n = 0;
-    current = _time-1;
 
 
     return;
