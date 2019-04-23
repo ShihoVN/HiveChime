@@ -22,8 +22,10 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    QString url = "https://text.npr.org";
-    //QString url = "http://tomcollinsresearch.net/research/rpa/hworld/numbers.html";
+   // QString url = "https://text.npr.org";
+   // QString url = "http://www.clocktab.com/";
+    QString url = "http://tomcollinsresearch.net/research/rpa/hworld/numbers.html";
+
 private slots:
     void downloadFinished(QNetworkReply*);
     void on_pushButton_clicked();

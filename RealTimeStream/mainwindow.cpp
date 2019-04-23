@@ -28,6 +28,7 @@ void MainWindow::on_pushButton_clicked()
     connect( manager, &QNetworkAccessManager::finished, this, &MainWindow::downloadFinished);
     const QUrl myurl = QUrl(url);
     QNetworkRequest request(myurl);
+    request.setRawHeader("User-Agent", "MyOwnBrowser 1.0");
     manager->get(request);
 
 }
