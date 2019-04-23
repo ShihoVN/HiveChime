@@ -7,7 +7,7 @@
 engine::engine()
 {
     this->num_rows = 30;
-    this->num_cols = 30;
+    this->num_cols = 10;
     reset_gameboard();
 }
 /**

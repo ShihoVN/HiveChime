@@ -5,12 +5,12 @@ using namespace std;
 
 /**
  * Default constructor
- * Sets rows & columns to 30
+ * Sets rows & columns to 20
  * */
 Bees::Bees(){
     numberOfBees = NUM_BEES;
-    num_rows = 20;
-    num_cols = 20;
+    num_rows = 10;
+    num_cols = 60;
     init_game();
 }
 
@@ -86,6 +86,17 @@ void Bees::move_bees(){
         }
     }
 }
+
+/**
+ * Moves the bees towards an exit
+ * Checks to see if a Bee rows or cols is greater than or less than the Bee
+ * */
+void Bees::bees_leaving(){
+    for (int i=0; i < bee.size();i++){
+
+    }
+}
+
 
 
 /**
