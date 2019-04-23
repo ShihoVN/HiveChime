@@ -6,4 +6,5 @@ SUBDIRS += \
     unittest \
     Weather \
     GUI \
-    Bee_Visual
+    Bee_Visual \
+    RealTimeStream
