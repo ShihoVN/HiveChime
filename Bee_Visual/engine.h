@@ -7,7 +7,7 @@
 #include <sstream>
 #include <string>
 #include <stdlib.h>
-#include <QImage>
+//#include <QImage>
 
 using namespace std;
 
@@ -18,7 +18,7 @@ struct Bee
     bool enter_exit;
     pair<int,int> gate;
     //bool QImage::load(const QString &, const char *format = Q_NULLPTR)
-    QImage *bee = new QImage("/User/Jon/qtrepo_grp_01/Weather/Indiv_Bee.png");
+    //QImage *bee = new QImage("/User/Jon/qtrepo_grp_01/Weather/Indiv_Bee.png");
 };
 
 class engine
