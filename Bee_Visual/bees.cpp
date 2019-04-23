@@ -31,6 +31,12 @@ Bees::Bees(int row, int col){
 Bees::~Bees(){
 }
 
+void Bees::create_bee_vectors(){
+
+
+
+}
+
 
 /**
  * Initalizes the game
@@ -92,17 +98,26 @@ void Bees::move_bees(){
  * Checks to see if a Bee rows or cols is greater than or less than the Bee
  * */
 void Bees::bees_leaving(){
-    for (int i=0; i < bee.size();i++){
+    for (int i=0; i < beeLeaving.size();i++){
+    if(bee.at(i).row != (num_rows - 1)){
 
     }
-}
+    if(bee.at(i).col != (num_cols - 1)){
 
+    }
+    }
+
+    //for (int i=0; i < bee.size();i++){ //Should change this to a vector of exit bees__ beeLeaving
+      // beeLeaving.push_back(add_thing('l', bee.row, int col, bool enter_exit, pair<int,int> gate));
+
+    //}
+}
 
 
 /**
  * Checks to see if a bee has entered a hive through a gate.
  * */
-void Bees::check_bees(){
+void Bees::check_bees(){ //Should this be a bool
     //for = myvector.begin() ; it != myvector.end(); ++it)
     std::vector<Bee>::iterator itr= bee.begin();
     for (int i = 0; i <  bee.size(); i++) { //Checks to see if a bees hit a will
@@ -112,9 +127,12 @@ void Bees::check_bees(){
             bee.erase(itr); //Erases bees in bees vector based on index
             numberOfBees=numberOfBees-1;
             score = score+1; //Number of bees which have enetered the hive
+            //return true;
         }
     }
 }
+
+
 
 
 /**
