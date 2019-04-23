@@ -9,8 +9,8 @@ using namespace std;
  * */
 Bees::Bees(){
     numberOfBees = NUM_BEES;
-    num_rows = 10;
-    num_cols = 60;
+    num_rows = 23;
+    num_cols = 84;
     init_game();
 }
 
@@ -102,8 +102,6 @@ void Bees::check_bees(){ //Should this be a bool
         }
     }
 }
-
-
 
 
 /**

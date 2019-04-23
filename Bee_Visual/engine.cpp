@@ -7,7 +7,7 @@
 engine::engine()
 {
     this->num_rows = 30;
-    this->num_cols = 10;
+    this->num_cols = 30;
     reset_gameboard();
 }
 /**
@@ -71,7 +71,7 @@ void engine::reset_gameboard(){
                     board[i][j] = '*';
                 }
                 else if(j == 0  || j == (num_cols-1)){
-                    board[i][j] = ' ';
+                    board[i][j] = '*';
                 }
                 else{
                     board[i][j] = ' ';

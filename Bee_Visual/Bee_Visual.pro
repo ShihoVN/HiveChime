@@ -9,5 +9,11 @@ SOURCES += \
     bees.cpp
 
 HEADERS +=\
-        engine.h \
+    engine.h \
     bees.h
+
+QT += gui
+
+QTPLUGIN += qjpeg \
+    qgif \
+    qtiff
