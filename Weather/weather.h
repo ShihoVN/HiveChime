@@ -5,7 +5,8 @@
 #include <QtNetwork/QNetworkAccessManager>
 #include "../Bee_Visual/bees.h"
 #include "../Bee_Visual/engine.h"
-
+#include <thread>
+#include <functional>
 namespace Ui {
 class Weather;
 }
@@ -18,6 +19,7 @@ public:
     explicit Weather(QWidget *parent = nullptr);
     ~Weather();
     Bees bee_test;
+    void cleanUpForMove();
 
 private slots:
     void on_pushButton_clicked();
@@ -33,7 +35,6 @@ private:
     void createBoard();
     void loadLabel();
     void clearBoard();
-    void cleanUpForMove();
 };
 
 #endif // WEATHER_H

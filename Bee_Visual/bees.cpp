@@ -92,14 +92,12 @@ void Bees::move_bees(){
  * */
 void Bees::check_bees(){ //Should this be a bool
     //for = myvector.begin() ; it != myvector.end(); ++it)
-    std::vector<Bee>::iterator itr= bee.begin();
     for (int i = 0; i <  bee.size(); i++) { //Checks to see if a bees hit a will
-        if(!(i>=bee.size()-1))itr++;
         if (bee.at(i).row ==  bee.at(i).gate.first &&  bee.at(i).col ==  bee.at(i).gate.second){
             remove_thing(bee.at(i).row, bee.at(i).col); //Removes the char from the baord
-            bee.erase(itr); //Erases bees in bees vector based on index
+            bee.erase(bee.begin()+i); //Erases bees in bees vector based on index
             numberOfBees=numberOfBees-1;
-            score = score+1; //Number of bees which have enetered the hive
+            score = score+1;
             //return true;
         }
     }

@@ -68,7 +68,7 @@ void engine::reset_gameboard(){
         for (int i = 0; i < this->num_rows; i++)
             for (int j = 0; j < this->num_cols; j++){
                 if(i == 0  || i == (num_rows-1)){
-                    board[i][j] = ' ';
+                    board[i][j] = '*';
                 }
                 else if(j == 0  || j == (num_cols-1)){
                     board[i][j] = ' ';

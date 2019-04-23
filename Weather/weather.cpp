@@ -59,6 +59,9 @@ void Weather::clearBoard(){
  * Creates a new baord and laod it onto the screen
  * */
 void Weather::cleanUpForMove(){
+    bee_test.step();
+    temp_board=to_string(bee_test.get_score()).c_str();
+    ui->label->setText(temp_board);
     clearBoard();
     temp_board = "";
     createBoard();
@@ -67,8 +70,10 @@ void Weather::cleanUpForMove(){
 
 void Weather::on_pushButton_clicked()
 {
+    bee_test.step();
     temp_board=to_string(bee_test.get_score()).c_str();
     ui->label->setText(temp_board);
-    bee_test.step();
     cleanUpForMove();
 }
+
+
