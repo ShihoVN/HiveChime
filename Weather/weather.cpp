@@ -68,6 +68,8 @@ void Weather::cleanUpForMove(){
     loadLabel();
 }
 
+
+
 void Weather::on_pushButton_clicked()
 {
     bee_test.step();

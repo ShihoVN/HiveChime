@@ -10,6 +10,13 @@ using namespace std;
 Bees::Bees(){
     numberOfBees = NUM_BEES;
     num_rows = 23;
+    num_cols = 120;
+    gate.insert(gate.end(),pair<int,int>(7,25));
+    gate.insert(gate.end(),pair<int,int>(18,45));
+    gate.insert(gate.end(),pair<int,int>(15,50));
+    gate.insert(gate.end(),pair<int,int>(11,60));
+    gate.insert(gate.end(),pair<int,int>(9,80));
+    gate.insert(gate.end(),pair<int,int>(13,98));
     num_cols = 84;
     init_game();
 }
@@ -18,10 +25,11 @@ Bees::Bees(){
  * Over-ride constructor
  * Sets the variable for rows and colums to the input the user passed in
  * */
-Bees::Bees(int row, int col){
+Bees::Bees(int row, int col,std::vector<pair<int,int>> _gate){
     numberOfBees = NUM_BEES;
     num_rows = row;
     num_cols = col;
+    gate=_gate;
     init_game();
 }
 
@@ -39,7 +47,7 @@ void Bees::init_game(){
     score = 0;//Set score to 0
     reset_gameboard(); //Draws the gameboard
     for (int i=0;i<numberOfBees;i++) {
-        bee.push_back(add_random('b'));//Fills the vecBeetor with random Bee
+        bee.push_back(add_random('b',4));//Fills the vecBeetor with random Bee
     }
 }
 
@@ -50,6 +58,9 @@ void Bees::update(){
     reset_gameboard();
     for (int i = 0; i < numberOfBees; i++) { //Sets the Bee
         board[ bee.at(i).row][ bee.at(i).col] = 'b';
+    }
+    for (int i = 0; i < gate.size(); i++) { //Sets the Bee
+        board[ gate.at(i).first][ gate.at(i).second] = '0';
     }
 }
 
@@ -62,6 +73,17 @@ void Bees::step(){
     update(); //Updates gamebaord
     check_bees();
 }
+
+void Bees::add_bee(int gate,bool enter){
+    if(enter){
+        add_random('b',gate);
+    }
+    else {
+        add_thing('b',gate);
+    }
+}
+
+
 /**
  * Moves the bees towards the player
  * Checks to see if a Bee rows or cols is greater than or less than the Bee

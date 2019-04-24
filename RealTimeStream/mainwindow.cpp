@@ -51,7 +51,7 @@ void MainWindow::downloadFinished(QNetworkReply *reply){
             "<body>\r\n",    //
             "\r\n</body>"
         );
-     //std::cout << newstring << std::endl;
+     std::cout << newstring << std::endl;
      UDPmessage.push_back(newstring); //add UDP message to vector
      qstring = QString::fromStdString(newstring);
      ui->Label->setText(qstring);  //set URL text to Label

@@ -68,7 +68,7 @@ void engine::reset_gameboard(){
         for (int i = 0; i < this->num_rows; i++)
             for (int j = 0; j < this->num_cols; j++){
                 if(i == 0  || i == (num_rows-1)){
-                    board[i][j] = '*';
+                    board[i][j] = ' ';
                 }
                 else if(j == 0  || j == (num_cols-1)){
                     board[i][j] = '*';
@@ -81,12 +81,12 @@ void engine::reset_gameboard(){
 }
 
 
-Bee engine::add_thing(char item, pair<int,int> gate){ //Need to finish
+Bee engine::add_thing(char item, int index){ //Need to finish
     Bee thing;
-    thing.row = gate.first;
-    thing.col = gate.second;
+    thing.row = gate.at(index).first;
+    thing.col = gate.at(index).second;
     thing.enter_exit=1;
-    thing.gate=findgate(gate);
+    thing.gate=findgate(gate.at(index));
     board[thing.row][thing.col] = item;
 
     return thing;
@@ -111,9 +111,12 @@ pair<int,int> engine::findgate( pair<int,int> gate){
     else if(j>num_cols/2&&j>i){
         return pair<int,int>(num_cols,rows1);
     }
+    else {
+        return pair<int,int>(num_cols,num_rows);
+    }
 }
 
-Bee engine::add_random(char item){//Need to finish
+Bee engine::add_random(char item,int index){//Need to finish
     int rows1 = rand () % num_rows;
     int cols1 = rand () % num_cols;
     Bee thing;
@@ -124,7 +127,7 @@ Bee engine::add_random(char item){//Need to finish
     board[rows1][cols1] = item;
     thing.col = cols1;
     thing.row = rows1;
-    thing.gate=pair<int,int>(num_rows/2,num_cols/2); // This should be the hive location
+    thing.gate=gate.at(index); // This should be the hive location
     return thing;
 }
 

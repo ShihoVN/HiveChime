@@ -49,7 +49,7 @@ protected:
 
 TEST(general, GETDATE) {
     /** replace with your own **/
-    //        DataDecoder d1;
+            // d1;
     //       ASSERT_EQ(d1.dateDecoder("D18.12.19T13.43.16000"), "18.12.19")
     //               << d1.dateDecoder("D18.12.19T13.43.16000")
     //               << " and "

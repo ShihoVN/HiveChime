@@ -10,6 +10,8 @@ BeeGeneration::BeeGeneration(int size)
     id = "0000";
     generateTime();
     setActivity(size);
+    setSeed(123);
+
 }
 
 /**
@@ -22,6 +24,8 @@ BeeGeneration::BeeGeneration(string _id, int size){
     id = _id;
     generateTime();
     setActivity(size);
+    setSeed(123);
+
 }
 
 /**
@@ -35,6 +39,8 @@ BeeGeneration::BeeGeneration(string _id, int size, int time){
     id = _id;
     generateTime(time);
     setActivity(size);
+    setSeed(123);
+
 }
 
 /**
@@ -73,6 +79,11 @@ BeeGeneration::~BeeGeneration()
 
 }
 
+void BeeGeneration::setSeed(unsigned int seed){
+    generator.seed(seed);
+}
+
+
 /**
  * @brief BeeGeneration::makeBee creates a single bee aka a single UDP message.
  * @return a string which is the UDP message
@@ -97,10 +108,11 @@ string BeeGeneration::makeBee()
        while(nextBees.size() < 8){
            update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
 
-       generate();
+           generate();
        }
 
        n--;
+       cout << "TOP BEE " << nextBees.top().board << " " << nextBees.top().sensor << endl;
        return generateUDP();
 }
 
@@ -176,7 +188,7 @@ string BeeGeneration::generateUDP(){
     int udpm = m;
 
 
-    //nextBees.pop();
+    nextBees.pop();
 
 
     if(!nextBees.empty()){ //Checks to see if gates were triggered at the same time
@@ -289,6 +301,9 @@ void BeeGeneration::generate(){
             bee.now[i] = time[i];
         }
         bee.m = milli;
+
+    cout << "bee: "<< bee.board <<" "<<bee.sensor << endl;
+    cout << "pair bee: "<<pairBee.board<<" "<< pairBee.sensor << endl;
 
     std::poisson_distribution<int> poissDistbn(450); //Randomly generates the pair UDP message (not in proper format)
     int* elpst =  calculate(poissDistbn(generator));

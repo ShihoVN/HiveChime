@@ -1,6 +1,6 @@
 #ifndef ROBOTS_H
 #define ROBOTS_H
-#define NUM_BEES 10
+#define NUM_BEES 20
 
 #include <iostream>
 #include <vector>
@@ -16,19 +16,18 @@ public:
     Bees();
     ~Bees();
     Bees(Bees &obj);
-    Bees(int row, int col);
+    Bees(int row, int col,std::vector<pair<int,int>> _gate);
+
     void init_game();
     void update();
     void step();
-
+    void add_bee(int gate,bool enter);
     void move_bees();
     void check_bees();
     void bees_leaving();
     void create_bee_vectors();
 
     int get_score();
-    int get_player_row();
-    int get_player_col();
 
     int getNumberOfBees();
 
