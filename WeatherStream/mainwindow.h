@@ -7,6 +7,7 @@
 #include <string>
 #include <QTimer>
 #include <iostream>
+#include <sstream>
 using namespace  std;
 //#include <QPixmap> ///to work with images
 
@@ -24,6 +25,10 @@ public:
     string readBetween(string str1, string str2); //gets string between strings
     void printVector();
 
+    void parseLocation(string location); // return the url with correct location
+
+
+
 
 
 private:
@@ -32,12 +37,14 @@ private:
     QNetworkRequest request;
     QTimer *timer;
     string content; // contains all website information
-    QString url = "http://tomcollinsresearch.net/research/rpa/hworld/numbers.html";
+    QString url;
+
 
     vector <string> UDPmessage;
 private slots:
-    void downloadFinished(QNetworkReply *reply);
-    void on_pushButton_clicked();
+   void getFromWeb();
+   void findTemp(QNetworkReply *reply);
+
 
 };
 

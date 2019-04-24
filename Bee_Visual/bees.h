@@ -6,6 +6,8 @@
 #include <vector>
 #include "engine.h"
 
+
+
 using namespace std;
 
 class Bees : public engine
@@ -22,6 +24,8 @@ public:
     void add_bee(int gate,bool enter);
     void move_bees();
     void check_bees();
+    void bees_leaving();
+    void create_bee_vectors();
 
     int get_score();
 
@@ -30,6 +34,7 @@ public:
 private:
 
     std::vector<Bee> bee;
+    std::vector<Bee> beeLeaving;
     int score;
     int numberOfBees;
 

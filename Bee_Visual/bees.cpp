@@ -17,6 +17,7 @@ Bees::Bees(){
     gate.insert(gate.end(),pair<int,int>(11,60));
     gate.insert(gate.end(),pair<int,int>(9,80));
     gate.insert(gate.end(),pair<int,int>(13,98));
+    num_cols = 84;
     init_game();
 }
 
@@ -123,8 +124,6 @@ void Bees::check_bees(){ //Should this be a bool
         }
     }
 }
-
-
 
 
 /**

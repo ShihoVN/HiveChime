@@ -1,14 +1,16 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-04-11T12:25:50
+# Project created by QtCreator 2019-04-23T11:13:31
 #
 #-------------------------------------------------
 
 QT       += core gui
 QT += network
+
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Weather
+TARGET = WeatherStream
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -26,25 +28,15 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        weather.cpp
+        mainwindow.cpp
 
 HEADERS += \
-        weather.h
+        mainwindow.h
 
 FORMS += \
-        weather.ui
-
-HEADERS += ../Bee_Visual/bees.h
-SOURCES += ../Bee_Visual/bees.cpp
-HEADERS += ../Bee_Visual/engine.h
-SOURCES += ../Bee_Visual/engine.cpp
+        mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-RESOURCES += \
-    beefiles.qrc
-
-DISTFILES +=
