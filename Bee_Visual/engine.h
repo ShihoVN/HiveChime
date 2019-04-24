@@ -16,9 +16,8 @@ struct Bee
     int row;
     bool enter_exit;
     pair<int,int> gate;
-    //bool QImage::load(const QString &, const char *format = Q_NULLPTR)
-    //QImage *bee = new QImage("/User/Jon/qtrepo_grp_01/Weather/Indiv_Bee.png");
-};
+    string image;
+}; //Image will refercne a real image file and only a string // when need to make it into an image its in U.I layer
 
 class engine
 {
