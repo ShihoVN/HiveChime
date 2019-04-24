@@ -4,7 +4,7 @@
 #include <string>
 #include "../Database/dbbeelog.h"
 #include "../Database/tool.h"
-
+#include "../Database/dbtable.h"
 using namespace std;
 
 
@@ -25,6 +25,8 @@ public:
     DataContainer(string db_name);
     ~DataContainer();
     void addData(Data* d);
+    void loadData(Data* d);
+
     vector<Data*> getUdpMessages();
     void track_db();
 

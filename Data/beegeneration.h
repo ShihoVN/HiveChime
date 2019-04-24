@@ -66,6 +66,7 @@ public:
     void setID(string _id, int size);
     void setID(string _id, int size, int time);
 private:
+    void setSeed(unsigned int seed);
     void generateTime();
     void generateTime(int _time);
     void setActivity(int size);

@@ -2,6 +2,7 @@
 #define ENGINE_H
 
 #include <array>
+#include <vector>
 #include <iostream>
 #include <ctime> // For Robot
 #include <sstream>
@@ -38,10 +39,10 @@ public:
 
     //---Engines like his//
     void reset_gameboard();
-    Bee add_thing(char item, pair<int,int> gate);
+    Bee add_thing(char item, int gate);
     pair<int,int>findgate(pair<int,int> gate);
 
-    Bee add_random(char item);
+    Bee add_random(char item,int index);
     void remove_thing(int row, int col);
     char get_thing(int row, int col);
     int get_num_rows();
@@ -51,6 +52,7 @@ private:
 
 protected:
     char **board;  //creates gameboard array
+    std::vector<pair<int,int>> gate;
     int num_rows;
     int num_cols;
     char plr;
