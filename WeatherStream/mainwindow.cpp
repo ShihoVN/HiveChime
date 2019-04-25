@@ -110,5 +110,21 @@ void MainWindow::parseLongAndLat(double x, double y){
 
 }
 
+void MainWindow:: setLocations(){
+    Location newYork;
+    newYork.city = "New York, NY";
+    newYork.latitude = 40.7831;
+    newYork.longitude = -73.9712;
+
+    locationVector.push_back(newYork);
+
+    Location California;
+    California.city = "Davis, CA";
+    California.longitude = 38.5449;
+    California.latitude = -121.7405;
+
+    locationVector.push_back(California);
+
+}
 
 
