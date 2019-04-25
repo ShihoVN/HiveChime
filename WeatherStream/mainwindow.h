@@ -11,6 +11,14 @@
 using namespace  std;
 //#include <QPixmap> ///to work with images
 
+struct Location {
+    string city;
+    double longitude;
+    double latitude;
+};
+
+
+
 namespace Ui {
 class MainWindow;
 }
@@ -28,6 +36,7 @@ public:
     void parseLocation(string location); // return the url with correct location
     void parseLongAndLat(double x , double y ); //PARSES IN LOGITUDE AND LATITUDE
 
+    void setLocations();
 
 
 
@@ -39,6 +48,7 @@ private:
     QTimer *timer;
     string content; // contains all website information
     QString url;
+    vector<Location> locationVector;
 
 
     vector <string> UDPmessage;
