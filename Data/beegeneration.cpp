@@ -107,7 +107,6 @@ string BeeGeneration::makeBee()
        cout << "Hive ID: 23"<< endl;
        while(nextBees.size() < 8){
            update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
-
            generate();
        }
 
@@ -211,7 +210,6 @@ string BeeGeneration::generateUDP(){
         }
     }
     return udp;
-
 }
 
 string BeeGeneration::anotherActivity(string _udp, int udpTime[], int _m){
@@ -221,7 +219,7 @@ string BeeGeneration::anotherActivity(string _udp, int udpTime[], int _m){
     char *cstr = &_udp[0u];
 //    char *cstr = new char[_udp.length() + 1];
 //    strcpy(cstr, _udp.c_str());
-    char * p=std::strtok (cstr,"B");;
+    char * p=std::strtok (cstr,"B");
     udp += p;
     int i = 0;
     string s;
@@ -306,7 +304,7 @@ void BeeGeneration::generate(){
     cout << "pair bee: "<<pairBee.board<<" "<< pairBee.sensor << endl;
 
     std::poisson_distribution<int> poissDistbn(450); //Randomly generates the pair UDP message (not in proper format)
-    int* elpst =  calculate(poissDistbn(generator));
+    vector<int> elpst =  calculate(poissDistbn(generator));
     pairBee.m = m;
     for(int i = 0; i < 6; i++){
         pairBee.now[i] = elpst[i];
@@ -400,9 +398,10 @@ void BeeGeneration::update(int ms){
  * @param ms takes in milliseconds
  * @return int* points to the calacu array of resulting times, once the param is added
  */
-int* BeeGeneration::calculate(int ms){
+vector<int> BeeGeneration::calculate(int ms){
 
-    int* ntime=new int;
+    //int* ntime=new int;
+    vector<int> ntime;
     for(int i = 0; i<6; i++){
         ntime[i] = time[i];
     }

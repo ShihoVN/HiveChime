@@ -60,23 +60,26 @@ public:
     BeeGeneration(string _id, int size);
     BeeGeneration(string _id, int size, int time);
     ~BeeGeneration();
+    int milli, m;
 
     string makeBee();
-
-    void setID(string _id, int size);
-    void setID(string _id, int size, int time);
-private:
     void setSeed(unsigned int seed);
     void generateTime();
     void generateTime(int _time);
     void setActivity(int size);
     void update(int ms);
-    int* calculate(int ms);
+    vector<int> calculate(int ms);
     void generate();
     string generateUDP();
     string anotherActivity(string _udp, int _udpTime[], int _m);
     int findPair(int s);
     int btod(string b);
+    void setID(string _id, int size);
+    void setID(string _id, int size, int time);
+    priority_queue<nextBee, vector<nextBee>, Compare> nextBees;
+
+private:
+
 
 
 
@@ -85,9 +88,8 @@ private:
     //int current;
     int n, x;
     string id;
-    int milli, m;
     int time[6];
-    priority_queue<nextBee, vector<nextBee>, Compare> nextBees;
+    //priority_queue<nextBee, vector<nextBee>, Compare> nextBees;
 
 
 
