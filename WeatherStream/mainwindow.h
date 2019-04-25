@@ -26,6 +26,7 @@ public:
     void printVector();
 
     void parseLocation(string location); // return the url with correct location
+    void parseLongAndLat(double x , double y ); //PARSES IN LOGITUDE AND LATITUDE
 
 
 
