@@ -3,7 +3,9 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
 
-    parseLocation("New York"); // this needs to be passed in from GUI eventually
+    //parseLocation("New York"); // this needs to be passed in from GUI eventually
+    parseLongAndLat(42.3601, -71.0589);
+
 
     ui->setupUi(this);
     manager = new QNetworkAccessManager(this);
@@ -45,21 +47,31 @@ void MainWindow::findTemp(QNetworkReply *reply){
      str= reply->readAll();
 
      content = str.toStdString();
-     string newstring;
+     string tempSummary;
+     string temp;
+
+
+     tempSummary = readBetween("summary\":", ",\"icon\":");
+     temp = readBetween(",\"temperature\":", ",\"apparentTemperature\"");
+     //temp.append("\xB0");
+     temp = temp + string(" Farenheit");
+    //std::cout << tempSummary << std::endl;
+
+
      //udp message will be sperated by return line
      QString qstring;
+     QString qTemp;
 //         newstring = readBetween(
 //             "span class=\"wob_t\" id=\"wob_tm\" style=\"display:inline\">",
 //             "</span><span class=\"wob_t\" id=\"wob_ttm\""
 //         );
-         newstring = readBetween(
-             "<span aria-level=\"3\" role=\"heading\"><div class=\"vk_gy vk_h\" id=\"wob_loc\">New York, NY</div><div class=\"vk_gy vk_sh\" id=\"wob_dts\">Tuesday 11:00 AM</div><div id=\"wob_dcp\"><span class=\"vk_gy vk_sh\" id=\"wob_dc\">Sunny</span></div></span>",
-             "<div class=\"vk_gy vk_sh\" id=\"wob_dts\">Tuesday 11:00 AM</div>"
-         );
-     // std::cout << newstring << std::endl;
 
-      qstring = QString::fromStdString(newstring);
+        qTemp = QString::fromStdString(temp);
+
+
+      qstring = QString::fromStdString(tempSummary);
       ui->cityName->setText(qstring);  //set cityName to Label
+      ui->tempLabel->setText(qTemp);
 
 }
 
@@ -88,6 +100,31 @@ void MainWindow::parseLocation(string location){
 
 }
 
+void MainWindow::parseLongAndLat(double x, double y){
 
+    string locationURL = string("https://api.darksky.net/forecast/7d4d899326f51981d1d887c0c96f2373/") + to_string(x) + string(",") + to_string(y);
+   cout << locationURL <<endl;
+   QString qs = QString::fromStdString(locationURL);
+
+   url = qs; //see the url in the header file to this
+
+}
+
+void MainWindow:: setLocations(){
+    Location newYork;
+    newYork.city = "New York, NY";
+    newYork.latitude = 40.7831;
+    newYork.longitude = -73.9712;
+
+    locationVector.push_back(newYork);
+
+    Location California;
+    California.city = "Davis, CA";
+    California.longitude = 38.5449;
+    California.latitude = -121.7405;
+
+    locationVector.push_back(California);
+
+}
 
 
