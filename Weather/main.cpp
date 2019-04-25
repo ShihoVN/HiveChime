@@ -1,6 +1,7 @@
 #include "weather.h"
 #include <QApplication>
 #include <chrono>
+#include <QMediaPlayer>
 #include "../Data/datadecoder.h"
 #include "../Data/datacontainer.h"
 #include "../Data/beegeneration.h"
@@ -33,3 +34,5 @@ int main(int argc, char *argv[])
     }
     return a.exec();
 }
+
+

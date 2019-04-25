@@ -17,3 +17,5 @@ QT += gui
 QTPLUGIN += qjpeg \
     qgif \
     qtiff
+
+
