@@ -211,7 +211,6 @@ string BeeGeneration::generateUDP(){
         }
     }
     return udp;
-
 }
 
 string BeeGeneration::anotherActivity(string _udp, int udpTime[], int _m){
@@ -221,7 +220,7 @@ string BeeGeneration::anotherActivity(string _udp, int udpTime[], int _m){
     char *cstr = &_udp[0u];
 //    char *cstr = new char[_udp.length() + 1];
 //    strcpy(cstr, _udp.c_str());
-    char * p=std::strtok (cstr,"B");;
+    char * p=std::strtok (cstr,"B");
     udp += p;
     int i = 0;
     string s;

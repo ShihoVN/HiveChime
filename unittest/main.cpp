@@ -42,19 +42,20 @@ protected:
     /** replace with your own **/
     //DBHiveTable t1;
     //DBHiveTable t2;
-    //    BeeGeneration* b1 = new BeeGeneration(2);
-    //    BeeGeneration* b2 = new BeeGeneration(2);
+    BeeGeneration* b1 = new BeeGeneration(2);
+    BeeGeneration* b2 = new BeeGeneration(2);
 };
 //DATABASE TEST SECTION
 
 TEST(general, GETDATE) {
     /** replace with your own **/
-            // d1;
-    //       ASSERT_EQ(d1.dateDecoder("D18.12.19T13.43.16000"), "18.12.19")
-    //               << d1.dateDecoder("D18.12.19T13.43.16000")
-    //               << " and "
-    //               << ("18.12.19")
-    //               << " should match!";
+    BeeGeneration* b1 = new BeeGeneration("0002", 400, 15);
+    BeeGeneration* b2 = new BeeGeneration("0002", 400, 15);
+           ASSERT_EQ(b2->makeBee(), b1->makeBee())
+                   << b2->makeBee()
+                   << " and "
+                   << b1->makeBee()
+                   << " should not match!";
 }
 TEST_F(FooTest, GETTIME) {
     //ASSERT_EQ(d1.timeDecoder("D18.12.19T13.43.16000"), "13.43.16000")
