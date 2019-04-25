@@ -303,13 +303,14 @@ void BeeGeneration::generate(){
     cout << "bee: "<< bee.board <<" "<<bee.sensor << endl;
     cout << "pair bee: "<<pairBee.board<<" "<< pairBee.sensor << endl;
 
-    std::poisson_distribution<int> poissDistbn(450); //Randomly generates the pair UDP message (not in proper format)
+    std::poisson_distribution<int> poissDistbn(1000); //Randomly generates the pair UDP message (not in proper format)
     int* elpst =  calculate(poissDistbn(generator));
     pairBee.m = m;
     for(int i = 0; i < 6; i++){
+        cout << elpst[i]<<endl;
         pairBee.now[i] = elpst[i];
     }
-
+    cout <<"Bees made"<<endl;
 
     nextBees.push(pairBee); //Stores in priority queue
 
@@ -403,9 +404,12 @@ int* BeeGeneration::calculate(int ms){
     int* ntime=new int;
     for(int i = 0; i<6; i++){
         ntime[i] = time[i];
+        cout<<"first bee" <<time[i]<<endl;
     }
     m = milli + ms;
-
+    cout << "milli" << milli<<endl;
+    cout << "ms" << ms<<endl;
+    cout << "m" << m<<endl;
 
     while(m > 1000){
         m -=1000;
