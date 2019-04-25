@@ -1,6 +1,6 @@
 #ifndef ROBOTS_H
 #define ROBOTS_H
-#define NUM_BEES 20
+#define NUM_BEES 10
 
 #include <iostream>
 #include <vector>
@@ -23,6 +23,7 @@ public:
     void step();
     void add_bee(int gate,bool enter);
     void move_bees();
+    void leaving_bees();
     void check_bees();
     void bees_leaving();
     void create_bee_vectors();
@@ -30,6 +31,9 @@ public:
     int get_score();
 
     int getNumberOfBees();
+    int enteringBees();
+    int leavingBees();
+
 
 private:
 
@@ -37,7 +41,7 @@ private:
     std::vector<Bee> beeLeaving;
     int score;
     int numberOfBees;
-
+    int enter=0;
 };
 
 #endif // ROBOTS_H

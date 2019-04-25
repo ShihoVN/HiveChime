@@ -211,7 +211,72 @@ void DataDecoder:: compareSensors(sensorActivity thisSensor){
             //cout << "sensor " << thisSensor.sensors << endl;
 
 }
+/**
+ * @brief DataDecoder::compareSensors This method takes in a sensor of the struct sensorActivty and looks for the correcponding
+ * sensor pair in the sensorArray. First the method checks the sensors time in miliseconds in the array. If the time is >500ms, delete it.
+ * If the correspoding pair is found, then the sensor is deleted from the array. If it is not
+ * found then the sensor is added to the array.
+ * @param thisSensor
+ */
+void DataDecoder:: livestream(sensorActivity thisSensor){
 
+    //if the array is empty just add sensor
+    if(sensorArray.size() ==0){
+        sensorArray.push_back(thisSensor);
+
+
+
+        return;
+    }
+
+    //run through array
+    for(unsigned i = 0; i<sensorArray.size(); i++){
+
+        //remove all sensors that were > than 500s ago
+        if(thisSensor.sensorTime - sensorArray.at(i).sensorTime > 500 ||
+                sensorArray.at(i).sensorTime - thisSensor.sensorTime > 500)
+        {
+           // cout << "sensor 11" << thisSensor.sensors << endl;
+
+            sensorArray.erase(sensorArray.begin() + (i));
+            if(sensorArray.size() ==0 || i >= sensorArray.size()){
+                break;
+            }
+
+        }
+
+
+          if(thisSensor.sensorBoard == sensorArray.at(i).sensorBoard) //check only sensors of the same board
+          {
+            //  cout << "sensor22" << thisSensor.sensors << endl;
+                if(sensorArray.at(i).sensors == getPair(thisSensor.sensors)){
+                    //send info into data base
+                    if(getPair(thisSensor.sensors) <=4){
+                        cout << "PAIR WAS MADEEE" << endl;
+                         d->type = 1;  //bee entered the hive
+                         dContainer->loadData(d);
+
+                    }
+                    else if(getPair(thisSensor.sensors) > 4){
+                         d->type = 0; // bee left the hive
+                         cout << "PAIR WAS MADEEE" << endl;
+                        dContainer->loadData(d);
+                    }
+
+                    sensorArray.erase(sensorArray.begin() +(i)); //remove the struct in array
+                    return;
+                }
+
+          }
+
+     }
+
+    //if the sensor does not have a pair then add it to the array
+     // cout << "sensor33" << thisSensor.sensors << endl;
+            sensorArray.push_back(thisSensor);
+            //cout << "sensor " << thisSensor.sensors << endl;
+
+}
 
 /**
  * @brief DataDecoder::decimalToBinary This method converts the decmial number input into a binary number
@@ -238,7 +303,7 @@ void DataDecoder:: decimalToBinary(int boardAct){
             sa.sensors = i+1; //set the sensor to the index == 1
             d->gate = sa.sensors;
           //  cout << "sensor " << sa.sensors << endl;
-            compareSensors(sa);
+            livestream(sa);
 
 
 

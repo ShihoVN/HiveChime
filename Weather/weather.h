@@ -26,7 +26,7 @@ public:
     ~Weather();
     Bees bee_test;
     void cleanUpForMove();
-
+    void streaming(int gate,int entry);
 private slots:
     void on_pushButton_clicked();
 
@@ -42,7 +42,7 @@ private:
     void loadLabel();
     void clearBoard();
     //bool QImage::load(const QString &, const char *format = Q_NULLPTR)
-    QImage *bee = new QImage("/User/Jon/qtrepo_grp_01/Weather/Indiv_Bee.png");
+    //QImage *bee = new QImage("/User/Jon/qtrepo_grp_01/Weather/Indiv_Bee.png");
 };
 
 #endif // WEATHER_H

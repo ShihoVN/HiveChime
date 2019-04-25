@@ -26,12 +26,11 @@ public:
     ~DataContainer();
     void addData(Data* d);
     void loadData(Data* d);
-
     vector<Data*> getUdpMessages();
     void track_db();
 
 private:
-    Tool *dbtool=new Tool("dbtable2");
+    Tool *dbtool=new Tool("dbtable");
     DBBeeLog *bee_logdb=new DBBeeLog(dbtool,"BEELOG");
     vector<Data*> udpMessages; //recently inputted data
 

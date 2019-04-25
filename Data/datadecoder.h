@@ -28,6 +28,7 @@ public:
     void decimalToBinary(int hiveNumber);
      void decimalToBinary2(int hiveNumber);
     void compareSensors(sensorActivity sen);
+    void livestream(sensorActivity thisSensor);
     int getPair(int sensorNum);
 
 

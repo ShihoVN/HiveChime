@@ -71,7 +71,7 @@ void engine::reset_gameboard(){
                     board[i][j] = ' ';
                 }
                 else if(j == 0  || j == (num_cols-1)){
-                    board[i][j] = '*';
+                    board[i][j] = ' ';
                 }
                 else{
                     board[i][j] = ' ';
@@ -101,18 +101,18 @@ pair<int,int> engine::findgate( pair<int,int> gate){
         return pair<int,int>(0,cols1);
     }
     else if(i>num_rows/2&&i>j){
-        return pair<int,int>(num_rows,cols1);
+        return pair<int,int>(num_rows-1,cols1);
 
     }
     else if(j<num_cols/2&& j<i){
-        return pair<int,int>(0,rows1);
+        return pair<int,int>(rows1,0);
 
     }
     else if(j>num_cols/2&&j>i){
-        return pair<int,int>(num_cols,rows1);
+        return pair<int,int>(rows1,num_cols-1);
     }
     else {
-        return pair<int,int>(num_cols,num_rows);
+        return pair<int,int>(num_cols-1,num_rows-1);
     }
 }
 

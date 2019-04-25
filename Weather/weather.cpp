@@ -53,6 +53,10 @@ void Weather::clearBoard(){
     ui->label_2->clear();
 }
 
+void Weather::streaming(int gate,int entry){
+    bee_test.add_bee(gate,entry);
+}
+
 /**
  * Clears the board
  * Sets the baord space
@@ -60,7 +64,7 @@ void Weather::clearBoard(){
  * */
 void Weather::cleanUpForMove(){
     bee_test.step();
-    temp_board=to_string(bee_test.get_score()).c_str();
+    temp_board=(to_string(bee_test.get_score())+"\n"+to_string(bee_test.enteringBees())+"\n"+to_string(bee_test.leavingBees())).c_str();
     ui->label->setText(temp_board);
     clearBoard();
     temp_board = "";
@@ -72,9 +76,9 @@ void Weather::cleanUpForMove(){
 
 void Weather::on_pushButton_clicked()
 {
-    bee_test.step();
-    temp_board=to_string(bee_test.get_score()).c_str();
-    ui->label->setText(temp_board);
+    int randgate= rand () % 5;
+    bee_test.add_bee(2,true);
+    bee_test.add_bee(randgate,false);
     cleanUpForMove();
 }
 

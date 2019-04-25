@@ -32,12 +32,12 @@ DataContainer::~DataContainer()
 void DataContainer::addData(Data *udpMsg){
     bee_logdb->add_row_m(int(udpMessages.size()),udpMsg->board,to_string(udpMsg->gate),udpMsg->date,udpMsg->time,to_string(udpMsg->type));
     udpMessages.push_back(udpMsg);
-
 }
+
 void DataContainer::loadData(Data *udpMsg){
     udpMessages.push_back(udpMsg);
-
 }
+
 vector<Data*> DataContainer:: getUdpMessages(){
     return udpMessages;
 }
