@@ -107,7 +107,6 @@ string BeeGeneration::makeBee()
        cout << "Hive ID: 23"<< endl;
        while(nextBees.size() < 8){
            update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
-
            generate();
        }
 
