@@ -304,7 +304,7 @@ void BeeGeneration::generate(){
     cout << "pair bee: "<<pairBee.board<<" "<< pairBee.sensor << endl;
 
     std::poisson_distribution<int> poissDistbn(450); //Randomly generates the pair UDP message (not in proper format)
-    int* elpst =  calculate(poissDistbn(generator));
+    vector<int> elpst =  calculate(poissDistbn(generator));
     pairBee.m = m;
     for(int i = 0; i < 6; i++){
         pairBee.now[i] = elpst[i];
@@ -398,9 +398,10 @@ void BeeGeneration::update(int ms){
  * @param ms takes in milliseconds
  * @return int* points to the calacu array of resulting times, once the param is added
  */
-int* BeeGeneration::calculate(int ms){
+vector<int> BeeGeneration::calculate(int ms){
 
-    int* ntime=new int;
+    //int* ntime=new int;
+    vector<int> ntime;
     for(int i = 0; i<6; i++){
         ntime[i] = time[i];
     }

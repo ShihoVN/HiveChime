@@ -68,7 +68,7 @@ public:
     void generateTime(int _time);
     void setActivity(int size);
     void update(int ms);
-    int* calculate(int ms);
+    vector<int> calculate(int ms);
     void generate();
     string generateUDP();
     string anotherActivity(string _udp, int _udpTime[], int _m);
