@@ -12,3 +12,9 @@ Bees::~Bees()
 {
     delete ui;
 }
+
+void Bees::on_checkBox_stateChanged(int arg1)
+{
+    genUsr = arg1;
+    std::cout<< arg1<< endl;
+}

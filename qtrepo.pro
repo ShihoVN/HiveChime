@@ -8,4 +8,5 @@ SUBDIRS += \
     GUI \
     Bee_Visual \
     RealTimeStream \
-    WeatherStream
+    WeatherStream \
+    LoginGUI

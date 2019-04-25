@@ -14,17 +14,17 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     Weather *w = new Weather();
     w->show();
-    DataContainer container;
-    DataDecoder d(&container);
-    BeeGeneration* BG = new BeeGeneration("0002", 400, 15);
+//    DataContainer container;
+//    DataDecoder d(&container);
+//    BeeGeneration* BG = new BeeGeneration("0002", 400, 15);
     for(int i = 0; i < 1000; i++){
-        d.decode(BG->makeBee());
+       // d.decode(BG->makeBee());
     }
     int i=0;
     while (true){
-        if(i<container.getUdpMessages().size()){
-            w->streaming(container.getUdpMessages().at(i)->board,container.getUdpMessages().at(i)->type);
-        }
+//        if(i<container.getUdpMessages().size()){
+//            w->streaming(container.getUdpMessages().at(i)->board,container.getUdpMessages().at(i)->type);
+//        }
         auto x = std::chrono::steady_clock::now() +std::chrono::milliseconds(100);
         do_something(w);
         qApp->processEvents();
