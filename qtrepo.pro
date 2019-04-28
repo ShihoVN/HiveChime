@@ -2,12 +2,12 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     #Database\
-    #Data\
+   # Data\
     #unittest \
    # Weather \
     #GUI \
     Graphics
-    #Bee_Visual \
+   # Bee_Visual
     #RealTimeStream \
     #WeatherStream \
     #LoginGUI

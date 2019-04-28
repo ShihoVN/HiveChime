@@ -8,14 +8,21 @@ FrameWork::FrameWork()
 
 QGraphicsScene * FrameWork::createEnvironment(){
     animationScene = new QGraphicsScene();
-    object = new QGraphicsRectItem();
-    object->setRect(0,0,100,100);
+
+
+
+
+
+
+
+//    object = new QGraphicsRectItem();
+//    object->setRect(0,0,100,100);
 
 
 
     QPixmap hivePic(":/images /images/beeHive.png");
 
-    hivePic = hivePic.scaled(50,50,Qt::KeepAspectRatio);
+    hivePic = hivePic.scaled(100,100,Qt::KeepAspectRatio);
     hive = new QGraphicsPixmapItem(hivePic);
 
     //animationScene->addItem(object);

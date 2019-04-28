@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/images ">
         <file>images/beeHive.png</file>
+        <file>images/Indiv_Bee.png</file>
     </qresource>
 </RCC>

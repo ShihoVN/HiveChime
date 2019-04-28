@@ -28,12 +28,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     framework.cpp \
-    animatedbee.cpp
+    animatedbee.cpp \
+    animationboard.cpp
 
 HEADERS += \
         mainwindow.h \
     framework.h \
-    animatedbee.h
+    animatedbee.h \
+    animationboard.h
 
 FORMS += \
         mainwindow.ui
