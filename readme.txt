@@ -1,6 +1,6 @@
 
 			****How to run program as of April 21, 2019***
-	3) In order to see the program’s visual simulation of the beehive, go to the Graphics class, and run the class. A graphic simulation will appear on the screen in a GUI form. 
+	3) In order to see the program’s visual simulation of the beehive, go to the Graphics class, all other classes except for the Graphics class should be commented out in the .pro file. Click on the Graphics class and run it. A graphical simulation will appear on the screen in a GUI form. 
 
 
 
