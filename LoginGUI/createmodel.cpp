@@ -22,7 +22,7 @@ void CreateModel::on_pushButton_clicked()
             (ui->checkBox_3->isChecked() && ui->checkBox_5->isChecked())){
          QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Check one box before continuing"));
     }
-    else if(ui->lineEdit->text().isEmpty() && ui->lineEdit_2->text().isEmpty() && ui->lineEdit_3->text().isEmpty()){
+    else if((ui->lineEdit->text().isEmpty())&& (ui->lineEdit_2->text().isEmpty()) && (ui->lineEdit_3->text().isEmpty())){
          QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Fill in all Boxes before Continuing"));
     }
     else{
