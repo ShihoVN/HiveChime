@@ -6,9 +6,9 @@ SUBDIRS += \
     #unittest \
    # Weather \
     #GUI \
-    Graphics
+    Graphics \
    # Bee_Visual
     #RealTimeStream \
     #WeatherStream \
-    #LoginGUI
+    LoginGUI
 
