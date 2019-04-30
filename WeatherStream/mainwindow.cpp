@@ -2,9 +2,9 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
-
-    //parseLocation("New York"); // this needs to be passed in from GUI eventually
-    parseLongAndLat(42.3601, -71.0589);
+    setLocations();
+    parseLocation(Florida); // this needs to be passed in from GUI eventually
+    //parseLongAndLat(42.3601, -71.0589);
 
 
     ui->setupUi(this);
@@ -88,15 +88,9 @@ void MainWindow::printVector(){
     }
 }
 
-void MainWindow::parseLocation(string location){
+void MainWindow::parseLocation(Location location){
 
-    string locationURL = string("https://www.google.com/search?q=") +
-            string(location) +
-            string("+weather&rlz=1C5CHFA_enUS759US761&oq=weather&aqs=chrome.0.69i59j0l3j69i60j0.3427j0j9&sourceid=chrome&ie=UTF-8");
-   cout << locationURL <<endl;
-   QString qs = QString::fromStdString(locationURL);
-
-   url = qs; //see the url in the header file to this
+    parseLongAndLat(location.longitude, location.latitude);
 
 }
 
@@ -111,19 +105,23 @@ void MainWindow::parseLongAndLat(double x, double y){
 }
 
 void MainWindow:: setLocations(){
-    Location newYork;
     newYork.city = "New York, NY";
     newYork.latitude = 40.7831;
     newYork.longitude = -73.9712;
 
-    locationVector.push_back(newYork);
 
-    Location California;
+
+
     California.city = "Davis, CA";
     California.longitude = 38.5449;
     California.latitude = -121.7405;
 
-    locationVector.push_back(California);
+
+
+    Florida.city = "Orlando, FL";
+    Florida.longitude = 28.5383;
+    Florida.latitude = 81.3792;
+
 
 }
 
