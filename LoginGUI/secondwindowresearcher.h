@@ -14,7 +14,7 @@ class secondWindowResearcher : public QDialog
     Q_OBJECT
 
 public:
-    explicit secondWindowResearcher(QWidget *parent = nullptr);
+    explicit secondWindowResearcher(QWidget *parent = nullptr,QString *hivename=nullptr);
     ~secondWindowResearcher();
 
 private slots:
@@ -23,8 +23,6 @@ private slots:
 private:
     Ui::secondWindowResearcher *ui;
     CreateModel *modelWindow;
-
-
 };
 
 #endif // SECONDWINDOWRESEARCHER_H

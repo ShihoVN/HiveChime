@@ -524,16 +524,6 @@
       <family>PingFang SC</family>
      </font>
     </property>
-    <item>
-     <property name="text">
-      <string>H1203</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>H2038</string>
-     </property>
-    </item>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
@@ -995,7 +985,7 @@
      <string>Continue</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>80</x>

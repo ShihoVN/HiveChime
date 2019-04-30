@@ -12,8 +12,11 @@ class CreateModel : public QDialog
     Q_OBJECT
 
 public:
-    explicit CreateModel(QWidget *parent = nullptr);
+    explicit CreateModel(QWidget *parent = nullptr,QString *hivename=nullptr);
     ~CreateModel();
+
+private slots:
+    void on_pushButton_clicked();
 
 private:
     Ui::CreateModel *ui;
