@@ -29,19 +29,26 @@ SOURCES += \
         mainwindow.cpp \
     secondwindow.cpp \
     secondwindowresearcher.cpp \
-    createmodel.cpp
+    createmodel.cpp \
+    userselectmodel.cpp \
+    generatedmodel.cpp
 
 HEADERS += \
         mainwindow.h \
     secondwindow.h \
     secondwindowresearcher.h \
-    createmodel.h
+    createmodel.h \
+    userselectmodel.h \
+    generatedmodel.h
 
 FORMS += \
         mainwindow.ui \
     secondwindow.ui \
     secondwindowresearcher.ui \
-    createmodel.ui
+    createmodel.ui \
+    selectmodel.ui \
+    userselectmodel.ui \
+    generatedmodel.ui
 
 
 HEADERS += ../Database/dbtable.h
