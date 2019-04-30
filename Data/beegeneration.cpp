@@ -62,6 +62,7 @@ void BeeGeneration::setID(string _id, int size){
  * @param size is the number of bees in a hive
  * @param time is the time in hours
  */
+
 void BeeGeneration::setID(string _id, int size, int time){
 
     id = _id;
@@ -188,7 +189,6 @@ string BeeGeneration::generateUDP(){
 
 
     nextBees.pop();
-
 
     if(!nextBees.empty()){ //Checks to see if gates were triggered at the same time
         for(int i = 0; i < 6; i ++){

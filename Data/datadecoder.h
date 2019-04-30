@@ -45,6 +45,8 @@ private:
     vector <sensorActivity> sensorArray;
     bool _type;
     Data *d;
+    int exitData;
+    int entryData;
 
 
 };
