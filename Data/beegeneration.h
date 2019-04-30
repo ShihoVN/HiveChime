@@ -77,6 +77,7 @@ public:
     void setID(string _id, int size);
     void setID(string _id, int size, int time);
     priority_queue<nextBee, vector<nextBee>, Compare> nextBees;
+    void setDate(int year,int month, int date);
 private:
 
 

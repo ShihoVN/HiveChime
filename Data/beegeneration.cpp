@@ -557,3 +557,11 @@ int BeeGeneration::btod(string b){
 
         return dec_value;
 }
+
+void BeeGeneration::setDate(int year, int month, int date){
+    year = year%100;
+    time[0] = year;
+    time[1] = month;
+    time[2] = date;
+    return;
+}
