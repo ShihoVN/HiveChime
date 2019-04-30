@@ -45,6 +45,7 @@ void DataDecoder::decode(string _hex){
     //cout << "SIZE OF SENSOR SARRYA " << sensorArray.size() << endl;
 
    //dContainer.addData(d);
+    calcStandDev();
 
 
 }
@@ -190,11 +191,17 @@ void DataDecoder:: compareSensors(sensorActivity thisSensor){
                          d->type = 1;  //bee entered the hive
                          dContainer->addData(d);
 
+                         //increase entry number
+                         entryData++;
+
                     }
                     else if(getPair(thisSensor.sensors) > 4){
                          d->type = 0; // bee left the hive
                          cout << "PAIR WAS MADEEE" << endl;
                         dContainer->addData(d);
+
+                        //increase exitData;
+                        exitData++;
                     }
 
                     sensorArray.erase(sensorArray.begin() +(i)); //remove the struct in array
@@ -256,11 +263,17 @@ void DataDecoder:: livestream(sensorActivity thisSensor){
                          d->type = 1;  //bee entered the hive
                          dContainer->loadData(d);
 
+                         //increase entryData
+                         entryData++;
+
                     }
                     else if(getPair(thisSensor.sensors) > 4){
                          d->type = 0; // bee left the hive
                          cout << "PAIR WAS MADEEE" << endl;
                         dContainer->loadData(d);
+
+                        //increase exitData;
+                        exitData++;
                     }
 
                     sensorArray.erase(sensorArray.begin() +(i)); //remove the struct in array
@@ -333,6 +346,23 @@ int DataDecoder::getPair(int sensorNum){
 
     }
 }
+
+void DataDecoder::calcStandDev(){
+    int totalBees = exitData+ entryData;
+
+    mean = exitData/totalBees;
+
+    float stdDev = mean*(.6875);
+
+    if((stdDev + mean) > exitData){
+        //send alert
+    }else if((stdDev + mean) > entryData){
+        //send entry alert
+    }
+
+}
+
+
 
 
 
