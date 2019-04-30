@@ -497,6 +497,11 @@
      <height>32</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>PingFang SC</family>
+    </font>
+   </property>
    <property name="text">
     <string>Continue</string>
    </property>
