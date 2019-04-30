@@ -77,7 +77,6 @@ public:
     void setID(string _id, int size);
     void setID(string _id, int size, int time);
     priority_queue<nextBee, vector<nextBee>, Compare> nextBees;
-
 private:
 
 
@@ -89,7 +88,6 @@ private:
     int n, x;
     string id;
     int time[6];
-    //priority_queue<nextBee, vector<nextBee>, Compare> nextBees;
 
 
 

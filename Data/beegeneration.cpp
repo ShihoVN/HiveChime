@@ -403,7 +403,7 @@ vector<int> BeeGeneration::calculate(int ms){
     //int* ntime=new int;
     vector<int> ntime;
     for(int i = 0; i<6; i++){
-        ntime[i] = time[i];
+        ntime.push_back(time[i]);
     }
     m = milli + ms;
 

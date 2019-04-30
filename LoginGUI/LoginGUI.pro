@@ -43,6 +43,23 @@ FORMS += \
     secondwindowresearcher.ui \
     createmodel.ui
 
+
+HEADERS += ../Database/dbtable.h
+SOURCES += ../Database/dbtable.cpp
+
+HEADERS += ../Database/tool.h
+SOURCES += ../Database/tool.cpp
+
+HEADERS += ../Database/dbhivetable.h
+SOURCES += ../Database/dbhivetable.cpp
+
+HEADERS += ../Database/dbmodeltable.h
+SOURCES += ../Database/dbmodeltable.cpp
+
+HEADERS += ../Database/dbbeelog.h
+SOURCES += ../Database/dbbeelog.cpp
+LIBS += -lsqlite3
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

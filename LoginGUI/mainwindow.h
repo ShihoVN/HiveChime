@@ -4,7 +4,8 @@
 #include <QMainWindow>
 #include "secondwindow.h"
 #include "secondwindowresearcher.h"
-
+#include "../Database/dbhivetable.h"
+#include "../Database/tool.h"
 namespace Ui {
 class MainWindow;
 }
@@ -25,10 +26,9 @@ private:
 
     secondWindow *secWindowGen;
     secondWindowResearcher *reseacherWindow;
-
+    Tool * dbtable=new Tool("database");
+    DBHiveTable *hives= new DBHiveTable(dbtable,"HiveTable");
     int genChkBox;
-
-
 };
 
 #endif // MAINWINDOW_H
