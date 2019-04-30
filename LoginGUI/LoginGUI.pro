@@ -26,13 +26,46 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    secondwindow.cpp \
+    secondwindowresearcher.cpp \
+    createmodel.cpp \
+    userselectmodel.cpp \
+    generatedmodel.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    secondwindow.h \
+    secondwindowresearcher.h \
+    createmodel.h \
+    userselectmodel.h \
+    generatedmodel.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    secondwindow.ui \
+    secondwindowresearcher.ui \
+    createmodel.ui \
+    selectmodel.ui \
+    userselectmodel.ui \
+    generatedmodel.ui
+
+
+HEADERS += ../Database/dbtable.h
+SOURCES += ../Database/dbtable.cpp
+
+HEADERS += ../Database/tool.h
+SOURCES += ../Database/tool.cpp
+
+HEADERS += ../Database/dbhivetable.h
+SOURCES += ../Database/dbhivetable.cpp
+
+HEADERS += ../Database/dbmodeltable.h
+SOURCES += ../Database/dbmodeltable.cpp
+
+HEADERS += ../Database/dbbeelog.h
+SOURCES += ../Database/dbbeelog.cpp
+LIBS += -lsqlite3
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

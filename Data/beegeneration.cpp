@@ -403,7 +403,7 @@ vector<int> BeeGeneration::calculate(int ms){
     //int* ntime=new int;
     vector<int> ntime;
     for(int i = 0; i<6; i++){
-        ntime[i] = time[i];
+        ntime.push_back(time[i]);
     }
     m = milli + ms;
 
@@ -556,4 +556,12 @@ int BeeGeneration::btod(string b){
         }
 
         return dec_value;
+}
+
+void BeeGeneration::setDate(int year, int month, int date){
+    year = year%100;
+    time[0] = year;
+    time[1] = month;
+    time[2] = date;
+    return;
 }
