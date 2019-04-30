@@ -26,13 +26,22 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    secondwindow.cpp \
+    secondwindowresearcher.cpp \
+    createmodel.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    secondwindow.h \
+    secondwindowresearcher.h \
+    createmodel.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    secondwindow.ui \
+    secondwindowresearcher.ui \
+    createmodel.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
