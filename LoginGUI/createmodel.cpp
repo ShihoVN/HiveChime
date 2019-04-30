@@ -18,7 +18,7 @@ CreateModel::~CreateModel()
 void CreateModel::on_pushButton_clicked()
 {
     if((ui->checkBox_3->isChecked() && ui->checkBox_4->isChecked() && ui->checkBox_5->isChecked())||
-            (ui->checkBox_3->isChecked() && ui->checkBox_4->isChecked()) || (ui->checkBox_4->isChecked() && ui->checkBox_5)||
+            (ui->checkBox_3->isChecked() && ui->checkBox_4->isChecked()) || (ui->checkBox_4->isChecked() && ui->checkBox_5->isChecked())||
             (ui->checkBox_3->isChecked() && ui->checkBox_5->isChecked())){
          QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Check one box before continuing"));
     }
