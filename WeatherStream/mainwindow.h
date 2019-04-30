@@ -33,7 +33,7 @@ public:
     string readBetween(string str1, string str2); //gets string between strings
     void printVector();
 
-    void parseLocation(string location); // return the url with correct location
+    void parseLocation(Location location); // return the url with correct location
     void parseLongAndLat(double x , double y ); //PARSES IN LOGITUDE AND LATITUDE
 
     void setLocations();
@@ -48,7 +48,11 @@ private:
     QTimer *timer;
     string content; // contains all website information
     QString url;
-    vector<Location> locationVector;
+
+    Location newYork;
+    Location California;
+    Location Florida;
+
 
 
     vector <string> UDPmessage;
