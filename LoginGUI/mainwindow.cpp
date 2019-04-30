@@ -11,23 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    hives->add_row_h(0,"HD002","shiho","MODELDB");
-    hives->add_row_h(1,"HD001","jon","MODELDB");
-    hives->add_row_h(2,"HD003","phil","MODELDB");
-    hives->add_row_h(3,"HD005","basit","MODELDB");
-    hives->add_row_h(4,"HD006","lia","MODELDB");
-    hives->add_row_h(5,"HD004","wayne","MODELDB");
-
     ui->setupUi(this);
-    char** P_rows =hives->select_table_h();
-    QString added;
-    if(P_rows!=nullptr){
-        for(int i =4; i<4*(hives->size()+1);i=i+4){
-            added=(P_rows[i+1]);
-            ui->comboBox->addItem(added);
-            std::cout <<P_rows[i+1]<<P_rows[i+2]<<P_rows[i+3] << std::endl;
-        }
-    }
 }
 
 MainWindow::~MainWindow()
@@ -50,6 +34,7 @@ void MainWindow::on_pushButton_2_clicked()
        reseacherWindow = new secondWindowResearcher(this);
        reseacherWindow->show();
    }
+
 
    //show error message
 
