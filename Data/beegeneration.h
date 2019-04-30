@@ -28,28 +28,28 @@ struct nextBee{
     int m;
     int board;
     int sensor;
-//    bool operator<(const nextBee& bee) const {
-////        return bee.now < this->now || (bee.now == this->now && bee.m < this->m);
-//        for(int i = 0; i < 6; i ++){
-//                if(this->now[i] != bee.now[i] ){
-//                    return this->now[i] < bee.now[i];
-//                }
-//            }
-//            return this->m < bee.m  ;
-//    }
+    //    bool operator<(const nextBee& bee) const {
+    ////        return bee.now < this->now || (bee.now == this->now && bee.m < this->m);
+    //        for(int i = 0; i < 6; i ++){
+    //                if(this->now[i] != bee.now[i] ){
+    //                    return this->now[i] < bee.now[i];
+    //                }
+    //            }
+    //            return this->m < bee.m  ;
+    //    }
 
 } ;
 
 struct Compare{
-  bool operator()(nextBee const& first, nextBee const& second)
-  {
-      for(int i = 0; i < 6; i ++){
-              if(first.now[i] != second.now[i] ){
-                  return first.now[i] > second.now[i];
-              }
-          }
-          return first.m > second.m  ;
-  }
+    bool operator()(nextBee const& first, nextBee const& second)
+    {
+        for(int i = 0; i < 6; i ++){
+            if(first.now[i] != second.now[i] ){
+                return first.now[i] > second.now[i];
+            }
+        }
+        return first.m > second.m  ;
+    }
 };
 
 
@@ -79,22 +79,12 @@ public:
     priority_queue<nextBee, vector<nextBee>, Compare> nextBees;
 
 private:
-
-
-
-
     std::default_random_engine generator;
     vector<int> lambda;
     //int current;
     int n, x;
     string id;
     int time[6];
-    //priority_queue<nextBee, vector<nextBee>, Compare> nextBees;
-
-
-
-
-
 };
 
 #endif // BEEGENERATION_H
