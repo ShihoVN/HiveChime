@@ -36,11 +36,23 @@ void MainWindow::createEnvironment(){
 
 
 
+            QPixmap hivePic(":/images /images/MainBeeHive.png");
+            hivePic = hivePic.scaled(800,800,Qt::KeepAspectRatio);
 
-    QPixmap hivePic(":/images /images/beeHive.png");
-    hivePic = hivePic.scaled(100,100,Qt::KeepAspectRatio);
+
+//    QPixmap hivePic(":/images /images/beeHive.png");
+//    hivePic = hivePic.scaled(100,100,Qt::KeepAspectRatio);
     hive = new QGraphicsPixmapItem(hivePic);
-    hive->setPos(-50,-50);
+
+
+
+
+
+    //hive->setPos(-50,-50);
+
+
+
+    hive->setPos(-250,-250);
     animationScene->addItem(hive);
     hive->setFlag(QGraphicsItem::ItemIsFocusable);
     hive->setFocus();

@@ -2,6 +2,8 @@
     <qresource prefix="/images ">
         <file>images/beeHive.png</file>
         <file>images/Indiv_Bee.png</file>
+        <file>images/BeehiveEdited1.png</file>
+        <file>images/MainBeeHive.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file>sound/beeSound.wav</file>
