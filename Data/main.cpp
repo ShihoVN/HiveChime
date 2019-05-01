@@ -13,7 +13,7 @@ int main()
 
     DataContainer container;
     DataDecoder d(&container);
-    BeeGeneration* BG = new BeeGeneration("0002", 400, 15);
+    BeeGeneration* BG = new BeeGeneration("0002", 30000, 12);
     string message;
     //    for(int i = 0; i<50;i++){
     //        cout << BG->makeBee() << endl;
@@ -31,8 +31,8 @@ int main()
 
     for(int i = 0; i < 100; i++){
         message=BG->makeBee();
-        d.decode(message);
-        //cout << message << endl;
+        //d.decode(message);
+        cout << message << endl;
 
         //        for (int j = 0; j < container.getUdpMessages().size(); ++j) {
 

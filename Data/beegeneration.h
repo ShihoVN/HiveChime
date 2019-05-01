@@ -25,7 +25,7 @@ using namespace std;
 
 struct nextBee{
     int now[6];
-    int m;
+    float m;
     int board;
     int sensor;
     //    bool operator<(const nextBee& bee) const {
@@ -60,24 +60,27 @@ public:
     BeeGeneration(string _id, int size);
     BeeGeneration(string _id, int size, int time);
     ~BeeGeneration();
-    int milli, m;
+    float milli, m;
 
     string makeBee();
     void setSeed(unsigned int seed);
     void generateTime();
     void generateTime(int _time);
     void setActivity(int size);
-    void update(int ms);
-    vector<int> calculate(int ms);
+    void update(float ms);
+    vector<int> calculate(float ms);
+
     void generate();
     string generateUDP();
-    string anotherActivity(string _udp, int _udpTime[], int _m);
+    string anotherActivity(string _udp, int _udpTime[], float _m);
     int findPair(int s);
     int btod(string b);
     void setID(string _id, int size);
     void setID(string _id, int size, int time);
     priority_queue<nextBee, vector<nextBee>, Compare> nextBees;
     void setDate(int year,int month, int date);
+
+    vector<int> nextUDP();
 private:
     std::default_random_engine generator;
     vector<int> lambda;
@@ -85,7 +88,7 @@ private:
     int n, x;
     string id;
     int time[6];
-
+    vector<int> next;
 
 
 
