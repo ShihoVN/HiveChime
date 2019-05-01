@@ -1,5 +1,7 @@
 #ifndef BEES_H
 #define BEES_H
+#include <QtCharts/QLineSeries>
+#include <QtCharts>
 
 #include <QMainWindow>
 //#include "../Data/beegeneration.h"
@@ -8,9 +10,11 @@
 #include <iostream>
 #include <string>
 using namespace  std;
+using namespace QtCharts;
+
 namespace Ui {
 
-    class Bees;
+class Bees;
 
 }
 
@@ -22,11 +26,9 @@ public:
     explicit Bees(QWidget *parent = nullptr);
     ~Bees();
 
-private slots:
-    void on_checkBox_stateChanged(int arg1);
-
 private:
     Ui::Bees *ui;
+    QLineSeries *series = new QLineSeries();
     int genUsr;
 };
 
