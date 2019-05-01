@@ -3,19 +3,30 @@
 
 AnimationBoard::AnimationBoard()
 {
+//    buzz = new QMediaPlayer();
+//    buzz->setMedia(QUrl("qrc:/sounds/sound/beeSound.wav"));
 
+}
+
+
+void AnimationBoard::playSound(){
+   // buzz->play();
 }
 
 
 void AnimationBoard::populate(){
     QTimer *timer = new QTimer();
     connect(timer,SIGNAL(timeout()), this,SLOT(addBee()));
+    //connect(timer,SIGNAL(timeout()), this,SLOT(playSound()));
 
    // timer->start(100);
    timer->start(rand() % 1000 + 100);//every 100ms timeout changes
 
-    for (int i = 1; i <= 100; i++){
+
+
+    for (int i = 1; i <= 1; i++){
         addBee();
+             // playSound();
 
 
         //        timer->start(100);//every 100ms timeout changes
@@ -33,6 +44,7 @@ void AnimationBoard::addBee(){
     //int ran = 2;
     AnimatedBee *b = new AnimatedBee(ran);
     setPosition(b);
+    //b->playSound();
 
 }
 

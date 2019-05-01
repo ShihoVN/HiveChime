@@ -8,6 +8,7 @@
 #include <QGraphicsItem>
 #include <QTimer>
 #include <QObject>
+#include <QMediaPlayer>
 
 
 
@@ -28,6 +29,7 @@ public:
     void setPosition();
     int getGate();
     void addBee(int i);
+    void playSound();
 
     QGraphicsPixmapItem* getBee();
 
@@ -42,6 +44,7 @@ public:
 private:
     int gate;
     QGraphicsPixmapItem *bee;
+    QMediaPlayer *buzz;
 
 
 public slots:

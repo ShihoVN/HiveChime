@@ -3,4 +3,7 @@
         <file>images/beeHive.png</file>
         <file>images/Indiv_Bee.png</file>
     </qresource>
+    <qresource prefix="/sounds">
+        <file>sound/beeSound.wav</file>
+    </qresource>
 </RCC>

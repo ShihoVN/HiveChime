@@ -7,7 +7,19 @@ AnimatedBee::AnimatedBee()
     QPixmap beeIMG(":/images /images/Indiv_Bee.png");
     beeIMG = beeIMG.scaled(50,50,Qt::KeepAspectRatio);
     bee = new QGraphicsPixmapItem(beeIMG);
+    buzz = new QMediaPlayer();
+    buzz->setMedia(QUrl("qrc:/sounds/sound/beeSound.wav"));
+
+
+
+
 }
+
+
+void AnimatedBee::playSound(){
+   buzz->play();
+}
+
 
 void AnimatedBee::move(){
 
@@ -26,7 +38,7 @@ void AnimatedBee::move(){
             bee->setPos(bee->x() , bee->y()- 10);
         }
         else if(bee->y() < -25){
-             bee->setPos(bee->x() , bee->y()+ 10);
+            bee->setPos(bee->x() , bee->y()+ 10);
 
         }
     }
