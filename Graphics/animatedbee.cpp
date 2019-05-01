@@ -7,12 +7,66 @@ AnimatedBee::AnimatedBee()
     QPixmap beeIMG(":/images /images/Indiv_Bee.png");
     beeIMG = beeIMG.scaled(50,50,Qt::KeepAspectRatio);
     bee = new QGraphicsPixmapItem(beeIMG);
+    buzz = new QMediaPlayer();
+    buzz->setMedia(QUrl("qrc:/sounds/sound/beeSound.wav"));
+
+
+
+
 }
+
+
+void AnimatedBee::playSound(){
+   buzz->play();
+}
+
 
 void AnimatedBee::move(){
 
     //if it is a bee entry
-    if(gate <= 4){
+    if(gate == 1){
+
+
+        if(bee->x() > 40){
+            bee->setPos(bee->x() - 10, bee->y());
+        }
+        else if(bee->x() < 40){
+            bee->setPos(bee->x() + 10 , bee->y());
+        }
+
+        if(bee->y() > -75){
+            bee->setPos(bee->x() , bee->y()- 10);
+        }
+        else if(bee->y() < -75){
+            bee->setPos(bee->x() , bee->y()+ 10);
+
+        }
+    }
+
+
+
+    if(gate == 2){
+
+
+        if(bee->x() > -50){
+            bee->setPos(bee->x() - 10, bee->y());
+        }
+        else if(bee->x() < -50){
+            bee->setPos(bee->x() + 10 , bee->y());
+        }
+
+        if(bee->y() > -80){
+            bee->setPos(bee->x() , bee->y()- 10);
+        }
+        else if(bee->y() < -80){
+            bee->setPos(bee->x() , bee->y()+ 10);
+
+        }
+    }
+
+
+
+    if(gate == 3){
 
 
         if(bee->x() > -25){
@@ -26,7 +80,28 @@ void AnimatedBee::move(){
             bee->setPos(bee->x() , bee->y()- 10);
         }
         else if(bee->y() < -25){
-             bee->setPos(bee->x() , bee->y()+ 10);
+            bee->setPos(bee->x() , bee->y()+ 10);
+
+        }
+    }
+
+
+
+    if(gate == 4){
+
+
+        if(bee->x() > -25){
+            bee->setPos(bee->x() - 10, bee->y());
+        }
+        else if(bee->x() < -25){
+            bee->setPos(bee->x() + 10 , bee->y());
+        }
+
+        if(bee->y() > 50){
+            bee->setPos(bee->x() , bee->y()- 10);
+        }
+        else if(bee->y() < 50){
+            bee->setPos(bee->x() , bee->y()+ 10);
 
         }
     }

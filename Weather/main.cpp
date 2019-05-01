@@ -10,6 +10,8 @@ void do_something(Weather* w){
     w->cleanUpForMove();
 }
 
+
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

@@ -21,6 +21,7 @@ public:
     void setPosition(AnimatedBee *b);
 
 
+
 private:
     pair<int,int> topL;
     pair<int,int> topR;
@@ -28,6 +29,8 @@ private:
     pair<int,int> bottomR;
     pair<int,int> mid;
     int beeSize = 50;
+    QMediaPlayer *buzz;
+    void playSound();
 
 
     vector<AnimatedBee*> bees;
@@ -35,6 +38,7 @@ private:
 
 public slots:
     void addBee();
+
 
 };
 

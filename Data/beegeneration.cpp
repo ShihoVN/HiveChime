@@ -102,12 +102,17 @@ string BeeGeneration::makeBee()
            if(x == 0){
                time[3]++;
            }
+
        }
 
-       std::exponential_distribution<double> expDistbn(double(600/x)); //Calculates the next expected activity
+       std::exponential_distribution<double> expDistbn(double(60000/x)); //Calculates the next expected activity
        cout << "Hive ID: 23"<< endl;
-       while(nextBees.size() < 8){
-           update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
+       while(nextBees.size() < 15){
+           float t = expDistbn(generator);
+           //update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
+           cout << t<< endl;
+           update(t*60);
+           cout << t<< endl;
            generate();
        }
 
@@ -128,7 +133,7 @@ string BeeGeneration::generateUDP(){
     }
 
     m = nextBees.top().m;
-    m += 50-(nextBees.top().m % 50);
+    m += 50-((int)m % 50);
 
     string udp;
     udp = "HC" + id + "-D";
@@ -161,7 +166,7 @@ string BeeGeneration::generateUDP(){
     if(m <10){
         udp += "0";
     }
-    udp += to_string(m) + "-";
+    udp += to_string((int)m) + "-";
 
 
     for(int i =0; i < 10; i++){
@@ -185,34 +190,25 @@ string BeeGeneration::generateUDP(){
     if(m == 0){
         udpTime[5] ++;
     }
-    int udpm = m;
+    float udpm = m;
 
 
     nextBees.pop();
 
     if(!nextBees.empty()){ //Checks to see if gates were triggered at the same time
         for(int i = 0; i < 6; i ++){
-            if(i == 5 && udpm == 0 && nextBees.top().m >950 && nextBees.top().m <1000){
-                if(nextBees.top().now[i]+1 == udpTime[i]){
-                    return anotherActivity(udp, udpTime, m);
-                }
-                break;
-            }
             if(nextBees.top().now[i] != udpTime[i]){
                 break;
             }
-            if(i == 5){
-                if(nextBees.top().m < udpm && nextBees.top().m > udpm-50){
+            if(i == 5 && udpm == nextBees.top().m){
                     return anotherActivity(udp, udpTime, m);
-                }
             }
-
         }
     }
     return udp;
 }
 
-string BeeGeneration::anotherActivity(string _udp, int udpTime[], int _m){
+string BeeGeneration::anotherActivity(string _udp, int udpTime[], float _m){
     cout << "another activity?" << endl;
     string udp = "";
 
@@ -298,14 +294,14 @@ void BeeGeneration::generate(){
         for(int i = 0; i < 6; i++){
             bee.now[i] = time[i];
         }
-        bee.m = milli;
+        bee.m = nearbyint(milli);
 
     cout << "bee: "<< bee.board <<" "<<bee.sensor << endl;
     cout << "pair bee: "<<pairBee.board<<" "<< pairBee.sensor << endl;
 
     std::poisson_distribution<int> poissDistbn(450); //Randomly generates the pair UDP message (not in proper format)
     vector<int> elpst =  calculate(poissDistbn(generator));
-    pairBee.m = m;
+    pairBee.m = nearbyint(m);
     for(int i = 0; i < 6; i++){
         pairBee.now[i] = elpst[i];
     }
@@ -342,7 +338,7 @@ int BeeGeneration::findPair(int s){
     return 0;
 }
 
-void BeeGeneration::update(int ms){
+void BeeGeneration::update(float ms){
 
         milli += ms;
 
@@ -398,7 +394,7 @@ void BeeGeneration::update(int ms){
  * @param ms takes in milliseconds
  * @return int* points to the calacu array of resulting times, once the param is added
  */
-vector<int> BeeGeneration::calculate(int ms){
+vector<int> BeeGeneration::calculate(float ms){
 
     //int* ntime=new int;
     vector<int> ntime;
@@ -565,3 +561,49 @@ void BeeGeneration::setDate(int year, int month, int date){
     time[2] = date;
     return;
 }
+
+vector<int> BeeGeneration::nextUDP(){
+    next.clear();
+    for(int i = 0; i<6;i++){
+        next.push_back(nextBees.top().now[i]);
+    }
+    next.push_back(nextBees.top().m);
+
+    m = nextBees.top().m;
+    m += 50-((int)nextBees.top().m % 50);
+
+    string udp;
+    udp = "HC" + id + "-D";
+    for(int i = 0; i < 6; i++){ //Format of UDP message
+        if(i==5 && m == 1000){
+            if(nextBees.top().now[i] < 9){
+                udp += "0";
+            }
+            udp += to_string(nextBees.top().now[i]+1);
+            m = 0;
+            break;
+        }
+        if(nextBees.top().now[i] < 10){
+            udp += "0";
+        }
+        udp += to_string(nextBees.top().now[i]);
+
+        if(i == 2){
+            udp += "T";
+
+        }
+        if(i != 5){
+            udp += ".";
+        }
+    }
+
+    if(m<100){
+        udp += "0";
+    }
+    if(m <10){
+        udp += "0";
+    }
+
+}
+
+
