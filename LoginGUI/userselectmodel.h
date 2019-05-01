@@ -3,6 +3,8 @@
 
 #include <QDialog>
 
+
+
 namespace Ui {
 class userSelectModel;
 }
@@ -15,8 +17,12 @@ public:
     explicit userSelectModel(QWidget *parent = nullptr);
     ~userSelectModel();
 
+private slots:
+    void on_pushButton_2_clicked();
+
 private:
     Ui::userSelectModel *ui;
+
 };
 
 #endif // USERSELECTMODEL_H

@@ -85,14 +85,11 @@ private:
     int n, x;
     string id;
     int time[6];
-<<<<<<< HEAD
-=======
 
 
 
 
 
->>>>>>> f873f84751f4a2e2d829383d813ab419b5711494
 };
 
 #endif // BEEGENERATION_H

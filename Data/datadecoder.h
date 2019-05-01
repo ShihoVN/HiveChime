@@ -30,6 +30,7 @@ public:
     void compareSensors(sensorActivity sen);
     void livestream(sensorActivity thisSensor);
     int getPair(int sensorNum);
+    void calcStandDev();
 
 
 
@@ -45,6 +46,10 @@ private:
     vector <sensorActivity> sensorArray;
     bool _type;
     Data *d;
+    int exitData;
+    int entryData;
+    int mean;
+
 
 
 };

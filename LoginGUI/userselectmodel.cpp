@@ -12,3 +12,9 @@ userSelectModel::~userSelectModel()
 {
     delete ui;
 }
+
+void userSelectModel::on_pushButton_2_clicked()
+{
+    delete this;
+
+}

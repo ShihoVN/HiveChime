@@ -29,6 +29,7 @@ public:
     vector<Data*> getUdpMessages();
     void track_db();
 
+
 private:
     Tool *dbtool=new Tool("dbtable");
     DBBeeLog *bee_logdb=new DBBeeLog(dbtool,"BEELOG");
