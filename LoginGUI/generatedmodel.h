@@ -3,6 +3,7 @@
 
 #include <QDialog>
 
+
 namespace Ui {
 class GeneratedModel;
 }
@@ -15,8 +16,12 @@ public:
     explicit GeneratedModel(QWidget *parent = nullptr);
     ~GeneratedModel();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::GeneratedModel *ui;
+
 };
 
 #endif // GENERATEDMODEL_H

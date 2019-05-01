@@ -12,3 +12,10 @@ GeneratedModel::~GeneratedModel()
 {
     delete ui;
 }
+
+
+
+void GeneratedModel::on_pushButton_clicked()
+{
+    delete this;
+}
