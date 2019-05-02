@@ -19,14 +19,27 @@ void secondWindow::on_pushButton_clicked()
 {
 
     if(ui->checkBox->isChecked() && ui->checkBox_2->isChecked() && ui->checkBox_3->isChecked()||
-            ui->checkBox->isChecked() && ui->checkBox_2->isChecked() ||
             ui->checkBox_2->isChecked() && ui->checkBox_3->isChecked() ||
             ui->checkBox->isChecked() && ui->checkBox_3->isChecked()){
-          QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Check one box before continuing"));
+        QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Check one box before continuing"));
     }else{
         if(ui->checkBox_3->isChecked()){
-            userSelect = new userSelectModel(this);
-            userSelect->show();
+           // userSelect = new userSelectModel(this);
+            //userSelect->show();
+        }else if(ui->checkBox->isChecked() && ui->checkBox_2->isChecked()){
+            playSound = true;
+
+        }else if(ui->checkBox->isChecked() && !ui->checkBox_2->isChecked()){
+            playSound = false;
         }
     }
+
+
+
 }
+
+bool secondWindow::getPlaySound(){
+    return playSound;
+}
+
+

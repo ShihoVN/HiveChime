@@ -2,7 +2,7 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     Database\
-    Data\
+    Data \
     unittest \
     Weather \
     GUI \

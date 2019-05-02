@@ -12,6 +12,7 @@
 #include <iostream>
 
 
+
 //class AnimatedBee: public QGraphicsPixmapItem
 
 using  namespace std;
@@ -55,7 +56,6 @@ private:
     int leftBorder = topBorder;
     int rightBorder = 250;
     int bottomBorder = rightBorder;
-
 
 
 

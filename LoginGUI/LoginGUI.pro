@@ -31,7 +31,9 @@ SOURCES += \
     secondwindowresearcher.cpp \
     createmodel.cpp \
     userselectmodel.cpp \
-    generatedmodel.cpp
+    generatedmodel.cpp \
+    linegraph.cpp \
+    bargraph.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,7 +41,9 @@ HEADERS += \
     secondwindowresearcher.h \
     createmodel.h \
     userselectmodel.h \
-    generatedmodel.h
+    generatedmodel.h \
+    linegraph.h \
+    bargraph.h
 
 FORMS += \
         mainwindow.ui \
@@ -48,7 +52,9 @@ FORMS += \
     createmodel.ui \
     selectmodel.ui \
     userselectmodel.ui \
-    generatedmodel.ui
+    generatedmodel.ui \
+    linegraph.ui \
+    bargraph.ui
 
 
 HEADERS += ../Database/dbtable.h

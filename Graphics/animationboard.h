@@ -1,12 +1,16 @@
 #ifndef ANIMATIONBOARD_H
 #define ANIMATIONBOARD_H
 
-
+#include "../Data/beegeneration.h"
+#include "../Data/datacontainer.h"
+#include "../Data/datadecoder.h"
 #include <QGraphicsRectItem>
 #include <animatedbee.h>
 #include <vector>
 #include <random>
 #include <QObject>
+#include "../LoginGUI/secondwindow.h"
+#include <QMediaPlayer>
 
 using namespace std;
 
@@ -19,6 +23,7 @@ public:
     AnimationBoard();
     void populate();
     void setPosition(AnimatedBee *b);
+    void playSound();
 
 
 
@@ -29,11 +34,14 @@ private:
     pair<int,int> bottomR;
     pair<int,int> mid;
     int beeSize = 50;
+    int b=0;
     QMediaPlayer *buzz;
-    void playSound();
 
 
+    DataContainer container;
     vector<AnimatedBee*> bees;
+    secondWindow *window2;
+
 
 
 public slots:
