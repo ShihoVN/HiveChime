@@ -128,10 +128,11 @@ void AnimatedBee::move(){
 
     //Scene might give error
     if(!isInBounds()){
-        scene()->removeItem(bee);
+        bee->scene()->removeItem(bee);
                 //->removeItem(bee);
         //cout << "bee deleted";
-        //delete bee;
+        delete bee;
+        delete this;
         return;
 
     }
