@@ -12,4 +12,3 @@ SUBDIRS += \
     WeatherStream \
     LoginGUI \
     AlertGUI
-

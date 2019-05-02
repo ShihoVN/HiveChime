@@ -41,6 +41,25 @@ HEADERS += \
 FORMS += \
         mainwindow.ui
 
+HEADERS += ../Data/beegeneration.h
+SOURCES += ../Data/beegeneration.cpp
+
+HEADERS += ../Data/datadecoder.h
+SOURCES += ../Data/datadecoder.cpp
+
+HEADERS += ../Data/datacontainer.h
+SOURCES += ../Data/datacontainer.cpp
+
+HEADERS += ../Database/dbtable.h
+SOURCES += ../Database/dbtable.cpp
+
+HEADERS += ../Database/tool.h
+SOURCES += ../Database/tool.cpp
+
+HEADERS += ../Database/dbbeelog.h
+SOURCES += ../Database/dbbeelog.cpp
+LIBS += -lsqlite3
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

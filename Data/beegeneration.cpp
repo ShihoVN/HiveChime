@@ -104,6 +104,7 @@ string BeeGeneration::makeBee()
                time[3] = 0;
            }
 
+
        }
 
        std::exponential_distribution<double> expDistbn(double(x/60)); //Calculates the next expected activity
