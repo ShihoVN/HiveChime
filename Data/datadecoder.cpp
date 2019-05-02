@@ -3,6 +3,7 @@
 DataDecoder::DataDecoder(DataContainer *container)
 {
 
+
     dContainer = container;
     sa.sensors = 0;
     sa.sensorTime =0;
@@ -18,7 +19,9 @@ DataDecoder::DataDecoder(DataContainer *container)
  */
 void DataDecoder::decode(string _hex){
     d = new Data;
-    cout << _hex << endl;
+
+
+   // cout << _hex << endl;
     vector<string> fragments; //vector containing each segment
     stringstream ss(_hex); // Turn the string into a stream.
     string tok;
@@ -40,13 +43,11 @@ void DataDecoder::decode(string _hex){
 
 
 
-
-
-    //cout << "SIZE OF SENSOR SARRYA " << sensorArray.size() << endl;
-   //dContainer.addData(d);
     sendExitAlert();
     sendEntryAlert();
 
+    //cout << "SIZE OF SENSOR SARRYA " << sensorArray.size() << endl;
+   //dContainer.addData(d);
     //dContainer.addData(d);
 
 
@@ -93,7 +94,7 @@ string DataDecoder:: timeDecoder(string s){
 
         unsigned long pos = time.find('.');
         string sub = time.substr(pos+3);
-        cout << "sub" << sub<< endl;
+       // cout << "sub" << sub<< endl;
         sub.erase(sub.begin());
 
         int milisec = std::stoi(sub);
@@ -106,9 +107,7 @@ string DataDecoder:: timeDecoder(string s){
     time.erase(time.begin()+pos);
     pos =long(time.find('.'));
     time.erase(time.begin()+pos);
-    pos =long(time.find('.'));
-    time.erase(time.begin()+pos);
-    cout << "sensor time " <<sa.sensorTime << endl;
+   // cout << "sensor time " <<sa.sensorTime << endl;
     return time;
 
 }
@@ -142,8 +141,8 @@ void DataDecoder:: activityDecoder(string _act){
             decimalToBinary(board); //pass the board activity to binary decoder
 
 
-            cout << "board Activity decimal "  << board<< endl;
-            cout << "board Index "  << boardIndex<< "\n"<< endl;
+           // cout << "board Activity decimal "  << board<< endl;
+          //  cout << "board Index "  << boardIndex<< "\n"<< endl;
 
 
         }
@@ -357,9 +356,11 @@ int DataDecoder::getPair(int sensorNum){
 }
 
 bool DataDecoder::sendExitAlert(){
-    int totalBees = exitData+ entryData;
-    if(totalBees > 100){
-        if(exitData > (totalBees/2)){
+     totalBees += (exitData+ entryData);
+    cout << "exit data " << exitData << endl;
+    if(totalBees > 10){
+        if(exitData >  (int)(totalBees)*.33 ){ //2
+
             return true;
         }else {
             return false;
@@ -371,9 +372,11 @@ bool DataDecoder::sendExitAlert(){
 }
 
 bool DataDecoder::sendEntryAlert(){
-    int totalBees = exitData+ entryData;
-    if(totalBees > 100){
-        if(entryData > (totalBees/2)){
+     totalBees += (exitData+ entryData);
+    if(totalBees > 10){
+    cout <<"totalBees*.33 "<< totalBees*.33 << endl;
+    cout << "entry data " << entryData << endl;
+        if(entryData > (int)(totalBees)*.33){  //2
             return true;
         }else {
             return false;
@@ -383,8 +386,13 @@ bool DataDecoder::sendEntryAlert(){
     }
 }
 
+void DataDecoder::setExitData(int i){
+    exitData=i;
+}
 
-
+void DataDecoder::setEntryData(int i){
+    entryData = i;
+}
 
 
 

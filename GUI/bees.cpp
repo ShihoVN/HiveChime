@@ -11,6 +11,12 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
         cout<<"X-axis "<<it->second.first<<" Y-axis "<<it->second.second<<endl;
         series->append(it->second.first,it->second.second);
     }
+
+    QPen pen(QRgb(0xFB3640));
+    pen.setWidth(4);
+    series->setPen(pen);
+
+
     //    series->append(0, 6);
     //    series->append(2, 4);
     //    series->append(3, 8);
@@ -19,6 +25,9 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
 
     QChart *chart = new QChart();
     chart->addSeries(series);
+
+
+
     QValueAxis *axisX = new QValueAxis;
     QValueAxis *axisY = new QValueAxis;
 
@@ -30,7 +39,20 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
     axisY->setTickCount(20);
     axisY->setTitleText("number of bees");
 
+    QFont font("Times", 40, QFont::Bold);
+    chart->setTitleFont(font);
+    chart->setTitleBrush(QBrush(Qt::black));
     chart->setTitle("Simple line chart example");
+
+    QLinearGradient plotAreaGradient;
+    plotAreaGradient.setStart(QPointF(0, 1));
+    plotAreaGradient.setFinalStop(QPointF(1, 0));
+    plotAreaGradient.setColorAt(0.0, QRgb(0xDD6E42));
+    plotAreaGradient.setColorAt(1.0, QRgb(0xFFC857));
+    plotAreaGradient.setCoordinateMode(QGradient::ObjectBoundingMode);
+    chart->setPlotAreaBackgroundBrush(plotAreaGradient);
+    chart->setPlotAreaBackgroundVisible(true);
+
     chart->setAxisX(axisX,series);
     chart->setAxisY(axisY,series);
     QChartView *chartView = new QChartView(chart);
