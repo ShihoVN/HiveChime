@@ -24,7 +24,9 @@ class Bees : public QMainWindow
 
 public:
     explicit Bees(QWidget *parent = nullptr,DataContainer * tool=nullptr);
-    void Timetable(string interval);
+    map<int,std::pair<int,int>> Timetable(string interval);
+    map<int,std::pair<int,int>> Timetable_enter(string interval);
+
     ~Bees();
 
 private:
