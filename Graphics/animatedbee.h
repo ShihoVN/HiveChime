@@ -58,7 +58,6 @@ private:
 
 
 
-
     int gate;
     QGraphicsPixmapItem *bee;
     QMediaPlayer *buzz;

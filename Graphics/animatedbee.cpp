@@ -55,7 +55,7 @@ AnimatedBee::AnimatedBee(int board, bool type)
 
 
     //loads image, rescale's it and use it to create a Qgraphics item to be displayed
-    beeSize = 30; //initial size of bee
+    beeSize = 15; //initial size of bee
     beeIMG.load(":/images /images/Indiv_Bee.png");
     beeIMG = beeIMG.scaled(beeSize,beeSize,Qt::KeepAspectRatio);
     bee = new QGraphicsPixmapItem(beeIMG);
@@ -64,7 +64,7 @@ AnimatedBee::AnimatedBee(int board, bool type)
     //Timer to move object based off the timeout interval
     QTimer *timer = new QTimer();
     connect(timer,SIGNAL(timeout()), this,SLOT(move()));
-    timer->start(50);//every 50ms timeout changes
+    timer->start(15);//every 50ms timeout changes
 
 
     //sets up bee hive sounds #not used yet
@@ -85,32 +85,150 @@ void AnimatedBee::playSound(){
 
 //Checks if the beeobject is in bounds
 bool AnimatedBee::isInBounds(){
-
-
-
-
-
     //it is an exit data
     if (type == false ){
-
-
-
         //check if its not within display window
-        if(bee->x() == rightBorder - 50 || bee->x() == leftBorder
-                || bee->y() == bottomBorder - 50 || bee->y() == topBorder){
-
-            //cout << "exited ";
+        if(bee->x() == rightBorder || bee->x() == leftBorder
+                || bee->y() == bottomBorder || bee->y() == topBorder){
             return false;
         }
         else {
             //cout << "bee deleted";
             return true;
-
         }
     }
 
 
     //Write code for bounds for entry;
+
+    //if it is an entry
+    if(type == true){
+
+        if(board == 1){
+
+            //check if its not within display window
+            if(bee->x() == 0 && bee->y() == 0){
+                return false;
+            }
+            else {
+                //cout << "bee deleted";
+                return true;
+            }
+        }
+
+
+
+        else if(board == 2){
+            //check if its not within display window
+            if(bee->x() == 0 && bee->y() == -85){
+                return false;
+            }
+            else {
+                //cout << "bee deleted";
+                return true;
+            }
+
+        }
+
+
+
+        else if(board == 3){
+            //check if its not within display window
+            if(bee->x() == -4 && bee->y() == -64){
+                return false;
+            }
+            else {
+                //cout << "bee deleted";
+                return true;
+            }
+
+        }
+
+
+
+        else if(board == 4){
+            if(bee->x() == -35 && bee->y() == 60){
+                return false;
+            }
+            else {
+                //cout << "bee deleted";
+                return true;
+            }
+
+        }
+
+
+        else if(board == 5){
+            if(bee->x() == -75 && bee->y() == 57){
+                return false;
+            }
+            else {
+                //cout << "bee deleted";
+                return true;
+            }
+
+        }
+
+
+        else if(board == 6){
+            if(bee->x() == -72 && bee->y() == 11){
+                return false;
+            }
+            else {
+                //cout << "bee deleted";
+                return true;
+            }
+
+        }
+
+        else if(board == 7){
+            if(bee->x() == -76 && bee->y() == -33){
+                return false;
+            }
+            else {
+                //cout << "bee deleted";
+                return true;
+            }
+
+        }
+
+        else if(board == 8){
+            if(bee->x() == -50 && bee->y() == -35){
+                return false;
+            }
+            else {
+                //cout << "bee deleted";
+                return true;
+            }
+
+        }
+
+        else if(board == 9){
+            if(bee->x() == -114 && bee->y() == -40){
+                return false;
+            }
+            else {
+                //cout << "bee deleted";
+                return true;
+            }
+
+        }
+
+        else if(board == 10){
+
+            if(bee->x() == -80 && bee->y() == -95){
+                return false;
+            }
+            else {
+                //cout << "bee deleted";
+                return true;
+            }
+
+        }
+
+
+    }
+
 
 }
 
@@ -118,24 +236,240 @@ bool AnimatedBee::isInBounds(){
 void AnimatedBee::move(){
 
 
-    if(bee->x() < rightBorder){
-        bee->setPos(bee->x() + 1, bee->y());
-    }
-    if(bee->y() < bottomBorder){
-        bee->setPos(bee->x() , bee->y()+ 1);
-    }
-
-
     //Scene might give error
     if(!isInBounds()){
         bee->scene()->removeItem(bee);
-                //->removeItem(bee);
+        //->removeItem(bee);
         //cout << "bee deleted";
         delete bee;
         delete this;
         return;
 
     }
+
+
+    //if it is an exit
+    if (type == false){
+
+
+        if (board <= 2){
+
+            int ranX = rand() % 3;
+            int randY = rand() % 3 - 2;
+
+            bee->setPos(bee->x() - ranX  ,bee->y() - randY );
+
+        }
+
+        else if(board > 2 && board <= 6){
+            int ranX = rand() % 3;
+            int randY = rand() % 3 ;
+
+            bee->setPos(bee->x() + ranX  ,bee->y() + randY );
+        }
+        else {
+
+            int ranX = rand() % 3;
+            int randY = rand() % 3 ;
+            bee->setPos(bee->x() + ranX  ,bee->y() - randY );
+
+        }
+    }
+
+
+
+    //if it is an entry
+    if(type == true){
+
+        if(board == 1){
+
+            if(bee->x() > 0){
+                bee->setPos(bee->x() - 1, bee->y());
+            }
+            else if(bee->x() < 00){
+                bee->setPos(bee->x() + 1 , bee->y());
+            }
+            if(bee->y() > 0){
+                bee->setPos(bee->x() , bee->y()- 1);
+            }
+            else if(bee->y() < 0){
+                bee->setPos(bee->x() , bee->y()+ 1);
+            }
+        }
+
+
+
+        else if(board == 2){
+            if(bee->x() > 0){
+                bee->setPos(bee->x() - 1, bee->y());
+            }
+            else if(bee->x() < 0){
+                bee->setPos(bee->x() + 1 , bee->y());
+            }
+            if(bee->y() > -85){
+                bee->setPos(bee->x() , bee->y()- 1);
+            }
+            else if(bee->y() < -85){
+                bee->setPos(bee->x() , bee->y()+ 1);
+            }
+
+        }
+
+
+
+        else if(board == 3){
+            if(bee->x() > -4){
+                bee->setPos(bee->x() - 1, bee->y());
+            }
+            else if(bee->x() < -4){
+                bee->setPos(bee->x() + 1 , bee->y());
+            }
+            if(bee->y() > -64){
+                bee->setPos(bee->x() , bee->y()- 1);
+            }
+            else if(bee->y() < -64){
+                bee->setPos(bee->x() , bee->y()+ 1);
+            }
+
+        }
+
+
+
+        else if(board == 4){
+            if(bee->x() > -35){
+                bee->setPos(bee->x() - 1, bee->y());
+            }
+            else if(bee->x() < -35){
+                bee->setPos(bee->x() + 1 , bee->y());
+            }
+            if(bee->y() > 60){
+                bee->setPos(bee->x() , bee->y()- 1);
+            }
+            else if(bee->y() < 60){
+                bee->setPos(bee->x() , bee->y()+ 1);
+            }
+
+        }
+
+
+        else if(board == 5){
+            if(bee->x() > -75){
+                bee->setPos(bee->x() - 1, bee->y());
+            }
+            else if(bee->x() < -75){
+                bee->setPos(bee->x() + 1 , bee->y());
+            }
+            if(bee->y() > 57){
+                bee->setPos(bee->x() , bee->y()- 1);
+            }
+            else if(bee->y() < 57){
+                bee->setPos(bee->x() , bee->y()+ 1);
+            }
+
+        }
+
+
+        else if(board == 6){
+            if(bee->x() > -72){
+                bee->setPos(bee->x() - 1, bee->y());
+            }
+            else if(bee->x() < -72){
+                bee->setPos(bee->x() + 1 , bee->y());
+            }
+            if(bee->y() > 11){
+                bee->setPos(bee->x() , bee->y()- 1);
+            }
+            else if(bee->y() < 11){
+                bee->setPos(bee->x() , bee->y()+ 1);
+            }
+
+        }
+
+        else if(board == 7){
+            if(bee->x() > -76){
+                bee->setPos(bee->x() - 1, bee->y());
+            }
+            else if(bee->x() < -76){
+                bee->setPos(bee->x() + 1 , bee->y());
+            }
+            if(bee->y() > -33){
+                bee->setPos(bee->x() , bee->y()- 1);
+            }
+            else if(bee->y() < -33){
+                bee->setPos(bee->x() , bee->y()+ 1);
+            }
+
+        }
+
+        else if(board == 8){
+            if(bee->x() > -50){
+                bee->setPos(bee->x() - 1, bee->y());
+            }
+            else if(bee->x() < -50){
+                bee->setPos(bee->x() + 1 , bee->y());
+            }
+            if(bee->y() > -35){
+                bee->setPos(bee->x() , bee->y()- 1);
+            }
+            else if(bee->y() < -35){
+                bee->setPos(bee->x() , bee->y()+ 1);
+            }
+
+        }
+
+        else if(board == 9){
+            if(bee->x() > -114){
+                bee->setPos(bee->x() - 1, bee->y());
+            }
+            else if(bee->x() < -114){
+                bee->setPos(bee->x() + 1 , bee->y());
+            }
+            if(bee->y() > 40){
+                bee->setPos(bee->x() , bee->y()- 1);
+            }
+            else if(bee->y() < 40){
+                bee->setPos(bee->x() , bee->y()+ 1);
+            }
+
+        }
+
+        else if(board == 10){
+            if(bee->x() > -80){
+                bee->setPos(bee->x() - 1, bee->y());
+            }
+            else if(bee->x() < -80){
+                bee->setPos(bee->x() + 1 , bee->y());
+            }
+            if(bee->y() > -95){
+                bee->setPos(bee->x() , bee->y()- 1);
+            }
+            else if(bee->y() < -95){
+                bee->setPos(bee->x() , bee->y()+ 1);
+            }
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+//    if(bee->x() < rightBorder){
+//        bee->setPos(bee->x() + 1, bee->y());
+//    }
+//    if(bee->y() < bottomBorder){
+//        bee->setPos(bee->x() , bee->y()+ 1);
+//    }
+
+
+
 
 
 
@@ -145,15 +479,15 @@ void AnimatedBee::move(){
 
 
     //Used to decrease size of image not implemented yet
-//    count ++;
-//    if (count % 100 == 0 && beeSize > 10){
-//        beeIMG = beeIMG.scaled(beeSize--,beeSize--,Qt::KeepAspectRatio);
-//        bee = new QGraphicsPixmapItem(beeIMG);
-//        count = 1;
-//    }
+    //    count ++;
+    //    if (count % 100 == 0 && beeSize > 10){
+    //        beeIMG = beeIMG.scaled(beeSize--,beeSize--,Qt::KeepAspectRatio);
+    //        bee = new QGraphicsPixmapItem(beeIMG);
+    //        count = 1;
+    //    }
 
 
-/*
+    /*
 
     //if it is a bee entry
     if(gate == 1){

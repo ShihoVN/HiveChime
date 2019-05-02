@@ -50,7 +50,7 @@ void AnimationBoard::addBee(){
 
 
 void AnimationBoard::setPosition(AnimatedBee *b){
-     b->getBee()->setPos(0,0 );
+     b->getBee()->setPos(-80,-95 );
 
 //    switch(b->getGate()){
 
