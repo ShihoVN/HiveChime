@@ -9,6 +9,8 @@
 #include <vector>
 #include <random>
 #include <QObject>
+#include "../LoginGUI/secondwindow.h"
+#include <QMediaPlayer>
 
 using namespace std;
 
@@ -21,6 +23,7 @@ public:
     AnimationBoard();
     void populate();
     void setPosition(AnimatedBee *b);
+    void playSound();
 
 
 
@@ -33,10 +36,12 @@ private:
     int beeSize = 50;
     int b=0;
     QMediaPlayer *buzz;
-    void playSound();
+
 
     DataContainer container;
     vector<AnimatedBee*> bees;
+    secondWindow *window2;
+
 
 
 public slots:

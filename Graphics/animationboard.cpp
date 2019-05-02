@@ -3,14 +3,22 @@
 
 AnimationBoard::AnimationBoard()
 {
+
 //    buzz = new QMediaPlayer();
 //    buzz->setMedia(QUrl("qrc:/sounds/sound/beeSound.wav"));
-
+      buzz = new QMediaPlayer;
+      buzz->setMedia(QUrl::fromLocalFile("www.superluigibros.com/downloads/sounds/SNES/S.../smrpg_enemy_beeattack.wav"));
+      //connect(buzz, SIGNAL(window2.ui.button), this, SLOT(playSound()));
 }
 
 
 void AnimationBoard::playSound(){
    // buzz->play();
+    if(window2->getPlaySound() == true){
+        buzz->setVolume(50);
+        buzz->play();
+
+    }
 }
 
 
@@ -22,7 +30,7 @@ void AnimationBoard::populate(){
     }
     QTimer *timer = new QTimer();
     connect(timer,SIGNAL(timeout()), this,SLOT(addBee()));
-    //connect(timer,SIGNAL(timeout()), this,SLOT(playSound()));
+    connect(timer,SIGNAL(timeout()), this,SLOT(playSound()));
    timer->start(rand() % 100 + 1000);//every 100ms timeout changes
 }
 
@@ -35,7 +43,7 @@ void AnimationBoard::addBee(){
     //int ran = 2;
     AnimatedBee *b = new AnimatedBee(bee.gate,bee.type);
     setPosition(b);
-    //b->playSound();
+    b->playSound();
 
 }
 

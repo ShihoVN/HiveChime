@@ -24,8 +24,8 @@ void secondWindow::on_pushButton_clicked()
         QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Check one box before continuing"));
     }else{
         if(ui->checkBox_3->isChecked()){
-            userSelect = new userSelectModel(this);
-            userSelect->show();
+           // userSelect = new userSelectModel(this);
+            //userSelect->show();
         }else if(ui->checkBox->isChecked() && ui->checkBox_2->isChecked()){
             playSound = true;
 
@@ -35,9 +35,11 @@ void secondWindow::on_pushButton_clicked()
     }
 
 
+
 }
 
-//void secondWindow::playSound(){
-//    player = new QMediaPlayer;
+bool secondWindow::getPlaySound(){
+    return playSound;
+}
 
-//}
+

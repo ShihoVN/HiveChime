@@ -16,6 +16,7 @@ class secondWindow : public QDialog
 public:
     explicit secondWindow(QWidget *parent = nullptr);
     ~secondWindow();
+    bool getPlaySound();
 
 private slots:
     void on_pushButton_clicked();
@@ -23,7 +24,7 @@ private slots:
 private:
     Ui::secondWindow *ui;
     userSelectModel *userSelect;
-    bool playSound;
+    bool playSound = true;
 
 };
 
