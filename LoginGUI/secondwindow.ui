@@ -514,25 +514,7 @@
     <rect>
      <x>50</x>
      <y>70</y>
-     <width>201</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>PingFang SC</family>
-    </font>
-   </property>
-   <property name="text">
-    <string>View Graph Of Bee Behavior</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="checkBox_2">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>100</y>
-     <width>201</width>
+     <width>281</width>
      <height>21</height>
     </rect>
    </property>
@@ -542,7 +524,25 @@
     </font>
    </property>
    <property name="text">
-    <string>Listen to Audio Simulation</string>
+    <string>View Real Time Simulation Of Bee Hive</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBox_2">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>100</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>PingFang SC</family>
+    </font>
+   </property>
+   <property name="text">
+    <string>Include Audio</string>
    </property>
   </widget>
   <widget class="QCheckBox" name="checkBox_3">

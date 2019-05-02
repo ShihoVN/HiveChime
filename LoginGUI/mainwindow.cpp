@@ -14,9 +14,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     char** P_rows =hives->select_table_h();
     QString added;
-//    hives->add_row_h(0,"HD002","shiho","ShihoMODELDB");
-  //  hives->add_row_h(1,"HD003","Jon","Jon'sMODEL");
-    //hives->add_row_h(2,"HD004","Basit","BasitMODELDB");
+    hives->add_row_h(0,"HD002","shiho","ShihoMODELDB");
+    hives->add_row_h(1,"HD003","Jon","Jon'sMODEL");
+    hives->add_row_h(2,"HD004","Basit","BasitMODELDB");
 
     if(P_rows!=nullptr){
         for(int i =4; i<4*(hives->size()+1);i=i+4){
