@@ -30,7 +30,8 @@ public:
     void compareSensors(sensorActivity sen);
     void livestream(sensorActivity thisSensor);
     int getPair(int sensorNum);
-    void calcStandDev();
+    bool sendExitAlert();
+    bool sendEntryAlert();
 
 
 

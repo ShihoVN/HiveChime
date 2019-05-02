@@ -7,6 +7,8 @@
 #include <string>
 #include <QTimer>
 #include <iostream>
+#include "../Data/datacontainer.h"
+#include "../Data/datadecoder.h"
 using namespace  std;
 //#include <QPixmap> ///to work with images
 
@@ -22,17 +24,20 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     string readBetween(string str1, string str2); //gets string between strings
-    void printVector();
+    //void printVector();
+    vector<string> splitter(string s, string delimeter);
 
 
 
 private:
     Ui::MainWindow *ui;
+    DataContainer container;
+    DataDecoder *decoder;
     QNetworkAccessManager *manager;
     QNetworkRequest request;
     QTimer *timer;
     string content; // contains all website information
-    QString url = "http://tomcollinsresearch.net/research/rpa/hworld/numbers.html";
+    QString url = "http://tomcollinsresearch.net/research/rpa/fakeudp/fakeudpmgate.html";
 
     vector <string> UDPmessage;
 private slots:

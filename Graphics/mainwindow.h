@@ -46,7 +46,7 @@ private:
     QGraphicsScene * animationScene;
     QGraphicsPixmapItem *hive;
 
-    vector<AnimatedBee*> bees;
+    //vector<AnimatedBee*> bees;
 
 
 

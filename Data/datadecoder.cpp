@@ -43,9 +43,12 @@ void DataDecoder::decode(string _hex){
 
 
     //cout << "SIZE OF SENSOR SARRYA " << sensorArray.size() << endl;
+   //dContainer.addData(d);
+    sendExitAlert();
+    sendEntryAlert();
 
     //dContainer.addData(d);
-    calcStandDev();
+
 
 
 }
@@ -353,19 +356,31 @@ int DataDecoder::getPair(int sensorNum){
     }
 }
 
-void DataDecoder::calcStandDev(){
+bool DataDecoder::sendExitAlert(){
     int totalBees = exitData+ entryData;
+    if(totalBees > 100){
+        if(exitData > (totalBees/2)){
+            return true;
+        }else {
+            return false;
+        }
+    }else{
+        return false;
 
-    mean = exitData/totalBees;
-
-    double stdDev = mean*(.6875);
-
-    if((stdDev + mean) > exitData){
-        //send alert
-    }else if((stdDev + mean) > entryData){
-        //send entry alert
     }
+}
 
+bool DataDecoder::sendEntryAlert(){
+    int totalBees = exitData+ entryData;
+    if(totalBees > 100){
+        if(entryData > (totalBees/2)){
+            return true;
+        }else {
+            return false;
+        }
+    }else{
+        return false;
+    }
 }
 
 
