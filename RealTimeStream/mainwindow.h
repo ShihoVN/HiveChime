@@ -25,7 +25,7 @@ public:
     ~MainWindow();
     string readBetween(string str1, string str2); //gets string between strings
     //void printVector();
-    vector<string> splitter(string s, string delimeter);
+    vector<string> splitter(string s);
 
 
 
@@ -40,6 +40,9 @@ private:
     QString url = "http://tomcollinsresearch.net/research/rpa/fakeudp/fakeudpmgate.html";
 
     vector <string> UDPmessage;
+
+
+   unsigned int i = 0;
 private slots:
     void downloadFinished(QNetworkReply *reply);
     void on_pushButton_clicked();

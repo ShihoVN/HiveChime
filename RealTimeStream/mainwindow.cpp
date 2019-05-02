@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     timer = new QTimer(this);
 
     connect(timer, SIGNAL(timeout()), this, SLOT(on_pushButton_clicked()));
-    timer->start(1000); //start timer
+    timer->start(5000); //start timer
 
 
     decoder = new DataDecoder(&container);
@@ -43,15 +43,87 @@ void MainWindow::downloadFinished(QNetworkReply *reply){
         return;
     }
 
+
+
+
+    //Gets the string content from the web page
     QString str;
     str= reply->readAll();
-
     content = str.toStdString();
+
+
+    content = readBetween("<body>", "</body>");
+
+
+
+    string finalUDP;
+
+
+
+    //if there is no message at the time
+    if (content.size() > 2 ){
+
+
+        //splits into udp messages
+        vector<string> udps = splitter(content);
+
+
+
+        //adds each udp message to vector and to string final udp
+        for (unsigned int i = 0; i < udps.size();i++) {
+            UDPmessage.push_back(udps.at(i));
+
+            finalUDP += udps.at(i) + "\n";
+
+
+        }
+
+
+
+
+        //converts final udp to str
+        str = QString::fromStdString(finalUDP);
+
+
+        //changes the label
+        ui->Label->setText(str);  //set URL text to Label
+        ui->Label->repaint();
+
+
+
+        cout << "CONTENT " ;
+        cout << ++i;
+        cout << "  ";
+
+        cout << content.find('H');
+        cout << "  ";
+
+        cout << content.size();
+
+        cout << string("start") + content << endl;
+
+
+    }
+
+
+
+
+
+    /*
+
+
+    str = QString::fromStdString(content);
+
+
+
+    ui->Label->setText(str);  //set URL text to Label
+    ui->Label->repaint();
+
+
     string newstring;
     //udp message will be sperated by return line
     QString qstring;
 
-    //   cout << "CONTENT " + content.size() << endl;
 
 
     //new website with UDp messages
@@ -88,7 +160,7 @@ void MainWindow::downloadFinished(QNetworkReply *reply){
 
 
 
-
+*/
 }
 
 string MainWindow::readBetween(string s1, string s2){
@@ -99,21 +171,44 @@ string MainWindow::readBetween(string s1, string s2){
 
 
 
-vector<string> MainWindow::splitter(string s, string del){
+vector<string> MainWindow::splitter(string s){
     vector<string> udps;
-    int startIndex = 0;
-    int  endIndex = 0;
-    while( (endIndex = s.find(del, startIndex)) < s.size() )
-    {
-        std::string val = s.substr(startIndex, endIndex - startIndex);
-        udps.push_back(val);
-        startIndex = endIndex + del.size();
+
+    udps.push_back(s.substr(s.find('H') ,s.find("<br/>") - s.find('H') ));
+
+    cout << s.substr(s.find('H') ,s.find("<br/>") - s.find('H') );
+
+    cout << " ";
+
+
+    //if string contains more than 1 udp message
+    while (s.find("<br/>")  != string::npos){
+
+        //create a string exempting the previous udp message
+        s = s.substr(s.find("<br/>")+ 5, s.length() -1);
+        udps.push_back(s.substr(s.find('H') ,s.find("<br/>") - s.find('H') ));
     }
-    if(startIndex < s.size())
-    {
-        std::string val = s.substr(startIndex);
-        udps.push_back(val);
-    }
+
+
+
+
+
+
+
+
+    //    int startIndex = 0;
+    //    int  endIndex = 0;
+    //    while( (endIndex = s.find(del, startIndex)) < s.size() )
+    //    {
+    //        std::string val = s.substr(startIndex, endIndex - startIndex);
+    //        udps.push_back(val);
+    //        startIndex = endIndex + del.size();
+    //    }
+    //    if(startIndex < s.size())
+    //    {
+    //        std::string val = s.substr(startIndex);
+    //        udps.push_back(val);
+    //    }
 
     return udps;
 }
