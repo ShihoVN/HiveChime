@@ -7,12 +7,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+
+
+    //Ensures that the window stays fixed
     ui->display->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->display->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
 
+    //Creates the display environment and displays it in the graphics view
     createEnvironment();
-    //populate();
 
 }
 
@@ -36,12 +40,12 @@ void MainWindow::createEnvironment(){
 
 
 
-            QPixmap hivePic(":/images /images/MainBeeHive.png");
-            hivePic = hivePic.scaled(800,800,Qt::KeepAspectRatio);
+    QPixmap hivePic(":/images /images/MainBeeHive.png");
+    hivePic = hivePic.scaled(800,800,Qt::KeepAspectRatio);
 
 
-//    QPixmap hivePic(":/images /images/beeHive.png");
-//    hivePic = hivePic.scaled(100,100,Qt::KeepAspectRatio);
+    //    QPixmap hivePic(":/images /images/beeHive.png");
+    //    hivePic = hivePic.scaled(100,100,Qt::KeepAspectRatio);
     hive = new QGraphicsPixmapItem(hivePic);
 
 
@@ -67,16 +71,16 @@ void MainWindow::createEnvironment(){
 
 
 
-//    QPixmap beeIMG(":/images /images/Indiv_Bee.png");
-//    beeIMG = beeIMG.scaled(50,50,Qt::KeepAspectRatio);
-//    QGraphicsPixmapItem *bee = new QGraphicsPixmapItem(beeIMG);
-//    bee->setPos(-250,-25);
-//    animationScene->addItem(bee);
+    //    QPixmap beeIMG(":/images /images/Indiv_Bee.png");
+    //    beeIMG = beeIMG.scaled(50,50,Qt::KeepAspectRatio);
+    //    QGraphicsPixmapItem *bee = new QGraphicsPixmapItem(beeIMG);
+    //    bee->setPos(-250,-25);
+    //    animationScene->addItem(bee);
 
 
-//    AnimatedBee *bee = new AnimatedBee();
-//    bee->getBee()->setPos(-250,-25);
-//    animationScene->addItem(bee->getBee());
+    //    AnimatedBee *bee = new AnimatedBee();
+    //    bee->getBee()->setPos(-250,-25);
+    //    animationScene->addItem(bee->getBee());
 
 }
 
@@ -86,9 +90,9 @@ void MainWindow::createEnvironment(){
 void MainWindow::populate(){
 
     for (int i = 1; i <= 8; i++){
-       //AnimatedBee *b = new AnimatedBee(i);
-      // setPosition(b);
-   //    bees.push_back(b);
+        //AnimatedBee *b = new AnimatedBee(i);
+        // setPosition(b);
+        //    bees.push_back(b);
     }
 
 }
@@ -139,9 +143,9 @@ MainWindow::~MainWindow()
 
 //leave methods
 QRectF MainWindow::boundingRect(){
-QRectF demo;
+    QRectF demo;
 
-return demo;
+    return demo;
 }
 
 void MainWindow::paint(QPainter*,const QStyleOptionGraphicsItem*, QWidget){

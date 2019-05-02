@@ -16,7 +16,6 @@
 //class AnimatedBee: public QGraphicsPixmapItem
 
 class AnimatedBee:public QObject, public QGraphicsPixmapItem
-
 {
     Q_OBJECT
 
@@ -45,6 +44,9 @@ private:
     int gate;
     QGraphicsPixmapItem *bee;
     QMediaPlayer *buzz;
+    QPixmap beeIMG;
+    int beeSize = 30;
+    int count = 1;
 
 
 public slots:
