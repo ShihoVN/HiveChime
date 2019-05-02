@@ -4,6 +4,7 @@
         <file>images/Indiv_Bee.png</file>
         <file>images/BeehiveEdited1.png</file>
         <file>images/MainBeeHive.png</file>
+        <file>images/BeehiveEdited5.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file>sound/beeSound.wav</file>

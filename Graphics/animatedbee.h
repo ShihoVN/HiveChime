@@ -30,6 +30,7 @@ public:
     int getGate();
     void addBee(int i);
     void playSound();
+    bool checkBounds();
 
     QGraphicsPixmapItem* getBee();
 

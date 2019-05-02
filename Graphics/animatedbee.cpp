@@ -17,11 +17,38 @@ AnimatedBee::AnimatedBee()
 
 
 void AnimatedBee::playSound(){
-   buzz->play();
+    buzz->play();
+}
+
+
+
+bool AnimatedBee::checkBounds(){
+   // bool bounds;
+
+    //If the bee is exiting
+    if(gate > 4 &&  gate <= 8 ){
+
+        if (bee->x() <50 &&
+                bee->x() > -50 && bee->y() < 50 && bee->y() > -50)
+        {
+           // return true;
+            delete this;
+        }
+
+    }
+
+
+
+
+
+    return false;
 }
 
 
 void AnimatedBee::move(){
+    if(checkBounds()){
+
+    }
 
     //if it is a bee entry
     if(gate == 1){
@@ -118,6 +145,15 @@ void AnimatedBee::move(){
     if (gate == 8){
         bee->setPos(bee->x() + 10 , bee->y()+  10);
     }
+
+
+
+    if (checkBounds()){
+
+
+
+
+    }//checks to see if the bee is inside
 }
 
 
