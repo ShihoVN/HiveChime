@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "userselectmodel.h"
+//#include <QMediaPlayer>
 
 namespace Ui {
 class secondWindow;
@@ -22,6 +23,8 @@ private slots:
 private:
     Ui::secondWindow *ui;
     userSelectModel *userSelect;
+    bool playSound;
+
 };
 
 #endif // SECONDWINDOW_H

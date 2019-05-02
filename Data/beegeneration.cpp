@@ -154,7 +154,7 @@ string BeeGeneration::generateUDP(){
             udp += "T";
 
         }
-        if(i != 5){
+        else if(i != 5){
             udp += ".";
         }
     }
