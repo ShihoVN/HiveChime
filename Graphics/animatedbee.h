@@ -9,14 +9,13 @@
 #include <QTimer>
 #include <QObject>
 #include <QMediaPlayer>
-
-
+#include <iostream>
 
 
 //class AnimatedBee: public QGraphicsPixmapItem
 
+using  namespace std;
 class AnimatedBee:public QObject, public QGraphicsPixmapItem
-
 {
     Q_OBJECT
 
@@ -24,27 +23,48 @@ class AnimatedBee:public QObject, public QGraphicsPixmapItem
 public:
     AnimatedBee();
     AnimatedBee(int gate);
+    AnimatedBee(int board, bool type);//type is exit or entry where true is entry
     AnimatedBee(QPixmap pic);
     AnimatedBee(QGraphicsItem *parent);
-    void setPosition();
     int getGate();
+    int getBoard();
+    bool getType();
+    int getBeeSize();
     void addBee(int i);
     void playSound();
+    bool isInBounds();
 
     QGraphicsPixmapItem* getBee();
 
 
 
 
-    //Virtual methods
+    //Virtual methods DO NOT DELETE
     QRectF boundingRect();
     void paint(QPainter*,const QStyleOptionGraphicsItem*, QWidget*);
 
 
 private:
+    int board; //there are 10 boards in total
+    bool type; //type of board data. False is exit and true is entry
+    int beeSize ;//initial size of the bee Object
+
+
+    //Game window borders
+    int topBorder = -250;
+    int leftBorder = topBorder;
+    int rightBorder = 250;
+    int bottomBorder = rightBorder;
+
+
+
+
     int gate;
     QGraphicsPixmapItem *bee;
     QMediaPlayer *buzz;
+    QPixmap beeIMG;
+
+    int count = 1;
 
 
 public slots:

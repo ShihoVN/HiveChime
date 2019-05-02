@@ -34,24 +34,24 @@ HEADERS += \
 FORMS += \
         bees.ui
 
-#HEADERS += ../Database/dbhivetable.h
-#SOURCES += ../Database/dbhivetable.cpp
+HEADERS += ../Data/beegeneration.h
+SOURCES += ../Data/beegeneration.cpp
 
-#HEADERS += ../Database/dbmodeltable.h
-#SOURCES += ../Database/dbmodeltable.cpp
+HEADERS += ../Data/datadecoder.h
+SOURCES += ../Data/datadecoder.cpp
 
+HEADERS += ../Data/datacontainer.h
+SOURCES += ../Data/datacontainer.cpp
 
-#HEADERS += ../Data/beegeneration.h
-#SOURCES += ../Data/beegeneration.cpp
+HEADERS += ../Database/dbtable.h
+SOURCES += ../Database/dbtable.cpp
 
-#HEADERS += ../Data/datadecoder.h
-#SOURCES += ../Data/datadecoder.cpp
+HEADERS += ../Database/tool.h
+SOURCES += ../Database/tool.cpp
 
-#HEADERS += ../Database/dbbeelog.h
-#SOURCES += ../Database/dbbeelog.cpp
-
-#HEADERS += ../Data/datacontainer.h
-#SOURCES += ../Data/datacontainer.cpp
+HEADERS += ../Database/dbbeelog.h
+SOURCES += ../Database/dbbeelog.cpp
+LIBS += -lsqlite3
 
 
 # Default rules for deployment.
