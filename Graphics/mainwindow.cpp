@@ -63,7 +63,7 @@ void MainWindow::createEnvironment(){
 
 
     //populate the board with bees
-    //board->populate();
+    board->populate();
 
 
 

@@ -68,7 +68,6 @@ void MainWindow::downloadFinished(QNetworkReply *reply){
         vector<string> udps = splitter(content);
 
 
-
         //adds each udp message to vector and to string final udp
         for (unsigned int i = 0; i < udps.size();i++) {
             UDPmessage.push_back(udps.at(i));
