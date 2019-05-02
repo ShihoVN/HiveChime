@@ -29,7 +29,7 @@ int main()
     //container.getUdpMessages();
 
 
-    for(int i = 0; i < 100; i++){
+    for(int i = 0; i < 1000; i++){
         message=BG->makeBee();
         //d.decode(message);
         cout << message << endl;

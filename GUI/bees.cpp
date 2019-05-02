@@ -8,16 +8,26 @@ Bees::Bees(QWidget *parent) :
 //    series->setPointLabelsVisible(true);    // is false by default
 //    series->setPointLabelsColor(Qt::black);
 //    series->setPointLabelsFormat("@yPoint");
-    series->append(0, 6);
-    series->append(2, 4);
-    series->append(3, 8);
-    series->append(7, 4);
-    series->append(10, 5);
+//    series->append(0, 6);
+//    series->append(2, 4);
+//    series->append(3, 8);
+//    series->append(7, 4);
+//    series->append(10, 5);
+
+    QBarSet *leaving = new QBarSet("leaving");
+    *leaving << (0,6) << (2,4) << (3,8) << (7,4) << (10.5);
+
+    //series->append(*leaving);
+
+
+
 
     QChart *chart = new QChart();
     //chart->legend()->hide();
     //chart->legend().
     chart->addSeries(series);
+
+
     QValueAxis *axisX = new QValueAxis;
     QValueAxis *axisY = new QValueAxis;
 
