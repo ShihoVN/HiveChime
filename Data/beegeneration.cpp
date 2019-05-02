@@ -103,16 +103,16 @@ string BeeGeneration::makeBee()
                time[3]++;
            }
 
+
        }
 
-       std::exponential_distribution<double> expDistbn(double(60000/x)); //Calculates the next expected activity
+       std::exponential_distribution<double> expDistbn(double(60/x)); //Calculates the next expected activity
        cout << "Hive ID: 23"<< endl;
        while(nextBees.size() < 15){
            float t = expDistbn(generator);
-           update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
            cout << t<< endl;
-           update(t*60);
-           cout << t<< endl;
+           update(60000*t); //Calls calcualte which calculates when the next bee will be created
+           cout <<"this too" << t*60<< endl;
            generate();
        }
 
@@ -501,7 +501,7 @@ void BeeGeneration::setActivity(int size){
         else if(i == 5){
             rate = 0.1;
         }
-        else if(i>5){
+        else if(i>5&&i<=9){
             rate += 0.05;
         }
         else if(i>9){
@@ -527,6 +527,7 @@ void BeeGeneration::setActivity(int size){
         }
         int activity = int (size*rate);
         lambda.push_back(activity);
+        cout <<i<<"LOOK" << activity<< endl;
     }
 }
 
