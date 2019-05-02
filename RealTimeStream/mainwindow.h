@@ -9,6 +9,7 @@
 #include <iostream>
 #include "../Data/datacontainer.h"
 #include "../Data/datadecoder.h"
+#include <QMessageBox>
 using namespace  std;
 //#include <QPixmap> ///to work with images
 
@@ -29,6 +30,7 @@ public:
 
 
 
+
 private:
     Ui::MainWindow *ui;
     DataContainer container;
@@ -36,6 +38,7 @@ private:
     QNetworkAccessManager *manager;
     QNetworkRequest request;
     QTimer *timer;
+    QTimer* timer2;
     string content; // contains all website information
     QString url = "http://tomcollinsresearch.net/research/rpa/fakeudp/fakeudpmgate.html";
 
@@ -46,6 +49,7 @@ private:
 private slots:
     void downloadFinished(QNetworkReply *reply);
     void on_pushButton_clicked();
+    void checkAlerts();
 
 };
 

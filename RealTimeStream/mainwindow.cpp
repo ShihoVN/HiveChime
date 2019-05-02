@@ -9,9 +9,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     manager = new QNetworkAccessManager(this);
     connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadFinished(QNetworkReply*)));
     timer = new QTimer(this);
+    timer2 = new QTimer(this);
+
 
     connect(timer, SIGNAL(timeout()), this, SLOT(on_pushButton_clicked()));
+
+    connect(timer2, SIGNAL(timeout()), this, SLOT(checkAlerts()));
+
     timer->start(5000); //start timer
+    timer2->start(20000);
 
 
     decoder = new DataDecoder(&container);
@@ -73,6 +79,7 @@ void MainWindow::downloadFinished(QNetworkReply *reply){
             UDPmessage.push_back(udps.at(i));
 
             finalUDP += udps.at(i) + "\n";
+            decoder->decode(udps.at(i));
 
 
         }
@@ -213,55 +220,24 @@ vector<string> MainWindow::splitter(string s){
 }
 
 
+void MainWindow::checkAlerts(){
+    if(decoder->sendExitAlert()== true){
+          QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("A Swarm of Bees is Leaving the Hive!"));
+          //ui->setupUi(this);
+          cout << "Alert True"<< endl;
+     }
+     if(decoder->sendEntryAlert()==true){
+           QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("A Swarm of Bees is Entering the Hive!"));
+           cout << "Alert True"<< endl;
+     }
+     else{
+           //if the alert was false reset the entry adn exit data
+          decoder->setExitData(0);
+          decoder->setEntryData(0);
+          cout << "made entry/exit ==0 NO WARNING";
+     }
 
+    cout << "decoder total" << decoder->totalBees << endl;
+    cout << "CHECKED ALERTS"<<endl;
 
-
-
-
-
-
-//    cout << "String " << s << endl;
-
-//    vector<string> udps;
-//    string newstring = readBetween(
-//                "<br/>",
-//                "<br/>"
-//                );
-
-//    cout << "splitter string " + newstring;
-//    udps.push_back(newstring);
-//    return udps;
-
-
-
-
-
-//    cout << "String " << s << endl;
-//    cout << "String at 0 " << s.at(1) << endl;
-//    while(s.at(0)  == 'H'){
-
-//        unsigned  int index = s.find("<br/>");
-//        udps.push_back(s.substr(0,index));
-//        cout << "Sub str " << s.substr(0,index) << endl;
-//        s = s.substr(index, s.length() -1);
-//        cout << "remainder " << s << endl;
-
-
-
-//    }
-
-
-//return udps;
-
-
-//void MainWindow::printVector(){
-//    for(int i =0; i<UDPmessage.size(); i++){
-//        cout << UDPmessage.at(i) << endl;
-//    }
-//}
-
-
-
-
-
-
+}

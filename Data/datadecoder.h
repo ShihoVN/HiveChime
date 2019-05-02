@@ -32,6 +32,10 @@ public:
     int getPair(int sensorNum);
     bool sendExitAlert();
     bool sendEntryAlert();
+    int totalBees;
+    void setExitData(int i);
+    void setEntryData(int i);
+
 
 
 
@@ -50,6 +54,7 @@ private:
     int exitData;
     int entryData;
     int mean;
+
 
 
 
