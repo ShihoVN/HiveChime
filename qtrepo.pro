@@ -10,6 +10,7 @@ SUBDIRS += \
     Bee_Visual \
     RealTimeStream \
     WeatherStream \
-    LoginGUI \
-    AlertGUI
+    #LoginGUI \
+    AlertGUI \
+    RealtimeGeneration
 

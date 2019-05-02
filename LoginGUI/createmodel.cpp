@@ -26,7 +26,7 @@ void CreateModel::on_pushButton_clicked()
          QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Fill in all Boxes before Continuing"));
     }
     else{
-        genModel = new GeneratedModel(this);
+        genModel = new GeneratedModel(this,&date,&time,&duration);
         genModel->show();
 
     }

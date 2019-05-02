@@ -608,4 +608,12 @@ vector<int> BeeGeneration::nextUDP(){
 
 }
 
+int BeeGeneration::getNextTime(int i){
+    return nextBees.top().now[i];
+}
+
+float BeeGeneration::getNextM(){
+    return nextBees.top().m;
+}
+
 
