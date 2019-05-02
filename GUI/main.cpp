@@ -5,7 +5,7 @@ int main(int argc, char *argv[])
 {
     DataContainer container;
     DataDecoder d(&container);
-    BeeGeneration* BG = new BeeGeneration("0002", 16000);
+    BeeGeneration* BG = new BeeGeneration("0002", 400);
     //BeeGeneration* BG1 = new BeeGeneration("0009", 400);
     //BeeGeneration* BG2 = new BeeGeneration("0032", 400);
 

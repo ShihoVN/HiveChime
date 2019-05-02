@@ -15,34 +15,25 @@ void AnimationBoard::playSound(){
 
 
 void AnimationBoard::populate(){
+    DataDecoder d(&container);
+    BeeGeneration* BG = new BeeGeneration("0002", 16000);
+    for (int i=0;i<10000 ;i++) {
+        d.decode(BG->makeBee());
+    }
     QTimer *timer = new QTimer();
     connect(timer,SIGNAL(timeout()), this,SLOT(addBee()));
     //connect(timer,SIGNAL(timeout()), this,SLOT(playSound()));
-
-   // timer->start(100);
    timer->start(rand() % 100 + 1000);//every 100ms timeout changes
-
-
-
-    for (int i = 1; i <= 1; i++){
-        addBee();
-             // playSound();
-
-
-        //        timer->start(100);//every 100ms timeout changes
-        //        AnimatedBee *b = new AnimatedBee(i);
-        //        setPosition(b);
-
-        //        bees.push_back(b);
-    }
 }
 
 
 void AnimationBoard::addBee(){
+    Data bee=*container.getUdpMessages().at(b);
     int ran = rand() % 8 + 1;
-
+    if(b<container.getUdpMessages().size()-1)
+        b++;
     //int ran = 2;
-    AnimatedBee *b = new AnimatedBee(1,false);
+    AnimatedBee *b = new AnimatedBee(1,bee.type);
     setPosition(b);
     //b->playSound();
 
