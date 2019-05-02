@@ -26,6 +26,7 @@ public:
     ~DataContainer();
     void addData(Data* d);
     void loadData(Data* d);
+    void storeData();
     vector<Data*> getUdpMessages();
     void track_db();
 

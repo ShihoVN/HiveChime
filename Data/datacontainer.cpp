@@ -21,7 +21,7 @@ DataContainer::DataContainer()
 
 DataContainer::DataContainer(string db_name)
 {
-   //beelog=new DBBeeLog(dbtool,db_name);
+    bee_logdb=new DBBeeLog(dbtool,db_name);
 }
 
 DataContainer::~DataContainer()
@@ -30,7 +30,8 @@ DataContainer::~DataContainer()
 }
 
 void DataContainer::addData(Data *udpMsg){
-    bee_logdb->add_row_m(int(udpMessages.size()),udpMsg->board,to_string(udpMsg->gate),udpMsg->date,udpMsg->time,to_string(udpMsg->type));
+    bee_logdb->add_row_m(int(udpMessages.size()),udpMsg->board,
+                         to_string(udpMsg->gate),udpMsg->date,udpMsg->time,to_string(udpMsg->type));
     udpMessages.push_back(udpMsg);
 }
 
@@ -40,6 +41,12 @@ void DataContainer::loadData(Data *udpMsg){
 
 vector<Data*> DataContainer:: getUdpMessages(){
     return udpMessages;
+}
+void DataContainer::storeData(){
+    for (unsigned long i=0;i<udpMessages.size();i++) {
+        bee_logdb->add_row_m(int(i),udpMessages.at(i)->board,to_string(udpMessages.at(i)->gate),
+                             udpMessages.at(i)->date,udpMessages.at(i)->time,to_string(udpMessages.at(i)->type));
+    }
 }
 
 void DataContainer::track_db(){

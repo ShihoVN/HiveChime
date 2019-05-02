@@ -29,23 +29,23 @@ int main()
     //container.getUdpMessages();
 
 
-    for(int i = 0; i < 100; i++){
+    for(int i = 0; i < 1000; i++){
         message=BG->makeBee();
-        //d.decode(message);
-        cout << message << endl;
+        d.decode(message);
+        //cout << message << endl;
 
-        //        for (int j = 0; j < container.getUdpMessages().size(); ++j) {
+//                for (int j = 0; j < container.getUdpMessages().size(); ++j) {
 
-        //            cout << "Hive ID: " << container.getUdpMessages().at(j)->hiveId << endl;
-        //            cout << "Date: " << container.getUdpMessages().at(j)->date << endl ;
-        //            cout << "Time: " << container.getUdpMessages().at(j)->time  << endl;
-        //            cout << "Board: " << container.getUdpMessages().at(j)->board  << endl;
-        //            cout << "Gate: " << container.getUdpMessages().at(j)->gate  << endl;
-        //            cout << "Type: " << container.getUdpMessages().at(j)->type << endl ;
-        //            cout << "\n" << endl;
-        //            cout << "Size of array in container: " << container.getUdpMessages().size() << endl;
+//                    cout << "Hive ID: " << container.getUdpMessages().at(j)->hiveId << endl;
+//                    cout << "Date: " << container.getUdpMessages().at(j)->date << endl ;
+//                    cout << "Time: " << container.getUdpMessages().at(j)->time  << endl;
+//                    cout << "Board: " << container.getUdpMessages().at(j)->board  << endl;
+//                    cout << "Gate: " << container.getUdpMessages().at(j)->gate  << endl;
+//                    cout << "Type: " << container.getUdpMessages().at(j)->type << endl ;
+//                    cout << "\n" << endl;
+//                    cout << "Size of array in container: " << container.getUdpMessages().size() << endl;
 
-        //        }
+//                }
     }
     container.track_db();
 
