@@ -7,12 +7,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+
+
+    //Ensures that the window stays fixed
     ui->display->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->display->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
 
+    //Creates the display environment and displays it in the graphics view
     createEnvironment();
-    //populate();
 
 }
 
@@ -38,6 +42,7 @@ void MainWindow::createEnvironment(){
 
     QPixmap hivePic(":/images /images/BeehiveEdited5.png");
     hivePic = hivePic.scaled(550,550,Qt::KeepAspectRatio);
+
 
 
     //    QPixmap hivePic(":/images /images/beeHive.png");

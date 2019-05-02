@@ -91,10 +91,7 @@ void BeeGeneration::setSeed(unsigned int seed){
  */
 string BeeGeneration::makeBee()
 {
-    if(time[3] == 24){ // This if statement checks to see if a day has elapsed and adjusts the time records acordingly
-        time[2] ++;
-        time[3] = 0;
-    }
+
        while(n == 0){ // This while loop checks to see there is reamaning expected bee activity
            std::poisson_distribution<int> poissDistbn(lambda.at(time[3])); //Creates a distuction for that hour based on the activty level
            x = poissDistbn(generator);
@@ -102,17 +99,19 @@ string BeeGeneration::makeBee()
            if(x == 0){
                time[3]++;
            }
+           if(time[3] == 24){ // This if statement checks to see if a day has elapsed and adjusts the time records acordingly
+               time[2] ++;
+               time[3] = 0;
+           }
 
        }
 
-       std::exponential_distribution<double> expDistbn(double(60000/x)); //Calculates the next expected activity
+       std::exponential_distribution<double> expDistbn(double(x/60)); //Calculates the next expected activity
        cout << "Hive ID: 23"<< endl;
        while(nextBees.size() < 15){
            float t = expDistbn(generator);
-           //update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
-           cout << t<< endl;
-           update(t*60);
-           cout << t<< endl;
+           cout<< "NEXT BEE" << t*60000<<endl;
+           update(t*60000);
            generate();
        }
 
@@ -501,11 +500,11 @@ void BeeGeneration::setActivity(int size){
         else if(i == 5){
             rate = 0.1;
         }
-        else if(i>5){
-            rate += 0.05;
-        }
-        else if(i>9){
+        else if(i<11 && i>5){
             rate += 0.1;
+        }
+        else if(i==11){
+            rate = 0.525;
         }
         else if(i>11 && i <15){
             rate = 0.55;
@@ -517,9 +516,9 @@ void BeeGeneration::setActivity(int size){
             rate -= 0.1;
         }
         else if(i == 17){
-            rate = 0.3;
+            rate = 0.25;
         }
-        else if(i >17 && i <21){
+        else if(i >17 && i <20){
             rate -= 0.1;
         }
         else{
@@ -527,6 +526,8 @@ void BeeGeneration::setActivity(int size){
         }
         int activity = int (size*rate);
         lambda.push_back(activity);
+        cout <<"shit "<<rate<<endl;
+        cout<<"HA" <<activity<<endl;
     }
 }
 

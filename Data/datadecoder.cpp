@@ -7,7 +7,7 @@ DataDecoder::DataDecoder(DataContainer *container)
     sa.sensors = 0;
     sa.sensorTime =0;
     sa.sensorBoard = 0;
-    _type = NULL;
+    _type = false;
     miliseconds = 0;
 }
 
@@ -18,7 +18,7 @@ DataDecoder::DataDecoder(DataContainer *container)
  */
 void DataDecoder::decode(string _hex){
     d = new Data;
-        cout << _hex << endl;
+    cout << _hex << endl;
     vector<string> fragments; //vector containing each segment
     stringstream ss(_hex); // Turn the string into a stream.
     string tok;
@@ -43,9 +43,12 @@ void DataDecoder::decode(string _hex){
 
 
     //cout << "SIZE OF SENSOR SARRYA " << sensorArray.size() << endl;
-
    //dContainer.addData(d);
-    calcStandDev();
+    sendExitAlert();
+    sendEntryAlert();
+
+    //dContainer.addData(d);
+
 
 
 }
@@ -84,23 +87,29 @@ string DataDecoder:: timeDecoder(string s){
 
 
     while(getline(ss, tok, 'T')) {
-    getline(ss, tok, 'T');
-     time = tok;
+        getline(ss, tok, 'T');
+        time = tok;
 
 
-    int pos = time.find('.');
-    string sub = time.substr(pos+3);
-    cout << "sub" << sub<< endl;
-    sub.erase(sub.begin());
+        unsigned long pos = time.find('.');
+        string sub = time.substr(pos+3);
+        cout << "sub" << sub<< endl;
+        sub.erase(sub.begin());
 
-    int milisec = std::stoi(sub);
+        int milisec = std::stoi(sub);
 
-     //set sensor time to
-     sa.sensorTime = milisec;
+        //set sensor time to
+        sa.sensorTime = milisec;
 
     }
-cout << "sensor time " <<sa.sensorTime << endl;
- return time;
+    long pos =long(time.find('.'));
+    time.erase(time.begin()+pos);
+    pos =long(time.find('.'));
+    time.erase(time.begin()+pos);
+    pos =long(time.find('.'));
+    time.erase(time.begin()+pos);
+    cout << "sensor time " <<sa.sensorTime << endl;
+    return time;
 
 }
 
@@ -110,37 +119,37 @@ cout << "sensor time " <<sa.sensorTime << endl;
  * @param _act is the third part of the UDP message
  */
 void DataDecoder:: activityDecoder(string _act){
-        stringstream act(_act);
-        string delimiter = "B"; // set the delimeter
-        vector<int> boardNum;
+    stringstream act(_act);
+    string delimiter = "B"; // set the delimeter
+    vector<int> boardNum;
 
-        int boardIndex=0;
+    int boardIndex=0;
 
-        while(std::getline(act, delimiter, 'B'))
-        {
+    while(std::getline(act, delimiter, 'B'))
+    {
 
-            int board = std::atoi(delimiter.c_str()); //convert the delimiter to an int
+        int board = std::atoi(delimiter.c_str()); //convert the delimiter to an int
 
-            //get rid of any 0s for complexity purpose
-            if(board != 0){
+        //get rid of any 0s for complexity purpose
+        if(board != 0){
 
-               boardNum.push_back(boardIndex); //this vector stores which board showed activity-- not sure if we need to know
-               //make struct sensors equal to this board
-               sa.sensorBoard = boardIndex;
-               d->board = sa.sensorBoard;
-
-
-               decimalToBinary(board); //pass the board activity to binary decoder
+            boardNum.push_back(boardIndex); //this vector stores which board showed activity-- not sure if we need to know
+            //make struct sensors equal to this board
+            sa.sensorBoard = boardIndex;
+            d->board = sa.sensorBoard;
 
 
-               cout << "board Activity decimal "  << board<< endl;
-               cout << "board Index "  << boardIndex<< "\n"<< endl;
+            decimalToBinary(board); //pass the board activity to binary decoder
 
 
-            }
+            cout << "board Activity decimal "  << board<< endl;
+            cout << "board Index "  << boardIndex<< "\n"<< endl;
 
-           boardIndex ++; //increase index for each loop
+
         }
+
+        boardIndex ++; //increase index for each loop
+    }
 
 
 
@@ -171,7 +180,7 @@ void DataDecoder:: compareSensors(sensorActivity thisSensor){
         if(thisSensor.sensorTime - sensorArray.at(i).sensorTime > 500 ||
                 sensorArray.at(i).sensorTime - thisSensor.sensorTime > 500)
         {
-           // cout << "sensor 11" << thisSensor.sensors << endl;
+            // cout << "sensor 11" << thisSensor.sensors << endl;
 
             sensorArray.erase(sensorArray.begin() + (i));
             if(sensorArray.size() ==0 || i >= sensorArray.size()){
@@ -181,41 +190,41 @@ void DataDecoder:: compareSensors(sensorActivity thisSensor){
         }
 
 
-          if(thisSensor.sensorBoard == sensorArray.at(i).sensorBoard) //check only sensors of the same board
-          {
+        if(thisSensor.sensorBoard == sensorArray.at(i).sensorBoard) //check only sensors of the same board
+        {
             //  cout << "sensor22" << thisSensor.sensors << endl;
-                if(sensorArray.at(i).sensors == getPair(thisSensor.sensors)){
-                    //send info into data base
-                    if(getPair(thisSensor.sensors) <=4){
-                        cout << "PAIR WAS MADEEE" << endl;
-                         d->type = 1;  //bee entered the hive
-                         dContainer->addData(d);
+            if(sensorArray.at(i).sensors == getPair(thisSensor.sensors)){
+                //send info into data base
+                if(getPair(thisSensor.sensors) <=4){
+                    cout << "PAIR WAS MADEEE" << endl;
+                    d->type = 1;  //bee entered the hive
+                    dContainer->addData(d);
 
-                         //increase entry number
-                         entryData++;
+                    //increase entry number
+                    entryData++;
 
-                    }
-                    else if(getPair(thisSensor.sensors) > 4){
-                         d->type = 0; // bee left the hive
-                         cout << "PAIR WAS MADEEE" << endl;
-                        dContainer->addData(d);
+                }
+                else if(getPair(thisSensor.sensors) > 4){
+                    d->type = 0; // bee left the hive
+                    cout << "PAIR WAS MADEEE" << endl;
+                    dContainer->addData(d);
 
-                        //increase exitData;
-                        exitData++;
-                    }
-
-                    sensorArray.erase(sensorArray.begin() +(i)); //remove the struct in array
-                    return;
+                    //increase exitData;
+                    exitData++;
                 }
 
-          }
+                sensorArray.erase(sensorArray.begin() +(i)); //remove the struct in array
+                return;
+            }
 
-     }
+        }
+
+    }
 
     //if the sensor does not have a pair then add it to the array
-     // cout << "sensor33" << thisSensor.sensors << endl;
-            sensorArray.push_back(thisSensor);
-            //cout << "sensor " << thisSensor.sensors << endl;
+    // cout << "sensor33" << thisSensor.sensors << endl;
+    sensorArray.push_back(thisSensor);
+    //cout << "sensor " << thisSensor.sensors << endl;
 
 }
 /**
@@ -243,7 +252,7 @@ void DataDecoder:: livestream(sensorActivity thisSensor){
         if(thisSensor.sensorTime - sensorArray.at(i).sensorTime > 500 ||
                 sensorArray.at(i).sensorTime - thisSensor.sensorTime > 500)
         {
-           // cout << "sensor 11" << thisSensor.sensors << endl;
+            // cout << "sensor 11" << thisSensor.sensors << endl;
 
             sensorArray.erase(sensorArray.begin() + (i));
             if(sensorArray.size() ==0 || i >= sensorArray.size()){
@@ -253,41 +262,41 @@ void DataDecoder:: livestream(sensorActivity thisSensor){
         }
 
 
-          if(thisSensor.sensorBoard == sensorArray.at(i).sensorBoard) //check only sensors of the same board
-          {
+        if(thisSensor.sensorBoard == sensorArray.at(i).sensorBoard) //check only sensors of the same board
+        {
             //  cout << "sensor22" << thisSensor.sensors << endl;
-                if(sensorArray.at(i).sensors == getPair(thisSensor.sensors)){
-                    //send info into data base
-                    if(getPair(thisSensor.sensors) <=4){
-                        cout << "PAIR WAS MADEEE" << endl;
-                         d->type = 1;  //bee entered the hive
-                         dContainer->loadData(d);
+            if(sensorArray.at(i).sensors == getPair(thisSensor.sensors)){
+                //send info into data base
+                if(getPair(thisSensor.sensors) <=4){
+                    cout << "PAIR WAS MADEEE" << endl;
+                    d->type = 1;  //bee entered the hive
+                    dContainer->loadData(d);
 
-                         //increase entryData
-                         entryData++;
+                    //increase entryData
+                    entryData++;
 
-                    }
-                    else if(getPair(thisSensor.sensors) > 4){
-                         d->type = 0; // bee left the hive
-                         cout << "PAIR WAS MADEEE" << endl;
-                        dContainer->loadData(d);
+                }
+                else if(getPair(thisSensor.sensors) > 4){
+                    d->type = 0; // bee left the hive
+                    cout << "PAIR WAS MADEEE" << endl;
+                    dContainer->loadData(d);
 
-                        //increase exitData;
-                        exitData++;
-                    }
-
-                    sensorArray.erase(sensorArray.begin() +(i)); //remove the struct in array
-                    return;
+                    //increase exitData;
+                    exitData++;
                 }
 
-          }
+                sensorArray.erase(sensorArray.begin() +(i)); //remove the struct in array
+                return;
+            }
 
-     }
+        }
+
+    }
 
     //if the sensor does not have a pair then add it to the array
-     // cout << "sensor33" << thisSensor.sensors << endl;
-            sensorArray.push_back(thisSensor);
-            //cout << "sensor " << thisSensor.sensors << endl;
+    // cout << "sensor33" << thisSensor.sensors << endl;
+    sensorArray.push_back(thisSensor);
+    //cout << "sensor " << thisSensor.sensors << endl;
 
 }
 
@@ -300,22 +309,22 @@ void DataDecoder:: livestream(sensorActivity thisSensor){
 void DataDecoder:: decimalToBinary(int boardAct){
     int _boardAct = boardAct;
     int binary[32];
-    unsigned count =0;
+    int count =0;
 
-   //convert to binary
+    //convert to binary
     while (_boardAct > 0){
-           binary[count] = _boardAct %2;
-           _boardAct = _boardAct/2;
-           count++;
+        binary[count] = _boardAct %2;
+        _boardAct = _boardAct/2;
+        count++;
 
 
-        }
+    }
     //binary is read in backwards
     for(int i = count-1; i >=0; i--){
         if(binary[i] == 1){
             sa.sensors = i+1; //set the sensor to the index == 1
             d->gate = sa.sensors;
-          //  cout << "sensor " << sa.sensors << endl;
+            //  cout << "sensor " << sa.sensors << endl;
             livestream(sa);
 
 
@@ -347,19 +356,31 @@ int DataDecoder::getPair(int sensorNum){
     }
 }
 
-void DataDecoder::calcStandDev(){
+bool DataDecoder::sendExitAlert(){
     int totalBees = exitData+ entryData;
+    if(totalBees > 100){
+        if(exitData > (totalBees/2)){
+            return true;
+        }else {
+            return false;
+        }
+    }else{
+        return false;
 
-    mean = exitData/totalBees;
-
-    float stdDev = mean*(.6875);
-
-    if((stdDev + mean) > exitData){
-        //send alert
-    }else if((stdDev + mean) > entryData){
-        //send entry alert
     }
+}
 
+bool DataDecoder::sendEntryAlert(){
+    int totalBees = exitData+ entryData;
+    if(totalBees > 100){
+        if(entryData > (totalBees/2)){
+            return true;
+        }else {
+            return false;
+        }
+    }else{
+        return false;
+    }
 }
 
 

@@ -85,7 +85,8 @@ private:
     std::default_random_engine generator;
     vector<int> lambda;
     //int current;
-    int n, x;
+    int n;
+    double x;
     string id;
     int time[6];
     vector<int> next;

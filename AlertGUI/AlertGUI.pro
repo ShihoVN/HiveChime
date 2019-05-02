@@ -1,14 +1,14 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-04-16T09:51:52
+# Project created by QtCreator 2019-04-30T23:34:16
 #
 #-------------------------------------------------
 
 QT       += core gui
-QT       += charts
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = GUI
+TARGET = AlertGUI
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -26,16 +26,15 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        bees.cpp
+        mainwindow.cpp
+
 
 HEADERS += \
-        bees.h
+        mainwindow.h \
+
 
 FORMS += \
-        bees.ui
-
-HEADERS += ../Data/beegeneration.h
-SOURCES += ../Data/beegeneration.cpp
+        mainwindow.ui
 
 HEADERS += ../Data/datadecoder.h
 SOURCES += ../Data/datadecoder.cpp
@@ -49,10 +48,12 @@ SOURCES += ../Database/dbtable.cpp
 HEADERS += ../Database/tool.h
 SOURCES += ../Database/tool.cpp
 
+HEADERS += ../Database/dbmodeltable.h
+SOURCES += ../Database/dbmodeltable.cpp
+
 HEADERS += ../Database/dbbeelog.h
 SOURCES += ../Database/dbbeelog.cpp
 LIBS += -lsqlite3
-
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

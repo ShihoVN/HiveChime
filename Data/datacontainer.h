@@ -12,8 +12,8 @@ struct Data{
     string hiveId;
     string date;
     string time;
-    int gate; //might be needed-- Lia changed this to an array
-    int board; // i think we neeed this - Lia
+    int gate;
+    int board;
     bool type; //entry or exit with entry being 1 and exit being 0
 
 };
@@ -26,6 +26,7 @@ public:
     ~DataContainer();
     void addData(Data* d);
     void loadData(Data* d);
+    void storeData();
     vector<Data*> getUdpMessages();
     void track_db();
 

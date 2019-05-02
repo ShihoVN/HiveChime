@@ -632,7 +632,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Column Graph</string>
+    <string>Line Graph</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
