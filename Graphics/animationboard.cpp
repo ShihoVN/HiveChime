@@ -3,17 +3,18 @@
 
 AnimationBoard::AnimationBoard(bool _Sound)
 {
-      sound = _Sound;
+    sound = _Sound;
     buzz = new QMediaPlayer();
     buzz->setMedia(QUrl("qrc:/sounds/sound/beesounds.mp3"));
-      //buzz = new QMediaPlayer;
-      //buzz->setMedia(QUrl::fromLocalFile("www.superluigibros.com/downloads/sounds/SNES/S.../smrpg_enemy_beeattack.wav"));
-      //connect(buzz, SIGNAL(window2.ui.button), this, SLOT(playSound()));
+    //buzz = new QMediaPlayer;
+    //buzz->setMedia(QUrl::fromLocalFile("www.superluigibros.com/downloads/sounds/SNES/S.../smrpg_enemy_beeattack.wav"));
+    //connect(buzz, SIGNAL(window2.ui.button), this, SLOT(playSound()));
+
 }
 
 
 void AnimationBoard::playSoundOnScreen(){
-   // buzz->play();
+    // buzz->play();
     if(sound == true){
         //buzz->setVolume(50);
         buzz->play();
@@ -24,8 +25,40 @@ void AnimationBoard::playSoundOnScreen(){
 }
 
 
+void AnimationBoard::stopSound(){
+    cout << "attempted stop sound";
+    buzz->stop();
+
+}
+void AnimationBoard::populateRT(){
+    DataDecoder d(&containerRT);
+
+    realTime = new MainWindowRT();
+    if(realTime->UDPmessage.size() != 0){
+        for(int i =0; i<realTime->UDPmessage.size(); i++){
+            d.decode(realTime->UDPmessage.at(i));
+
+        }
+    }
+
+
+
+
+
+//    QTimer *timer = new QTimer();
+//    connect(timer,SIGNAL(timeout()), this,SLOT(addBee()));
+//    //connect(timer,SIGNAL(timeout()), this,SLOT(playSoundOnScreen()));
+//    timer->start(rand() % 100 + 100);//every 100ms timeout changes
+    playSoundOnScreen();
+
+
+   // realTime->UDPmessage.empty();
+}
+
 void AnimationBoard::populate(){
     DataDecoder d(&container);
+
+
     BeeGeneration* BG = new BeeGeneration("0002", 60000);
     for (int i=0;i<100000 ;i++) {
         d.decode(BG->makeBee());
@@ -33,8 +66,21 @@ void AnimationBoard::populate(){
     QTimer *timer = new QTimer();
     connect(timer,SIGNAL(timeout()), this,SLOT(addBee()));
     //connect(timer,SIGNAL(timeout()), this,SLOT(playSoundOnScreen()));
-   timer->start(rand() % 100 + 100);//every 100ms timeout changes
-       playSoundOnScreen();
+    timer->start(rand() % 100 + 100);//every 100ms timeout changes
+    playSoundOnScreen();
+}
+
+
+void AnimationBoard::addBeeRT(){
+    Data bee=*containerRT.getUdpMessages().at(b);
+   // int ran = rand() % 8 + 1;
+    if(b<container.getUdpMessages().size()-1)
+        b++;
+    //int ran = 2;
+    AnimatedBee *b = new AnimatedBee(bee.gate,bee.type);
+    setPosition(b);
+
+
 }
 
 
@@ -52,57 +98,54 @@ void AnimationBoard::addBee(){
 
 
 void AnimationBoard::setPosition(AnimatedBee *b){
-     b->getBee()->setPos(-80,-95 );
+    b->getBee()->setPos(-80,-95 );
 
 
-     //if it is an exit
-     if (b->getType() == false){
-         if(b->getGate() == 1){
-             b->getBee()->setPos(0,0);
-         }
-         else if (b->getGate() == 2){
-             b->getBee()->setPos(0,-85);
-         }
-         else if (b->getGate() == 3){
-             b->getBee()->setPos(-4,-64);
-         }
-         else if (b->getGate() == 4){
-             b->getBee()->setPos(-35,60);
-         }
-         else if (b->getGate() == 5){
-             b->getBee()->setPos(-75,57);
-         }
-         else if (b->getGate() == 6){
-             b->getBee()->setPos(-72,11);
-         }
-         else if (b->getGate() == 7){
-             b->getBee()->setPos(-76,-33);
-         }
-         else if (b->getGate() == 8){
-             b->getBee()->setPos(-50,-35);
-         }
-         else if (b->getGate() == 9){
-             b->getBee()->setPos(-114,40);
-         }
-         else if (b->getGate() == 10){
-             b->getBee()->setPos(-80,-95);
-         }
+    //if it is an exit
+    if (b->getType() == false){
+        if(b->getGate() == 1){
+            b->getBee()->setPos(0,0);
+        }
+        else if (b->getGate() == 2){
+            b->getBee()->setPos(0,-85);
+        }
+        else if (b->getGate() == 3){
+            b->getBee()->setPos(-4,-64);
+        }
+        else if (b->getGate() == 4){
+            b->getBee()->setPos(-35,60);
+        }
+        else if (b->getGate() == 5){
+            b->getBee()->setPos(-75,57);
+        }
+        else if (b->getGate() == 6){
+            b->getBee()->setPos(-72,11);
+        }
+        else if (b->getGate() == 7){
+            b->getBee()->setPos(-76,-33);
+        }
+        else if (b->getGate() == 8){
+            b->getBee()->setPos(-50,-35);
+        }
+        else if (b->getGate() == 9){
+            b->getBee()->setPos(-114,40);
+        }
+        else if (b->getGate() == 10){
+            b->getBee()->setPos(-80,-95);
+        }
 
-     }
+    }
 
-     //if entry
-     else if(b->getType() == true){
-         if(b->getGate() < 7){
-             b->getBee()->setPos(250,rand()%500 - 250);
-         }
-         else {
-             b->getBee()->setPos(rand()%500 - 250, -250);
-         }
+    //if entry
+    else if(b->getType() == true){
+        if(b->getGate() < 7){
+            b->getBee()->setPos(250,rand()%500 - 250);
+        }
+        else {
+            b->getBee()->setPos(rand()%500 - 250, -250);
+        }
 
-     }
-
-
-
+    }
 
 
 
@@ -115,42 +158,44 @@ void AnimationBoard::setPosition(AnimatedBee *b){
 
 
 
-//    switch(b->getGate()){
-
-//    case 1: b->getBee()->setPos(rand()%500 -250,-250 );
-//        break;
-
-//    case 2: b->getBee()->setPos(-250  ,rand()%500 -250 );
-//        break;
-
-//    case 3: b->getBee()->setPos(rand()%500 -250  ,250 - beeSize);
-//        break;
-
-//    case 4: b->getBee()->setPos(250 - beeSize,rand()%500 -250);
-//        break;
-
-//    default: b->getBee()->setPos(-25,-25);
-//        break;
-//    }
 
 
-//    switch(b->getGate()){
+    //    switch(b->getGate()){
 
-//    case 1: b->getBee()->setPos(250 - beeSize,-250 );
-//        break;
+    //    case 1: b->getBee()->setPos(rand()%500 -250,-250 );
+    //        break;
 
-//    case 2: b->getBee()->setPos(-250  ,-250 );
-//        break;
+    //    case 2: b->getBee()->setPos(-250  ,rand()%500 -250 );
+    //        break;
 
-//    case 3: b->getBee()->setPos(-250  ,250 - beeSize);
-//        break;
+    //    case 3: b->getBee()->setPos(rand()%500 -250  ,250 - beeSize);
+    //        break;
 
-//    case 4: b->getBee()->setPos(250 - beeSize,250 - beeSize);
-//        break;
+    //    case 4: b->getBee()->setPos(250 - beeSize,rand()%500 -250);
+    //        break;
 
-//    default: b->getBee()->setPos(-25,-25);
-//        break;
-//    }
+    //    default: b->getBee()->setPos(-25,-25);
+    //        break;
+    //    }
+
+
+    //    switch(b->getGate()){
+
+    //    case 1: b->getBee()->setPos(250 - beeSize,-250 );
+    //        break;
+
+    //    case 2: b->getBee()->setPos(-250  ,-250 );
+    //        break;
+
+    //    case 3: b->getBee()->setPos(-250  ,250 - beeSize);
+    //        break;
+
+    //    case 4: b->getBee()->setPos(250 - beeSize,250 - beeSize);
+    //        break;
+
+    //    default: b->getBee()->setPos(-25,-25);
+    //        break;
+    //    }
 
     scene()->addItem(b->getBee());
 
