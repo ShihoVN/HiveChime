@@ -4,10 +4,10 @@
 AnimationBoard::AnimationBoard(bool _Sound)
 {
       sound = _Sound;
-//    buzz = new QMediaPlayer();
-//    buzz->setMedia(QUrl("qrc:/sounds/sound/beeSound.wav"));
-      buzz = new QMediaPlayer;
-      buzz->setMedia(QUrl::fromLocalFile("www.superluigibros.com/downloads/sounds/SNES/S.../smrpg_enemy_beeattack.wav"));
+    buzz = new QMediaPlayer();
+    buzz->setMedia(QUrl("qrc:/sounds/sound/beesounds.mp3"));
+      //buzz = new QMediaPlayer;
+      //buzz->setMedia(QUrl::fromLocalFile("www.superluigibros.com/downloads/sounds/SNES/S.../smrpg_enemy_beeattack.wav"));
       //connect(buzz, SIGNAL(window2.ui.button), this, SLOT(playSound()));
 }
 
@@ -15,7 +15,7 @@ AnimationBoard::AnimationBoard(bool _Sound)
 void AnimationBoard::playSoundOnScreen(){
    // buzz->play();
     if(sound == true){
-        buzz->setVolume(50);
+        //buzz->setVolume(50);
         buzz->play();
 
     }
