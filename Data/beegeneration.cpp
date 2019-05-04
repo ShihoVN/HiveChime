@@ -133,7 +133,6 @@ string BeeGeneration::generateUDP(){
     }
 
     m = nextBees.top().m;
-    m += 50-((int)m % 50);
 
     string udp;
     udp = "HC" + id + "-D";
@@ -295,6 +294,7 @@ void BeeGeneration::generate(){
             bee.now[i] = time[i];
         }
         bee.m = nearbyint(milli);
+        bee.m += 50-((int)bee.m % 50);
 
     cout << "bee: "<< bee.board <<" "<<bee.sensor << endl;
     cout << "pair bee: "<<pairBee.board<<" "<< pairBee.sensor << endl;
@@ -302,6 +302,7 @@ void BeeGeneration::generate(){
     std::poisson_distribution<int> poissDistbn(450); //Randomly generates the pair UDP message (not in proper format)
     vector<int> elpst =  calculate(poissDistbn(generator));
     pairBee.m = nearbyint(m);
+    pairBee.m += 50-((int)pairBee.m % 50);
     for(int i = 0; i < 6; i++){
         pairBee.now[i] = elpst[i];
     }
