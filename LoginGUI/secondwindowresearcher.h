@@ -16,6 +16,9 @@ class secondWindowResearcher : public QDialog
 public:
     explicit secondWindowResearcher(QWidget *parent = nullptr,QString *hivename=nullptr);
     ~secondWindowResearcher();
+    bool viewModel;
+    bool realTime;
+    bool playSound;
 
 private slots:
     void on_pushButton_clicked();

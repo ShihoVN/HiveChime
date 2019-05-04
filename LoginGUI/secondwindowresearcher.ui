@@ -512,7 +512,7 @@
   <widget class="QCheckBox" name="checkBox_2">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>90</x>
      <y>100</y>
      <width>201</width>
      <height>21</height>
@@ -524,7 +524,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Listen to Audio Sumulation</string>
+    <string>Include Audio</string>
    </property>
   </widget>
   <widget class="QCheckBox" name="checkBox_3">

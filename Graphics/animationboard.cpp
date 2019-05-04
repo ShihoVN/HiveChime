@@ -4,10 +4,10 @@
 AnimationBoard::AnimationBoard(bool _Sound)
 {
       sound = _Sound;
-//    buzz = new QMediaPlayer();
-//    buzz->setMedia(QUrl("qrc:/sounds/sound/beeSound.wav"));
-      buzz = new QMediaPlayer;
-      buzz->setMedia(QUrl::fromLocalFile("www.superluigibros.com/downloads/sounds/SNES/S.../smrpg_enemy_beeattack.wav"));
+    buzz = new QMediaPlayer();
+    buzz->setMedia(QUrl("qrc:/sounds/sound/beesounds.mp3"));
+      //buzz = new QMediaPlayer;
+      //buzz->setMedia(QUrl::fromLocalFile("www.superluigibros.com/downloads/sounds/SNES/S.../smrpg_enemy_beeattack.wav"));
       //connect(buzz, SIGNAL(window2.ui.button), this, SLOT(playSound()));
 }
 
@@ -15,7 +15,7 @@ AnimationBoard::AnimationBoard(bool _Sound)
 void AnimationBoard::playSoundOnScreen(){
    // buzz->play();
     if(sound == true){
-        buzz->setVolume(50);
+        //buzz->setVolume(50);
         buzz->play();
 
     }
@@ -26,14 +26,15 @@ void AnimationBoard::playSoundOnScreen(){
 
 void AnimationBoard::populate(){
     DataDecoder d(&container);
-    BeeGeneration* BG = new BeeGeneration("0002", 16000);
-    for (int i=0;i<10000 ;i++) {
+    BeeGeneration* BG = new BeeGeneration("0002", 60000);
+    for (int i=0;i<100000 ;i++) {
         d.decode(BG->makeBee());
     }
     QTimer *timer = new QTimer();
     connect(timer,SIGNAL(timeout()), this,SLOT(addBee()));
     //connect(timer,SIGNAL(timeout()), this,SLOT(playSoundOnScreen()));
-   timer->start(rand() % 100 + 1000);//every 100ms timeout changes
+   timer->start(rand() % 100 + 100);//every 100ms timeout changes
+       playSoundOnScreen();
 }
 
 
@@ -45,7 +46,7 @@ void AnimationBoard::addBee(){
     //int ran = 2;
     AnimatedBee *b = new AnimatedBee(bee.gate,bee.type);
     setPosition(b);
-    playSoundOnScreen();
+
 
 }
 

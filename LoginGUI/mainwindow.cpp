@@ -25,6 +25,9 @@ MainWindow::MainWindow(QWidget *parent) :
             std::cout <<P_rows[i+1]<< P_rows[i+2]<<P_rows[i+3] << std::endl;
         }
     }
+    //call new diaglougue
+    introWindow = new Intro();
+    introWindow->exec();
 }
 
 MainWindow::~MainWindow()
