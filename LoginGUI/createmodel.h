@@ -22,19 +22,21 @@ public:
 private slots:
     void on_pushButton_clicked();
 
-
-
-    void on_lineEdit_textChanged(const QString &arg1);
-
-    void on_lineEdit_2_textChanged(const QString &arg1);
-
     void on_lineEdit_3_textChanged(const QString &arg1);
+
+    void on_dateEdit_dateChanged(const QDate &date);
+
+    void on_dateEdit_userDateChanged(const QDate &date);
+
+    void on_timeEdit_userTimeChanged(const QTime &time);
+
+    void on_timeEdit_timeChanged(const QTime &time);
 
 private:
     Ui::CreateModel *ui;
     GeneratedModel *genModel;
 
-    string time;
+    string times;
     string duration;
     string date;
 
