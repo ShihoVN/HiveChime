@@ -1,28 +1,24 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "mainwindowanimate.h"
+#include "ui_mainwindowanimate.h"
 #include "animatedbee.h"
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindowAnimate::MainWindowAnimate(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindowAnimate)
 {
     ui->setupUi(this);
-
-
-
     //Ensures that the window stays fixed
     ui->display->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->display->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
 
     //Creates the display environment and displays it in the graphics view
-    createEnvironment();
+    //createEnvironment();
 
 }
 
 
-
-void MainWindow::createEnvironment(){
+void MainWindowAnimate::createEnvironment(){
     //Create a scene
     animationScene = new QGraphicsScene();
     animationScene->setSceneRect(-250,-250,500,500);
@@ -30,7 +26,8 @@ void MainWindow::createEnvironment(){
 
 
     //Create board to be added to the scene
-    AnimationBoard* board = new AnimationBoard(true);
+    cout<< "sound " << sound << endl;
+    AnimationBoard* board = new AnimationBoard(sound);
     board->setRect(-250,-250,500,500);
 
     //add board to the scene
@@ -80,29 +77,22 @@ void MainWindow::createEnvironment(){
 
 }
 
-
-
-
-void MainWindow::populate(){
-
-    for (int i = 1; i <= 8; i++){
-        //AnimatedBee *b = new AnimatedBee(i);
-        // setPosition(b);
-        //    bees.push_back(b);
-    }
-
-}
-
-
-
-
-
-
-
-MainWindow::~MainWindow()
+MainWindowAnimate::~MainWindowAnimate()
 {
     delete ui;
 }
+
+
+void MainWindowAnimate::populate(){
+
+    //for (int i = 1; i <= 8; i++){
+        //AnimatedBee *b = new AnimatedBee(i);
+        // setPosition(b);
+        //    bees.push_back(b);
+   // }
+
+}
+
 
 
 //void MainWindow::setPosition(AnimatedBee *b){
@@ -135,15 +125,18 @@ MainWindow::~MainWindow()
 
 
 
-
+void MainWindowAnimate::setSound(bool s){
+    sound = s;
+}
 
 //leave methods
-QRectF MainWindow::boundingRect(){
+QRectF MainWindowAnimate::boundingRect(){
     QRectF demo;
 
     return demo;
 }
 
-void MainWindow::paint(QPainter*,const QStyleOptionGraphicsItem*, QWidget){
+void MainWindowAnimate::paint(QPainter*,const QStyleOptionGraphicsItem*, QWidget){
 
 }
+

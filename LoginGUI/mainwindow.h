@@ -6,6 +6,8 @@
 #include "secondwindowresearcher.h"
 #include "../Database/dbhivetable.h"
 #include "../Database/tool.h"
+#include "../Graphics/mainwindowanimate.h"
+
 namespace Ui {
 class MainWindow;
 }
