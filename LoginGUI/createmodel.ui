@@ -1193,10 +1193,40 @@
     <rect>
      <x>210</x>
      <y>220</y>
-     <width>121</width>
+     <width>21</width>
      <height>21</height>
     </rect>
    </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>211</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Hours</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Minutes</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Seconds</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Days</string>
+    </property>
+   </item>
   </widget>
  </widget>
  <resources/>
