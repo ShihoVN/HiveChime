@@ -27,7 +27,7 @@ void MainWindowAnimate::createEnvironment(){
 
     //Create board to be added to the scene
     cout<< "sound " << sound << endl;
-    AnimationBoard* board = new AnimationBoard(sound);
+    board = new AnimationBoard(sound);
     board->setRect(-250,-250,500,500);
 
     //add board to the scene
@@ -60,7 +60,20 @@ void MainWindowAnimate::createEnvironment(){
 
 
     //populate the board with bees
-    board->populate();
+   // board->populate();
+
+    QTimer *timer = new QTimer();
+    connect(timer,SIGNAL(timeout()), this,SLOT(populateRT()));
+    //connect(timer,SIGNAL(timeout()), this,SLOT(playSoundOnScreen()));
+    timer->start(5000);//every 100ms timeout changes
+
+    QTimer *timer1 = new QTimer();
+    connect(timer,SIGNAL(timeout()), this,SLOT(addBeeRT()));
+    //connect(timer,SIGNAL(timeout()), this,SLOT(playSoundOnScreen()));
+    timer1->start(rand() % 100 + 100);//every 100ms timeout changes
+    board->playSoundOnScreen();
+
+
 
 
 
@@ -77,9 +90,26 @@ void MainWindowAnimate::createEnvironment(){
 
 }
 
+void MainWindowAnimate::addBeeRT(){
+
+    board->addBeeRT();
+
+
+}
+
+void MainWindowAnimate::populateRT(){
+
+    board->populateRT();
+
+
+}
+
+
 MainWindowAnimate::~MainWindowAnimate()
 {
-    delete ui;
+
+   board->stopSound();
+   delete ui;
 }
 
 

@@ -10,6 +10,7 @@
 #include <random>
 #include <QObject>
 #include <QMediaPlayer>
+#include "../RealTimeStream/mainwindowrt.h"
 
 using namespace std;
 
@@ -23,6 +24,9 @@ public:
     void populate();
     void setPosition(AnimatedBee *b);
     void playSoundOnScreen();
+    void stopSound();
+
+
 
 
 
@@ -38,13 +42,18 @@ private:
 
 
     DataContainer container;
+    DataContainer containerRT;
+
     vector<AnimatedBee*> bees;
     bool sound;
+    MainWindowRT *realTime;
 
 
 
 public slots:
     void addBee();
+    void populateRT();
+        void addBeeRT();
 
 
 };

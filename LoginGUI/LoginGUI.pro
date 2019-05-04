@@ -39,7 +39,8 @@ SOURCES += \
     ../Graphics/animatedbee.cpp\
     ../Graphics/animationboard.cpp \
     ../Graphics/framework.cpp \
-    intro.cpp
+    intro.cpp  \
+    ../RealTimeStream/mainwindowrt.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -54,7 +55,8 @@ HEADERS += \
     ../Graphics/animatedbee.h\
     ../Graphics/animationboard.h \
     ../Graphics/framework.h \
-    intro.h
+    intro.h \
+    ../RealTimeStream/mainwindowrt.h
 
 
 FORMS += \
@@ -68,7 +70,8 @@ FORMS += \
     linegraph.ui \
     bargraph.ui \
     ../Graphics/mainWindowAnimate.ui \
-    intro.ui
+    intro.ui \
+    ../RealTimeStream/mainwindowrt.ui
 
 
 

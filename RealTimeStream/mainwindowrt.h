@@ -1,5 +1,6 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef MAINWINDOWRT_H
+#define MAINWINDOWRT_H
+
 
 #include <QMainWindow>
 #include <QNetworkAccessManager>
@@ -11,29 +12,25 @@
 #include "../Data/datadecoder.h"
 #include <QMessageBox>
 using namespace  std;
-//#include <QPixmap> ///to work with images
 
 namespace Ui {
-class MainWindow;
+class MainWindowRT;
 }
 
-class MainWindow : public QMainWindow
+class MainWindowRT : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit MainWindowRT(QWidget *parent = nullptr);
+    ~MainWindowRT();
     string readBetween(string str1, string str2); //gets string between strings
     //void printVector();
     vector<string> splitter(string s);
         vector <string> UDPmessage;
 
-
-
-
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindowRT *ui;
     DataContainer container;
     DataDecoder *decoder;
     QNetworkAccessManager *manager;
@@ -43,15 +40,11 @@ private:
     string content; // contains all website information
     QString url = "http://tomcollinsresearch.net/research/rpa/fakeudp/fakeudpmgate.html";
 
-
-
-
-   unsigned int i = 0;
+       unsigned int i = 0;
 private slots:
     void downloadFinished(QNetworkReply *reply);
     void on_pushButton_clicked();
     void checkAlerts();
-
 };
 
-#endif // MAINWINDOW_H
+#endif // MAINWINDOWRT_H

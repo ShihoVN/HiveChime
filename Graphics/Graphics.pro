@@ -27,22 +27,24 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp \
+      #  mainwindow.cpp \
     framework.cpp \
     animatedbee.cpp \
     animationboard.cpp \
-    mainwindowanimate.cpp
+    mainwindowanimate.cpp \
+     ../RealTimeStream/mainwindowrt.cpp
 
 HEADERS += \
-        mainwindow.h \
+    #    mainwindow.h \
     framework.h \
     animatedbee.h \
     animationboard.h \
-    mainwindowanimate.h
+    mainwindowanimate.h \
+    ../RealTimeStream/mainwindowrt.h
 
 FORMS += \
-        mainwindow.ui \
-    mainwindowanimate.ui
+     #   mainwindow.ui \
+    ../RealTimeStream/mainwindowrt.ui
 
 HEADERS += ../Data/beegeneration.h
 SOURCES += ../Data/beegeneration.cpp

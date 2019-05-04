@@ -39,6 +39,12 @@ private:
     QGraphicsScene * animationScene;
     QGraphicsPixmapItem *hive;
     bool sound = false;
+    AnimationBoard* board;
+
+
+public slots:
+    void addBeeRT();
+    void populateRT();
 };
 
 #endif // MAINWINDOWANIMATE_H

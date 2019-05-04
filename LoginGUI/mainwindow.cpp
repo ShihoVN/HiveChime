@@ -48,10 +48,11 @@ void MainWindow::on_pushButton_2_clicked()
     std::cout << secWindowGen->realTime <<endl;
     if(secWindowGen->realTime ==true){
         MainWindowAnimate *w = new MainWindowAnimate(this);
-
-        w->setSound(secWindowGen->playSound);
+            cout << "SEC SOUND "<< secWindowGen->getPlaySound();
+        w->setSound(secWindowGen->getPlaySound());
         w->createEnvironment();
         w->show();
+
     }
 
    }

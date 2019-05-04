@@ -27,13 +27,16 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+       # mainwindow.cpp \
+    mainwindowrt.cpp
 
 HEADERS += \
-        mainwindow.h
+      #  mainwindow.h \
+    mainwindowrt.h
 
 FORMS += \
-        mainwindow.ui
+      #  mainwindow.ui \
+    mainwindowrt.ui
 
 HEADERS += ../Data/datadecoder.h
 SOURCES += ../Data/datadecoder.cpp
