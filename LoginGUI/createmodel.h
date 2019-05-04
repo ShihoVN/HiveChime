@@ -32,6 +32,8 @@ private slots:
 
     void on_timeEdit_timeChanged(const QTime &time);
 
+    void on_comboBox_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::CreateModel *ui;
     GeneratedModel *genModel;
