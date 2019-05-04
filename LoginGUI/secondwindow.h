@@ -5,6 +5,7 @@
 #include "userselectmodel.h"
 //#include <QMediaPlayer>
 #include "../Graphics/mainwindowanimate.h"
+#include <QMediaPlayer>
 
 namespace Ui {
 class secondWindow;

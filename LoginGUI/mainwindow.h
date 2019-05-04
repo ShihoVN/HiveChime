@@ -7,6 +7,8 @@
 #include "../Database/dbhivetable.h"
 #include "../Database/tool.h"
 #include "../Graphics/mainwindowanimate.h"
+#include "intro.h"
+#include <QMediaPlayer>
 
 namespace Ui {
 class MainWindow;
@@ -33,6 +35,7 @@ private:
     Tool * dbtable=new Tool("database");
     DBHiveTable *hives= new DBHiveTable(dbtable,"HiveTable");
     int genChkBox;
+    Intro *introWindow;
 };
 
 #endif // MAINWINDOW_H
