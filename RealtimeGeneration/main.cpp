@@ -10,7 +10,7 @@ int main()
 {
     int time[6];
     int Ti = 7;
-    BeeGeneration *BG = new BeeGeneration("001", 20000, Ti);
+    BeeGeneration *BG = new BeeGeneration("001", 2000, Ti);
 
     BG->generate();
     float m = BG->getNextM();
@@ -25,10 +25,8 @@ int main()
 
 
     for(int i = 0; i< 5; i++){
-        auto t = delta;
         delta = chrono::hours(BG->getNextTime(3)) + chrono::minutes(BG->getNextTime(4)) + chrono::seconds(BG->getNextTime(5)) + chrono::milliseconds((int)BG->getNextM());
         delta -= chrono::hours(time[3]) - chrono::minutes(time[4]) - chrono::seconds(time[5]) - chrono::milliseconds((int)m);
-        delta - t;
         cout << delta.count()<< endl;
 
 
