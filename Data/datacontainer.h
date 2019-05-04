@@ -23,6 +23,8 @@ class DataContainer
 public:
     DataContainer();
     DataContainer(string db_name);
+    DataContainer(Tool *tool,string db_name);
+
     ~DataContainer();
     void addData(Data* d);
     void loadData(Data* d);
