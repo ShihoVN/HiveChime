@@ -19,6 +19,8 @@ void AnimationBoard::playSound(){
         buzz->play();
 
     }
+
+    //if(ui.sound)
 }
 
 

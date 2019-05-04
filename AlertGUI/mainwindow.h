@@ -5,6 +5,8 @@
 #include "../Data/datacontainer.h"
 #include "../Data/datadecoder.h"
 #include <QMessageBox>
+#include <QObject>
+
 
 namespace Ui {
 class MainWindow;
