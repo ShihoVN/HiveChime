@@ -1268,7 +1268,7 @@
     </datetime>
    </property>
    <property name="displayFormat">
-    <string>h:mm </string>
+    <string>hh:mm </string>
    </property>
   </widget>
  </widget>

@@ -52,7 +52,6 @@ void CreateModel::on_dateEdit_userDateChanged(const QDate &dates)
 {
     date=to_string(dates.day())+to_string(dates.month())+to_string(dates.year());
     cout<<"date: "<<date<<endl;
-
 }
 
 void CreateModel::on_timeEdit_userTimeChanged(const QTime &time)
