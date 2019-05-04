@@ -11,10 +11,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     manager = new QNetworkAccessManager(this);
     connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(findTemp(QNetworkReply*)));
     timer = new QTimer(this);
+    getFromWeb();
 
     connect(timer, SIGNAL(timeout()), this, SLOT(getFromWeb()));
 
-    timer->start(1000); //start timer
+    timer->start(60000); //Check weather updates every minute
 
 
 }
