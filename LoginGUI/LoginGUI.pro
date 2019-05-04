@@ -57,6 +57,10 @@ FORMS += \
     bargraph.ui
 
 
+
+HEADERS += ../Data/beegeneration.h
+SOURCES += ../Data/beegeneration.cpp
+
 HEADERS += ../Database/dbtable.h
 SOURCES += ../Database/dbtable.cpp
 

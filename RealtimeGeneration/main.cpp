@@ -37,11 +37,5 @@ int main()
 
         std::this_thread::sleep_for(delta/5);
         cout << BG->makeBee() << endl;
-
-
     }
-
-
-
-
 }
