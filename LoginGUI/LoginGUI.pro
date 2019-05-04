@@ -6,6 +6,7 @@
 
 QT       += core gui
 QT       += charts
+QT       += multimedia
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = LoginGUI
@@ -33,7 +34,11 @@ SOURCES += \
     userselectmodel.cpp \
     generatedmodel.cpp \
     linegraph.cpp \
-    bargraph.cpp
+    bargraph.cpp \
+    ../Graphics/mainWindowAnimate.cpp \
+    ../Graphics/animatedbee.cpp\
+    ../Graphics/animationboard.cpp \
+    ../Graphics/framework.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -43,7 +48,12 @@ HEADERS += \
     userselectmodel.h \
     generatedmodel.h \
     linegraph.h \
-    bargraph.h
+    bargraph.h \
+    ../Graphics/mainWindowAnimate.h \
+    ../Graphics/animatedbee.h\
+    ../Graphics/animationboard.h \
+    ../Graphics/framework.h
+
 
 FORMS += \
         mainwindow.ui \
@@ -54,12 +64,19 @@ FORMS += \
     userselectmodel.ui \
     generatedmodel.ui \
     linegraph.ui \
-    bargraph.ui
+    bargraph.ui \
+    ../Graphics/mainWindowAnimate.ui
 
 
 
 HEADERS += ../Data/beegeneration.h
 SOURCES += ../Data/beegeneration.cpp
+
+HEADERS += ../Data/datadecoder.h
+SOURCES += ../Data/datadecoder.cpp
+
+HEADERS += ../Data/datacontainer.h
+SOURCES += ../Data/datacontainer.cpp
 
 HEADERS += ../Database/dbtable.h
 SOURCES += ../Database/dbtable.cpp
@@ -76,6 +93,9 @@ SOURCES += ../Database/dbmodeltable.cpp
 HEADERS += ../Database/dbbeelog.h
 SOURCES += ../Database/dbbeelog.cpp
 LIBS += -lsqlite3
+
+RESOURCES += \
+    ../Graphics/resources.qrc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -1,9 +1,9 @@
 #include "animationboard.h"
 #include <QGraphicsScene>
 
-AnimationBoard::AnimationBoard()
+AnimationBoard::AnimationBoard(bool _Sound)
 {
-
+      sound = _Sound;
 //    buzz = new QMediaPlayer();
 //    buzz->setMedia(QUrl("qrc:/sounds/sound/beeSound.wav"));
       buzz = new QMediaPlayer;
@@ -12,15 +12,15 @@ AnimationBoard::AnimationBoard()
 }
 
 
-void AnimationBoard::playSound(){
+void AnimationBoard::playSoundOnScreen(){
    // buzz->play();
-    if(window2->getPlaySound() == true){
+    if(sound == true){
         buzz->setVolume(50);
         buzz->play();
 
     }
 
-    //if(ui.sound)
+
 }
 
 
@@ -32,7 +32,7 @@ void AnimationBoard::populate(){
     }
     QTimer *timer = new QTimer();
     connect(timer,SIGNAL(timeout()), this,SLOT(addBee()));
-    connect(timer,SIGNAL(timeout()), this,SLOT(playSound()));
+    //connect(timer,SIGNAL(timeout()), this,SLOT(playSoundOnScreen()));
    timer->start(rand() % 100 + 1000);//every 100ms timeout changes
 }
 
@@ -45,7 +45,7 @@ void AnimationBoard::addBee(){
     //int ran = 2;
     AnimatedBee *b = new AnimatedBee(bee.gate,bee.type);
     setPosition(b);
-    b->playSound();
+    playSoundOnScreen();
 
 }
 

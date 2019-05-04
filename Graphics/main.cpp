@@ -1,6 +1,7 @@
-#include "mainwindow.h"
+//#include "mainwindow.h"
 #include <QApplication>
 #include "animatedbee.h"
+#include "mainwindowanimate.h"
 #include <vector>
 
 using namespace std;
@@ -8,7 +9,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;    
+    MainWindowAnimate w;
     w.show();
 
 

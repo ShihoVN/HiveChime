@@ -31,18 +31,18 @@ SOURCES += \
     framework.cpp \
     animatedbee.cpp \
     animationboard.cpp \
-    ../LoginGUI/secondWindow.cpp
+    mainwindowanimate.cpp
 
 HEADERS += \
         mainwindow.h \
     framework.h \
     animatedbee.h \
     animationboard.h \
-    ../LoginGUI/secondWindow.h
+    mainwindowanimate.h
 
 FORMS += \
         mainwindow.ui \
-        ../LoginGUI/secondWindow.ui
+    mainwindowanimate.ui
 
 HEADERS += ../Data/beegeneration.h
 SOURCES += ../Data/beegeneration.cpp

@@ -26,11 +26,19 @@ void secondWindow::on_pushButton_clicked()
         if(ui->checkBox_3->isChecked()){
            // userSelect = new userSelectModel(this);
             //userSelect->show();
+            viewModel = true;
+              this->hide();
         }else if(ui->checkBox->isChecked() && ui->checkBox_2->isChecked()){
+           // animateW->show();
             playSound = true;
+            realTime = true;
+            this->hide();
+
 
         }else if(ui->checkBox->isChecked() && !ui->checkBox_2->isChecked()){
             playSound = false;
+            realTime = true;
+              this->hide();
         }
     }
 

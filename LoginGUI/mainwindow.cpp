@@ -41,7 +41,16 @@ void MainWindow::on_pushButton_2_clicked()
    if( ui->checkBox->isChecked()){
 
     secWindowGen = new secondWindow(this);
-    secWindowGen->show();
+    secWindowGen->exec();
+    std::cout << secWindowGen->realTime <<endl;
+    if(secWindowGen->realTime ==true){
+        MainWindowAnimate *w = new MainWindowAnimate(this);
+
+        w->setSound(secWindowGen->playSound);
+        w->createEnvironment();
+        w->show();
+    }
+
    }
    else if(ui->checkBox_2->isChecked()){
        reseacherWindow = new secondWindowResearcher(this,&hiveid);
