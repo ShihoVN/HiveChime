@@ -26,10 +26,15 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        bees.cpp
+        bees.cpp \
+        chart.cpp \
+        chartview.cpp
+
 
 HEADERS += \
-        bees.h
+        bees.h \
+        chart.h \
+        chartview.h
 
 FORMS += \
         bees.ui

@@ -9,6 +9,9 @@
 #include "../Data/beegeneration.h"
 #include "../Data/datacontainer.h"
 #include "../Data/datadecoder.h"
+#include "chart.h"
+#include "chartview.h"
+
 using namespace  std;
 using namespace QtCharts;
 
@@ -26,14 +29,33 @@ public:
     explicit Bees(QWidget *parent = nullptr,DataContainer * tool=nullptr);
     map<int,std::pair<int,int>> Timetable(string interval);
     map<int,std::pair<int,int>> Timetable_enter(string interval);
+    map<int,std::pair<int,int>> Timetable_exit(string interval);
 
     ~Bees();
+
+
+private slots:
+    void on_upButton_clicked();
+
+    void on_leftButton_clicked();
+
+    void on_rightButton_clicked();
+
+    void on_downButton_clicked();
+
+    void on_zoomButton_clicked();
+
+    void on_outButton_clicked();
 
 private:
     Ui::Bees *ui;
     QLineSeries *series = new QLineSeries();
+    QLineSeries *seriesEnter = new QLineSeries();
+    QLineSeries *seriesExit = new QLineSeries();
     DataContainer *beelog;
     int genUsr;
+     QChartView *chartView;
+    Chart *chart;
 };
 
 #endif // BEES_H

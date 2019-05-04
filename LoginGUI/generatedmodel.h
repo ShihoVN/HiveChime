@@ -17,7 +17,7 @@ class GeneratedModel : public QDialog
     Q_OBJECT
 
 public:
-    explicit GeneratedModel(QWidget *parent = nullptr,string* hiveid=nullptr,string* size=nullptr,string *date=nullptr,string *time=nullptr,string *duration=nullptr,string* restaint=nullptr);
+    explicit GeneratedModel(QWidget *parent = nullptr,string* modelid=nullptr,string* size=nullptr,string *date=nullptr,string *time=nullptr,string *duration=nullptr);
     map<int,std::pair<int,int>> Timetable(string interval);
     map<int,std::pair<int,int>> Timetable_enter(string interval);
     ~GeneratedModel();
