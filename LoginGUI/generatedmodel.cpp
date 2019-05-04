@@ -6,18 +6,19 @@ GeneratedModel::GeneratedModel(QWidget *parent , string *hiveid, string *size, s
     ui(new Ui::GeneratedModel)
 {
     ui->setupUi(this);
-    int times=std::stoi(time->substr(0,2));
-    BeeGeneration *BG = new BeeGeneration(*hiveid,15000,times);
-    if(*size=="large"){
-        BG = new BeeGeneration(*hiveid,40000,times);
-        BG->setDate(std::stoi(date->substr(0,2)),std::stoi(date->substr(0,2)),std::stoi(date->substr(0,2)));
-    }
-    else if(*size=="medium"){
-        BG = new BeeGeneration(*hiveid,20000,times);
-    }
-    else{
-        BG = new BeeGeneration(*hiveid,15000,times);
-    }
+
+//    int times=std::stoi(time->substr(0,2));
+//    BeeGeneration *BG = new BeeGeneration(*hiveid,15000,times);
+//    if(*size=="large"){
+//        BG = new BeeGeneration(*hiveid,40000,times);
+//        BG->setDate(std::stoi(date->substr(0,2)),std::stoi(date->substr(0,2)),std::stoi(date->substr(0,2)));
+//    }
+//    else if(*size=="medium"){
+//        BG = new BeeGeneration(*hiveid,20000,times);
+//    }
+//    else{
+//        BG = new BeeGeneration(*hiveid,15000,times);
+//    }
 }
 
 GeneratedModel::~GeneratedModel()
