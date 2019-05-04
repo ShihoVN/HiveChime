@@ -32,7 +32,6 @@ private slots:
 
     void on_timeEdit_timeChanged(const QTime &time);
 
-
 private:
     Ui::CreateModel *ui;
     GeneratedModel *genModel;

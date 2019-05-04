@@ -28,6 +28,8 @@ void CreateModel::on_pushButton_clicked()
          QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Fill in all Boxes before Continuing"));
     }
     else{
+        duration=ui->comboBox->itemText(0).toStdString();
+        cout<<"duration: "<<duration<<endl;
         genModel = new GeneratedModel(this,&date,&times,&duration);
         genModel->show();
 
@@ -45,7 +47,6 @@ void CreateModel::on_dateEdit_dateChanged(const QDate &dates)
 {
     date=to_string(dates.day())+to_string(dates.month())+to_string(dates.year());
     cout<<"date: "<<date<<endl;
-
 }
 
 void CreateModel::on_dateEdit_userDateChanged(const QDate &dates)
