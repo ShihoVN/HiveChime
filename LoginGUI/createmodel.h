@@ -20,6 +20,8 @@ public:
     ~CreateModel();
     string times;
     string duration;
+    string modeltitle;
+
     string date;
     string size;
     bool generate=false;
@@ -37,9 +39,15 @@ private slots:
 
     void on_timeEdit_timeChanged(const QTime &time);
 
+    void on_lineEdit_textChanged(const QString &arg1);
+
+    vector<string> checkmodel();
+
 private:
     Ui::CreateModel *ui;
     GeneratedModel *genModel;
+    string hiveid;
+    Tool* dbtool;
     void hiveSize();
 
 };

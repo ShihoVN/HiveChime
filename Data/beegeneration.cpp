@@ -62,7 +62,6 @@ void BeeGeneration::setID(string _id, int size){
  * @param size is the number of bees in a hive
  * @param time is the time in hours
  */
-
 void BeeGeneration::setID(string _id, int size, int time){
 
     id = _id;
@@ -77,6 +76,9 @@ void BeeGeneration::setID(string _id, int size, int time){
  */
 BeeGeneration::~BeeGeneration()
 {
+    while(!nextBees.empty()){
+        nextBees.pop();
+    }
 
 }
 
@@ -126,7 +128,6 @@ string BeeGeneration::makeBee()
  * @brief BeeGeneration::pairGenerate generates and formats a UDP message from the priority queue
  * @return string of UDP message
  */
-
 string BeeGeneration::generateUDP(){
     if(nextBees.empty()){
         cout << "this is why" << endl;
@@ -207,6 +208,13 @@ string BeeGeneration::generateUDP(){
     return udp;
 }
 
+/**
+ * @brief BeeGeneration::anotherActivity is called when there are multiple bee activity occuring in 50ms intervals
+ * @param _udp that is already created for one bee activity
+ * @param udpTime is the udp's time stored in an array
+ * @param _m is the udp's ms time
+ * @return updated udp message with one or more activity occuring
+ */
 string BeeGeneration::anotherActivity(string _udp, int udpTime[], float _m){
     cout << "another activity?" << endl;
     string udp = "";
@@ -339,6 +347,10 @@ int BeeGeneration::findPair(int s){
     return 0;
 }
 
+/**
+ * @brief BeeGeneration::update the last time[] where udp were generated
+ * @param ms to be added and updateed appropriately to time[]
+ */
 void BeeGeneration::update(float ms){
 
         milli += ms;
@@ -534,7 +546,7 @@ void BeeGeneration::setActivity(int size){
 }
 
 /**
- * @brief BeeGeneration::btod changes the string in bianry to an integer. Used to generate the UDP represention of sesnors.
+ * @brief BeeGeneration::btod changes the string in bianry to an integer. Used to generate the UDP represention of sensors.
  * @param b which is the binary representation in a string
  * @return int which is the integer representation of the bianry
  */
@@ -557,6 +569,12 @@ int BeeGeneration::btod(string b){
         return dec_value;
 }
 
+/**
+ * @brief BeeGeneration::setDate initializes the date of udp generation. Called as needed.
+ * @param year specifies initial year to begin generating
+ * @param month specifies initial month to begin generating
+ * @param date specifies initial date to begin generating
+ */
 void BeeGeneration::setDate(int year, int month, int date){
     year = year%100;
     time[0] = year;
@@ -565,54 +583,65 @@ void BeeGeneration::setDate(int year, int month, int date){
     return;
 }
 
-vector<int> BeeGeneration::nextUDP(){
-    next.clear();
-    for(int i = 0; i<6;i++){
-        next.push_back(nextBees.top().now[i]);
-    }
-    next.push_back(nextBees.top().m);
 
-    m = nextBees.top().m;
-    m += 50-((int)nextBees.top().m % 50);
+//vector<int> BeeGeneration::nextUDP(){
+//    next.clear();
+//    for(int i = 0; i<6;i++){
+//        next.push_back(nextBees.top().now[i]);
+//    }
+//    next.push_back(nextBees.top().m);
 
-    string udp;
-    udp = "HC" + id + "-D";
-    for(int i = 0; i < 6; i++){ //Format of UDP message
-        if(i==5 && m == 1000){
-            if(nextBees.top().now[i] < 9){
-                udp += "0";
-            }
-            udp += to_string(nextBees.top().now[i]+1);
-            m = 0;
-            break;
-        }
-        if(nextBees.top().now[i] < 10){
-            udp += "0";
-        }
-        udp += to_string(nextBees.top().now[i]);
+//    m = nextBees.top().m;
+//    m += 50-((int)nextBees.top().m % 50);
 
-        if(i == 2){
-            udp += "T";
+//    string udp;
+//    udp = "HC" + id + "-D";
+//    for(int i = 0; i < 6; i++){ //Format of UDP message
+//        if(i==5 && m == 1000){
+//            if(nextBees.top().now[i] < 9){
+//                udp += "0";
+//            }
+//            udp += to_string(nextBees.top().now[i]+1);
+//            m = 0;
+//            break;
+//        }
+//        if(nextBees.top().now[i] < 10){
+//            udp += "0";
+//        }
+//        udp += to_string(nextBees.top().now[i]);
 
-        }
-        if(i != 5){
-            udp += ".";
-        }
-    }
+//        if(i == 2){
+//            udp += "T";
 
-    if(m<100){
-        udp += "0";
-    }
-    if(m <10){
-        udp += "0";
-    }
+//        }
+//        if(i != 5){
+//            udp += ".";
+//        }
+//    }
 
-}
+//    if(m<100){
+//        udp += "0";
+//    }
+//    if(m <10){
+//        udp += "0";
+//    }
 
+//}
+
+
+/**
+ * @brief BeeGeneration::getNextTime
+ * @param i is the index of the time unit of the next bee activity
+ * @return next bee activity's specific time unit
+ */
 int BeeGeneration::getNextTime(int i){
     return nextBees.top().now[i];
 }
 
+/**
+ * @brief BeeGeneration::getNextM
+ * @return return the next bee activity's ms time unit
+ */
 float BeeGeneration::getNextM(){
     return nextBees.top().m;
 }
