@@ -83,8 +83,12 @@ void MainWindow::on_pushButton_2_clicked()
             }
             else if(reseacherWindow->createModel == true){
                 createModel = new CreateModel(this, &hiveid, dbtable);
-
+                createModel->exec();
+                generateModel = new GeneratedModel(this, &hiveid, &createModel->size, &createModel->date,
+                                                   &createModel->times, &createModel->duration);
+                generateModel->show();
             }
+
 
 
         }

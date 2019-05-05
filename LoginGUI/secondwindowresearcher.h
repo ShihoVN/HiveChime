@@ -21,6 +21,7 @@ public:
     bool realTime;
     bool playSound;
     bool rawData;
+    bool createModel;
     bool getPlaySound();
 
 private slots:

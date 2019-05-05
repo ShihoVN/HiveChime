@@ -7,7 +7,7 @@ CreateModel::CreateModel(QWidget *parent,QString *hivename,Tool *tool) :
     ui(new Ui::CreateModel)
 {
     ui->setupUi(this);
-    dbtool=tool;
+    //dbtool=tool;
     ui->label_9->setText(*hivename);
     date=to_string(ui->dateEdit->date().year()).substr(2,4);
     if(ui->dateEdit->date().month()<10)
@@ -73,8 +73,9 @@ void CreateModel::on_pushButton_clicked()
         cout<<"date: "<<date<<endl;
         cout<<"time: "<<times<<endl;
         hiveSize();
-        genModel = new GeneratedModel(this,&hivemodel,&size,&date,&times,&duration,dbtool);
-        genModel->show();
+        this->hide();
+       // genModel = new GeneratedModel(this,&hivemodel,&size,&date,&times,&duration,dbtool);
+       // genModel->show();
     }
 }
 

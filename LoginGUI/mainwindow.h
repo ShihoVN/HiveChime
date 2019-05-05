@@ -8,6 +8,7 @@
 #include "../Database/tool.h"
 #include "../Graphics/mainwindowanimate.h"
 #include "../RealTimeStream/mainwindow.h"
+#include "generatedmodel.h"
 #include "createmodel.h"
 #include "intro.h"
 #include <QMediaPlayer>
@@ -40,6 +41,7 @@ private:
     Intro *introWindow;
     MainWindowRT *realTimeWindow;
     CreateModel *createModel;
+    GeneratedModel *generateModel;
 
 };
 
