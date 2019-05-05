@@ -110,7 +110,7 @@ bool DBBeeLog::add_row_m(int id, int board, std::string gate,std::string date, s
 
     sql_add_row += " );";
 
-    //std::cout << sql_add_row << std::endl;
+    std::cout << sql_add_row << std::endl;
 
     retCode = sqlite3_exec(curr_db->db_ref(),
                            sql_add_row.c_str(),

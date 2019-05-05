@@ -1,52 +1,59 @@
 #include "generatedmodel.h"
 #include "ui_generatedmodel.h"
 
-GeneratedModel::GeneratedModel(QWidget *parent , QString *hiveid, string *size, string *date, string *time, string *duration,Tool*dbtool) :
+
+GeneratedModel::GeneratedModel(QWidget *parent , QString *hiveid, string* modelid,string *size, string *date, string *time, string *duration,Tool*tool) :
     QDialog(parent),
     ui(new Ui::GeneratedModel)
 {
     ui->setupUi(this);
-    cout<<"hiveid: "<<hiveid->toStdString()<<endl;
-    beelog=new DataContainer(dbtool, hiveid->toStdString());
+    dbtool=tool;
+    hiveids=hiveid->toStdString();
+    modelids=*modelid;
+    beelog=new DataContainer(dbtool, *modelid);
     int times=std::stoi(time->substr(0,2));
-    cout<<"times: "<<times<<endl;
-//    cout <<"date :"<<std::stoi(date->substr(0,2))<<endl;
-//    cout <<"date3 :"<<std::stoi(date->substr(2,2))<<endl;
-//    cout <<"date2 :"<<std::stoi(date->substr(4,5))<<endl;
-    BeeGeneration *BG = new BeeGeneration(hiveid->toStdString(),15000,times);
+    BeeGeneration *BG;
     if(*size=="large"){
-        BG = new BeeGeneration(hiveid->toStdString(),40000,times);
+        BG = new BeeGeneration(hiveid->toStdString(),4000,times);
         BG->setDate(std::stoi(date->substr(0,2)),std::stoi(date->substr(2,2)),std::stoi(date->substr(4,5)));
     }
     else if(*size=="medium"){
-        BG = new BeeGeneration(hiveid->toStdString(),20000,times);
+        BG = new BeeGeneration(hiveid->toStdString(),2000,times);
         BG->setDate(std::stoi(date->substr(0,2)),std::stoi(date->substr(2,2)),std::stoi(date->substr(4,5)));
     }
     else{
-        BG = new BeeGeneration(hiveid->toStdString(),15000,times);
+        BG = new BeeGeneration(hiveid->toStdString(),1500,times);
         BG->setDate(std::stoi(date->substr(0,2)),std::stoi(date->substr(2,2)),std::stoi(date->substr(4,5)));
     }
     ui->time_label->setText(time->c_str());
     ui->date_label->setText(date->c_str());
-    ui->duration_label->setText(setendDate().c_str());
+    ui->duration_label->setText(setendDate(*time,*duration).c_str());
     DataDecoder *models=new DataDecoder(beelog);
 
     for(int i = 0; i < 10000; i++){
         models->decode(BG->makeBee());
     }
-    //beelog->storeData();
 }
 
-string GeneratedModel::setendDate(){
-    return "done";
+string GeneratedModel::setendDate(string time,string duration){
+
+    if(duration.substr(1,duration.size()).compare("Hour"))
+        return "done";
+    if(duration.substr(1,duration.size()).compare("Hour"))
+        return "done";
+
+    if(duration.substr(1,duration.size()).compare("Hour"))
+        return "done";
+
+    if(duration.substr(1,duration.size()).compare("Hour"))
+
+        return "done";
 }
 
 GeneratedModel::~GeneratedModel()
 {
     delete ui;
 }
-
-
 
 void GeneratedModel::on_pushButton_clicked()
 {
@@ -55,5 +62,17 @@ void GeneratedModel::on_pushButton_clicked()
 
 void GeneratedModel::on_pushButton_2_clicked()
 {
+    DBModelTable* models=new DBModelTable(dbtool,hiveids+"ModelDB");
+    char** P_rows =models->select_table_m();
+    string added;
+    vector<string> modeltitles;
+    if(P_rows!=nullptr){
+        for(int i =3; i<3*(models->size()+1);i=i+3){
+            added=P_rows[i+1];
+            modeltitles.push_back(added);
+            std::cout <<P_rows[i]<< P_rows[i+1]<<P_rows[i+2] << std::endl;
+        }
+    }
+    models->add_row_m(modeltitles.size(),hiveids+":"+modelids,modelids);
     beelog->storeData();
 }
