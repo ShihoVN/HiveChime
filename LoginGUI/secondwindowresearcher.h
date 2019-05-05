@@ -21,6 +21,7 @@ public:
     bool realTime;
     bool playSound;
     bool rawData;
+    bool getPlaySound();
 
 private slots:
     void on_pushButton_clicked();

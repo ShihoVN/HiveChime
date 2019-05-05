@@ -8,6 +8,7 @@
 #include "../Database/tool.h"
 #include "../Graphics/mainwindowanimate.h"
 #include "../RealTimeStream/mainwindow.h"
+#include "createmodel.h"
 #include "intro.h"
 #include <QMediaPlayer>
 
@@ -38,6 +39,7 @@ private:
     int genChkBox;
     Intro *introWindow;
     MainWindowRT *realTimeWindow;
+    CreateModel *createModel;
 
 };
 

@@ -43,6 +43,8 @@ void secondWindow::on_pushButton_clicked()
             playSound = false;
             realTime = true;
             this->hide();
+        }else if(ui->checkBox_4->isChecked()){
+
         }
     }
 
