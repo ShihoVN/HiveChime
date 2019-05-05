@@ -35,7 +35,7 @@ SOURCES += \
     generatedmodel.cpp \
     linegraph.cpp \
     bargraph.cpp \
-    ../Graphics/mainWindowAnimate.cpp \
+    ../Graphics/mainwindowanimate.cpp \
     ../Graphics/animatedbee.cpp\
     ../Graphics/animationboard.cpp \
     ../Graphics/framework.cpp \
@@ -55,7 +55,7 @@ HEADERS += \
     generatedmodel.h \
     linegraph.h \
     bargraph.h \
-    ../Graphics/mainWindowAnimate.h \
+    ../Graphics/mainwindowanimate.h \
     ../Graphics/animatedbee.h\
     ../Graphics/animationboard.h \
     ../Graphics/framework.h \
@@ -78,7 +78,7 @@ FORMS += \
     generatedmodel.ui \
     linegraph.ui \
     bargraph.ui \
-    ../Graphics/mainWindowAnimate.ui \
+    ../Graphics/mainwindowanimate.ui \
     intro.ui \
     ../RealTimeStream/mainwindowrt.ui \
     ../GUI/bees.ui
