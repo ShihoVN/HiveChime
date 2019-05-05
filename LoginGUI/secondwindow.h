@@ -19,9 +19,9 @@ public:
     explicit secondWindow(QWidget *parent = nullptr);
     ~secondWindow();
     bool getPlaySound();
-    bool viewModel;
-    bool realTime;
-    bool playSound;
+    bool viewModel=false;
+    bool realTime=false;
+    bool playSound=false;
 
 private slots:
     void on_pushButton_clicked();

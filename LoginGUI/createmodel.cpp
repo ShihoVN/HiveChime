@@ -7,7 +7,7 @@ CreateModel::CreateModel(QWidget *parent,QString *hivename,Tool *tool) :
     ui(new Ui::CreateModel)
 {
     ui->setupUi(this);
-    //dbtool=tool;
+    dbtool=tool;
     ui->label_9->setText(*hivename);
     date=to_string(ui->dateEdit->date().year()).substr(2,4);
     if(ui->dateEdit->date().month()<10)
@@ -66,6 +66,8 @@ void CreateModel::on_pushButton_clicked()
          QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Fill in all Boxes before Continuing"));
     }else if((ui->lineEdit_3->text().toInt()>10 && ui->comboBox->itemText(0).toStdString().compare("Days"))){
          QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Max Duration is 9 days"));
+    }else if(std::find(checkmodel().begin(), checkmodel().end(), modeltitle) != checkmodel().end()) {
+        QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("modelname exists"));
     }
     else{
         duration=ui->lineEdit_3->text().toStdString()+ui->comboBox->itemText(0).toStdString();
@@ -75,8 +77,6 @@ void CreateModel::on_pushButton_clicked()
         hiveSize();
         generate=true;
         this->hide();
-       // genModel = new GeneratedModel(this,&hivemodel,&size,&date,&times,&duration,dbtool);
-       // genModel->show();
     }
 }
 
@@ -155,4 +155,25 @@ void CreateModel::on_timeEdit_timeChanged(const QTime &time)
         times= times+to_string(time.minute());
     }
     cout<<"time: "<<times<<endl;
+}
+
+vector<string> CreateModel::checkmodel(){
+    DBModelTable* models=new DBModelTable(dbtool,hiveid+"ModelDB");
+    char** P_rows =models->select_table_m();
+    string added;
+    vector<string> modeltitles;
+    if(P_rows!=nullptr){
+        for(int i =4; i<4*(models->size()+1);i=i+4){
+            added=P_rows[i+1];
+            modeltitles.push_back(added);
+            std::cout <<P_rows[i+1]<< P_rows[i+2]<<P_rows[i+3] << std::endl;
+        }
+        return modeltitles;
+    }
+    return modeltitles;
+}
+
+void CreateModel::on_lineEdit_textChanged(const QString &arg1)
+{
+    modeltitle=arg1.toStdString();
 }

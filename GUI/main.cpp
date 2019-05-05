@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
         //d.decode(BG2->makeBee());
     }
     QApplication a(argc, argv);
-    Bees w(nullptr,&container);
+    Bees w(nullptr, &container);
     w.show();
 
     return a.exec();
