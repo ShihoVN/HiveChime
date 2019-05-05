@@ -120,7 +120,7 @@
   <widget class="QLabel" name="label_8">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>160</x>
      <y>160</y>
      <width>171</width>
      <height>31</height>
@@ -128,6 +128,22 @@
    </property>
    <property name="text">
     <string>How To Use the Program</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="plainTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>190</y>
+     <width>371</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="plainText">
+    <string>To use the program proceed intuitively. If you would like to go back to a previous screen, exit out of the current screen you are on.</string>
+   </property>
+   <property name="overwriteMode">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>
