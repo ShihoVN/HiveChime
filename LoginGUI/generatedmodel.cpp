@@ -34,7 +34,7 @@ GeneratedModel::GeneratedModel(QWidget *parent , QString *hiveid, string *size, 
     for(int i = 0; i < 10000; i++){
         models->decode(BG->makeBee());
     }
-    beelog->storeData();
+    //beelog->storeData();
 }
 
 string GeneratedModel::setendDate(){
@@ -51,4 +51,9 @@ GeneratedModel::~GeneratedModel()
 void GeneratedModel::on_pushButton_clicked()
 {
     delete this;
+}
+
+void GeneratedModel::on_pushButton_2_clicked()
+{
+    beelog->storeData();
 }
