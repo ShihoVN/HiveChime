@@ -22,8 +22,8 @@ void secondWindowResearcher::on_pushButton_clicked()
     if((!ui->checkBox_2->isChecked() && !ui->checkBox_3->isChecked()) && !ui->checkBox_4->isChecked() && !ui->checkBox_5->isChecked()){
         QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Check one box before continuing"));
     }
-    else{
 
+    else{
         if(ui->checkBox_2->isChecked()){
             // animateW->show();
             //playSound = true;

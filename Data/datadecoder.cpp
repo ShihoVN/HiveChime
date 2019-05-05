@@ -209,7 +209,7 @@ void DataDecoder:: compareSensors(sensorActivity thisSensor){
                 else if(getPair(thisSensor.sensors) > 4){
                     d->type = 0; // bee left the hive
                     cout << "PAIR WAS MADEEE" << endl;
-                    dContainer->addData(d);
+                    dContainer->loadData(d);
 
                     //increase exitData;
                     exitData++;
