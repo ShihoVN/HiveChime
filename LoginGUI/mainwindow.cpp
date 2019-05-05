@@ -15,9 +15,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     char** P_rows =hives->select_table_h();
     QString added;
-    hives->add_row_h(0,"HD002","shiho","ShihoMODELDB");
-    hives->add_row_h(1,"HD003","Jon","Jon'sMODEL");
-    hives->add_row_h(2,"HD004","Basit","BasitMODELDB");
+    hives->add_row_h(0,"HD002","shiho","HD002ModelDB");
+    hives->add_row_h(1,"HD003","Jon","HD003ModelDB");
+    hives->add_row_h(2,"HD004","Basit","HD004ModelDB");
 
     if(P_rows!=nullptr){
         for(int i =4; i<4*(hives->size()+1);i=i+4){
@@ -40,6 +40,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    string nessicarty;
     if((!ui->checkBox->isChecked() && !ui->checkBox_2->isChecked()) ||
             (ui->checkBox->isChecked() && ui->checkBox_2->isChecked())){
         QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Check one box before continuing"));
@@ -59,7 +60,11 @@ void MainWindow::on_pushButton_2_clicked()
                 w->setSound(secWindowGen->getPlaySound());
                 w->createEnvironment();
                 w->show();
-
+            }else if(secWindowGen->viewModel ==true){
+                nessicarty=hiveid.toStdString()+"ModelDB";
+                usm = new userSelectModel(this,dbtable,&nessicarty);
+                cout << "SEC SOUND "<< secWindowGen->getPlaySound();
+                usm->show();
             }
 
         }
@@ -85,7 +90,7 @@ void MainWindow::on_pushButton_2_clicked()
                 createModel = new CreateModel(this, &hiveid, dbtable);
                 createModel->exec();
                 if(createModel->generate==true){
-                generateModel = new GeneratedModel(this, &hiveid, &createModel->size, &createModel->date,
+                generateModel = new GeneratedModel(this, &hiveid, &createModel->modeltitle,&createModel->size, &createModel->date,
                                                    &createModel->times, &createModel->duration,dbtable);
                 generateModel->show();
                 graphModel = new Bees(this, generateModel->beelog);
@@ -97,12 +102,6 @@ void MainWindow::on_pushButton_2_clicked()
 
         }
 
-
-        //show error message
-
-
-        //    secWindow.setModal(true);
-        //    secWindow.exec();
     }
 
 }

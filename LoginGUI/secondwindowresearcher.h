@@ -17,11 +17,11 @@ class secondWindowResearcher : public QDialog
 public:
     explicit secondWindowResearcher(QWidget *parent = nullptr,QString *hivename=nullptr);
     ~secondWindowResearcher();
-    bool viewModel;
-    bool realTime;
-    bool playSound;
-    bool rawData;
-    bool createModel;
+    bool viewModel=false;
+    bool realTime=false;
+    bool playSound=false;
+    bool rawData=false;
+    bool createModel=false;
     bool getPlaySound();
 
 private slots:

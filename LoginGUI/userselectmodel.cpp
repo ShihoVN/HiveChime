@@ -6,7 +6,7 @@ userSelectModel::userSelectModel(QWidget *parent,Tool *tool,string *tablename) :
     ui(new Ui::userSelectModel)
 {
     ui->setupUi(this);
-    dbtool=*tool;
+    dbtool=tool;
     models=new DBModelTable(tool,*tablename);
     char** P_rows =models->select_table_m();
     QString added;
@@ -26,7 +26,7 @@ userSelectModel::~userSelectModel()
 
 void userSelectModel::on_pushButton_clicked()
 {
-    data=new DataContainer(&dbtool,modelname);
+    data=new DataContainer(dbtool,modelname);
     this->hide();
 }
 
