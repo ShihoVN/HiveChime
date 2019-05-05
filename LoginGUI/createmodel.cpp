@@ -2,13 +2,14 @@
 #include "ui_createmodel.h"
 #include <QMessageBox>
 
-CreateModel::CreateModel(QWidget *parent,QString *hivename,Tool *tool) :
+CreateModel::CreateModel(QWidget *parent,QString *hivename) :
     QDialog(parent),
     ui(new Ui::CreateModel)
 {
     ui->setupUi(this);
-    dbtool=tool;
+    dbtool=new Tool("dbTable");
     ui->label_9->setText(*hivename);
+    hivemodel=hivename->toStdString();
     date=to_string(ui->dateEdit->date().year()).substr(2,4);
     if(ui->dateEdit->date().month()<10)
        date=date+ "0"+to_string(ui->dateEdit->date().month());

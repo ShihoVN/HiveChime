@@ -16,7 +16,7 @@ class CreateModel : public QDialog
     Q_OBJECT
 
 public:
-    explicit CreateModel(QWidget *parent = nullptr,QString *hivename=nullptr,Tool*dbtool=nullptr);
+    explicit CreateModel(QWidget *parent = nullptr,QString *hivename=nullptr);
     ~CreateModel();
 
 private slots:
