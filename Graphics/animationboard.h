@@ -16,7 +16,7 @@ using namespace std;
 
 class AnimationBoard:public QObject, public QGraphicsRectItem
 
-//class AnimationBoard: public QGraphicsRectItem
+        //class AnimationBoard: public QGraphicsRectItem
 {
     Q_OBJECT
 public:
@@ -25,6 +25,7 @@ public:
     void setPosition(AnimatedBee *b);
     void playSoundOnScreen();
     void stopSound();
+    QMediaPlayer* returnSound();
 
 
 
@@ -53,7 +54,7 @@ private:
 public slots:
     void addBee();
     void populateRT();
-        void addBeeRT();
+    void addBeeRT();
 
 
 };

@@ -45,6 +45,7 @@ private:
 public slots:
     void addBeeRT();
     void populateRT();
+    void playSound();
 };
 
 #endif // MAINWINDOWANIMATE_H

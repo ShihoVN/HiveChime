@@ -60,18 +60,25 @@ void MainWindowAnimate::createEnvironment(){
 
 
     //populate the board with bees
-   // board->populate();
+    board->populate();
 
-    QTimer *timer = new QTimer();
-    connect(timer,SIGNAL(timeout()), this,SLOT(populateRT()));
-    //connect(timer,SIGNAL(timeout()), this,SLOT(playSoundOnScreen()));
-    timer->start(5000);//every 100ms timeout changes
+        QTimer *timer = new QTimer();
+        connect(timer,SIGNAL(timeout()), this,SLOT(playSound()));
+        timer->start(100);//ev
 
-    QTimer *timer1 = new QTimer();
-    connect(timer,SIGNAL(timeout()), this,SLOT(addBeeRT()));
-    //connect(timer,SIGNAL(timeout()), this,SLOT(playSoundOnScreen()));
-    timer1->start(rand() % 100 + 100);//every 100ms timeout changes
-    board->playSoundOnScreen();
+
+
+
+
+    //    connect(timer,SIGNAL(timeout()), this,SLOT(populateRT()));
+    //    //connect(timer,SIGNAL(timeout()), this,SLOT(playSoundOnScreen()));
+    //    timer->start(5000);//every 100ms timeout changes
+
+    //    QTimer *timer1 = new QTimer();
+    //    connect(timer,SIGNAL(timeout()), this,SLOT(addBeeRT()));
+    //    //connect(timer,SIGNAL(timeout()), this,SLOT(playSoundOnScreen()));
+    //    timer1->start(rand() % 100 + 100);//every 100ms timeout changes
+    //board->playSoundOnScreen();
 
 
 
@@ -105,21 +112,37 @@ void MainWindowAnimate::populateRT(){
 }
 
 
+void MainWindowAnimate::playSound(){
+    if(ui->sound->isChecked()){
+        if(board->returnSound()->state() == QMediaPlayer::StoppedState)
+            board->returnSound()->play();
+        else if (board->returnSound()->isMuted()) {
+            board->returnSound()->setMuted(false);
+        }
+    }
+    else {
+        if(board->returnSound()->state() == QMediaPlayer::PlayingState)
+            board->returnSound()->setMuted(true);
+    }
+
+}
+
+
 MainWindowAnimate::~MainWindowAnimate()
 {
 
-   board->stopSound();
-   delete ui;
+    board->returnSound()->stop();
+    delete ui;
 }
 
 
 void MainWindowAnimate::populate(){
 
     //for (int i = 1; i <= 8; i++){
-        //AnimatedBee *b = new AnimatedBee(i);
-        // setPosition(b);
-        //    bees.push_back(b);
-   // }
+    //AnimatedBee *b = new AnimatedBee(i);
+    // setPosition(b);
+    //    bees.push_back(b);
+    // }
 
 }
 

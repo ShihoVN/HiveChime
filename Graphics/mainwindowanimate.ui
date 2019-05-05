@@ -42,7 +42,7 @@
      <enum>Qt::ScrollBarAlwaysOff</enum>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox">
+   <widget class="QCheckBox" name="sound">
     <property name="geometry">
      <rect>
       <x>40</x>
