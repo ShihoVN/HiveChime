@@ -7,6 +7,7 @@
 #include "../Database/dbhivetable.h"
 #include "../Database/tool.h"
 #include "../Graphics/mainwindowanimate.h"
+#include "../RealTimeStream/mainwindow.h"
 #include "intro.h"
 #include <QMediaPlayer>
 
@@ -36,6 +37,8 @@ private:
     DBHiveTable *hives= new DBHiveTable(dbtable,"HiveTable");
     int genChkBox;
     Intro *introWindow;
+    MainWindowRT *realTimeWindow;
+
 };
 
 #endif // MAINWINDOW_H

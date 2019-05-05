@@ -4,6 +4,7 @@
 
 #include <QDialog>
 #include "createmodel.h"
+#include "../RealTimeStream/mainwindowrt.h"
 
 namespace Ui {
 class secondWindowResearcher;
@@ -19,6 +20,7 @@ public:
     bool viewModel;
     bool realTime;
     bool playSound;
+    bool rawData;
 
 private slots:
     void on_pushButton_clicked();
@@ -26,6 +28,7 @@ private slots:
 private:
     Ui::secondWindowResearcher *ui;
     CreateModel *modelWindow;
+    MainWindowRT *realTimeData;
 };
 
 #endif // SECONDWINDOWRESEARCHER_H

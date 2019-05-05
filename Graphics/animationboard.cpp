@@ -3,6 +3,7 @@
 
 AnimationBoard::AnimationBoard(bool _Sound)
 {
+    realTime = new MainWindowRT();
     sound = _Sound;
     buzz = new QMediaPlayer();
     buzz->setMedia(QUrl("qrc:/sounds/sound/beesounds.mp3"));
@@ -24,6 +25,10 @@ void AnimationBoard::playSoundOnScreen(){
 
 }
 
+QMediaPlayer* AnimationBoard::returnSound(){
+    return buzz;
+}
+
 
 void AnimationBoard::stopSound(){
     cout << "attempted stop sound";
@@ -33,12 +38,13 @@ void AnimationBoard::stopSound(){
 void AnimationBoard::populateRT(){
     DataDecoder d(&containerRT);
 
-    realTime = new MainWindowRT();
+
     if(realTime->UDPmessage.size() != 0){
         for(int i =0; i<realTime->UDPmessage.size(); i++){
             d.decode(realTime->UDPmessage.at(i));
 
         }
+        realTime->UDPmessage.clear();
     }
 
 
