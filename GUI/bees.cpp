@@ -6,7 +6,11 @@
 #include <QtCharts/QChartView>
 
 
-
+/**
+ * @brief Bees::Bees create a graph of a specificied generated data
+ * @param parent widget to display the graph
+ * @param tool where data to graph is stored
+ */
 Bees::Bees(QWidget *parent,DataContainer * tool) :
     QMainWindow(parent),
     ui(new Ui::Bees)
@@ -14,6 +18,7 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
     ui->setupUi(this);
     beelog=tool;
 
+    //creates series of total bee activity
     map<int,std::pair<int,int>>intervals=Timetable("Hours");
     for (std::map<int,std::pair<int,int>>::iterator it = intervals.begin();it!=intervals.end();++it) {
         cout<<"X-axis "<<it->second.first<<" Y-axis "<<it->second.second<<endl;
@@ -21,11 +26,14 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
     }
     cout<<"done all "<<endl;
 
+    //customize total bee activity line
     QPen pen(QRgb(0xFB3640));
     pen.setWidth(1.8);
     series->setPen(pen);
     ui->total->setStyleSheet("QCheckBox {color: red}");
 
+
+    //creates series of leaving bee activity
     map<int,std::pair<int,int>>intervals2=Timetable_exit("Hours");
     for (std::map<int,std::pair<int,int>>::iterator it2 = intervals2.begin();it2!=intervals2.end();++it2) {
         cout<<"X-axis "<<it2->second.first<<" Y-axis "<<it2->second.second<<endl;
@@ -33,12 +41,13 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
     }
     cout<<"done entry "<<endl;
 
+    //customize leaving bee activity line
     QPen pen2(QRgb(0x3a9b22));
     pen2.setWidth(1.8);
     seriesExit->setPen(pen2);
+    ui->leaving->setStyleSheet("QCheckBox {color: green}");
 
-    ui->leaving->setStyleSheet("QCheckBox {color: blue}");
-
+    //creates series of entering bee activity
     map<int,std::pair<int,int>>intervals3=Timetable_enter("Hours");
     for (std::map<int,std::pair<int,int>>::iterator it3 = intervals3.begin();it3!=intervals3.end();++it3) {
         cout<<"X-axis "<<it3->second.first<<" Y-axis "<<it3->second.second<<endl;
@@ -46,20 +55,19 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
     }
     cout<<"done exit "<<endl;
 
+    //customize entering bee activity line
     QPen pen3(QRgb(0x3972d5));
     pen3.setWidth(1.8);
     seriesEnter->setPen(pen3);
-    ui->entering->setStyleSheet("QCheckBox {color: green}");
+    ui->entering->setStyleSheet("QCheckBox {color: blue}");
 
-
-
+    //create chart to display liens
     chart = new Chart();
     chart->setAnimationOptions(QChart::SeriesAnimations);
-
     chart->legend()->setVisible(false);
 
 
-
+    //customize axes
     axisX->setRange(0, 58);
     axisX->setTickCount(25);
     axisX->setLabelFormat("%d");
@@ -69,13 +77,12 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
     axisY->setLabelFormat("%d");
     axisY->setTitleText("number of bees");
 
-
-
+    //customizing design of the chart
     QFont font("Times", 40, QFont::Bold);
     chart->setTitleFont(font);
     chart->setTitleBrush(QBrush(Qt::black));
     chart->setTitle("Simple line chart example");
-
+    //customizing background of the chart
     QLinearGradient plotAreaGradient;
     plotAreaGradient.setStart(QPointF(0, 1));
     plotAreaGradient.setFinalStop(QPointF(1, 0));
@@ -85,6 +92,7 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
     chart->setPlotAreaBackgroundBrush(plotAreaGradient);
     chart->setPlotAreaBackgroundVisible(true);
 
+    //add the 3 created series to the chart, and attach axes accordingly to all data lines
     chart->setAxisX(axisX,series);
     chart->setAxisY(axisY,series);
     chart->addSeries(series);
@@ -96,15 +104,15 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
     seriesEnter->attachAxis(axisY);
     seriesExit->attachAxis(axisX);
     seriesExit->attachAxis(axisY);
-//    chart->createDefaultAxes();
 
+    //display of chart
     chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
 
     ui->gridLayout->addWidget(chartView);
-    //this->setCentralWidget(chartView);
     this->resize(1500, 1000);
 
+    //allow zoom in and out by gestures (alternative from widget buttons)
     this->grabGesture(Qt::PanGesture);
     this->grabGesture(Qt::PinchGesture);
 
@@ -113,7 +121,11 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
 
 }
 
-
+/**
+ * @brief Bees::Timetable sorts total bee activity by its interval frame
+ * @param time interval of each graph points
+ * @return  map of total bee activity to time
+ */
 map<int,std::pair<int,int>> Bees::Timetable(string interval){
     Data entre;
     map<int,std::pair<int,int>>timeslots;
@@ -164,6 +176,11 @@ map<int,std::pair<int,int>> Bees::Timetable(string interval){
     return timeslots;
 }
 
+/**
+ * @brief Bees::Timetable_enter sorts entering bee activity by its interval frame
+ * @param time interval of each graph points
+ * @return  map of entering bee activity to time
+ */
 map<int,std::pair<int,int>> Bees::Timetable_enter(string interval){
     Data entre;
     map<int,std::pair<int,int>>timeslots;
@@ -216,6 +233,12 @@ map<int,std::pair<int,int>> Bees::Timetable_enter(string interval){
 
     return timeslots;
 }
+
+/**
+ * @brief Bees::Timetable_exit sorts exiting bee activity by its interval frame
+ * @param time interval of each graph points
+ * @return  map of exiting bee activity to time
+ */
 map<int,std::pair<int,int>> Bees::Timetable_exit(string interval){
     Data entre;
     map<int,std::pair<int,int>>timeslots;
@@ -269,94 +292,122 @@ map<int,std::pair<int,int>> Bees::Timetable_exit(string interval){
 
 
 }
+/**
+ * @brief Bees::~Bees deconstructor.  Called when class is deconstructed.
+ */
 Bees::~Bees()
 {
     delete ui;
 }
 
 
-
+/**
+ * @brief Bees::on_upButton_clicked moves the graph's perspective higher
+ */
 void Bees::on_upButton_clicked()
 {
     chart->scroll(0, 10);
 }
 
+/**
+ * @brief Bees::on_leftButton_clicked moves the graph's perspective to the left
+ */
 void Bees::on_leftButton_clicked()
 {
     //chartView->keyPressEvent(QT::Key_Left);
     chart->scroll(-10, 0);
 }
 
+/**
+ * @brief Bees::on_rightButton_clicked moves the graph's perspective to the right
+ */
 void Bees::on_rightButton_clicked()
 {
     chart->scroll(10, 0);
 }
+
+/**
+ * @brief Bees::on_downButton_clicked moves the graph's perspective lower
+ */
 void Bees::on_downButton_clicked()
 {
     chart->scroll(0, -10);
 }
 
+/**
+ * @brief Bees::on_zoomButton_clicked zooms into the graph for more detail
+ */
 void Bees::on_zoomButton_clicked()
 {
     chart->zoomIn();
 }
 
+/**
+ * @brief Bees::on_outButton_clicked zooms out the graph for wider view
+ */
 void Bees::on_outButton_clicked()
 {
     chart->zoomOut();
 }
 
+/**
+ * @brief Bees::on_total_stateChanged allows user to add and remove total bee activity's data line from the graph
+ * @param arg1 is the state of checkbox
+ */
 void Bees::on_total_stateChanged(int arg1)
 {
-        cout << arg1 << endl;
+    //checkbox is checked
     if(arg1 == 2){
         chart->addSeries(series);
-        //chart->createDefaultAxes();
         series->attachAxis(axisX);
         series->attachAxis(axisY);
     }
+    //check box is unchecked
     else{
         chart->removeSeries(series);
-        //chart->createDefaultAxes();
         series->attachAxis(axisX);
         series->attachAxis(axisY);
 
     }
 }
 
+/**
+ * @brief Bees::on_leaving_stateChanged allows user to add and remove leaving bee activity's data line from the graph
+ * @param arg1 is the state of checkbox
+ */
 void Bees::on_leaving_stateChanged(int arg1)
 {
-    cout << arg1 << endl;
+    //checkbox is checked
     if(arg1 == 2){
         chart->addSeries(seriesExit);
-        //chart->createDefaultAxes();
         seriesExit->attachAxis(axisX);
         seriesExit->attachAxis(axisY);
-
-
     }
+    //check box is unchecked
     else{
         chart->removeSeries(seriesExit);
-        //chart->createDefaultAxes();
         seriesExit->detachAxis(axisX);
         seriesExit->detachAxis(axisY);
 
     }
 }
 
+/**
+ * @brief Bees::on_entering_stateChanged allows user to add and remove entering bee activity's data line from the graph
+ * @param arg1 is the state of checkbox
+ */
 void Bees::on_entering_stateChanged(int arg1)
 {
-    cout << arg1 << endl;
+    //check box is checked
     if(arg1 == 2){
         chart->addSeries(seriesEnter);
-        //chart->createDefaultAxes();
         seriesEnter->attachAxis(axisX);
         seriesEnter->attachAxis(axisY);
 
     }
+    //checkbox is unchecked
     else{
         chart->removeSeries(seriesEnter);
-        //chart->createDefaultAxes();
         seriesEnter->detachAxis(axisX);
         seriesEnter->detachAxis(axisY);
 

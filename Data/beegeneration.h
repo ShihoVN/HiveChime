@@ -23,21 +23,12 @@
 
 using namespace std;
 
+//information about the next bee activity waiting. Stored in priority queue
 struct nextBee{
     int now[6];
     float m;
     int board;
     int sensor;
-    //    bool operator<(const nextBee& bee) const {
-    ////        return bee.now < this->now || (bee.now == this->now && bee.m < this->m);
-    //        for(int i = 0; i < 6; i ++){
-    //                if(this->now[i] != bee.now[i] ){
-    //                    return this->now[i] < bee.now[i];
-    //                }
-    //            }
-    //            return this->m < bee.m  ;
-    //    }
-
 } ;
 
 struct Compare{
@@ -56,11 +47,16 @@ struct Compare{
 class BeeGeneration
 {
 public:
+    //constructors
     BeeGeneration(int size);
     BeeGeneration(string _id, int size);
     BeeGeneration(string _id, int size, int time);
-    ~BeeGeneration();
-    float milli, m;
+
+    ~BeeGeneration(); //deconstructor
+
+    float milli, m; //place holder for ms
+    priority_queue<nextBee, vector<nextBee>, Compare> nextBees; //stores next few bee activity
+
 
     string makeBee();
     void setSeed(unsigned int seed);
@@ -69,7 +65,6 @@ public:
     void setActivity(int size);
     void update(float ms);
     vector<int> calculate(float ms);
-
     void generate();
     string generateUDP();
     string anotherActivity(string _udp, int _udpTime[], float _m);
@@ -77,21 +72,18 @@ public:
     int btod(string b);
     void setID(string _id, int size);
     void setID(string _id, int size, int time);
-    priority_queue<nextBee, vector<nextBee>, Compare> nextBees;
     void setDate(int year,int month, int date);
     int getNextTime(int);
     float getNextM();
 
-//    vector<int> nextUDP();
 private:
-    std::default_random_engine generator;
-    vector<int> lambda;
-    //int current;
-    int n;
-    double x;
-    string id;
-    int time[6];
-    vector<int> next;
+    std::default_random_engine generator;   //random generator
+    vector<int> lambda;      //stores lambda of the hive's bee activity
+    int n;  //number of anticipating bee acitvity left in the hour
+    double x;       //number of total bee activity in the hour
+    string id;      //id of bee hive
+    int time[6];     //latest bee activity to be added into the priory queue
+    //vector<int> next;
 
 
 
