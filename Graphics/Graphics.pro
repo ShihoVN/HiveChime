@@ -44,6 +44,7 @@ HEADERS += \
 
 FORMS += \
      #   mainwindow.ui \
+    mainwindowanimate.ui \
     ../RealTimeStream/mainwindowrt.ui
 
 HEADERS += ../Data/beegeneration.h

@@ -16,8 +16,13 @@ class CreateModel : public QDialog
     Q_OBJECT
 
 public:
-    explicit CreateModel(QWidget *parent = nullptr,QString *hivename=nullptr);
+    explicit CreateModel(QWidget *parent = nullptr,QString *hivename=nullptr,Tool*dbtool=nullptr);
     ~CreateModel();
+    string times;
+    string duration;
+    string date;
+    string size;
+    bool generate=false;
 
 private slots:
     void on_pushButton_clicked();
@@ -35,11 +40,7 @@ private slots:
 private:
     Ui::CreateModel *ui;
     GeneratedModel *genModel;
-
-    string times;
-    string duration;
-    string date;
-
+    void hiveSize();
 
 };
 

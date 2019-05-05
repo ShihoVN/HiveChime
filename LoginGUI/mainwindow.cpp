@@ -4,6 +4,7 @@
 #include <string>
 #include <QMessageBox>
 
+
 using namespace  std;
 
 
@@ -25,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
             std::cout <<P_rows[i+1]<< P_rows[i+2]<<P_rows[i+3] << std::endl;
         }
     }
+
+
     //call new diaglougue
     introWindow = new Intro();
     introWindow->exec();
@@ -37,37 +40,68 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_2_clicked()
 {
- if((!ui->checkBox->isChecked() && !ui->checkBox_2->isChecked()) ||
+    if((!ui->checkBox->isChecked() && !ui->checkBox_2->isChecked()) ||
             (ui->checkBox->isChecked() && ui->checkBox_2->isChecked())){
         QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Check one box before continuing"));
-}else {
-   if( ui->checkBox->isChecked()){
-
-    secWindowGen = new secondWindow(this);
-    secWindowGen->exec();
-    std::cout << secWindowGen->realTime <<endl;
-    if(secWindowGen->realTime ==true){
-        MainWindowAnimate *w = new MainWindowAnimate(this);
-            cout << "SEC SOUND "<< secWindowGen->getPlaySound();
-        w->setSound(secWindowGen->getPlaySound());
-        w->createEnvironment();
-        w->show();
-
     }
+    else {
+        if( ui->checkBox->isChecked()){
 
-   }
-   else if(ui->checkBox_2->isChecked()){
-       reseacherWindow = new secondWindowResearcher(this,&hiveid);
-       reseacherWindow->show();
-   }
-
-
-   //show error message
+            secWindowGen = new secondWindow(this);
+            //this->hide();
+            secWindowGen->exec();
 
 
-//    secWindow.setModal(true);
-//    secWindow.exec();
- }
+            std::cout << secWindowGen->realTime <<endl;
+            if(secWindowGen->realTime ==true){
+                MainWindowAnimate *w = new MainWindowAnimate(this);
+                cout << "SEC SOUND "<< secWindowGen->getPlaySound();
+                w->setSound(secWindowGen->getPlaySound());
+                w->createEnvironment();
+                w->show();
+
+            }
+
+        }
+        else if(ui->checkBox_2->isChecked()){
+            cout << "Researcher window" << endl;
+            reseacherWindow = new secondWindowResearcher(this, &hiveid);
+            reseacherWindow->exec();
+
+            if(reseacherWindow->rawData == true){
+                realTimeWindow = new MainWindowRT(this);
+                realTimeWindow->show();
+            }
+
+            else if(reseacherWindow->realTime == true){
+               cout << "I GOT HEREE" << endl;
+                MainWindowAnimate *w = new MainWindowAnimate(this);
+                cout << "SEC SOUND "<< secWindowGen->getPlaySound();
+                w->setSound(reseacherWindow->getPlaySound());
+                w->createEnvironment();
+                w->show();
+            }
+            else if(reseacherWindow->createModel == true){
+                createModel = new CreateModel(this, &hiveid, dbtable);
+                createModel->exec();
+                if(createModel->generate==true){
+                generateModel = new GeneratedModel(this, &hiveid, &createModel->size, &createModel->date,
+                                                   &createModel->times, &createModel->duration,dbtable);
+                generateModel->show();
+                }
+            }
+
+
+
+        }
+
+
+        //show error message
+
+
+        //    secWindow.setModal(true);
+        //    secWindow.exec();
+    }
 
 }
 

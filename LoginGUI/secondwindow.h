@@ -27,6 +27,7 @@ private slots:
     void on_pushButton_clicked();
 
 private:
+    QWidget *mainWindow;
     Ui::secondWindow *ui;
     userSelectModel *userSelect;
 

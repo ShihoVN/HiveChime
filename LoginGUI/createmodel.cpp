@@ -2,14 +2,35 @@
 #include "ui_createmodel.h"
 #include <QMessageBox>
 
-CreateModel::CreateModel(QWidget *parent,QString *hivename) :
+CreateModel::CreateModel(QWidget *parent,QString *hivename,Tool *tool) :
     QDialog(parent),
     ui(new Ui::CreateModel)
 {
     ui->setupUi(this);
+    //dbtool=tool;
     ui->label_9->setText(*hivename);
-    date=to_string(ui->dateEdit->date().year())+to_string(
-                ui->dateEdit->date().month())+to_string(ui->dateEdit->date().day());
+    date=to_string(ui->dateEdit->date().year()).substr(2,4);
+    if(ui->dateEdit->date().month()<10)
+       date=date+ "0"+to_string(ui->dateEdit->date().month());
+    else {
+        date=date+ to_string(ui->dateEdit->date().month());
+    }
+    if(ui->dateEdit->date().day()<10)
+       date=date+"0"+ to_string(ui->dateEdit->date().day());
+    else {
+        date= date+to_string(ui->dateEdit->date().day());
+    }
+    if(ui->timeEdit->time().hour()<10)
+       times="0"+ to_string(ui->timeEdit->time().hour());
+    else {
+        times= to_string(ui->timeEdit->time().hour());
+    }
+    if(ui->timeEdit->time().minute()<10)
+       times=times+"0"+ to_string(ui->timeEdit->time().minute());
+    else {
+        times= times+to_string(ui->timeEdit->time().minute());
+    }
+    cout<<"time: "<<times<<endl;
 }
 
 CreateModel::~CreateModel()
@@ -17,10 +38,25 @@ CreateModel::~CreateModel()
     delete ui;
 }
 
+void CreateModel::hiveSize(){
+    if(ui->checkBox_3->isChecked()){
+        size="small";
+
+    }
+    else if(ui->checkBox_4->isChecked()){
+        size="medium";
+    }
+    else if(ui->checkBox_5->isChecked()){
+        size="large";
+    }
+    else {
+        size="medium";
+    }
+    cout<<"size: "<<size<<endl;
+}
+
 void CreateModel::on_pushButton_clicked()
 {
-    string size;
-    string hivemodel;
     if((ui->checkBox_3->isChecked() && ui->checkBox_4->isChecked() && ui->checkBox_5->isChecked())||
             (ui->checkBox_3->isChecked() && ui->checkBox_4->isChecked()) || (ui->checkBox_4->isChecked() && ui->checkBox_5->isChecked())||
             (ui->checkBox_3->isChecked() && ui->checkBox_5->isChecked())){
@@ -28,20 +64,34 @@ void CreateModel::on_pushButton_clicked()
     }
     else if((ui->lineEdit_3->text().isEmpty())){
          QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Fill in all Boxes before Continuing"));
+    }else if((ui->lineEdit_3->text().toInt()>10 && ui->comboBox->itemText(0).toStdString().compare("Days"))){
+         QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Max Duration is 9 days"));
     }
     else{
         duration=ui->lineEdit_3->text().toStdString()+ui->comboBox->itemText(0).toStdString();
         cout<<"duration: "<<duration<<endl;
-        genModel = new GeneratedModel(this,&hivemodel,&size,&date,&times,&duration);
-        genModel->show();
+        cout<<"date: "<<date<<endl;
+        cout<<"time: "<<times<<endl;
+        hiveSize();
+        generate=true;
+        this->hide();
+       // genModel = new GeneratedModel(this,&hivemodel,&size,&date,&times,&duration,dbtool);
+       // genModel->show();
     }
-
 }
 
 void CreateModel::on_lineEdit_3_textChanged(const QString &arg1)
 {
-    QString duration1 = arg1;
-    duration = duration1.toStdString();
+    if(arg1.size()>2){
+        ui->lineEdit_3->backspace();
+    }
+    for (int i=0;i<arg1.size();i++) {
+        if(arg1.at(i).isNumber()==false){
+            ui->lineEdit_3->setText("");
+        }
+    }
+    duration=arg1.toStdString()+ui->comboBox->itemText(0).toStdString();
+    cout<<"duration: "<<duration<<endl;
 }
 
 void CreateModel::on_dateEdit_dateChanged(const QDate &dates)

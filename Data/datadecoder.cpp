@@ -5,6 +5,9 @@ DataDecoder::DataDecoder(DataContainer *container)
 
 
     dContainer = container;
+    entryData =0;
+    exitData =0;
+    totalBees =0;
     sa.sensors = 0;
     sa.sensorTime =0;
     sa.sensorBoard = 0;
@@ -31,9 +34,9 @@ void DataDecoder::decode(string _hex){
     }
 
 
-    string _hiveId = fragments.at(0);
-    string _date = dateDecoder(fragments.at(1));
-    string _time = timeDecoder(fragments.at(1));
+     _hiveId = fragments.at(0);
+     _date = dateDecoder(fragments.at(1));
+     _time = timeDecoder(fragments.at(1));
     d->hiveId = _hiveId;
     d->date = _date;
     d->time = _time;
@@ -206,7 +209,7 @@ void DataDecoder:: compareSensors(sensorActivity thisSensor){
                 else if(getPair(thisSensor.sensors) > 4){
                     d->type = 0; // bee left the hive
                     cout << "PAIR WAS MADEEE" << endl;
-                    dContainer->addData(d);
+                    dContainer->loadData(d);
 
                     //increase exitData;
                     exitData++;
@@ -287,6 +290,7 @@ void DataDecoder:: livestream(sensorActivity thisSensor){
                 sensorArray.erase(sensorArray.begin() +(i)); //remove the struct in array
                 return;
             }
+
 
         }
 
@@ -376,7 +380,7 @@ bool DataDecoder::sendEntryAlert(){
     if(totalBees > 10){
     cout <<"totalBees*.33 "<< totalBees*.33 << endl;
     cout << "entry data " << entryData << endl;
-        if(entryData > (int)(totalBees)*.33){  //2
+        if(entryData > (float)(totalBees)*.33){  //2
             return true;
         }else {
             return false;
@@ -393,6 +397,27 @@ void DataDecoder::setExitData(int i){
 void DataDecoder::setEntryData(int i){
     entryData = i;
 }
+
+string DataDecoder::getHiveID(){
+    return _hiveId;
+}
+
+string DataDecoder::getDate(){
+    return _date;
+}
+
+string DataDecoder::getTime(){
+    return _time;
+}
+
+string DataDecoder::getType(){
+    if(_type == false){
+        return "Exit";
+    }else
+        return "Entry";
+
+}
+
 
 
 
