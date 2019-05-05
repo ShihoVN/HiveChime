@@ -21,13 +21,14 @@ public:
     map<int,std::pair<int,int>> Timetable(string interval);
     map<int,std::pair<int,int>> Timetable_enter(string interval);
     ~GeneratedModel();
+    DataContainer *beelog;
 
 private slots:
     void on_pushButton_clicked();
 
 private:
     Ui::GeneratedModel *ui;
-    DataContainer *beelog;
+
     string setendDate();
 };
 

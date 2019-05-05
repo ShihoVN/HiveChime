@@ -21,9 +21,8 @@ secondWindow::~secondWindow()
 void secondWindow::on_pushButton_clicked()
 {
 
-    if(ui->checkBox->isChecked() && ui->checkBox_2->isChecked() && ui->checkBox_3->isChecked()||
-            ui->checkBox_2->isChecked() && ui->checkBox_3->isChecked() ||
-            ui->checkBox->isChecked() && ui->checkBox_3->isChecked()){
+    if((ui->checkBox->isChecked() && ui->checkBox_3->isChecked())||
+           (!ui->checkBox->isChecked() && !ui->checkBox_3->isChecked())){
         QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Check one box before continuing"));
     }
     else{
@@ -32,18 +31,18 @@ void secondWindow::on_pushButton_clicked()
             //userSelect->show();
             viewModel = true;
             this->hide();
-        }else if(ui->checkBox->isChecked() && ui->checkBox_2->isChecked()){
+        }else if(ui->checkBox->isChecked()){
             // animateW->show();
             playSound = true;
             realTime = true;
             this->hide();
 
 
-        }else if(ui->checkBox->isChecked() && !ui->checkBox_2->isChecked()){
+        }/*else if(ui->checkBox->isChecked() && !ui->checkBox_2->isChecked()){
             playSound = false;
             realTime = true;
             this->hide();
-        }
+        }*/
     }
 
 
