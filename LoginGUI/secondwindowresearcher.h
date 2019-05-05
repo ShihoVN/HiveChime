@@ -19,6 +19,7 @@ public:
     bool viewModel;
     bool realTime;
     bool playSound;
+    bool rawData;
 
 private slots:
     void on_pushButton_clicked();

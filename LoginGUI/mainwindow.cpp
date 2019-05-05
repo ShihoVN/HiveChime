@@ -4,6 +4,7 @@
 #include <string>
 #include <QMessageBox>
 
+
 using namespace  std;
 
 
@@ -47,7 +48,7 @@ void MainWindow::on_pushButton_2_clicked()
         if( ui->checkBox->isChecked()){
 
             secWindowGen = new secondWindow(this);
-            this->hide();
+            //this->hide();
             secWindowGen->exec();
 
 
@@ -65,6 +66,10 @@ void MainWindow::on_pushButton_2_clicked()
         else if(ui->checkBox_2->isChecked()){
             reseacherWindow = new secondWindowResearcher(this,&hiveid);
             reseacherWindow->show();
+            if(reseacherWindow->rawData == true){
+                realTimeWindow = new MainWindowRT(this);
+                realTimeWindow->show();
+            }
         }
 
 

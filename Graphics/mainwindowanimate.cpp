@@ -62,9 +62,11 @@ void MainWindowAnimate::createEnvironment(){
     //populate the board with bees
     board->populate();
 
-        QTimer *timer = new QTimer();
-        connect(timer,SIGNAL(timeout()), this,SLOT(playSound()));
-        timer->start(100);//ev
+
+    playSound();
+    QTimer *timer = new QTimer();
+    connect(timer,SIGNAL(timeout()), this,SLOT(playSound()));
+    timer->start(100);//ev
 
 
 
@@ -130,7 +132,7 @@ void MainWindowAnimate::playSound(){
 
 MainWindowAnimate::~MainWindowAnimate()
 {
-
+    cout << "close everything";
     board->returnSound()->stop();
     delete ui;
 }
