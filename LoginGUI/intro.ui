@@ -120,7 +120,7 @@
   <widget class="QLabel" name="label_8">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>160</x>
      <y>160</y>
      <width>171</width>
      <height>31</height>
@@ -128,6 +128,22 @@
    </property>
    <property name="text">
     <string>How To Use the Program</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_9">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>190</y>
+     <width>321</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>If you would like to proceed Press &quot;Ok&quot; to continue. Then select the type of user you are as well as your HiveId. To go back to a previous screen, exit out of the current screen you are on. </string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>

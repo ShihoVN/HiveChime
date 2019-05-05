@@ -88,6 +88,8 @@ void MainWindow::on_pushButton_2_clicked()
                 generateModel = new GeneratedModel(this, &hiveid, &createModel->size, &createModel->date,
                                                    &createModel->times, &createModel->duration,dbtable);
                 generateModel->show();
+                graphModel = new Bees(this, generateModel->beelog);
+                graphModel->show();
                 }
             }
 

@@ -565,54 +565,65 @@ void BeeGeneration::setDate(int year, int month, int date){
     return;
 }
 
-vector<int> BeeGeneration::nextUDP(){
-    next.clear();
-    for(int i = 0; i<6;i++){
-        next.push_back(nextBees.top().now[i]);
-    }
-    next.push_back(nextBees.top().m);
 
-    m = nextBees.top().m;
-    m += 50-((int)nextBees.top().m % 50);
+//vector<int> BeeGeneration::nextUDP(){
+//    next.clear();
+//    for(int i = 0; i<6;i++){
+//        next.push_back(nextBees.top().now[i]);
+//    }
+//    next.push_back(nextBees.top().m);
 
-    string udp;
-    udp = "HC" + id + "-D";
-    for(int i = 0; i < 6; i++){ //Format of UDP message
-        if(i==5 && m == 1000){
-            if(nextBees.top().now[i] < 9){
-                udp += "0";
-            }
-            udp += to_string(nextBees.top().now[i]+1);
-            m = 0;
-            break;
-        }
-        if(nextBees.top().now[i] < 10){
-            udp += "0";
-        }
-        udp += to_string(nextBees.top().now[i]);
+//    m = nextBees.top().m;
+//    m += 50-((int)nextBees.top().m % 50);
 
-        if(i == 2){
-            udp += "T";
+//    string udp;
+//    udp = "HC" + id + "-D";
+//    for(int i = 0; i < 6; i++){ //Format of UDP message
+//        if(i==5 && m == 1000){
+//            if(nextBees.top().now[i] < 9){
+//                udp += "0";
+//            }
+//            udp += to_string(nextBees.top().now[i]+1);
+//            m = 0;
+//            break;
+//        }
+//        if(nextBees.top().now[i] < 10){
+//            udp += "0";
+//        }
+//        udp += to_string(nextBees.top().now[i]);
 
-        }
-        if(i != 5){
-            udp += ".";
-        }
-    }
+//        if(i == 2){
+//            udp += "T";
 
-    if(m<100){
-        udp += "0";
-    }
-    if(m <10){
-        udp += "0";
-    }
+//        }
+//        if(i != 5){
+//            udp += ".";
+//        }
+//    }
 
-}
+//    if(m<100){
+//        udp += "0";
+//    }
+//    if(m <10){
+//        udp += "0";
+//    }
 
+//}
+
+
+/**
+ * @brief BeeGeneration::getNextTime
+ * @param i is the index of the time unit of the next bee activity
+ * @return next bee activity's specific time unit
+ */
 int BeeGeneration::getNextTime(int i){
     return nextBees.top().now[i];
 }
 
+/**
+ * @brief BeeGeneration::getNextM
+ * @return return the next bee activity's ms time unit
+ */
 float BeeGeneration::getNextM(){
     return nextBees.top().m;
 }
