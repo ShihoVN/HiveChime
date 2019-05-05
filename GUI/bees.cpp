@@ -5,6 +5,8 @@
 #include <QtWidgets/QRubberBand>
 #include <QtCharts/QChartView>
 
+
+
 Bees::Bees(QWidget *parent,DataContainer * tool) :
     QMainWindow(parent),
     ui(new Ui::Bees)
@@ -20,8 +22,9 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
     cout<<"done all "<<endl;
 
     QPen pen(QRgb(0xFB3640));
-    pen.setWidth(4);
+    pen.setWidth(1.8);
     series->setPen(pen);
+    ui->total->setStyleSheet("QCheckBox {color: red}");
 
     map<int,std::pair<int,int>>intervals2=Timetable_exit("Hours");
     for (std::map<int,std::pair<int,int>>::iterator it2 = intervals2.begin();it2!=intervals2.end();++it2) {
@@ -30,9 +33,11 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
     }
     cout<<"done entry "<<endl;
 
-    QPen pen2(QRgb(0xFFF000));
-    pen.setWidth(4);
+    QPen pen2(QRgb(0x3a9b22));
+    pen2.setWidth(1.8);
     seriesExit->setPen(pen2);
+
+    ui->leaving->setStyleSheet("QCheckBox {color: blue}");
 
     map<int,std::pair<int,int>>intervals3=Timetable_enter("Hours");
     for (std::map<int,std::pair<int,int>>::iterator it3 = intervals3.begin();it3!=intervals3.end();++it3) {
@@ -41,35 +46,31 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
     }
     cout<<"done exit "<<endl;
 
-    QPen pen3(QRgb(0xF00FF));
-    pen.setWidth(4);
+    QPen pen3(QRgb(0x3972d5));
+    pen3.setWidth(1.8);
     seriesEnter->setPen(pen3);
+    ui->entering->setStyleSheet("QCheckBox {color: green}");
+
 
 
     chart = new Chart();
-    chart->addSeries(series);
-    chart->addSeries(seriesExit);
-    chart->addSeries(seriesEnter);
     chart->setAnimationOptions(QChart::SeriesAnimations);
 
+    chart->legend()->setVisible(false);
 
 
-    QValueAxis *axisX = new QValueAxis;
-    QValueAxis *axisY = new QValueAxis;
 
     axisX->setRange(0, 58);
     axisX->setTickCount(25);
-    axisX->setLabelFormat("%.2f");
+    axisX->setLabelFormat("%d");
     axisX->setTitleText("time");
     axisY->setRange(0, 300);
     axisY->setTickCount(20);
+    axisY->setLabelFormat("%d");
     axisY->setTitleText("number of bees");
-//    series->attachAxis(axisX);
-//    series->attachAxis(axisY);
-//    seriesEnter->attachAxis(axisX);
-//    seriesEnter->attachAxis(axisY);
-//    seriesExit->attachAxis(axisX);
-//    seriesExit->attachAxis(axisY);
+
+
+
     QFont font("Times", 40, QFont::Bold);
     chart->setTitleFont(font);
     chart->setTitleBrush(QBrush(Qt::black));
@@ -84,9 +85,18 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
     chart->setPlotAreaBackgroundBrush(plotAreaGradient);
     chart->setPlotAreaBackgroundVisible(true);
 
-//    chart->setAxisX(axisX,series);
-//    chart->setAxisY(axisY,series);
-    chart->createDefaultAxes();
+    chart->setAxisX(axisX,series);
+    chart->setAxisY(axisY,series);
+    chart->addSeries(series);
+    chart->addSeries(seriesExit);
+    chart->addSeries(seriesEnter);
+    series->attachAxis(axisX);
+    series->attachAxis(axisY);
+    seriesEnter->attachAxis(axisX);
+    seriesEnter->attachAxis(axisY);
+    seriesExit->attachAxis(axisX);
+    seriesExit->attachAxis(axisY);
+//    chart->createDefaultAxes();
 
     chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
@@ -97,6 +107,7 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
 
     this->grabGesture(Qt::PanGesture);
     this->grabGesture(Qt::PinchGesture);
+
 
 
 
@@ -293,4 +304,62 @@ void Bees::on_zoomButton_clicked()
 void Bees::on_outButton_clicked()
 {
     chart->zoomOut();
+}
+
+void Bees::on_total_stateChanged(int arg1)
+{
+        cout << arg1 << endl;
+    if(arg1 == 2){
+        chart->addSeries(series);
+        //chart->createDefaultAxes();
+        series->attachAxis(axisX);
+        series->attachAxis(axisY);
+    }
+    else{
+        chart->removeSeries(series);
+        //chart->createDefaultAxes();
+        series->attachAxis(axisX);
+        series->attachAxis(axisY);
+
+    }
+}
+
+void Bees::on_leaving_stateChanged(int arg1)
+{
+    cout << arg1 << endl;
+    if(arg1 == 2){
+        chart->addSeries(seriesExit);
+        //chart->createDefaultAxes();
+        seriesExit->attachAxis(axisX);
+        seriesExit->attachAxis(axisY);
+
+
+    }
+    else{
+        chart->removeSeries(seriesExit);
+        //chart->createDefaultAxes();
+        seriesExit->detachAxis(axisX);
+        seriesExit->detachAxis(axisY);
+
+    }
+}
+
+void Bees::on_entering_stateChanged(int arg1)
+{
+    cout << arg1 << endl;
+    if(arg1 == 2){
+        chart->addSeries(seriesEnter);
+        //chart->createDefaultAxes();
+        seriesEnter->attachAxis(axisX);
+        seriesEnter->attachAxis(axisY);
+
+    }
+    else{
+        chart->removeSeries(seriesEnter);
+        //chart->createDefaultAxes();
+        seriesEnter->detachAxis(axisX);
+        seriesEnter->detachAxis(axisY);
+
+
+    }
 }

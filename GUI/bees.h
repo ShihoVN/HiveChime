@@ -47,6 +47,12 @@ private slots:
 
     void on_outButton_clicked();
 
+    void on_total_stateChanged(int arg1);
+
+    void on_leaving_stateChanged(int arg1);
+
+    void on_entering_stateChanged(int arg1);
+
 private:
     Ui::Bees *ui;
     QLineSeries *series = new QLineSeries();
@@ -56,6 +62,10 @@ private:
     int genUsr;
      QChartView *chartView;
     Chart *chart;
+
+
+    QValueAxis *axisX = new QValueAxis;
+    QValueAxis *axisY = new QValueAxis;
 };
 
 #endif // BEES_H
