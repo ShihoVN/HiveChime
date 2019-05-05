@@ -21,7 +21,7 @@ class userSelectModel : public QDialog
 public:
     explicit userSelectModel(QWidget *parent = nullptr,Tool* tool = nullptr,string* tablename=nullptr);
     ~userSelectModel();
-
+    DataContainer *data;
 private slots:
     void on_pushButton_clicked();
 
@@ -32,7 +32,6 @@ private:
     Tool *dbtool;
     DBModelTable *models;
     string modelname;
-    DataContainer *data;
 };
 
 #endif // USERSELECTMODEL_H
