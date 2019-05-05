@@ -39,6 +39,7 @@ private:
     QTimer* timer2;
     string content; // contains all website information
     QString url = "http://tomcollinsresearch.net/research/rpa/fakeudp/fakeudpmgate.html";
+    QString translate;
 
        unsigned int i = 0;
 private slots:

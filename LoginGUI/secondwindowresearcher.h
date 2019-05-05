@@ -4,6 +4,7 @@
 
 #include <QDialog>
 #include "createmodel.h"
+#include "../RealTimeStream/mainwindowrt.h"
 
 namespace Ui {
 class secondWindowResearcher;
@@ -26,6 +27,7 @@ private slots:
 private:
     Ui::secondWindowResearcher *ui;
     CreateModel *modelWindow;
+    MainWindowRT *realTimeData;
 };
 
 #endif // SECONDWINDOWRESEARCHER_H

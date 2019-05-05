@@ -50,7 +50,9 @@ void MainWindowRT::downloadFinished(QNetworkReply *reply){
 
 
     //Gets the string content from the web page
+
     QString str;
+    string all;
     str= reply->readAll();
     content = str.toStdString();
 
@@ -73,24 +75,25 @@ void MainWindowRT::downloadFinished(QNetworkReply *reply){
 
         //adds each udp message to vector and to string final udp
         for (unsigned int i = 0; i < udps.size();i++) {
-            UDPmessage.push_back(udps.at(i));
 
+            UDPmessage.push_back(udps.at(i));
             finalUDP += udps.at(i) + "\n";
             decoder->decode(udps.at(i));
 
 
+
+
+
         }
-
-
-
 
         //converts final udp to str
         str = QString::fromStdString(finalUDP);
 
 
+
         //changes the label
         ui->Label->setText(str);  //set URL text to Label
-        ui->Label->repaint();
+        //ui->Label->repaint();
 
 
 
@@ -219,20 +222,20 @@ vector<string> MainWindowRT::splitter(string s){
 
 void MainWindowRT::checkAlerts(){
     if(decoder->sendExitAlert()== true){
-          QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("A Swarm of Bees is Leaving the Hive!"));
-          //ui->setupUi(this);
-          cout << "Alert True"<< endl;
-     }
-     if(decoder->sendEntryAlert()==true){
-           QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("A Swarm of Bees is Entering the Hive!"));
-           cout << "Alert True"<< endl;
-     }
-     else{
-           //if the alert was false reset the entry adn exit data
-          decoder->setExitData(0);
-          decoder->setEntryData(0);
-          cout << "made entry/exit ==0 NO WARNING";
-     }
+        QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("A Swarm of Bees is Leaving the Hive!"));
+        //ui->setupUi(this);
+        cout << "Alert True"<< endl;
+    }
+    if(decoder->sendEntryAlert()==true){
+        QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("A Swarm of Bees is Entering the Hive!"));
+        cout << "Alert True"<< endl;
+    }
+    else{
+        //if the alert was false reset the entry adn exit data
+        decoder->setExitData(0);
+        decoder->setEntryData(0);
+        cout << "made entry/exit ==0 NO WARNING";
+    }
 
     cout << "decoder total" << decoder->totalBees << endl;
     cout << "CHECKED ALERTS"<<endl;

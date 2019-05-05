@@ -31,9 +31,9 @@ void DataDecoder::decode(string _hex){
     }
 
 
-    string _hiveId = fragments.at(0);
-    string _date = dateDecoder(fragments.at(1));
-    string _time = timeDecoder(fragments.at(1));
+     _hiveId = fragments.at(0);
+     _date = dateDecoder(fragments.at(1));
+     _time = timeDecoder(fragments.at(1));
     d->hiveId = _hiveId;
     d->date = _date;
     d->time = _time;
@@ -288,6 +288,7 @@ void DataDecoder:: livestream(sensorActivity thisSensor){
                 return;
             }
 
+
         }
 
     }
@@ -393,6 +394,27 @@ void DataDecoder::setExitData(int i){
 void DataDecoder::setEntryData(int i){
     entryData = i;
 }
+
+string DataDecoder::getHiveID(){
+    return _hiveId;
+}
+
+string DataDecoder::getDate(){
+    return _date;
+}
+
+string DataDecoder::getTime(){
+    return _time;
+}
+
+string DataDecoder::getType(){
+    if(_type == false){
+        return "Exit";
+    }else
+        return "Entry";
+
+}
+
 
 
 
