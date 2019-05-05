@@ -40,7 +40,11 @@ SOURCES += \
     ../Graphics/animationboard.cpp \
     ../Graphics/framework.cpp \
     intro.cpp  \
-    ../RealTimeStream/mainwindowrt.cpp
+    ../RealTimeStream/mainwindowrt.cpp \
+    ../GUI/bees.cpp \
+    ../GUI/chart.cpp \
+    ../GUI/chartview.cpp
+
 
 HEADERS += \
         mainwindow.h \
@@ -56,7 +60,12 @@ HEADERS += \
     ../Graphics/animationboard.h \
     ../Graphics/framework.h \
     intro.h \
-    ../RealTimeStream/mainwindowrt.h
+    ../RealTimeStream/mainwindowrt.h \
+    ../GUI/bees.h \
+    ../GUI/chart.h \
+    ../GUI/chartview.h
+
+
 
 
 FORMS += \
@@ -71,7 +80,8 @@ FORMS += \
     bargraph.ui \
     ../Graphics/mainWindowAnimate.ui \
     intro.ui \
-    ../RealTimeStream/mainwindowrt.ui
+    ../RealTimeStream/mainwindowrt.ui \
+    ../GUI/bees.ui
 
 
 

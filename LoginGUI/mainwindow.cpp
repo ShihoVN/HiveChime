@@ -85,7 +85,7 @@ void MainWindow::on_pushButton_2_clicked()
                 createModel = new CreateModel(this, &hiveid, dbtable);
                 createModel->exec();
                 generateModel = new GeneratedModel(this, &hiveid, &createModel->size, &createModel->date,
-                                                   &createModel->times, &createModel->duration);
+                                                   &createModel->times, &createModel->duration,dbtable);
                 generateModel->show();
             }
 
