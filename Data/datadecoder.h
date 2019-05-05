@@ -36,6 +36,13 @@ public:
     void setExitData(int i);
     void setEntryData(int i);
 
+    //getters
+    string getHiveID();
+    string getDate();
+    string getTime();
+    string getType();
+
+
 
 
 
@@ -49,11 +56,17 @@ private:
     int miliseconds;
     sensorActivity sa;
     vector <sensorActivity> sensorArray;
-    bool _type;
+
     Data *d;
     int exitData;
     int entryData;
     int mean;
+
+    //display on GUI
+    string _hiveId;
+    string _date;
+    string _time;
+    bool _type;
 
 
 
