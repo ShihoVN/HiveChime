@@ -5,6 +5,9 @@ DataDecoder::DataDecoder(DataContainer *container)
 
 
     dContainer = container;
+    entryData =0;
+    exitData =0;
+    totalBees =0;
     sa.sensors = 0;
     sa.sensorTime =0;
     sa.sensorBoard = 0;
@@ -377,7 +380,7 @@ bool DataDecoder::sendEntryAlert(){
     if(totalBees > 10){
     cout <<"totalBees*.33 "<< totalBees*.33 << endl;
     cout << "entry data " << entryData << endl;
-        if(entryData > (int)(totalBees)*.33){  //2
+        if(entryData > (float)(totalBees)*.33){  //2
             return true;
         }else {
             return false;

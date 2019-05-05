@@ -19,26 +19,30 @@ void secondWindowResearcher::on_pushButton_clicked()
 {
     QString Hiveid=ui->label->text();
 
-    if((!ui->checkBox->isChecked() && !ui->checkBox_2->isChecked()) && !ui->checkBox_3->isChecked() && !ui->checkBox_4->isChecked() && !ui->checkBox_5->isChecked()){
+    if((!ui->checkBox_2->isChecked() && !ui->checkBox_3->isChecked()) && !ui->checkBox_4->isChecked() && !ui->checkBox_5->isChecked()){
         QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Check one box before continuing"));
     }
-    if(ui->checkBox_4->isChecked()){
-        CreateModel* models = new CreateModel(this,&Hiveid);
-        models->show();
+
+    else{
+        if(ui->checkBox_2->isChecked()){
+            // animateW->show();
+            //playSound = true;
+            realTime = true;
+            this->hide();
+            //this->destroy();
+        }
+        else if(ui->checkBox_5->isChecked()){
+            rawData = true;
+            this->hide();
+        }else if(ui->checkBox_4->isChecked()){
+            createModel = true;
+            this->hide();
+        }
     }
-    else if(ui->checkBox->isChecked() && ui->checkBox_2->isChecked()){
-        playSound = true;
-        realTime = true;
-        this->hide();
+    cout << "Realt time " << realTime << endl;
 
+}
 
-    }else if(ui->checkBox->isChecked() && !ui->checkBox_2->isChecked()){
-        playSound = false;
-        realTime = true;
-        this->hide();
-    }else if(ui->checkBox_5->isChecked()){
-        realTimeData = new MainWindowRT();
-        realTimeData->show();
-    }
-
+bool secondWindowResearcher::getPlaySound(){
+    return playSound;
 }

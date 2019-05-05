@@ -231,10 +231,10 @@ void MainWindowRT::checkAlerts(){
         cout << "Alert True"<< endl;
     }
     else{
-        //if the alert was false reset the entry adn exit data
+        //if the alert was false reset the entry and exit data
         decoder->setExitData(0);
         decoder->setEntryData(0);
-        cout << "made entry/exit ==0 NO WARNING";
+        cout << "made entry/exit ==0 NO WARNING"<< endl;
     }
 
     cout << "decoder total" << decoder->totalBees << endl;

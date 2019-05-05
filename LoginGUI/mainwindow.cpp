@@ -64,12 +64,29 @@ void MainWindow::on_pushButton_2_clicked()
 
         }
         else if(ui->checkBox_2->isChecked()){
-            reseacherWindow = new secondWindowResearcher(this,&hiveid);
-            reseacherWindow->show();
+            cout << "Researcher window" << endl;
+            reseacherWindow = new secondWindowResearcher(this, &hiveid);
+            reseacherWindow->exec();
+
             if(reseacherWindow->rawData == true){
                 realTimeWindow = new MainWindowRT(this);
                 realTimeWindow->show();
             }
+
+            else if(reseacherWindow->realTime == true){
+               cout << "I GOT HEREE" << endl;
+                MainWindowAnimate *w = new MainWindowAnimate(this);
+                cout << "SEC SOUND "<< secWindowGen->getPlaySound();
+                w->setSound(reseacherWindow->getPlaySound());
+                w->createEnvironment();
+                w->show();
+            }
+            else if(reseacherWindow->createModel == true){
+                createModel = new CreateModel(this, &hiveid, dbtable);
+
+            }
+
+
         }
 
 

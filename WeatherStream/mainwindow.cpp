@@ -124,6 +124,8 @@ void MainWindow:: setLocations(){
     Florida.latitude = 81.3792;
 
 
+
+
 }
 
 
