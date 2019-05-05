@@ -73,6 +73,7 @@ void CreateModel::on_pushButton_clicked()
         cout<<"date: "<<date<<endl;
         cout<<"time: "<<times<<endl;
         hiveSize();
+        generate=true;
         this->hide();
        // genModel = new GeneratedModel(this,&hivemodel,&size,&date,&times,&duration,dbtool);
        // genModel->show();

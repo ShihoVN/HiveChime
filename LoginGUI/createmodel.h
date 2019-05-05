@@ -22,7 +22,7 @@ public:
     string duration;
     string date;
     string size;
-   // string hivemodel;
+    bool generate=false;
 
 private slots:
     void on_pushButton_clicked();
@@ -42,7 +42,6 @@ private:
     GeneratedModel *genModel;
     void hiveSize();
 
-   // Tool *dbtool;
 };
 
 #endif // CREATEMODEL_H

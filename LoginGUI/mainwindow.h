@@ -10,6 +10,7 @@
 #include "../RealTimeStream/mainwindow.h"
 #include "generatedmodel.h"
 #include "createmodel.h"
+#include "../GUI/bees.h"
 #include "intro.h"
 #include <QMediaPlayer>
 
@@ -42,6 +43,7 @@ private:
     MainWindowRT *realTimeWindow;
     CreateModel *createModel;
     GeneratedModel *generateModel;
+    Bees *graphModel;
 
 };
 
