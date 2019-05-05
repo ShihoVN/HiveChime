@@ -130,20 +130,20 @@
     <string>How To Use the Program</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="plainTextEdit">
+  <widget class="QLabel" name="label_9">
    <property name="geometry">
     <rect>
      <x>50</x>
      <y>190</y>
-     <width>371</width>
-     <height>61</height>
+     <width>321</width>
+     <height>71</height>
     </rect>
    </property>
-   <property name="plainText">
-    <string>To use the program proceed intuitively. If you would like to go back to a previous screen, exit out of the current screen you are on.</string>
+   <property name="text">
+    <string>If you would like to proceed Press &quot;Ok&quot; to continue. Then select the type of user you are as well as your HiveId. To go back to a previous screen, exit out of the current screen you are on. </string>
    </property>
-   <property name="overwriteMode">
-    <bool>false</bool>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>
