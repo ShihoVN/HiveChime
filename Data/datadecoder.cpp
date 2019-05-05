@@ -359,6 +359,11 @@ int DataDecoder::getPair(int sensorNum){
     }
 }
 
+/**
+ * @brief DataDecoder::sendExitAlert - This method returns true if the hive population exiting the hive is > half
+ * of the total hive population
+ * @return bool
+ */
 bool DataDecoder::sendExitAlert(){
      totalBees += (exitData+ entryData);
     cout << "exit data " << exitData << endl;
@@ -375,6 +380,10 @@ bool DataDecoder::sendExitAlert(){
     }
 }
 
+/**
+ * @brief DataDecoder::sendEntryAlert - This method returns true if the hive population entering the hive is > half the total hive population
+ * @return bool
+ */
 bool DataDecoder::sendEntryAlert(){
      totalBees += (exitData+ entryData);
     if(totalBees > 10){
@@ -390,26 +399,52 @@ bool DataDecoder::sendEntryAlert(){
     }
 }
 
+/**
+ * @brief DataDecoder::setExitData - setter method that sets the exitData to a paramter passed.
+ * This is used for checking alerts in the RealTimeStream class
+ * @param i
+ */
 void DataDecoder::setExitData(int i){
     exitData=i;
 }
 
+/**
+ * @brief DataDecoder::setEntryData - setter method that sets the entry data to a paramter passed
+ * This is used for checking alerts in the RealTimeStream class.
+ * @param i
+ */
 void DataDecoder::setEntryData(int i){
     entryData = i;
 }
 
+/**
+ * @brief DataDecoder::getHiveID - Getter method
+ * @return string hiveId
+ */
 string DataDecoder::getHiveID(){
     return _hiveId;
 }
 
+/**
+ * @brief DataDecoder::getDate - Getter method
+ * @return string date
+ */
 string DataDecoder::getDate(){
     return _date;
 }
 
+/**
+ * @brief DataDecoder::getDate - Getter method
+ * @return string time
+ */
 string DataDecoder::getTime(){
     return _time;
 }
 
+/**
+ * @brief DataDecoder::getDate - Getter method
+ * @return string type (entry/exit)
+ */
 string DataDecoder::getType(){
     if(_type == false){
         return "Exit";

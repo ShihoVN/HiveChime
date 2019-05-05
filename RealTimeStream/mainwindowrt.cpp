@@ -28,7 +28,9 @@ MainWindowRT::~MainWindowRT()
     delete ui;
 }
 
-//gets data from website
+/**
+ * @brief This method was for testing purposes when initally setting up the class
+ */
 void MainWindowRT::on_pushButton_clicked()
 {
 
@@ -40,6 +42,10 @@ void MainWindowRT::on_pushButton_clicked()
 
 }
 
+/**
+ * @brief This method takes in the data from the website in realTime, translates it, and places it in a GUI
+ * @param reply - A network.
+ */
 void MainWindowRT::downloadFinished(QNetworkReply *reply){
     if(reply->error()){
         qDebug() << reply->errorString();
@@ -169,6 +175,13 @@ void MainWindowRT::downloadFinished(QNetworkReply *reply){
 */
 }
 
+/**
+ * @brief MainWindowRT::readBetween - This method reads bettwen two stirings, when passiing in the query of a website,
+ * we needed to be able to read between syntaxes to distinguish what we wanted to take in from the website.
+ * @param s1 string
+ * @param s2 string
+ * @return string - inbetwwen parameters
+ */
 string MainWindowRT::readBetween(string s1, string s2){
     size_t first = content.find(s1) + s1.size();
     size_t second = content.find(s2) - first;
@@ -176,7 +189,12 @@ string MainWindowRT::readBetween(string s1, string s2){
 }
 
 
-
+/**
+ * @brief MainWindowRT::splitter - This method splits the string up, according to a delimiter. When reading from a website
+ * we found the websites body was still contained in the string we were pulling.
+ * @param s string
+ * @return string of contnet parsed by delimiters
+ */
 vector<string> MainWindowRT::splitter(string s){
     vector<string> udps;
 
@@ -219,7 +237,9 @@ vector<string> MainWindowRT::splitter(string s){
     return udps;
 }
 
-
+/**
+ * @brief MainWindowRT::checkAlerts - This method cheks for alerts in real time. and displays a message if there is an alert.
+ */
 void MainWindowRT::checkAlerts(){
     if(decoder->sendExitAlert()== true){
         QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("A Swarm of Bees is Leaving the Hive!"));
