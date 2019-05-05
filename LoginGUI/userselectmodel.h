@@ -29,7 +29,7 @@ private slots:
 
 private:
     Ui::userSelectModel *ui;
-    Tool dbtool;
+    Tool *dbtool;
     DBModelTable *models;
     string modelname;
     DataContainer *data;
