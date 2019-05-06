@@ -83,7 +83,11 @@ void AnimatedBee::playSound(){
 }
 
 
-//Checks if the beeobject is in bounds
+
+/**
+ * @brief AnimatedBee::isInBounds checks if the beeobject is in bounds
+ * @return true or false if the bee is in bounds
+ */
 bool AnimatedBee::isInBounds(){
     //it is an exit data
     if (type == false ){
@@ -233,6 +237,10 @@ bool AnimatedBee::isInBounds(){
 }
 
 
+/**
+ * @brief AnimatedBee::moves a bee onthe board
+ * @return void
+ */
 void AnimatedBee::move(){
 
 
