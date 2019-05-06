@@ -10,15 +10,12 @@ MainWindowRT::MainWindowRT(QWidget *parent) :
     connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadFinished(QNetworkReply*)));
     timer = new QTimer(this);
     timer2 = new QTimer(this);
-
-
     connect(timer, SIGNAL(timeout()), this, SLOT(on_pushButton_clicked()));
 
     connect(timer2, SIGNAL(timeout()), this, SLOT(checkAlerts()));
 
     timer->start(5000); //start timer
     timer2->start(20000);
-
 
     decoder = new DataDecoder(&container);
 }
@@ -52,32 +49,21 @@ void MainWindowRT::downloadFinished(QNetworkReply *reply){
         return;
     }
 
-
-
-
     //Gets the string content from the web page
-
     QString str;
     string all;
     str= reply->readAll();
     content = str.toStdString();
 
-
     content = readBetween("<body>", "</body>");
 
-
-
     string finalUDP;
-
-
 
     //if there is no message at the time
     if (content.size() > 2 ){
 
-
         //splits into udp messages
         vector<string> udps = splitter(content);
-
 
         //adds each udp message to vector and to string final udp
         for (unsigned int i = 0; i < udps.size();i++) {
@@ -85,94 +71,16 @@ void MainWindowRT::downloadFinished(QNetworkReply *reply){
             UDPmessage.push_back(udps.at(i));
             finalUDP += udps.at(i) + "\n";
             decoder->decode(udps.at(i));
-
-
-
-
-
         }
 
         //converts final udp to str
         str = QString::fromStdString(finalUDP);
-
-
-
         //changes the label
         ui->Label->setText(str);  //set URL text to Label
-        //ui->Label->repaint();
-
-
-
-        cout << "CONTENT " ;
-        cout << ++i;
-        cout << "  ";
-
-        cout << content.find('H');
-        cout << "  ";
-
-        cout << content.size();
-
-        cout << string("start") + content << endl;
-
 
     }
 
 
-
-
-
-    /*
-
-
-    str = QString::fromStdString(content);
-
-
-
-    ui->Label->setText(str);  //set URL text to Label
-    ui->Label->repaint();
-
-
-    string newstring;
-    //udp message will be sperated by return line
-    QString qstring;
-
-
-
-    //new website with UDp messages
-    newstring = readBetween(
-                "<body>",
-                "</body>"
-                );
-
-    cout << "NEW STRINGGGG " + newstring << endl;
-  if(newstring != " "){
-    vector<string> udps = splitter(newstring, "<br/>");
-
-
-
-    for (unsigned int i = 0;i < udps.size();i++) {
-        std::cout << udps.at(i) << std::endl;
-        decoder->decode(udps.at(i));
-
-        UDPmessage.push_back(udps.at(i));
-       qstring = QString::fromStdString(udps.at(i));
-       ui->Label->setText(qstring);  //set URL text to Label
-       ui->Label->repaint();
-
-    }
-    //    std::cout << newstring << std::endl;
-    //      decoder->decode(newstring);
-    //add UDP message to vector
-
-
-}
-
-    //printVector(); //print elemetns in the vector
-
-
-
-
-*/
 }
 
 /**
@@ -200,11 +108,9 @@ vector<string> MainWindowRT::splitter(string s){
 
     udps.push_back(s.substr(s.find('H') ,s.find("<br/>") - s.find('H') ));
 
-    cout << s.substr(s.find('H') ,s.find("<br/>") - s.find('H') );
+    // cout << s.substr(s.find('H') ,s.find("<br/>") - s.find('H') );
 
-    cout << " ";
-
-
+    //cout << " ";
     //if string contains more than 1 udp message
     while (s.find("<br/>")  != string::npos){
 
@@ -213,26 +119,6 @@ vector<string> MainWindowRT::splitter(string s){
         udps.push_back(s.substr(s.find('H') ,s.find("<br/>") - s.find('H') ));
     }
 
-
-
-
-
-
-
-
-    //    int startIndex = 0;
-    //    int  endIndex = 0;
-    //    while( (endIndex = s.find(del, startIndex)) < s.size() )
-    //    {
-    //        std::string val = s.substr(startIndex, endIndex - startIndex);
-    //        udps.push_back(val);
-    //        startIndex = endIndex + del.size();
-    //    }
-    //    if(startIndex < s.size())
-    //    {
-    //        std::string val = s.substr(startIndex);
-    //        udps.push_back(val);
-    //    }
 
     return udps;
 }
@@ -243,7 +129,6 @@ vector<string> MainWindowRT::splitter(string s){
 void MainWindowRT::checkAlerts(){
     if(decoder->sendExitAlert()== true){
         QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("A Swarm of Bees is Leaving the Hive!"));
-        //ui->setupUi(this);
         cout << "Alert True"<< endl;
     }
     if(decoder->sendEntryAlert()==true){
@@ -254,11 +139,8 @@ void MainWindowRT::checkAlerts(){
         //if the alert was false reset the entry and exit data
         decoder->setExitData(0);
         decoder->setEntryData(0);
-        cout << "made entry/exit ==0 NO WARNING"<< endl;
-    }
 
-    cout << "decoder total" << decoder->totalBees << endl;
-    cout << "CHECKED ALERTS"<<endl;
+    }
 
 }
 

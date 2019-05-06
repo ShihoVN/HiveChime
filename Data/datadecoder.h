@@ -52,7 +52,6 @@ private:
     vector <string> hexArr; //array of data string entries
     int _gate;
     int _board;
-    //vector <int> binaryMessage;
     int miliseconds;
     sensorActivity sa;
     vector <sensorActivity> sensorArray;

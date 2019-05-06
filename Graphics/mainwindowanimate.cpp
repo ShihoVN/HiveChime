@@ -15,9 +15,6 @@ MainWindowAnimate::MainWindowAnimate(QWidget *parent) :
     //Creates the display environment and displays it in the graphics view
     createEnvironment();
 
-
-
-
     //Weather Instatiator
     setLocations();
     parseLocation(California); // this needs to be passed in from GUI eventually

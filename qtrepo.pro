@@ -4,13 +4,13 @@ SUBDIRS += \
     Database\
     Data \
     unittest \
-    Weather \
+    #Weather \
     GUI \
     Graphics \
     Bee_Visual \
     RealTimeStream \
-    WeatherStream \
-    LoginGUI \
-    AlertGUI \
-    RealtimeGeneration
+    #WeatherStream \
+    LoginGUI
+    #AlertGUI \
+    #RealtimeGeneration
 

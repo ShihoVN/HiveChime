@@ -7,13 +7,13 @@ AnimationBoard::AnimationBoard(bool _Sound)
     sound = _Sound;
     buzz = new QMediaPlayer();
     buzz->setMedia(QUrl("qrc:/sounds/sound/beesounds.mp3"));
-    //buzz = new QMediaPlayer;
-    //buzz->setMedia(QUrl::fromLocalFile("www.superluigibros.com/downloads/sounds/SNES/S.../smrpg_enemy_beeattack.wav"));
-    //connect(buzz, SIGNAL(window2.ui.button), this, SLOT(playSound()));
+
 
 }
 
-
+/**
+ * @brief AnimationBoard::playSoundOnScreen - This method sets the sound to play in a GUI
+ */
 void AnimationBoard::playSoundOnScreen(){
     // buzz->play();
     if(sound == true){
@@ -25,16 +25,27 @@ void AnimationBoard::playSoundOnScreen(){
 
 }
 
+/**
+ * @brief AnimationBoard::returnSound - This method returns the QMedia Player sound
+ * @return
+ */
 QMediaPlayer* AnimationBoard::returnSound(){
     return buzz;
 }
 
 
+/**
+ * @brief AnimationBoard::stopSound - This method stops the sound from playing
+ */
 void AnimationBoard::stopSound(){
-    cout << "attempted stop sound";
+  //  cout << "attempted stop sound";
     buzz->stop();
 
 }
+
+/**
+ * @brief AnimationBoard::populateRT - This method populates the DataContainer in real Time
+ */
 void AnimationBoard::populateRT(){
     DataDecoder d(&containerRT);
 
@@ -47,20 +58,14 @@ void AnimationBoard::populateRT(){
         realTime->UDPmessage.clear();
     }
 
-
-
-
-
-//    QTimer *timer = new QTimer();
-//    connect(timer,SIGNAL(timeout()), this,SLOT(addBee()));
-//    //connect(timer,SIGNAL(timeout()), this,SLOT(playSoundOnScreen()));
-//    timer->start(rand() % 100 + 100);//every 100ms timeout changes
     playSoundOnScreen();
 
-
-   // realTime->UDPmessage.empty();
 }
 
+/**
+ * @brief AnimationBoard::populate - This method populates the container not in real-Time
+ * (for generating purposes)
+ */
 void AnimationBoard::populate(){
     DataDecoder d(&container);
 
@@ -71,12 +76,13 @@ void AnimationBoard::populate(){
     }
     QTimer *timer = new QTimer();
     connect(timer,SIGNAL(timeout()), this,SLOT(addBee()));
-    //connect(timer,SIGNAL(timeout()), this,SLOT(playSoundOnScreen()));
     timer->start(rand() % 100 + 100);//every 100ms timeout changes
     playSoundOnScreen();
 }
 
-
+/**
+ * @brief AnimationBoard::addBeeRT - This method decodes a udp message and adds a bee in real time
+ */
 void AnimationBoard::addBeeRT(){
     Data bee=*containerRT.getUdpMessages().at(b);
    // int ran = rand() % 8 + 1;
@@ -89,7 +95,10 @@ void AnimationBoard::addBeeRT(){
 
 }
 
-
+/**
+ * @brief AnimationBoard::addBee - This method decodes a udp message and adds a bee not in real time
+ * (for generating purposes)
+ */
 void AnimationBoard::addBee(){
     Data bee=*container.getUdpMessages().at(b);
     int ran = rand() % 8 + 1;
@@ -102,7 +111,10 @@ void AnimationBoard::addBee(){
 
 }
 
-
+/**
+ * @brief AnimationBoard::setPosition - This method sets the position for a bee on the GUI
+ * @param b
+ */
 void AnimationBoard::setPosition(AnimatedBee *b){
     b->getBee()->setPos(-80,-95 );
 
@@ -152,56 +164,6 @@ void AnimationBoard::setPosition(AnimatedBee *b){
         }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //    switch(b->getGate()){
-
-    //    case 1: b->getBee()->setPos(rand()%500 -250,-250 );
-    //        break;
-
-    //    case 2: b->getBee()->setPos(-250  ,rand()%500 -250 );
-    //        break;
-
-    //    case 3: b->getBee()->setPos(rand()%500 -250  ,250 - beeSize);
-    //        break;
-
-    //    case 4: b->getBee()->setPos(250 - beeSize,rand()%500 -250);
-    //        break;
-
-    //    default: b->getBee()->setPos(-25,-25);
-    //        break;
-    //    }
-
-
-    //    switch(b->getGate()){
-
-    //    case 1: b->getBee()->setPos(250 - beeSize,-250 );
-    //        break;
-
-    //    case 2: b->getBee()->setPos(-250  ,-250 );
-    //        break;
-
-    //    case 3: b->getBee()->setPos(-250  ,250 - beeSize);
-    //        break;
-
-    //    case 4: b->getBee()->setPos(250 - beeSize,250 - beeSize);
-    //        break;
-
-    //    default: b->getBee()->setPos(-25,-25);
-    //        break;
-    //    }
 
     scene()->addItem(b->getBee());
 

@@ -25,12 +25,21 @@ userSelectModel::~userSelectModel()
     delete ui;
 }
 
+/**
+ * @brief userSelectModel::on_pushButton_clicked - This method is triggered when the continue button is pressed, takes what model
+ * name the user selected and retreives it from the datacontainer.
+ */
 void userSelectModel::on_pushButton_clicked()
 {
     data=new DataContainer(dbtool,modelname);
     this->hide();
 }
 
+/**
+ * @brief userSelectModel::on_ModelList_itemClicked - This method takes in the selected model name form the screen in order to get the
+ * the correct model
+ * @param item
+ */
 void userSelectModel::on_ModelList_itemClicked(QListWidgetItem *item)
 {
     loop=true;

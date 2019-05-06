@@ -23,8 +23,6 @@ DataDecoder::DataDecoder(DataContainer *container)
 void DataDecoder::decode(string _hex){
     d = new Data;
 
-
-   // cout << _hex << endl;
     vector<string> fragments; //vector containing each segment
     stringstream ss(_hex); // Turn the string into a stream.
     string tok;
@@ -44,14 +42,9 @@ void DataDecoder::decode(string _hex){
     activityDecoder(fragments.at(2));
 
 
-
-
     sendExitAlert();
     sendEntryAlert();
 
-    //cout << "SIZE OF SENSOR SARRYA " << sensorArray.size() << endl;
-   //dContainer.addData(d);
-    //dContainer.addData(d);
 
 
 
@@ -198,7 +191,7 @@ void DataDecoder:: compareSensors(sensorActivity thisSensor){
             if(sensorArray.at(i).sensors == getPair(thisSensor.sensors)){
                 //send info into data base
                 if(getPair(thisSensor.sensors) <=4){
-                    cout << "PAIR WAS MADEEE" << endl;
+                   // cout << "PAIR WAS MADEEE" << endl;
                     d->type = 1;  //bee entered the hive
                     dContainer->addData(d);
 
@@ -208,7 +201,7 @@ void DataDecoder:: compareSensors(sensorActivity thisSensor){
                 }
                 else if(getPair(thisSensor.sensors) > 4){
                     d->type = 0; // bee left the hive
-                    cout << "PAIR WAS MADEEE" << endl;
+                    //cout << "PAIR WAS MADEEE" << endl;
                     dContainer->loadData(d);
 
                     //increase exitData;
@@ -224,9 +217,7 @@ void DataDecoder:: compareSensors(sensorActivity thisSensor){
     }
 
     //if the sensor does not have a pair then add it to the array
-    // cout << "sensor33" << thisSensor.sensors << endl;
     sensorArray.push_back(thisSensor);
-    //cout << "sensor " << thisSensor.sensors << endl;
 
 }
 /**
@@ -270,7 +261,7 @@ void DataDecoder:: livestream(sensorActivity thisSensor){
             if(sensorArray.at(i).sensors == getPair(thisSensor.sensors)){
                 //send info into data base
                 if(getPair(thisSensor.sensors) <=4){
-                    cout << "PAIR WAS MADEEE" << endl;
+                   // cout << "PAIR WAS MADEEE" << endl;
                     d->type = 1;  //bee entered the hive
                     dContainer->loadData(d);
 
@@ -280,7 +271,7 @@ void DataDecoder:: livestream(sensorActivity thisSensor){
                 }
                 else if(getPair(thisSensor.sensors) > 4){
                     d->type = 0; // bee left the hive
-                    cout << "PAIR WAS MADEEE" << endl;
+                   // cout << "PAIR WAS MADEEE" << endl;
                     dContainer->loadData(d);
 
                     //increase exitData;
@@ -366,7 +357,6 @@ int DataDecoder::getPair(int sensorNum){
  */
 bool DataDecoder::sendExitAlert(){
      totalBees += (exitData+ entryData);
-    cout << "exit data " << exitData << endl;
     if(totalBees > 10){
         if(exitData >  (int)(totalBees)*.33 ){ //2
 
@@ -387,8 +377,6 @@ bool DataDecoder::sendExitAlert(){
 bool DataDecoder::sendEntryAlert(){
      totalBees += (exitData+ entryData);
     if(totalBees > 10){
-    cout <<"totalBees*.33 "<< totalBees*.33 << endl;
-    cout << "entry data " << entryData << endl;
         if(entryData > (float)(totalBees)*.33){  //2
             return true;
         }else {

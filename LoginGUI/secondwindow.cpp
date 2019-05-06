@@ -1,3 +1,6 @@
+/**This class is for General Uses, it is the Gui that controls which Gui's will be displayed for a General User.
+  **/
+
 #include "secondwindow.h"
 #include "ui_secondwindow.h"
 #include <QMessageBox>
@@ -18,6 +21,10 @@ secondWindow::~secondWindow()
     delete ui;
 }
 
+/**
+ * @brief secondWindow::on_pushButton_clicked - This method determines which box is checked by the User after they have selected
+ * that they are a general user.
+ */
 void secondWindow::on_pushButton_clicked()
 {
 
@@ -38,17 +45,15 @@ void secondWindow::on_pushButton_clicked()
             this->hide();
 
 
-        }/*else if(ui->checkBox->isChecked() && !ui->checkBox_2->isChecked()){
-            playSound = false;
-            realTime = true;
-            this->hide();
-        }*/
+        }
     }
-
-
 
 }
 
+/**
+ * @brief secondWindow::getPlaySound - This method returns whether the sound should be played on the visualization GUI
+ * @return
+ */
 bool secondWindow::getPlaySound(){
     return playSound;
 }

@@ -9,7 +9,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
 
-
     //Ensures that the window stays fixed
     ui->display->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->display->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -21,7 +20,9 @@ MainWindow::MainWindow(QWidget *parent) :
 }
 
 
-
+/**
+ * @brief MainWindow::createEnvironment - This method creates a new visual simulation GUI
+ */
 void MainWindow::createEnvironment(){
     //Create a scene
     animationScene = new QGraphicsScene();
@@ -35,9 +36,6 @@ void MainWindow::createEnvironment(){
 
     //add board to the scene
     animationScene->addItem(board);
-
-
-
 
 
     QPixmap hivePic(":/images /images/BeehiveEdited5.png");
@@ -59,24 +57,9 @@ void MainWindow::createEnvironment(){
     ui->display->setScene(animationScene);
     //ui->display->show();
 
-
-
-
     //populate the board with bees
     board->populate();
 
-
-
-    //    QPixmap beeIMG(":/images /images/Indiv_Bee.png");
-    //    beeIMG = beeIMG.scaled(50,50,Qt::KeepAspectRatio);
-    //    QGraphicsPixmapItem *bee = new QGraphicsPixmapItem(beeIMG);
-    //    bee->setPos(-250,-25);
-    //    animationScene->addItem(bee);
-
-
-    //    AnimatedBee *bee = new AnimatedBee();
-    //    bee->getBee()->setPos(-250,-25);
-    //    animationScene->addItem(bee->getBee());
 
 }
 
@@ -101,41 +84,9 @@ void MainWindow::populate(){
 
 MainWindow::~MainWindow()
 {
-    cout <<"sound should stop";
+   // cout <<"sound should stop";
     delete ui;
 }
-
-
-//void MainWindow::setPosition(AnimatedBee *b){
-//    //animationScene->addItem(b);
-
-
-//    switch(b->getGate()){
-
-//    //case 1: b->setPos(ui->display->width(),0);
-//        case 1: b->setPos(20,20);
-//        break;
-
-//    case 2: b->setPos(0,0);
-//        break;
-
-//    case 3: b->setPos(0,ui->display->height());
-//        break;
-
-//    case 4: b->setPos(ui->display->width(),ui->display->height());
-//        break;
-
-//    default: b->setPos(ui->display->width()/2,ui->display->height()/2);
-//        break;
-//    }
-
-//    animationScene->addItem(b);
-
-//}
-
-
-
-
 
 
 //leave methods

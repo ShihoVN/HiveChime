@@ -181,5 +181,10 @@ vector<string> CreateModel::checkmodel(){
 
 void CreateModel::on_lineEdit_textChanged(const QString &arg1)
 {
-    modeltitle=arg1.toStdString();
+        for (int i=0;i<arg1.size();i++) {
+            if(arg1.at(i).isSpace()==true){
+                ui->lineEdit->backspace();
+            }
+        }
+    modeltitle=ui->lineEdit->text().toStdString();
 }
