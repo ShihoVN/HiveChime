@@ -17,18 +17,25 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
 {
     ui->setupUi(this);
     beelog=tool;
-
+    int maxX=0;
+    int maxY=0;
     //creates series of total bee activity
     map<int,std::pair<int,int>>intervals=Timetable("Hours");
     for (std::map<int,std::pair<int,int>>::iterator it = intervals.begin();it!=intervals.end();++it) {
         cout<<"X-axis "<<it->second.first<<" Y-axis "<<it->second.second<<endl;
+        if (maxX<it->second.first) {
+            maxX=it->second.first;
+        }
+        if (maxY<it->second.second) {
+            maxY=it->second.second;
+        }
         series->append(it->second.first,it->second.second);
     }
     cout<<"done all "<<endl;
 
     //customize total bee activity line
     QPen pen(QRgb(0xFB3640));
-    pen.setWidth(1.8);
+    pen.setWidth(2);
     series->setPen(pen);
     ui->total->setStyleSheet("QCheckBox {color: red}");
 
@@ -43,7 +50,7 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
 
     //customize leaving bee activity line
     QPen pen2(QRgb(0x3a9b22));
-    pen2.setWidth(1.8);
+    pen2.setWidth(2);
     seriesExit->setPen(pen2);
     ui->leaving->setStyleSheet("QCheckBox {color: green}");
 
@@ -57,7 +64,7 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
 
     //customize entering bee activity line
     QPen pen3(QRgb(0x3972d5));
-    pen3.setWidth(1.8);
+    pen3.setWidth(2);
     seriesEnter->setPen(pen3);
     ui->entering->setStyleSheet("QCheckBox {color: blue}");
 
@@ -68,12 +75,12 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
 
 
     //customize axes
-    axisX->setRange(0, 58);
-    axisX->setTickCount(25);
+    axisX->setRange(0, maxX+1);
+    axisX->setTickCount((maxX+1)/2);
     axisX->setLabelFormat("%d");
     axisX->setTitleText("time");
-    axisY->setRange(0, 300);
-    axisY->setTickCount(20);
+    axisY->setRange(0, maxY);
+    axisY->setTickCount(10);
     axisY->setLabelFormat("%d");
     axisY->setTitleText("number of bees");
 

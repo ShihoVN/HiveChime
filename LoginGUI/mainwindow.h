@@ -42,6 +42,7 @@ private:
     int genChkBox;
     Intro *introWindow;
     MainWindowRT *realTimeWindow;
+    MainWindowAnimate *w=nullptr;
     CreateModel *createModel;
     GeneratedModel *generateModel;
     userSelectModel *usm;

@@ -55,7 +55,9 @@ void MainWindow::on_pushButton_2_clicked()
 
             std::cout << secWindowGen->realTime <<endl;
             if(secWindowGen->realTime ==true){
-                MainWindowAnimate *w = new MainWindowAnimate(this);
+                if(w!=nullptr)
+                    w->close();
+                w = new MainWindowAnimate(this);
                 cout << "SEC SOUND "<< secWindowGen->getPlaySound();
                 w->setSound(secWindowGen->getPlaySound());
                 w->createEnvironment();

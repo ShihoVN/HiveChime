@@ -31,6 +31,7 @@ struct nextBee{
     int sensor;
 } ;
 
+//compares struct of nextBee by time
 struct Compare{
     bool operator()(nextBee const& first, nextBee const& second)
     {

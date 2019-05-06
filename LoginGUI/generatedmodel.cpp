@@ -14,15 +14,15 @@ GeneratedModel::GeneratedModel(QWidget *parent , QString *hiveid, string* modeli
     int times=std::stoi(time->substr(0,2));
     BeeGeneration *BG;
     if(*size=="large"){
-        BG = new BeeGeneration(hiveid->toStdString(),40000,times);
+        BG = new BeeGeneration(hiveid->toStdString(),600,times);
         BG->setDate(std::stoi(date->substr(0,2)),std::stoi(date->substr(2,2)),std::stoi(date->substr(4,5)));
     }
     else if(*size=="medium"){
-        BG = new BeeGeneration(hiveid->toStdString(),30000,times);
+        BG = new BeeGeneration(hiveid->toStdString(),300,times);
         BG->setDate(std::stoi(date->substr(0,2)),std::stoi(date->substr(2,2)),std::stoi(date->substr(4,5)));
     }
     else{
-        BG = new BeeGeneration(hiveid->toStdString(),15000,times);
+        BG = new BeeGeneration(hiveid->toStdString(),150,times);
         BG->setDate(std::stoi(date->substr(0,2)),std::stoi(date->substr(2,2)),std::stoi(date->substr(4,5)));
     }
     ui->time_label->setText(time->c_str());
@@ -75,4 +75,7 @@ void GeneratedModel::on_pushButton_2_clicked()
     }
     models->add_row_m(modeltitles.size(),hiveids+":"+modelids,modelids);
     beelog->storeData();
+    beelog->track_db();
+    this->hide();
+    this->destroy();
 }
