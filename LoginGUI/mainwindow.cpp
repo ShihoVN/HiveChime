@@ -63,8 +63,9 @@ void MainWindow::on_pushButton_2_clicked()
             }else if(secWindowGen->viewModel ==true){
                 nessicarty=hiveid.toStdString()+"ModelDB";
                 usm = new userSelectModel(this,dbtable,&nessicarty);
-                cout << "SEC SOUND "<< secWindowGen->getPlaySound();
-                usm->show();
+                usm->exec();
+                graphModel = new Bees(this, usm->data);
+                graphModel->show();
             }
 
         }

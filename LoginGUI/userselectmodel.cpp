@@ -7,14 +7,15 @@ userSelectModel::userSelectModel(QWidget *parent,Tool *tool,string *tablename) :
 {
     ui->setupUi(this);
     dbtool=tool;
+    cout<<*tablename<<endl;
     models=new DBModelTable(tool,*tablename);
     char** P_rows =models->select_table_m();
     QString added;
     if(P_rows!=nullptr){
-        for(int i =4; i<4*(models->size()+1);i=i+4){
-            added=P_rows[i+1];
+        for(int i =3; i<3*(models->size()+1);i=i+3){
+            added=P_rows[i+2];
             ui->ModelList->addItem(added);
-            std::cout <<P_rows[i+1]<< P_rows[i+2]<<P_rows[i+3] << std::endl;
+            std::cout <<P_rows[i]<< P_rows[i+1]<<P_rows[i+2] << std::endl;
         }
     }
 }
