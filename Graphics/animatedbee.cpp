@@ -76,8 +76,8 @@ void AnimatedBee::playSound(){
 
 
 /**
- * @brief AnimatedBee::isInBounds - this method checks if the BeeObject is in the bounds
- * @return
+ * @brief AnimatedBee::isInBounds checks if the beeobject is in bounds
+ * @return true or false if the bee is in bounds
  */
 bool AnimatedBee::isInBounds(){
     //it is an exit data
@@ -227,8 +227,10 @@ bool AnimatedBee::isInBounds(){
 
 }
 
+
 /**
- * @brief AnimatedBee::move - This method moves a bee
+ * @brief AnimatedBee::moves a bee onthe board
+ * @return void
  */
 void AnimatedBee::move(){
 
@@ -498,7 +500,6 @@ QGraphicsPixmapItem* AnimatedBee::getBee(){
 }
 
 
-//Anything below this line is not implemented
 /**
  * @brief AnimatedBee::boundingRect - This methhod returns the bounds of the screen
  * @return
