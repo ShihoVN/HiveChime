@@ -13,7 +13,23 @@ MainWindowAnimate::MainWindowAnimate(QWidget *parent) :
 
 
     //Creates the display environment and displays it in the graphics view
-    //createEnvironment();
+    createEnvironment();
+
+
+
+
+    //Weather Instatiator
+    setLocations();
+    parseLocation(California); // this needs to be passed in from GUI eventually
+    manager = new QNetworkAccessManager(this);
+    connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(findTemp(QNetworkReply*)));
+    timer = new QTimer(this);
+    getFromWeb();
+    connect(timer, SIGNAL(timeout()), this, SLOT(getFromWeb()));
+    timer->start(60000); //Check weather updates every minute
+
+
+
 
 }
 
@@ -106,6 +122,7 @@ void MainWindowAnimate::addBeeRT(){
 
 }
 
+
 void MainWindowAnimate::populateRT(){
 
     board->populateRT();
@@ -138,51 +155,127 @@ MainWindowAnimate::~MainWindowAnimate()
 }
 
 
-void MainWindowAnimate::populate(){
-
-    //for (int i = 1; i <= 8; i++){
-    //AnimatedBee *b = new AnimatedBee(i);
-    // setPosition(b);
-    //    bees.push_back(b);
-    // }
-
-}
-
-
-
-//void MainWindow::setPosition(AnimatedBee *b){
-//    //animationScene->addItem(b);
-
-
-//    switch(b->getGate()){
-
-//    //case 1: b->setPos(ui->display->width(),0);
-//        case 1: b->setPos(20,20);
-//        break;
-
-//    case 2: b->setPos(0,0);
-//        break;
-
-//    case 3: b->setPos(0,ui->display->height());
-//        break;
-
-//    case 4: b->setPos(ui->display->width(),ui->display->height());
-//        break;
-
-//    default: b->setPos(ui->display->width()/2,ui->display->height()/2);
-//        break;
-//    }
-
-//    animationScene->addItem(b);
-
-//}
-
-
-
 
 void MainWindowAnimate::setSound(bool s){
     sound = s;
 }
+
+//gets data from website
+void MainWindowAnimate::getFromWeb()
+{
+
+    const QUrl myurl = QUrl(url);
+    QNetworkRequest request(myurl);
+    request.setRawHeader("User-Agent", "MyOwnBrowser 1.0");
+
+    manager->get(request);
+
+}
+
+
+void MainWindowAnimate::findTemp(QNetworkReply *reply){
+    if(reply->error()){
+        qDebug() << reply->errorString();
+        return;
+    }
+
+    QString str;
+    str= reply->readAll();
+
+    content = str.toStdString();
+    string tempSummary;
+    string temp;
+
+
+    tempSummary = readBetween("summary\":", ",\"icon\":");
+    temp = readBetween(",\"temperature\":", ",\"apparentTemperature\"");
+    //temp.append("\xB0");
+    temp = temp + string("F");
+    //std::cout << tempSummary << std::endl;
+
+
+    //udp message will be sperated by return line
+    QString qstring;
+    QString qTemp;
+    //         newstring = readBetween(
+    //             "span class=\"wob_t\" id=\"wob_tm\" style=\"display:inline\">",
+    //             "</span><span class=\"wob_t\" id=\"wob_ttm\""
+    //         );
+
+    qTemp = QString::fromStdString(temp);
+
+
+    qstring = QString::fromStdString(tempSummary);
+    //ui->cityName->setText(qstring);  //set cityName to Label
+    //ui->tempLabel->setText(qTemp);
+
+    ui->temp->setText(qTemp);
+    ui->weather->setText(qstring);
+
+}
+
+
+
+
+string MainWindowAnimate::readBetween(string s1, string s2){
+    size_t first = content.find(s1) + s1.size();
+    size_t second = content.find(s2) - first;
+    //cout <<  content.substr(first, second) << endl;
+    return content.substr(first, second);
+}
+
+
+
+void MainWindowAnimate::printVector(){
+    for(int i =0; i<UDPmessage.size(); i++){
+        cout << UDPmessage.at(i) << endl;
+    }
+}
+
+
+void MainWindowAnimate::parseLocation(Location location){
+    parseLongAndLat(location.longitude, location.latitude);
+    ui->cityName->setText(QString::fromStdString(location.city));
+}
+
+
+void MainWindowAnimate::parseLongAndLat(double x, double y){
+
+    string locationURL = string("https://api.darksky.net/forecast/7d4d899326f51981d1d887c0c96f2373/") + to_string(x) + string(",") + to_string(y);
+    cout << locationURL <<endl;
+    QString qs = QString::fromStdString(locationURL);
+    url = qs; //see the url in the header file to this
+}
+
+
+
+void MainWindowAnimate:: setLocations(){
+    newYork.city = "New York, NY";
+    newYork.latitude = 40.7831;
+    newYork.longitude = -73.9712;
+
+
+
+
+    California.city = "Davis, CA";
+    California.longitude = 38.5449;
+    California.latitude = -121.7405;
+
+
+
+    Florida.city = "Orlando, FL";
+    Florida.longitude = 28.5383;
+    Florida.latitude = 81.3792;
+
+
+
+
+}
+
+
+
+
+
 
 //leave methods
 QRectF MainWindowAnimate::boundingRect(){

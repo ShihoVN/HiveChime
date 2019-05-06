@@ -17,7 +17,7 @@
    <widget class="QGraphicsView" name="display">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>80</x>
       <y>0</y>
       <width>500</width>
       <height>500</height>
@@ -55,6 +55,55 @@
      <string>Sound</string>
     </property>
    </widget>
+   <widget class="QLabel" name="cityName">
+    <property name="geometry">
+     <rect>
+      <x>419</x>
+      <y>300</y>
+      <width>59</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="acceptDrops">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>f</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="weather">
+    <property name="geometry">
+     <rect>
+      <x>419</x>
+      <y>290</y>
+      <width>59</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>f</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="temp">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>280</y>
+      <width>91</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>d</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -62,7 +111,7 @@
      <x>0</x>
      <y>0</y>
      <width>838</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

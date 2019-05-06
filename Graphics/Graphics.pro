@@ -4,6 +4,10 @@
 #
 #-------------------------------------------------
 
+
+QT       += network
+
+
 QT       += core gui \
         multimedia
 
@@ -27,23 +31,25 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-      #  mainwindow.cpp \
+        mainwindow.cpp \
     framework.cpp \
     animatedbee.cpp \
     animationboard.cpp \
     mainwindowanimate.cpp \
-     ../RealTimeStream/mainwindowrt.cpp
+     ../RealTimeStream/mainwindowrt.cpp \
+    weather.cpp
 
 HEADERS += \
-    #    mainwindow.h \
+        mainwindow.h \
     framework.h \
     animatedbee.h \
     animationboard.h \
     mainwindowanimate.h \
-    ../RealTimeStream/mainwindowrt.h
+    ../RealTimeStream/mainwindowrt.h \
+    weather.h
 
 FORMS += \
-     #   mainwindow.ui \
+        mainwindow.ui \
     mainwindowanimate.ui \
     ../RealTimeStream/mainwindowrt.ui
 
