@@ -13,7 +13,7 @@ DataContainer::DataContainer()
             added->date=P_rows[i+3];
             added->time=P_rows[i+4];
             added->type=P_rows[i+5];
-            std::cout <<added->board<< added->gate<<added->date <<added->time << std::endl;
+            //std::cout <<added->board<< added->gate<<added->date <<added->time << std::endl;
             this->loadData(added);
         }
     }
@@ -32,7 +32,7 @@ DataContainer::DataContainer(string db_name)
             added->date=P_rows[i+3];
             added->time=P_rows[i+4];
             added->type=P_rows[i+5];
-            std::cout <<added->board<< added->gate<<added->date <<added->time << std::endl;
+            //std::cout <<added->board<< added->gate<<added->date <<added->time << std::endl;
             this->loadData(added);
         }
     }
@@ -51,11 +51,11 @@ DataContainer::DataContainer(Tool*tool,string db_name)
             added->date=P_rows[i+3];
             added->time=P_rows[i+4];
             added->type=std::atoi(P_rows[i+5]);
-            std::cout<<"board " <<added->board<<std::endl;
+            /*std::cout<<"board " <<added->board<<std::endl;
             std::cout <<"gate "<< added->gate<<std::endl;
             std::cout <<"time "<<added->time << std::endl;
             std::cout <<"date "<<added->date << std::endl;
-            std::cout <<"Type "<<P_rows[i+5] << std::endl;
+            std::cout <<"Type "<<P_rows[i+5] << std::endl;*/
 
             this->loadData(added);
         }

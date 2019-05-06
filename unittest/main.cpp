@@ -73,7 +73,7 @@ TEST_F(FooTest, RAN) {
     std::default_random_engine generator;
     int x=100;
     std::exponential_distribution<double> expDistbn(double(600/x)); //Calculates the next expected activity
-    cout << "Hive ID: 23"<< endl;
+    //cout << "Hive ID: 23"<< endl;
     while(i < 8){
         b1->update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
         b2->update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
@@ -93,7 +93,7 @@ TEST_F(FooTest, RAN2) {
     std::default_random_engine generator;
     int x=500;
     std::exponential_distribution<double> expDistbn(double(600/x)); //Calculates the next expected activity
-    cout << "Hive ID: 23"<< endl;
+    //cout << "Hive ID: 23"<< endl;
     while(i < 8){
         b1->update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
         b2->update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
@@ -113,7 +113,7 @@ TEST_F(FooTest, RAN3) {
     std::default_random_engine generator;
     int x=50;
     std::exponential_distribution<double> expDistbn(double(600/x)); //Calculates the next expected activity
-    cout << "Hive ID: 23"<< endl;
+    //cout << "Hive ID: 23"<< endl;
     while(i < 8){
         b1->update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
         b2->update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
@@ -133,7 +133,7 @@ TEST_F(FooTest, RAN4) {
     std::default_random_engine generator;
     int x=3;
     std::exponential_distribution<double> expDistbn(double(600/x)); //Calculates the next expected activity
-    cout << "Hive ID: 23"<< endl;
+    //cout << "Hive ID: 23"<< endl;
     while(i < 8){
         b1->update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
         b2->update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
@@ -179,7 +179,7 @@ TEST_F(FooTest, udpgen1) {
     std::default_random_engine generator;
     int x=3;
     std::exponential_distribution<double> expDistbn(double(600/x)); //Calculates the next expected activity
-    cout << "Hive ID: 23"<< endl;
+    //cout << "Hive ID: 23"<< endl;
         while(b1->nextBees.size()<8){
             b1->update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
             b1->generate();
@@ -200,7 +200,7 @@ TEST_F(FooTest, udpgen2) {
     std::default_random_engine generator;
     int x=3;
     std::exponential_distribution<double> expDistbn(double(600/x)); //Calculates the next expected activity
-    cout << "Hive ID: 23"<< endl;
+    //cout << "Hive ID: 23"<< endl;
         while(b1->nextBees.size()<8){
             b1->update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
             b1->generate();
@@ -221,7 +221,7 @@ TEST_F(FooTest, udpgen3) {
     std::default_random_engine generator;
     int x=500;
     std::exponential_distribution<double> expDistbn(double(600/x)); //Calculates the next expected activity
-    cout << "Hive ID: 23"<< endl;
+    //cout << "Hive ID: 23"<< endl;
         while(b1->nextBees.size()<8){
             b1->update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
             b1->generate();
@@ -242,7 +242,7 @@ TEST_F(FooTest, udpgen4) {
     std::default_random_engine generator;
     int x=50;
     std::exponential_distribution<double> expDistbn(double(600/x)); //Calculates the next expected activity
-    cout << "Hive ID: 23"<< endl;
+    //cout << "Hive ID: 23"<< endl;
         while(b1->nextBees.size()<8){
             b1->update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
             b1->generate();
@@ -264,7 +264,7 @@ TEST_F(FooTest, cal) {
     std::default_random_engine generator;
     int x=50;
     std::exponential_distribution<double> expDistbn(double(600/x)); //Calculates the next expected activity
-    cout << "Hive ID: 23"<< endl;
+    //cout << "Hive ID: 23"<< endl;
         while(b1->nextBees.size()<8){
             b1->update(6000*expDistbn(generator)); //Calls calcualte which calculates when the next bee will be created
             b1->generate();

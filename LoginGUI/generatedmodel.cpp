@@ -44,8 +44,8 @@ GeneratedModel::GeneratedModel(QWidget *parent , QString *hiveid, string* modeli
 string GeneratedModel::setendDate(string time,string duration){
     int times=std::stoi(time.substr(0,2));
     string _duration=time;
-    cout<<"begin: "<<times<<endl;
-    cout<<"duration: "<<duration.substr(2,duration.size())<<endl;
+    //cout<<"begin: "<<times<<endl;
+    //cout<<"duration: "<<duration.substr(2,duration.size())<<endl;
     if(duration.substr(2,duration.size()).compare("Hours")==0){
         times=times+std::stoi(duration.substr(0,2))+1;
         if(times<10)
@@ -53,9 +53,9 @@ string GeneratedModel::setendDate(string time,string duration){
 
         else
             _duration.replace(0,2,to_string(times));
-        cout<<"starttime: "<<time<<endl;
-        cout<<"differnece: "<<times<<endl;
-        cout<<"endtime: "<<_duration<<endl;
+        //cout<<"starttime: "<<time<<endl;
+        //cout<<"differnece: "<<times<<endl;
+        //cout<<"endtime: "<<_duration<<endl;
         return _duration;
     }
 }

@@ -88,7 +88,7 @@ bool AnimatedBee::isInBounds(){
             return false;
         }
         else {
-            //cout << "bee deleted";
+            ////cout << "bee deleted";
             return true;
         }
     }
@@ -106,7 +106,7 @@ bool AnimatedBee::isInBounds(){
                 return false;
             }
             else {
-                //cout << "bee deleted";
+                ////cout << "bee deleted";
                 return true;
             }
         }
@@ -119,7 +119,7 @@ bool AnimatedBee::isInBounds(){
                 return false;
             }
             else {
-                //cout << "bee deleted";
+                ////cout << "bee deleted";
                 return true;
             }
 
@@ -133,7 +133,7 @@ bool AnimatedBee::isInBounds(){
                 return false;
             }
             else {
-                //cout << "bee deleted";
+                ////cout << "bee deleted";
                 return true;
             }
 
@@ -146,7 +146,7 @@ bool AnimatedBee::isInBounds(){
                 return false;
             }
             else {
-                //cout << "bee deleted";
+                ////cout << "bee deleted";
                 return true;
             }
 
@@ -158,7 +158,7 @@ bool AnimatedBee::isInBounds(){
                 return false;
             }
             else {
-                //cout << "bee deleted";
+                ////cout << "bee deleted";
                 return true;
             }
 
@@ -170,7 +170,7 @@ bool AnimatedBee::isInBounds(){
                 return false;
             }
             else {
-                //cout << "bee deleted";
+                ////cout << "bee deleted";
                 return true;
             }
 
@@ -181,7 +181,7 @@ bool AnimatedBee::isInBounds(){
                 return false;
             }
             else {
-                //cout << "bee deleted";
+                ////cout << "bee deleted";
                 return true;
             }
 
@@ -192,7 +192,7 @@ bool AnimatedBee::isInBounds(){
                 return false;
             }
             else {
-                //cout << "bee deleted";
+                ////cout << "bee deleted";
                 return true;
             }
 
@@ -203,7 +203,7 @@ bool AnimatedBee::isInBounds(){
                 return false;
             }
             else {
-                //cout << "bee deleted";
+                ////cout << "bee deleted";
                 return true;
             }
 
@@ -215,7 +215,7 @@ bool AnimatedBee::isInBounds(){
                 return false;
             }
             else {
-                //cout << "bee deleted";
+                ////cout << "bee deleted";
                 return true;
             }
 
@@ -239,7 +239,7 @@ void AnimatedBee::move(){
     if(!isInBounds()){
         bee->scene()->removeItem(bee);
         //->removeItem(bee);
-        //cout << "bee deleted";
+        ////cout << "bee deleted";
         delete bee;
         delete this;
         return;

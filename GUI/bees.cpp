@@ -22,7 +22,7 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
     //creates series of total bee activity
     map<int,std::pair<int,int>>intervals=Timetable("Hours");
     for (std::map<int,std::pair<int,int>>::iterator it = intervals.begin();it!=intervals.end();++it) {
-        cout<<"X-axis "<<it->second.first<<" Y-axis "<<it->second.second<<endl;
+        //cout<<"X-axis "<<it->second.first<<" Y-axis "<<it->second.second<<endl;
         if (maxX<it->second.first) {
             maxX=it->second.first;
         }
@@ -31,7 +31,7 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
         }
         series->append(it->second.first,it->second.second);
     }
-    cout<<"done all "<<endl;
+    //cout<<"done all "<<endl;
 
     //customize total bee activity line
     QPen pen(QRgb(0xFB3640));
@@ -43,10 +43,10 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
     //creates series of leaving bee activity
     map<int,std::pair<int,int>>intervals2=Timetable_exit("Hours");
     for (std::map<int,std::pair<int,int>>::iterator it2 = intervals2.begin();it2!=intervals2.end();++it2) {
-        cout<<"X-axis "<<it2->second.first<<" Y-axis "<<it2->second.second<<endl;
+        //cout<<"X-axis "<<it2->second.first<<" Y-axis "<<it2->second.second<<endl;
         seriesExit->append(it2->second.first,it2->second.second);
     }
-    cout<<"done entry "<<endl;
+    //cout<<"done entry "<<endl;
 
     //customize leaving bee activity line
     QPen pen2(QRgb(0x3a9b22));
@@ -57,10 +57,10 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
     //creates series of entering bee activity
     map<int,std::pair<int,int>>intervals3=Timetable_enter("Hours");
     for (std::map<int,std::pair<int,int>>::iterator it3 = intervals3.begin();it3!=intervals3.end();++it3) {
-        cout<<"X-axis "<<it3->second.first<<" Y-axis "<<it3->second.second<<endl;
+        //cout<<"X-axis "<<it3->second.first<<" Y-axis "<<it3->second.second<<endl;
         seriesEnter->append(it3->second.first,it3->second.second);
     }
-    cout<<"done exit "<<endl;
+    //cout<<"done exit "<<endl;
 
     //customize entering bee activity line
     QPen pen3(QRgb(0x3972d5));
@@ -143,11 +143,11 @@ map<int,std::pair<int,int>> Bees::Timetable(string interval){
         if(interval.compare("Hours")==0){
             times=std::stoi(entre.time.substr(0,2))+days*24;
             if(timeslots.size()>0 && timeslots.rbegin()->second.first+1>times && timeslots.rbegin()->second.first-1<times ){
-                cout<<"times "<<times<<" vs. "<<timeslots.rbegin()->second.first<<endl;
+                //cout<<"times "<<times<<" vs. "<<timeslots.rbegin()->second.first<<endl;
                 timeslots.rbegin()->second.second=timeslots.rbegin()->second.second+1;
             }else {
                 if(timeslots.size()>0){
-                    cout<<"times "<<timeslots.rbegin()->second.first<<" vs.  nob: "<<timeslots.rbegin()->second.second<<endl;
+                    //cout<<"times "<<timeslots.rbegin()->second.first<<" vs.  nob: "<<timeslots.rbegin()->second.second<<endl;
                     if(timeslots.rbegin()->second.first-1>times){
                         days++;
                         times=times+24;
@@ -159,10 +159,10 @@ map<int,std::pair<int,int>> Bees::Timetable(string interval){
         //        if(interval.compare("Minutes")==0){
         //            time=std::stoi(entre.time.substr(0,2));
         //            if(timeslots.size()>0)
-        //                cout<<"times "<<entre.time<<" vs. "<<timeslots.rbegin()->first<<endl;
+        //                //cout<<"times "<<entre.time<<" vs. "<<timeslots.rbegin()->first<<endl;
         //            if(timeslots.size()>0 && timeslots.rbegin()->first+1>time){
         //                timeslots.rbegin()->second=timeslots.rbegin()->second+1;
-        //                cout<<"num of bees "<<timeslots.rbegin()->second<<endl;
+        //                //cout<<"num of bees "<<timeslots.rbegin()->second<<endl;
         //            }else {
         //                timeslots.insert(std::pair<int,int>(time,1));
         //            }
@@ -170,16 +170,16 @@ map<int,std::pair<int,int>> Bees::Timetable(string interval){
         //        if(interval.compare("seconds")==0){
         //            time=std::stoi(entre.time.substr(0,2));
         //            if(timeslots.size()>0)
-        //                cout<<"times "<<entre.time<<" vs. "<<timeslots.rbegin()->first<<endl;
+        //                //cout<<"times "<<entre.time<<" vs. "<<timeslots.rbegin()->first<<endl;
         //            if(timeslots.size()>0 && timeslots.rbegin()->first+1>time){
         //                timeslots.rbegin()->second=timeslots.rbegin()->second+1;
-        //                cout<<"num of bees "<<timeslots.rbegin()->second<<endl;
+        //                //cout<<"num of bees "<<timeslots.rbegin()->second<<endl;
         //            }else {
         //                timeslots.insert(std::pair<int,int>(time,1));
         //            }
         //        }
     }
-    cout<<times<<endl;
+    //cout<<times<<endl;
     return timeslots;
 }
 
@@ -200,11 +200,11 @@ map<int,std::pair<int,int>> Bees::Timetable_enter(string interval){
             if(interval.compare("Hours")==0){
                 times=std::stoi(entre.time.substr(0,2))+days*24;
                 if(timeslots.size()>0 && timeslots.rbegin()->second.first+1>times && timeslots.rbegin()->second.first-1<times ){
-                    cout<<"times "<<times<<" vs. "<<timeslots.rbegin()->second.first<<endl;
+                    //cout<<"times "<<times<<" vs. "<<timeslots.rbegin()->second.first<<endl;
                     timeslots.rbegin()->second.second=timeslots.rbegin()->second.second+1;
                 }else {
                     if(timeslots.size()>0){
-                        cout<<"times "<<timeslots.rbegin()->second.first<<" vs.  nob: "<<timeslots.rbegin()->second.second<<endl;
+                        //cout<<"times "<<timeslots.rbegin()->second.first<<" vs.  nob: "<<timeslots.rbegin()->second.second<<endl;
                         if(timeslots.rbegin()->second.first-1>times){
                             days++;
                             times=times+24;
@@ -216,10 +216,10 @@ map<int,std::pair<int,int>> Bees::Timetable_enter(string interval){
             //        if(interval.compare("Minutes")==0){
             //            time=std::stoi(entre.time.substr(0,2));
             //            if(timeslots.size()>0)
-            //                cout<<"times "<<entre.time<<" vs. "<<timeslots.rbegin()->first<<endl;
+            //                //cout<<"times "<<entre.time<<" vs. "<<timeslots.rbegin()->first<<endl;
             //            if(timeslots.size()>0 && timeslots.rbegin()->first+1>time){
             //                timeslots.rbegin()->second=timeslots.rbegin()->second+1;
-            //                cout<<"num of bees "<<timeslots.rbegin()->second<<endl;
+            //                //cout<<"num of bees "<<timeslots.rbegin()->second<<endl;
             //            }else {
             //                timeslots.insert(std::pair<int,int>(time,1));
             //            }
@@ -227,10 +227,10 @@ map<int,std::pair<int,int>> Bees::Timetable_enter(string interval){
             //        if(interval.compare("seconds")==0){
             //            time=std::stoi(entre.time.substr(0,2));
             //            if(timeslots.size()>0)
-            //                cout<<"times "<<entre.time<<" vs. "<<timeslots.rbegin()->first<<endl;
+            //                //cout<<"times "<<entre.time<<" vs. "<<timeslots.rbegin()->first<<endl;
             //            if(timeslots.size()>0 && timeslots.rbegin()->first+1>time){
             //                timeslots.rbegin()->second=timeslots.rbegin()->second+1;
-            //                cout<<"num of bees "<<timeslots.rbegin()->second<<endl;
+            //                //cout<<"num of bees "<<timeslots.rbegin()->second<<endl;
             //            }else {
             //                timeslots.insert(std::pair<int,int>(time,1));
             //            }
@@ -258,11 +258,11 @@ map<int,std::pair<int,int>> Bees::Timetable_exit(string interval){
             if(interval.compare("Hours")==0){
                 times=std::stoi(entre.time.substr(0,2))+days*24;
                 if(timeslots.size()>0 && timeslots.rbegin()->second.first+1>times && timeslots.rbegin()->second.first-1<times ){
-                    cout<<"times "<<times<<" vs. "<<timeslots.rbegin()->second.first<<endl;
+                    //cout<<"times "<<times<<" vs. "<<timeslots.rbegin()->second.first<<endl;
                     timeslots.rbegin()->second.second=timeslots.rbegin()->second.second+1;
                 }else {
                     if(timeslots.size()>0){
-                        cout<<"times "<<timeslots.rbegin()->second.first<<" vs.  nob: "<<timeslots.rbegin()->second.second<<endl;
+                        //cout<<"times "<<timeslots.rbegin()->second.first<<" vs.  nob: "<<timeslots.rbegin()->second.second<<endl;
                         if(timeslots.rbegin()->second.first-1>times){
                             days++;
                             times=times+24;
@@ -274,10 +274,10 @@ map<int,std::pair<int,int>> Bees::Timetable_exit(string interval){
             //        if(interval.compare("Minutes")==0){
             //            time=std::stoi(entre.time.substr(0,2));
             //            if(timeslots.size()>0)
-            //                cout<<"times "<<entre.time<<" vs. "<<timeslots.rbegin()->first<<endl;
+            //                //cout<<"times "<<entre.time<<" vs. "<<timeslots.rbegin()->first<<endl;
             //            if(timeslots.size()>0 && timeslots.rbegin()->first+1>time){
             //                timeslots.rbegin()->second=timeslots.rbegin()->second+1;
-            //                cout<<"num of bees "<<timeslots.rbegin()->second<<endl;
+            //                //cout<<"num of bees "<<timeslots.rbegin()->second<<endl;
             //            }else {
             //                timeslots.insert(std::pair<int,int>(time,1));
             //            }
@@ -285,10 +285,10 @@ map<int,std::pair<int,int>> Bees::Timetable_exit(string interval){
             //        if(interval.compare("seconds")==0){
             //            time=std::stoi(entre.time.substr(0,2));
             //            if(timeslots.size()>0)
-            //                cout<<"times "<<entre.time<<" vs. "<<timeslots.rbegin()->first<<endl;
+            //                //cout<<"times "<<entre.time<<" vs. "<<timeslots.rbegin()->first<<endl;
             //            if(timeslots.size()>0 && timeslots.rbegin()->first+1>time){
             //                timeslots.rbegin()->second=timeslots.rbegin()->second+1;
-            //                cout<<"num of bees "<<timeslots.rbegin()->second<<endl;
+            //                //cout<<"num of bees "<<timeslots.rbegin()->second<<endl;
             //            }else {
             //                timeslots.insert(std::pair<int,int>(time,1));
             //            }

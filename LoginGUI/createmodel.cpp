@@ -30,7 +30,7 @@ CreateModel::CreateModel(QWidget *parent,QString *hivename,Tool *tool) :
     else {
         times= times+to_string(ui->timeEdit->time().minute());
     }
-    cout<<"time: "<<times<<endl;
+    //cout<<"time: "<<times<<endl;
 }
 
 CreateModel::~CreateModel()
@@ -52,7 +52,7 @@ void CreateModel::hiveSize(){
     else {
         size="medium";
     }
-    cout<<"size: "<<size<<endl;
+    //cout<<"size: "<<size<<endl;
 }
 
 void CreateModel::on_pushButton_clicked()
@@ -71,9 +71,9 @@ void CreateModel::on_pushButton_clicked()
     }
     else{
         duration=duration+ui->comboBox->itemText(0).toStdString();
-        cout<<"duration: "<<duration<<endl;
-        cout<<"date: "<<date<<endl;
-        cout<<"time: "<<times<<endl;
+        //cout<<"duration: "<<duration<<endl;
+        //cout<<"date: "<<date<<endl;
+        //cout<<"time: "<<times<<endl;
         hiveSize();
         generate=true;
         this->hide();
@@ -93,10 +93,10 @@ void CreateModel::on_lineEdit_3_textChanged(const QString &arg1)
     }
     if(arg1.size()<2){
         duration="0"+arg1.toStdString();
-        cout<<"duration: "<<duration<<endl;
+        //cout<<"duration: "<<duration<<endl;
     }else{
         duration=arg1.toStdString();
-        cout<<"duration: "<<duration<<endl;
+        //cout<<"duration: "<<duration<<endl;
     }
 }
 
@@ -113,7 +113,7 @@ void CreateModel::on_dateEdit_dateChanged(const QDate &dates)
     else {
         date= date+to_string(dates.day());
     }
-    cout<<"date: "<<date<<endl;
+    //cout<<"date: "<<date<<endl;
 
 }
 
@@ -130,7 +130,7 @@ void CreateModel::on_dateEdit_userDateChanged(const QDate &dates)
     else {
         date= date+to_string(dates.day());
     }
-    cout<<"date: "<<date<<endl;
+    //cout<<"date: "<<date<<endl;
 }
 
 void CreateModel::on_timeEdit_userTimeChanged(const QTime &time)
@@ -145,7 +145,7 @@ void CreateModel::on_timeEdit_userTimeChanged(const QTime &time)
     else {
         times= times+to_string(time.minute());
     }
-    cout<<"time: "<<times<<endl;
+    //cout<<"time: "<<times<<endl;
 }
 
 void CreateModel::on_timeEdit_timeChanged(const QTime &time)
@@ -160,7 +160,7 @@ void CreateModel::on_timeEdit_timeChanged(const QTime &time)
     else {
         times= times+to_string(time.minute());
     }
-    cout<<"time: "<<times<<endl;
+    //cout<<"time: "<<times<<endl;
 }
 
 vector<string> CreateModel::checkmodel(){
@@ -172,7 +172,7 @@ vector<string> CreateModel::checkmodel(){
         for(int i =4; i<4*(models->size()+1);i=i+4){
             added=P_rows[i+1];
             modeltitles.push_back(added);
-            std::cout <<P_rows[i+1]<< P_rows[i+2]<<P_rows[i+3] << std::endl;
+            //std::cout <<P_rows[i+1]<< P_rows[i+2]<<P_rows[i+3] << std::endl;
         }
         return modeltitles;
     }

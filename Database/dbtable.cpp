@@ -294,13 +294,13 @@ int cb_create(void  *data,
     // Commented code prints information returned by
     // sqlite.
 
-    // std::cout << "------------------------------\n";
-    // std::cout << obj->get_name()
+    // std:://cout << "------------------------------\n";
+    // std:://cout << obj->get_name()
     // 	    << std::endl;
 
     // int i;
     // for(i = 0; i < argc; i++){
-    //   std::cout << azColName[i]
+    //   std:://cout << azColName[i]
     // 	      << " = "
     // 	      <<  (argv[i] ? argv[i] : "NULL")
     // 	      << std::endl;
@@ -358,13 +358,13 @@ int cb_drop(void  *data,
                   << std::endl;
     }
 
-    // std::cout << "------------------------------\n";
-    // std::cout << obj->get_name()
+    // std:://cout << "------------------------------\n";
+    // std:://cout << obj->get_name()
     // 	    << std::endl;
 
     // int i;
     // for(i = 0; i < argc; i++){
-    //   std::cout << azColName[i]
+    //   std:://cout << azColName[i]
     // 	      << " = "
     // 	      <<  (argv[i] ? argv[i] : "NULL")
     // 	      << std::endl;

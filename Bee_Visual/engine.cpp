@@ -59,7 +59,7 @@ bool engine::nullPtrCheck(){
 void engine::reset_gameboard(){
     board = new char* [num_rows];
     if (board == nullptr){
-        cout << "Error: nullptr problem";
+        //cout << "Error: nullptr problem";
     }
     else {
         for (int i = 0; i < num_rows; i++)
@@ -152,9 +152,9 @@ int engine::get_num_cols(){
 void engine::printBoard(){
     for (int i = 0; i < num_rows; i++){
         for (int j = 0; j < num_cols; j++){
-            cout << board[i][j];
+            //cout << board[i][j];
         }
-        cout << endl;
+        //cout << endl;
     }
 }
 

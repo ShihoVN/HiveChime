@@ -108,9 +108,9 @@ vector<string> MainWindowRT::splitter(string s){
 
     udps.push_back(s.substr(s.find('H') ,s.find("<br/>") - s.find('H') ));
 
-    // cout << s.substr(s.find('H') ,s.find("<br/>") - s.find('H') );
+    // //cout << s.substr(s.find('H') ,s.find("<br/>") - s.find('H') );
 
-    //cout << " ";
+    ////cout << " ";
     //if string contains more than 1 udp message
     while (s.find("<br/>")  != string::npos){
 
@@ -129,11 +129,11 @@ vector<string> MainWindowRT::splitter(string s){
 void MainWindowRT::checkAlerts(){
     if(decoder->sendExitAlert()== true){
         QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("A Swarm of Bees is Leaving the Hive!"));
-        cout << "Alert True"<< endl;
+        //cout << "Alert True"<< endl;
     }
     if(decoder->sendEntryAlert()==true){
         QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("A Swarm of Bees is Entering the Hive!"));
-        cout << "Alert True"<< endl;
+        //cout << "Alert True"<< endl;
     }
     else{
         //if the alert was false reset the entry and exit data

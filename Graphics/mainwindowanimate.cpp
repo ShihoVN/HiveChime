@@ -39,7 +39,7 @@ void MainWindowAnimate::createEnvironment(){
 
 
     //Create board to be added to the scene
-    cout<< "sound " << sound << endl;
+    //cout<< "sound " << sound << endl;
     board = new AnimationBoard(sound);
     board->setRect(-250,-250,500,500);
 
@@ -146,7 +146,7 @@ void MainWindowAnimate::playSound(){
 
 MainWindowAnimate::~MainWindowAnimate()
 {
-    cout << "close everything";
+    //cout << "close everything";
     board->returnSound()->stop();
     delete ui;
 }
@@ -191,7 +191,7 @@ void MainWindowAnimate::findTemp(QNetworkReply *reply){
     temp = readBetween(",\"temperature\":", ",\"apparentTemperature\"");
     //temp.append("\xB0");
     temp = temp + string("F");
-    //std::cout << tempSummary << std::endl;
+    //std:://cout << tempSummary << std::endl;
 
 
     //udp message will be sperated by return line
@@ -220,7 +220,7 @@ void MainWindowAnimate::findTemp(QNetworkReply *reply){
 string MainWindowAnimate::readBetween(string s1, string s2){
     size_t first = content.find(s1) + s1.size();
     size_t second = content.find(s2) - first;
-    //cout <<  content.substr(first, second) << endl;
+    ////cout <<  content.substr(first, second) << endl;
     return content.substr(first, second);
 }
 
@@ -228,7 +228,7 @@ string MainWindowAnimate::readBetween(string s1, string s2){
 
 void MainWindowAnimate::printVector(){
     for(int i =0; i<UDPmessage.size(); i++){
-        cout << UDPmessage.at(i) << endl;
+        //cout << UDPmessage.at(i) << endl;
     }
 }
 
@@ -242,7 +242,7 @@ void MainWindowAnimate::parseLocation(Location location){
 void MainWindowAnimate::parseLongAndLat(double x, double y){
 
     string locationURL = string("https://api.darksky.net/forecast/7d4d899326f51981d1d887c0c96f2373/") + to_string(x) + string(",") + to_string(y);
-    cout << locationURL <<endl;
+    //cout << locationURL <<endl;
     QString qs = QString::fromStdString(locationURL);
     url = qs; //see the url in the header file to this
 }

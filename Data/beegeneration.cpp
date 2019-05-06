@@ -110,16 +110,16 @@ string BeeGeneration::makeBee()
        }
 
        std::exponential_distribution<double> expDistbn(double(x/60)); //Calculates the next expected activity
-       cout << "Hive ID: 23"<< endl;
+       //cout << "Hive ID: 23"<< endl;
        while(nextBees.size() < 15){
            float t = expDistbn(generator);
-           cout<< "NEXT BEE" << t*60000<<endl;
+           //cout<< "NEXT BEE" << t*60000<<endl;
            update(t*60000);
            generate();
        }
 
        n--;
-       cout << "TOP BEE " << nextBees.top().board << " " << nextBees.top().sensor << endl;
+       //cout << "TOP BEE " << nextBees.top().board << " " << nextBees.top().sensor << endl;
        return generateUDP();
 }
 
@@ -130,7 +130,7 @@ string BeeGeneration::makeBee()
  */
 string BeeGeneration::generateUDP(){
     if(nextBees.empty()){
-        cout << "this is why" << endl;
+        //cout << "this is why" << endl;
     }
 
     m = nextBees.top().m;
@@ -216,7 +216,7 @@ string BeeGeneration::generateUDP(){
  * @return updated udp message with one or more activity occuring
  */
 string BeeGeneration::anotherActivity(string _udp, int udpTime[], float _m){
-    cout << "another activity?" << endl;
+    //cout << "another activity?" << endl;
     string udp = "";
 
     char *cstr = &_udp[0u];
@@ -263,7 +263,7 @@ string BeeGeneration::anotherActivity(string _udp, int udpTime[], float _m){
         for(int i = 0; i < 6; i ++){
             if(i == 5 && _m == 0 && nextBees.top().m >950 && nextBees.top().m <1000){
                 if((nextBees.top().now[i]-1) == udpTime[i]){
-                            cout << "another activity part 2" << endl;
+                            //cout << "another activity part 2" << endl;
                     return anotherActivity(udp, udpTime, _m);
                 }
                 break;
@@ -304,8 +304,8 @@ void BeeGeneration::generate(){
         bee.m = nearbyint(milli);
         bee.m += 50-((int)bee.m % 50);
 
-    cout << "bee: "<< bee.board <<" "<<bee.sensor << endl;
-    cout << "pair bee: "<<pairBee.board<<" "<< pairBee.sensor << endl;
+    //cout << "bee: "<< bee.board <<" "<<bee.sensor << endl;
+    //cout << "pair bee: "<<pairBee.board<<" "<< pairBee.sensor << endl;
 
     std::poisson_distribution<int> poissDistbn(450); //Randomly generates the pair UDP message (not in proper format)
     vector<int> elpst =  calculate(poissDistbn(generator));
@@ -540,8 +540,8 @@ void BeeGeneration::setActivity(int size){
         }
         int activity = int (size*rate);
         lambda.push_back(activity);
-        cout <<"shit "<<rate<<endl;
-        cout<<"HA" <<activity<<endl;
+        //cout <<"shit "<<rate<<endl;
+        //cout<<"HA" <<activity<<endl;
     }
 }
 

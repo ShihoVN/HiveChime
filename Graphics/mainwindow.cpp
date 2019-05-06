@@ -84,7 +84,7 @@ void MainWindow::populate(){
 
 MainWindow::~MainWindow()
 {
-   // cout <<"sound should stop";
+   // //cout <<"sound should stop";
     delete ui;
 }
 

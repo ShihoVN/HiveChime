@@ -38,7 +38,7 @@ QMediaPlayer* AnimationBoard::returnSound(){
  * @brief AnimationBoard::stopSound - This method stops the sound from playing
  */
 void AnimationBoard::stopSound(){
-  //  cout << "attempted stop sound";
+  //  //cout << "attempted stop sound";
     buzz->stop();
 
 }

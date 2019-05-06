@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
         for(int i =4; i<4*(hives->size()+1);i=i+4){
             added=P_rows[i+1];
             ui->comboBox->addItem(added);
-            std::cout <<P_rows[i+1]<< P_rows[i+2]<<P_rows[i+3] << std::endl;
+            //std::cout <<P_rows[i+1]<< P_rows[i+2]<<P_rows[i+3] << std::endl;
         }
     }
 
@@ -45,8 +45,10 @@ MainWindow::~MainWindow()
  */
 void MainWindow::on_pushButton_2_clicked()
 {
-    if(w!=nullptr)
-        w->quit();
+    if(w!=nullptr){
+        w->close();
+        w->~MainWindowAnimate();
+    }
     string nessicarty;
     if((!ui->checkBox->isChecked() && !ui->checkBox_2->isChecked()) ||
             (ui->checkBox->isChecked() && ui->checkBox_2->isChecked())){
@@ -57,14 +59,13 @@ void MainWindow::on_pushButton_2_clicked()
         if( ui->checkBox->isChecked()){
 
             secWindowGen = new secondWindow(this);
-            //this->hide();
             secWindowGen->exec();
 
 
-            std::cout << secWindowGen->realTime <<endl;
+            //std::cout << secWindowGen->realTime <<endl;
             if(secWindowGen->realTime ==true){
                 w = new MainWindowAnimate(this);
-                cout << "SEC SOUND "<< secWindowGen->getPlaySound();
+                //cout << "SEC SOUND "<< secWindowGen->getPlaySound();
                 w->setSound(secWindowGen->getPlaySound());
                 w->createEnvironment();
                 w->show();
@@ -72,8 +73,10 @@ void MainWindow::on_pushButton_2_clicked()
                 nessicarty=hiveid.toStdString()+"ModelDB";
                 usm = new userSelectModel(this,dbtable,&nessicarty);
                 usm->exec();
+                if(usm->loop){
                 graphModel = new Bees(this, usm->data);
                 graphModel->show();
+                }
             }
 
         }
@@ -90,7 +93,7 @@ void MainWindow::on_pushButton_2_clicked()
 
             else if(reseacherWindow->realTime == true){
                 w = new MainWindowAnimate(this);
-                cout << "SEC SOUND "<< secWindowGen->getPlaySound();
+                //cout << "SEC SOUND "<< secWindowGen->getPlaySound();
                 w->setSound(reseacherWindow->getPlaySound());
                 w->createEnvironment();
                 w->show();
@@ -110,8 +113,10 @@ void MainWindow::on_pushButton_2_clicked()
                 nessicarty=hiveid.toStdString()+"ModelDB";
                 usm = new userSelectModel(this,dbtable,&nessicarty);
                 usm->exec();
+                if(usm->loop){
                 graphModel = new Bees(this, usm->data);
                 graphModel->show();
+                }
             }
 
         }
@@ -129,5 +134,5 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::on_comboBox_currentIndexChanged(const QString &arg1)
 {
     hiveid=arg1;
-    std::cout<<&hiveid<<endl;
+    //std::cout<<&hiveid<<endl;
 }

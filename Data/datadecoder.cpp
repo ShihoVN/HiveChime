@@ -90,7 +90,7 @@ string DataDecoder:: timeDecoder(string s){
 
         unsigned long pos = time.find('.');
         string sub = time.substr(pos+3);
-       // cout << "sub" << sub<< endl;
+       // //cout << "sub" << sub<< endl;
         sub.erase(sub.begin());
 
         int milisec = std::stoi(sub);
@@ -103,7 +103,7 @@ string DataDecoder:: timeDecoder(string s){
     time.erase(time.begin()+pos);
     pos =long(time.find('.'));
     time.erase(time.begin()+pos);
-   // cout << "sensor time " <<sa.sensorTime << endl;
+   // //cout << "sensor time " <<sa.sensorTime << endl;
     return time;
 
 }
@@ -137,8 +137,8 @@ void DataDecoder:: activityDecoder(string _act){
             decimalToBinary(board); //pass the board activity to binary decoder
 
 
-           // cout << "board Activity decimal "  << board<< endl;
-          //  cout << "board Index "  << boardIndex<< "\n"<< endl;
+           // //cout << "board Activity decimal "  << board<< endl;
+          //  //cout << "board Index "  << boardIndex<< "\n"<< endl;
 
 
         }
@@ -175,7 +175,7 @@ void DataDecoder:: compareSensors(sensorActivity thisSensor){
         if(thisSensor.sensorTime - sensorArray.at(i).sensorTime > 500 ||
                 sensorArray.at(i).sensorTime - thisSensor.sensorTime > 500)
         {
-            // cout << "sensor 11" << thisSensor.sensors << endl;
+            // //cout << "sensor 11" << thisSensor.sensors << endl;
 
             sensorArray.erase(sensorArray.begin() + (i));
             if(sensorArray.size() ==0 || i >= sensorArray.size()){
@@ -187,11 +187,11 @@ void DataDecoder:: compareSensors(sensorActivity thisSensor){
 
         if(thisSensor.sensorBoard == sensorArray.at(i).sensorBoard) //check only sensors of the same board
         {
-            //  cout << "sensor22" << thisSensor.sensors << endl;
+            //  //cout << "sensor22" << thisSensor.sensors << endl;
             if(sensorArray.at(i).sensors == getPair(thisSensor.sensors)){
                 //send info into data base
                 if(getPair(thisSensor.sensors) <=4){
-                   // cout << "PAIR WAS MADEEE" << endl;
+                   // //cout << "PAIR WAS MADEEE" << endl;
                     d->type = 1;  //bee entered the hive
                     dContainer->addData(d);
 
@@ -201,7 +201,7 @@ void DataDecoder:: compareSensors(sensorActivity thisSensor){
                 }
                 else if(getPair(thisSensor.sensors) > 4){
                     d->type = 0; // bee left the hive
-                    //cout << "PAIR WAS MADEEE" << endl;
+                    ////cout << "PAIR WAS MADEEE" << endl;
                     dContainer->loadData(d);
 
                     //increase exitData;
@@ -245,7 +245,7 @@ void DataDecoder:: livestream(sensorActivity thisSensor){
         if(thisSensor.sensorTime - sensorArray.at(i).sensorTime > 500 ||
                 sensorArray.at(i).sensorTime - thisSensor.sensorTime > 500)
         {
-            // cout << "sensor 11" << thisSensor.sensors << endl;
+            // //cout << "sensor 11" << thisSensor.sensors << endl;
 
             sensorArray.erase(sensorArray.begin() + (i));
             if(sensorArray.size() ==0 || i >= sensorArray.size()){
@@ -257,11 +257,11 @@ void DataDecoder:: livestream(sensorActivity thisSensor){
 
         if(thisSensor.sensorBoard == sensorArray.at(i).sensorBoard) //check only sensors of the same board
         {
-            //  cout << "sensor22" << thisSensor.sensors << endl;
+            //  //cout << "sensor22" << thisSensor.sensors << endl;
             if(sensorArray.at(i).sensors == getPair(thisSensor.sensors)){
                 //send info into data base
                 if(getPair(thisSensor.sensors) <=4){
-                   // cout << "PAIR WAS MADEEE" << endl;
+                   // //cout << "PAIR WAS MADEEE" << endl;
                     d->type = 1;  //bee entered the hive
                     dContainer->loadData(d);
 
@@ -271,7 +271,7 @@ void DataDecoder:: livestream(sensorActivity thisSensor){
                 }
                 else if(getPair(thisSensor.sensors) > 4){
                     d->type = 0; // bee left the hive
-                   // cout << "PAIR WAS MADEEE" << endl;
+                   // //cout << "PAIR WAS MADEEE" << endl;
                     dContainer->loadData(d);
 
                     //increase exitData;
@@ -288,9 +288,9 @@ void DataDecoder:: livestream(sensorActivity thisSensor){
     }
 
     //if the sensor does not have a pair then add it to the array
-    // cout << "sensor33" << thisSensor.sensors << endl;
+    // //cout << "sensor33" << thisSensor.sensors << endl;
     sensorArray.push_back(thisSensor);
-    //cout << "sensor " << thisSensor.sensors << endl;
+    ////cout << "sensor " << thisSensor.sensors << endl;
 
 }
 
@@ -318,7 +318,7 @@ void DataDecoder:: decimalToBinary(int boardAct){
         if(binary[i] == 1){
             sa.sensors = i+1; //set the sensor to the index == 1
             d->gate = sa.sensors;
-            //  cout << "sensor " << sa.sensors << endl;
+            //  //cout << "sensor " << sa.sensors << endl;
             livestream(sa);
 
 

@@ -125,7 +125,7 @@ char** DBModelTable::select_table_m(){
         sql_select  = "SELECT * FROM ";
         sql_select += table_name;
         sql_select += ";";
-        std::cout << sql_select << std::endl;
+        //std::cout << sql_select << std::endl;
         if(size()<1)
             return nullptr;
         retCode = sqlite3_get_table(curr_db->db_ref(),sql_select.c_str(),
