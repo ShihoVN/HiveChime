@@ -11,22 +11,22 @@ CreateModel::CreateModel(QWidget *parent,QString *hivename,Tool *tool) :
     ui->label_9->setText(*hivename);
     date=to_string(ui->dateEdit->date().year()).substr(2,4);
     if(ui->dateEdit->date().month()<10)
-       date=date+ "0"+to_string(ui->dateEdit->date().month());
+        date=date+ "0"+to_string(ui->dateEdit->date().month());
     else {
         date=date+ to_string(ui->dateEdit->date().month());
     }
     if(ui->dateEdit->date().day()<10)
-       date=date+"0"+ to_string(ui->dateEdit->date().day());
+        date=date+"0"+ to_string(ui->dateEdit->date().day());
     else {
         date= date+to_string(ui->dateEdit->date().day());
     }
     if(ui->timeEdit->time().hour()<10)
-       times="0"+ to_string(ui->timeEdit->time().hour());
+        times="0"+ to_string(ui->timeEdit->time().hour());
     else {
         times= to_string(ui->timeEdit->time().hour());
     }
     if(ui->timeEdit->time().minute()<10)
-       times=times+"0"+ to_string(ui->timeEdit->time().minute());
+        times=times+"0"+ to_string(ui->timeEdit->time().minute());
     else {
         times= times+to_string(ui->timeEdit->time().minute());
     }
@@ -60,17 +60,17 @@ void CreateModel::on_pushButton_clicked()
     if((ui->checkBox_3->isChecked() && ui->checkBox_4->isChecked() && ui->checkBox_5->isChecked())||
             (ui->checkBox_3->isChecked() && ui->checkBox_4->isChecked()) || (ui->checkBox_4->isChecked() && ui->checkBox_5->isChecked())||
             (ui->checkBox_3->isChecked() && ui->checkBox_5->isChecked())){
-         QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Check one box before continuing"));
+        QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Check one box before continuing"));
     }
     else if((ui->lineEdit_3->text().isEmpty())){
-         QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Fill in all Boxes before Continuing"));
-    }else if((ui->lineEdit_3->text().toInt()>10 && ui->comboBox->itemText(0).toStdString().compare("Days"))){
-         QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Max Duration is 9 days"));
+        QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Fill in all Boxes before Continuing"));
+    }else if((ui->lineEdit_3->text().toInt()>23 && ui->comboBox->itemText(0).toStdString().compare("Hours")==0)){
+        QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Max Duration is 24 hour"));
     }else if(std::find(checkmodel().begin(), checkmodel().end(), modeltitle) != checkmodel().end()) {
         QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("modelname exists"));
     }
     else{
-        duration=ui->lineEdit_3->text().toStdString()+ui->comboBox->itemText(0).toStdString();
+        duration=duration+ui->comboBox->itemText(0).toStdString();
         cout<<"duration: "<<duration<<endl;
         cout<<"date: "<<date<<endl;
         cout<<"time: "<<times<<endl;
@@ -85,25 +85,31 @@ void CreateModel::on_lineEdit_3_textChanged(const QString &arg1)
     if(arg1.size()>2){
         ui->lineEdit_3->backspace();
     }
+
     for (int i=0;i<arg1.size();i++) {
         if(arg1.at(i).isNumber()==false){
             ui->lineEdit_3->setText("");
         }
     }
-    duration=arg1.toStdString()+ui->comboBox->itemText(0).toStdString();
-    cout<<"duration: "<<duration<<endl;
+    if(arg1.size()<2){
+        duration="0"+arg1.toStdString();
+        cout<<"duration: "<<duration<<endl;
+    }else{
+        duration=arg1.toStdString();
+        cout<<"duration: "<<duration<<endl;
+    }
 }
 
 void CreateModel::on_dateEdit_dateChanged(const QDate &dates)
 {
     date=to_string(dates.year()).substr(2,4);
     if(dates.month()<10)
-       date=date+ "0"+to_string(dates.month());
+        date=date+ "0"+to_string(dates.month());
     else {
         date=date+ to_string(dates.month());
     }
     if(dates.day()<10)
-       date=date+"0"+ to_string(dates.day());
+        date=date+"0"+ to_string(dates.day());
     else {
         date= date+to_string(dates.day());
     }
@@ -115,12 +121,12 @@ void CreateModel::on_dateEdit_userDateChanged(const QDate &dates)
 {
     date=to_string(dates.year()).substr(2,4);
     if(dates.month()<10)
-       date=date+ "0"+to_string(dates.month());
+        date=date+ "0"+to_string(dates.month());
     else {
         date=date+ to_string(dates.month());
     }
     if(dates.day()<10)
-       date=date+"0"+ to_string(dates.day());
+        date=date+"0"+ to_string(dates.day());
     else {
         date= date+to_string(dates.day());
     }
@@ -130,12 +136,12 @@ void CreateModel::on_dateEdit_userDateChanged(const QDate &dates)
 void CreateModel::on_timeEdit_userTimeChanged(const QTime &time)
 {
     if(time.hour()<10)
-       times="0"+ to_string(time.hour());
+        times="0"+ to_string(time.hour());
     else {
         times= to_string(time.hour());
     }
     if(time.minute()<10)
-       times=times+"0"+ to_string(time.minute());
+        times=times+"0"+ to_string(time.minute());
     else {
         times= times+to_string(time.minute());
     }
@@ -145,12 +151,12 @@ void CreateModel::on_timeEdit_userTimeChanged(const QTime &time)
 void CreateModel::on_timeEdit_timeChanged(const QTime &time)
 {
     if(time.hour()<10)
-       times="0"+ to_string(time.hour());
+        times="0"+ to_string(time.hour());
     else {
         times= to_string(time.hour());
     }
     if(time.minute()<10)
-       times=times+"0"+ to_string(time.minute());
+        times=times+"0"+ to_string(time.minute());
     else {
         times= times+to_string(time.minute());
     }

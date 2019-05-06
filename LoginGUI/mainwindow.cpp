@@ -40,6 +40,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    if(w!=nullptr)
+        w->quit();
     string nessicarty;
     if((!ui->checkBox->isChecked() && !ui->checkBox_2->isChecked()) ||
             (ui->checkBox->isChecked() && ui->checkBox_2->isChecked())){
@@ -55,8 +57,6 @@ void MainWindow::on_pushButton_2_clicked()
 
             std::cout << secWindowGen->realTime <<endl;
             if(secWindowGen->realTime ==true){
-                if(w!=nullptr)
-                    w->close();
                 w = new MainWindowAnimate(this);
                 cout << "SEC SOUND "<< secWindowGen->getPlaySound();
                 w->setSound(secWindowGen->getPlaySound());
@@ -83,7 +83,7 @@ void MainWindow::on_pushButton_2_clicked()
 
             else if(reseacherWindow->realTime == true){
                cout << "I GOT HEREE" << endl;
-                MainWindowAnimate *w = new MainWindowAnimate(this);
+                w = new MainWindowAnimate(this);
                 cout << "SEC SOUND "<< secWindowGen->getPlaySound();
                 w->setSound(reseacherWindow->getPlaySound());
                 w->createEnvironment();

@@ -61,6 +61,7 @@ public:
     void parseLocation(Location location); // return the url with correct location
     void parseLongAndLat(double x , double y ); //PARSES IN LOGITUDE AND LATITUDE
     void setLocations();
+    void quit();
 
 private:
     Ui::MainWindowAnimate *ui;

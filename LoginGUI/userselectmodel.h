@@ -22,6 +22,7 @@ public:
     explicit userSelectModel(QWidget *parent = nullptr,Tool* tool = nullptr,string* tablename=nullptr);
     ~userSelectModel();
     DataContainer *data;
+    bool loop=false;
 private slots:
     void on_pushButton_clicked();
 

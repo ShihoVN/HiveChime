@@ -33,5 +33,6 @@ void userSelectModel::on_pushButton_clicked()
 
 void userSelectModel::on_ModelList_itemClicked(QListWidgetItem *item)
 {
+    loop=true;
     modelname=item->text().toStdString();
 }

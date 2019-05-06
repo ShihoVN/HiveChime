@@ -272,21 +272,6 @@
      <string>Hours</string>
     </property>
    </item>
-   <item>
-    <property name="text">
-     <string>Minutes</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Seconds</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Days</string>
-    </property>
-   </item>
   </widget>
   <widget class="QDateEdit" name="dateEdit">
    <property name="geometry">

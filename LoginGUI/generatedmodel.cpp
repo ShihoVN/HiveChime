@@ -29,25 +29,35 @@ GeneratedModel::GeneratedModel(QWidget *parent , QString *hiveid, string* modeli
     ui->date_label->setText(date->c_str());
     ui->duration_label->setText(setendDate(*time,*duration).c_str());
     DataDecoder *models=new DataDecoder(beelog);
-
-    for(int i = 0; i < 10000; i++){
+    bool continuelooping=true;
+    string endtime=setendDate(*time,*duration)+"00000";
+    while(continuelooping){
+                if(beelog->getUdpMessages().size()>1){
+                    if(beelog->getUdpMessages().at(beelog->getUdpMessages().size()-1)->time>=endtime||beelog->getUdpMessages().at(0)->date<beelog->getUdpMessages().at(beelog->getUdpMessages().size()-1)->date){
+                        continuelooping=false;
+                    }
+                }
         models->decode(BG->makeBee());
     }
 }
 
 string GeneratedModel::setendDate(string time,string duration){
+    int times=std::stoi(time.substr(0,2));
+    string _duration=time;
+    cout<<"begin: "<<times<<endl;
+    cout<<"duration: "<<duration.substr(2,duration.size())<<endl;
+    if(duration.substr(2,duration.size()).compare("Hours")==0){
+        times=times+std::stoi(duration.substr(0,2))+1;
+        if(times<10)
+            _duration.replace(0,2,"0"+to_string(times));
 
-    if(duration.substr(1,duration.size()).compare("Hour"))
-        return "done";
-    if(duration.substr(1,duration.size()).compare("Hour"))
-        return "done";
-
-    if(duration.substr(1,duration.size()).compare("Hour"))
-        return "done";
-
-    if(duration.substr(1,duration.size()).compare("Hour"))
-
-        return "done";
+        else
+            _duration.replace(0,2,to_string(times));
+        cout<<"starttime: "<<time<<endl;
+        cout<<"differnece: "<<times<<endl;
+        cout<<"endtime: "<<_duration<<endl;
+        return _duration;
+    }
 }
 
 GeneratedModel::~GeneratedModel()
@@ -75,7 +85,6 @@ void GeneratedModel::on_pushButton_2_clicked()
     }
     models->add_row_m(modeltitles.size(),hiveids+":"+modelids,modelids);
     beelog->storeData();
-    beelog->track_db();
     this->hide();
     this->destroy();
 }

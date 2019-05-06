@@ -172,6 +172,9 @@ void MainWindowAnimate::getFromWeb()
 
 }
 
+void MainWindowAnimate::quit(){
+    this->destroy();
+}
 
 void MainWindowAnimate::findTemp(QNetworkReply *reply){
     if(reply->error()){
