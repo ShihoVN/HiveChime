@@ -67,19 +67,36 @@ DataContainer::~DataContainer()
 
 }
 
+
+/**
+ * @brief DataContainer::addData - This method adds a row to the database and adds the udp message to a vector
+ * @param udpMsg
+ */
 void DataContainer::addData(Data *udpMsg){
     bee_logdb->add_row_m(int(udpMessages.size()),udpMsg->board,
                          to_string(udpMsg->gate),udpMsg->date,udpMsg->time,to_string(udpMsg->type));
     udpMessages.push_back(udpMsg);
 }
 
+/**
+ * @brief DataContainer::loadData - This method adds a udp message to the vectro
+ * @param udpMsg
+ */
 void DataContainer::loadData(Data *udpMsg){
     udpMessages.push_back(udpMsg);
 }
 
+/**
+ * @brief DataContainer::getUdpMessages - This method returns the udp message
+ * @return
+ */
 vector<Data*> DataContainer:: getUdpMessages(){
     return udpMessages;
 }
+
+/**
+ * @brief DataContainer::storeData - This method stores the data into the database
+ */
 void DataContainer::storeData(){
     for (unsigned long i=0;i<udpMessages.size();i++) {
         bee_logdb->add_row_m(int(i),udpMessages.at(i)->board,to_string(udpMessages.at(i)->gate),
@@ -87,6 +104,9 @@ void DataContainer::storeData(){
     }
 }
 
+/**
+ * @brief DataContainer::track_db - This method tracks the database when called.
+ */
 void DataContainer::track_db(){
     bee_logdb->select_all();
 }

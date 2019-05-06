@@ -8,6 +8,7 @@
 #include "../Database/dbmodeltable.h"
 #include "../Data/datacontainer.h"
 
+
 using namespace std;
 
 namespace Ui {
@@ -22,6 +23,7 @@ public:
     explicit userSelectModel(QWidget *parent = nullptr,Tool* tool = nullptr,string* tablename=nullptr);
     ~userSelectModel();
     DataContainer *data;
+
 private slots:
     void on_pushButton_clicked();
 
@@ -32,6 +34,9 @@ private:
     Tool *dbtool;
     DBModelTable *models;
     string modelname;
+
+
+
 };
 
 #endif // USERSELECTMODEL_H

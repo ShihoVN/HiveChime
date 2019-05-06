@@ -38,8 +38,6 @@ public:
     QGraphicsPixmapItem* getBee();
 
 
-
-
     //Virtual methods DO NOT DELETE
     QRectF boundingRect();
     void paint(QPainter*,const QStyleOptionGraphicsItem*, QWidget*);

@@ -27,7 +27,12 @@ void secondWindowResearcher::on_pushButton_clicked()
 {
     QString Hiveid=ui->label->text();
 
-    if((!ui->checkBox_2->isChecked() && !ui->checkBox_3->isChecked()) && !ui->checkBox_4->isChecked() && !ui->checkBox_5->isChecked()){
+    if(((!ui->checkBox_2->isChecked() && !ui->checkBox_3->isChecked()) && !ui->checkBox_4->isChecked() && !ui->checkBox_5->isChecked()) ||
+           (ui->checkBox_2->isChecked() && ui->checkBox_3->isChecked() && ui->checkBox_4->isChecked() && ui->checkBox_5->isChecked()) ||
+            (ui->checkBox_2->isChecked() && ui->checkBox_3->isChecked() && ui->checkBox_4->isChecked()) ||
+             (ui->checkBox_2->isChecked() && ui->checkBox_3->isChecked()) ||
+            (ui->checkBox_2->isChecked() &&  ui->checkBox_4->isChecked()) || (ui->checkBox_3->isChecked() && ui->checkBox_4->isChecked()) ||
+            ui->checkBox_4->isChecked() && ui->checkBox_5->isChecked() || ui->checkBox_3->isChecked() && ui->checkBox_4->isChecked() && ui->checkBox_5->isChecked()){
         QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Check one box before continuing"));
     }
 
@@ -45,17 +50,15 @@ void secondWindowResearcher::on_pushButton_clicked()
         }else if(ui->checkBox_4->isChecked()){
             createModel = true;
             this->hide();
-        }else if(ui->checkBox_3->isChecked()){
-            viewModel = true;
-            this->hide();
         }
     }
+
 
 }
 
 /**
  * @brief secondWindowResearcher::getPlaySound - This method returns whether the sound should be played on the visualization GUI
- * @return
+ * @return - the sound
  */
 bool secondWindowResearcher::getPlaySound(){
     return playSound;

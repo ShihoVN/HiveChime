@@ -36,8 +36,8 @@ SOURCES += \
     animatedbee.cpp \
     animationboard.cpp \
     mainwindowanimate.cpp \
-     ../RealTimeStream/mainwindowrt.cpp \
-    weather.cpp
+     ../RealTimeStream/mainwindowrt.cpp
+   # weather.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,8 +45,8 @@ HEADERS += \
     animatedbee.h \
     animationboard.h \
     mainwindowanimate.h \
-    ../RealTimeStream/mainwindowrt.h \
-    weather.h
+    ../RealTimeStream/mainwindowrt.h
+    #weather.h
 
 FORMS += \
         mainwindow.ui \
