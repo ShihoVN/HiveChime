@@ -25,9 +25,8 @@ public:
     explicit MainWindowRT(QWidget *parent = nullptr);
     ~MainWindowRT();
     string readBetween(string str1, string str2); //gets string between strings
-    //void printVector();
     vector<string> splitter(string s);
-        vector <string> UDPmessage;
+    vector <string> UDPmessage;
 
 private:
     Ui::MainWindowRT *ui;
@@ -41,7 +40,7 @@ private:
     QString url = "http://tomcollinsresearch.net/research/rpa/fakeudp/fakeudpmgate.html";
     QString translate;
 
-       unsigned int i = 0;
+    unsigned int i = 0;
 private slots:
     void downloadFinished(QNetworkReply *reply);
     void on_pushButton_clicked();

@@ -27,7 +27,6 @@ MainWindow::MainWindow(QWidget *parent) :
         }
     }
 
-
     //call new diaglougue
     introWindow = new Intro();
     introWindow->exec();
@@ -38,6 +37,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+/**
+ * @brief MainWindow::on_pushButton_2_clicked - This method determines the next Window to be popped up, with the conditions
+ * based on the GUI. The method also determines the Guis to be displayed after the first one. All GUIs to display
+ * are determined in this method.
+ */
 void MainWindow::on_pushButton_2_clicked()
 {
     string nessicarty;
@@ -45,6 +50,7 @@ void MainWindow::on_pushButton_2_clicked()
             (ui->checkBox->isChecked() && ui->checkBox_2->isChecked())){
         QMessageBox::warning(this, tr("ERROR MESSAGE"), tr("Check one box before continuing"));
     }
+    //general user
     else {
         if( ui->checkBox->isChecked()){
 
@@ -71,8 +77,9 @@ void MainWindow::on_pushButton_2_clicked()
             }
 
         }
+
+        //researcher
         else if(ui->checkBox_2->isChecked()){
-            cout << "Researcher window" << endl;
             reseacherWindow = new secondWindowResearcher(this, &hiveid);
             reseacherWindow->exec();
 
@@ -82,9 +89,8 @@ void MainWindow::on_pushButton_2_clicked()
             }
 
             else if(reseacherWindow->realTime == true){
-               cout << "I GOT HEREE" << endl;
+
                 MainWindowAnimate *w = new MainWindowAnimate(this);
-                cout << "SEC SOUND "<< secWindowGen->getPlaySound();
                 w->setSound(reseacherWindow->getPlaySound());
                 w->createEnvironment();
                 w->show();
@@ -93,15 +99,20 @@ void MainWindow::on_pushButton_2_clicked()
                 createModel = new CreateModel(this, &hiveid, dbtable);
                 createModel->exec();
                 if(createModel->generate==true){
-                generateModel = new GeneratedModel(this, &hiveid, &createModel->modeltitle,&createModel->size, &createModel->date,
-                                                   &createModel->times, &createModel->duration,dbtable);
-                generateModel->show();
-                graphModel = new Bees(this, generateModel->beelog);
-                graphModel->show();
+                    generateModel = new GeneratedModel(this, &hiveid, &createModel->modeltitle,&createModel->size, &createModel->date,
+                                                       &createModel->times, &createModel->duration,dbtable);
+                    generateModel->show();
+                    graphModel = new Bees(this, generateModel->beelog);
+                    graphModel->show();
                 }
             }
-
-
+            else if(reseacherWindow->viewModel ==true){
+                nessicarty=hiveid.toStdString()+"ModelDB";
+                usm = new userSelectModel(this,dbtable,&nessicarty);
+                usm->exec();
+                graphModel = new Bees(this, usm->data);
+                graphModel->show();
+            }
 
         }
 
@@ -110,7 +121,11 @@ void MainWindow::on_pushButton_2_clicked()
 }
 
 
-
+/**
+ * @brief MainWindow::on_comboBox_currentIndexChanged - This method takes in an argument which determines the HiveID, and sets it to the
+ * variable that represents the HiveID.
+ * @param arg1
+ */
 void MainWindow::on_comboBox_currentIndexChanged(const QString &arg1)
 {
     hiveid=arg1;

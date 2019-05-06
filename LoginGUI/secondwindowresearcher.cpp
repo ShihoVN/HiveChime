@@ -1,3 +1,6 @@
+/**This class is for a user who has selected the box indicating that they are a Researcher.
+  **/
+
 #include "secondwindowresearcher.h"
 #include "ui_secondwindowresearcher.h"
 #include <QMessageBox>
@@ -15,6 +18,11 @@ secondWindowResearcher::~secondWindowResearcher()
     delete ui;
 }
 
+/**
+ * @brief secondWindowResearcher::on_pushButton_clicked - This method determines which box is checked by the researcher after they have selected
+ * that they are a general user. This determines which functionalities the researcher would like to use as they are logged in the program,
+ * using checkboxes displayed on the GUI
+ */
 void secondWindowResearcher::on_pushButton_clicked()
 {
     QString Hiveid=ui->label->text();
@@ -37,12 +45,18 @@ void secondWindowResearcher::on_pushButton_clicked()
         }else if(ui->checkBox_4->isChecked()){
             createModel = true;
             this->hide();
+        }else if(ui->checkBox_3->isChecked()){
+            viewModel = true;
+            this->hide();
         }
     }
-    cout << "Realt time " << realTime << endl;
 
 }
 
+/**
+ * @brief secondWindowResearcher::getPlaySound - This method returns whether the sound should be played on the visualization GUI
+ * @return
+ */
 bool secondWindowResearcher::getPlaySound(){
     return playSound;
 }

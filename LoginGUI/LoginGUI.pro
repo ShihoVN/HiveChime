@@ -33,8 +33,8 @@ SOURCES += \
     createmodel.cpp \
     userselectmodel.cpp \
     generatedmodel.cpp \
-    linegraph.cpp \
-    bargraph.cpp \
+    #linegraph.cpp \
+   # bargraph.cpp \
     ../Graphics/mainwindowanimate.cpp \
     ../Graphics/animatedbee.cpp\
     ../Graphics/animationboard.cpp \
@@ -53,8 +53,8 @@ HEADERS += \
     createmodel.h \
     userselectmodel.h \
     generatedmodel.h \
-    linegraph.h \
-    bargraph.h \
+   # linegraph.h \
+   # bargraph.h \
     ../Graphics/mainwindowanimate.h \
     ../Graphics/animatedbee.h\
     ../Graphics/animationboard.h \
@@ -76,8 +76,8 @@ FORMS += \
     selectmodel.ui \
     userselectmodel.ui \
     generatedmodel.ui \
-    linegraph.ui \
-    bargraph.ui \
+   # linegraph.ui \
+   # bargraph.ui \
     ../Graphics/mainwindowanimate.ui \
     intro.ui \
     ../RealTimeStream/mainwindowrt.ui \
