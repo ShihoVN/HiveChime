@@ -2,7 +2,6 @@
 #include <QGraphicsScene>
 
 
-//not used
 AnimatedBee::AnimatedBee()
 {
     QPixmap beeIMG(":/images /images/Indiv_Bee.png");
@@ -14,7 +13,7 @@ AnimatedBee::AnimatedBee()
 }
 
 
-//not used
+
 AnimatedBee::AnimatedBee(int gate)
 {
 
@@ -26,22 +25,12 @@ AnimatedBee::AnimatedBee(int gate)
     beeIMG = beeIMG.scaled(beeSize,beeSize,Qt::KeepAspectRatio);
     bee = new QGraphicsPixmapItem(beeIMG);
 
-
     //Connect
     QTimer *timer = new QTimer();
     connect(timer,SIGNAL(timeout()), this,SLOT(move()));
 
     timer->start(10);//every 100ms timeout changes
 
-    //scene->removeitem(this);
-    //pos.x()
-    //setPos(x(),y());
-    //check collision
-    //QList<QGraphicsItem *> items = collidingItems();
-    //for loops checking if items in Qlist
-    //if  (typeid(*(colliding_items[i])) == typeid(Enemy)
-    //remove and then delete
-    //then return
 
 }
 
@@ -75,7 +64,9 @@ AnimatedBee::AnimatedBee(int board, bool type)
 
 
 
-
+/**
+ * @brief AnimatedBee::playSound - This method plays the bee sounds on the GUI
+ */
 void AnimatedBee::playSound(){
     if (buzz->isAvailable()){
         buzz->play();
@@ -255,7 +246,6 @@ void AnimatedBee::move(){
 
     }
 
-
     //if it is an exit
     if (type == false){
 
@@ -283,8 +273,6 @@ void AnimatedBee::move(){
 
         }
     }
-
-
 
     //if it is an entry
     if(type == true){
@@ -460,174 +448,65 @@ void AnimatedBee::move(){
 
     }
 
-
-
-
-
-
-
-
-
-
-//    if(bee->x() < rightBorder){
-//        bee->setPos(bee->x() + 1, bee->y());
-//    }
-//    if(bee->y() < bottomBorder){
-//        bee->setPos(bee->x() , bee->y()+ 1);
-//    }
-
-
-
-
-
-
-
-
-
-
-
-    //Used to decrease size of image not implemented yet
-    //    count ++;
-    //    if (count % 100 == 0 && beeSize > 10){
-    //        beeIMG = beeIMG.scaled(beeSize--,beeSize--,Qt::KeepAspectRatio);
-    //        bee = new QGraphicsPixmapItem(beeIMG);
-    //        count = 1;
-    //    }
-
-
-    /*
-
-    //if it is a bee entry
-    if(gate == 1){
-        if(bee->x() > 40){
-            bee->setPos(bee->x() - 1, bee->y());
-        }
-        else if(bee->x() < 40){
-            bee->setPos(bee->x() + 1 , bee->y());
-        }
-        if(bee->y() > -75){
-            bee->setPos(bee->x() , bee->y()- 1);
-        }
-        else if(bee->y() < -75){
-            bee->setPos(bee->x() , bee->y()+ 1);
-        }
-    }
-
-
-
-    if(gate == 2){
-
-
-        if(bee->x() > -50){
-            bee->setPos(bee->x() - 1, bee->y());
-        }
-        else if(bee->x() < -50){
-            bee->setPos(bee->x() + 1 , bee->y());
-        }
-
-        if(bee->y() > -80){
-            bee->setPos(bee->x() , bee->y()- 1);
-        }
-        else if(bee->y() < -80){
-            bee->setPos(bee->x() , bee->y()+ 1);
-
-        }
-    }
-
-
-
-    if(gate == 3){
-
-
-        if(bee->x() > -25){
-            bee->setPos(bee->x() - 1, bee->y());
-        }
-        else if(bee->x() < -25){
-            bee->setPos(bee->x() + 1 , bee->y());
-        }
-
-        if(bee->y() > -25){
-            bee->setPos(bee->x() , bee->y()- 1);
-        }
-        else if(bee->y() < -25){
-            bee->setPos(bee->x() , bee->y()+ 1);
-
-        }
-    }
-
-
-
-    if(gate == 4){
-
-
-        if(bee->x() > -25){
-            bee->setPos(bee->x() - 1, bee->y());
-        }
-        else if(bee->x() < -25){
-            bee->setPos(bee->x() + 1 , bee->y());
-        }
-
-        if(bee->y() > 50){
-            bee->setPos(bee->x() , bee->y()- 1);
-        }
-        else if(bee->y() < 50){
-            bee->setPos(bee->x() , bee->y()+ 1);
-
-        }
-    }
-
-    if (gate == 5){
-        bee->setPos(bee->x() + 10 , bee->y()-  1);
-    }
-    if (gate == 6){
-        bee->setPos(bee->x() - 10 , bee->y()-  1);
-    }
-    if (gate == 7){
-        bee->setPos(bee->x() - 10 , bee->y()+  1);
-    }
-    if (gate == 8){
-        bee->setPos(bee->x() + 10 , bee->y()+  1);
-    }
-
-    */
 }
 
 
 
-
+/**
+ * @brief AnimatedBee::getGate - This method returns the hive gate
+ * @return
+ */
 int AnimatedBee::getGate(){
     return gate;
 }
 
+/**
+ * @brief AnimatedBee::getBoard - This method returns the board on the Hive
+ * @return
+ */
 int AnimatedBee::getBoard(){
     return board;
 }
 
+/**
+ * @brief AnimatedBee::getBeeSize - This method returns the Bee Size of the hive
+ * @return
+ */
 int AnimatedBee::getBeeSize(){
     return beeSize;
 }
 
+/**
+ * @brief AnimatedBee::getType - This method returns the type of entry for the hive
+ * @return
+ */
 bool AnimatedBee::getType(){
     return type;
 }
 
+/**
+ * @brief AnimatedBee::paint - This method paints the bee on the screen
+ */
+void AnimatedBee::paint(QPainter*,const QStyleOptionGraphicsItem*, QWidget*){
 
+}
 
-
+/**
+ * @brief AnimatedBee::getBee - this method returns the bee
+ * @return
+ */
 QGraphicsPixmapItem* AnimatedBee::getBee(){
     return bee;
 }
 
 
-
-
-
-//Anything below this line is not implemented
+/**
+ * @brief AnimatedBee::boundingRect - This methhod returns the bounds of the screen
+ * @return
+ */
 QRectF AnimatedBee::boundingRect(){
     QRectF n;
     return n;
 }
 
-void AnimatedBee::paint(QPainter*,const QStyleOptionGraphicsItem*, QWidget*){
 
-}
