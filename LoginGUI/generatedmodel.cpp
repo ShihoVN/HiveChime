@@ -31,9 +31,11 @@ GeneratedModel::GeneratedModel(QWidget *parent , QString *hiveid, string* modeli
     DataDecoder *models=new DataDecoder(beelog);
     bool continuelooping=true;
     string endtime=setendDate(*time,*duration)+"00000";
+
     while(continuelooping){
                 if(beelog->getUdpMessages().size()>1){
                     if(beelog->getUdpMessages().at(beelog->getUdpMessages().size()-1)->time>=endtime||beelog->getUdpMessages().at(0)->date<beelog->getUdpMessages().at(beelog->getUdpMessages().size()-1)->date){
+                        cout << beelog->getUdpMessages().at(beelog->getUdpMessages().size()-1)->date.substr(3,2)<<endl;
                         continuelooping=false;
                     }
                 }
@@ -44,8 +46,6 @@ GeneratedModel::GeneratedModel(QWidget *parent , QString *hiveid, string* modeli
 string GeneratedModel::setendDate(string time,string duration){
     int times=std::stoi(time.substr(0,2));
     string _duration=time;
-    //cout<<"begin: "<<times<<endl;
-    //cout<<"duration: "<<duration.substr(2,duration.size())<<endl;
     if(duration.substr(2,duration.size()).compare("Hours")==0){
         times=times+std::stoi(duration.substr(0,2))+1;
         if(times<10)
@@ -53,9 +53,16 @@ string GeneratedModel::setendDate(string time,string duration){
 
         else
             _duration.replace(0,2,to_string(times));
-        //cout<<"starttime: "<<time<<endl;
-        //cout<<"differnece: "<<times<<endl;
-        //cout<<"endtime: "<<_duration<<endl;
+        return _duration;
+    }
+    times=std::stoi(time.substr(3,2));
+    if(duration.substr(2,duration.size()).compare("Days")==0){
+        times=times+std::stoi(duration.substr(0,2))+1;
+        if(times<10)
+            _duration.replace(0,2,"0"+to_string(times));
+
+        else
+            _duration.replace(0,2,to_string(times));
         return _duration;
     }
 }

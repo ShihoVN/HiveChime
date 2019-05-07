@@ -190,7 +190,7 @@ void MainWindowAnimate::findTemp(QNetworkReply *reply){
     tempSummary = readBetween("summary\":", ",\"icon\":");
     temp = readBetween(",\"temperature\":", ",\"apparentTemperature\"");
     //temp.append("\xB0");
-    temp = temp + string("F");
+    temp = temp + string("°F");
     //std:://cout << tempSummary << std::endl;
 
 
@@ -203,6 +203,7 @@ void MainWindowAnimate::findTemp(QNetworkReply *reply){
     //         );
 
     qTemp = QString::fromStdString(temp);
+
 
 
     qstring = QString::fromStdString(tempSummary);
@@ -234,7 +235,7 @@ void MainWindowAnimate::printVector(){
 
 
 void MainWindowAnimate::parseLocation(Location location){
-    parseLongAndLat(location.longitude, location.latitude);
+    parseLongAndLat(location.latitude, location.longitude);
     ui->cityName->setText(QString::fromStdString(location.city));
 }
 
@@ -258,8 +259,8 @@ void MainWindowAnimate:: setLocations(){
 
 
     California.city = "Davis, CA";
-    California.longitude = 38.5449;
-    California.latitude = -121.7405;
+    California.latitude = 38.5449;
+    California.longitude = -121.7405;
 
 
 

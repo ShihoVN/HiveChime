@@ -23,16 +23,11 @@ class AnimatedBee:public QObject, public QGraphicsPixmapItem
 
 public:
     AnimatedBee();
-    AnimatedBee(int gate);
     AnimatedBee(int board, bool type);//type is exit or entry where true is entry
-    AnimatedBee(QPixmap pic);
-    AnimatedBee(QGraphicsItem *parent);
-    int getGate();
     int getBoard();
     bool getType();
     int getBeeSize();
     void addBee(int i);
-    void playSound();
     bool isInBounds();
 
     QGraphicsPixmapItem* getBee();

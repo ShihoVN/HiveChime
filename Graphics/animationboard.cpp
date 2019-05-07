@@ -70,13 +70,13 @@ void AnimationBoard::populate(){
     DataDecoder d(&container);
 
 
-    BeeGeneration* BG = new BeeGeneration("0002", 60000);
+    BeeGeneration* BG = new BeeGeneration("0002", 6000);
     for (int i=0;i<100000 ;i++) {
         d.decode(BG->makeBee());
     }
     QTimer *timer = new QTimer();
     connect(timer,SIGNAL(timeout()), this,SLOT(addBee()));
-    timer->start(rand() % 100 + 100);//every 100ms timeout changes
+    timer->start(rand() % 100 + 250);//every 100ms timeout changes
     playSoundOnScreen();
 }
 
@@ -121,34 +121,34 @@ void AnimationBoard::setPosition(AnimatedBee *b){
 
     //if it is an exit
     if (b->getType() == false){
-        if(b->getGate() == 1){
+        if(b->getBoard() == 1){
             b->getBee()->setPos(0,0);
         }
-        else if (b->getGate() == 2){
+        else if (b->getBoard() == 2){
             b->getBee()->setPos(0,-85);
         }
-        else if (b->getGate() == 3){
+        else if (b->getBoard() == 3){
             b->getBee()->setPos(-4,-64);
         }
-        else if (b->getGate() == 4){
+        else if (b->getBoard() == 4){
             b->getBee()->setPos(-35,60);
         }
-        else if (b->getGate() == 5){
+        else if (b->getBoard() == 5){
             b->getBee()->setPos(-75,57);
         }
-        else if (b->getGate() == 6){
+        else if (b->getBoard() == 6){
             b->getBee()->setPos(-72,11);
         }
-        else if (b->getGate() == 7){
+        else if (b->getBoard() == 7){
             b->getBee()->setPos(-76,-33);
         }
-        else if (b->getGate() == 8){
+        else if (b->getBoard() == 8){
             b->getBee()->setPos(-50,-35);
         }
-        else if (b->getGate() == 9){
+        else if (b->getBoard() == 9){
             b->getBee()->setPos(-114,40);
         }
-        else if (b->getGate() == 10){
+        else if (b->getBoard() == 10){
             b->getBee()->setPos(-80,-95);
         }
 
@@ -156,7 +156,7 @@ void AnimationBoard::setPosition(AnimatedBee *b){
 
     //if entry
     else if(b->getType() == true){
-        if(b->getGate() < 7){
+        if(b->getBoard() < 7){
             b->getBee()->setPos(250,rand()%500 - 250);
         }
         else {

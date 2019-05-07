@@ -48,6 +48,12 @@ void MainWindow::on_pushButton_2_clicked()
     if(w!=nullptr){
         w->close();
         w->~MainWindowAnimate();
+        w=nullptr;
+    }
+    if(graphModel!=nullptr){
+        graphModel->close();
+        graphModel->~Bees();
+        graphModel=nullptr;
     }
     string nessicarty;
     if((!ui->checkBox->isChecked() && !ui->checkBox_2->isChecked()) ||

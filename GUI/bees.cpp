@@ -88,7 +88,7 @@ Bees::Bees(QWidget *parent,DataContainer * tool) :
     QFont font("Times", 40, QFont::Bold);
     chart->setTitleFont(font);
     chart->setTitleBrush(QBrush(Qt::black));
-    chart->setTitle("Simple line chart example");
+    chart->setTitle("Bee Activity");
     //customizing background of the chart
     QLinearGradient plotAreaGradient;
     plotAreaGradient.setStart(QPointF(0, 1));

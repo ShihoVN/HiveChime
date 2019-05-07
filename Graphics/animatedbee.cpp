@@ -13,28 +13,6 @@ AnimatedBee::AnimatedBee()
 }
 
 
-
-AnimatedBee::AnimatedBee(int gate)
-{
-
-    this->gate = gate;
-
-
-    beeIMG.load(":/images /images/Indiv_Bee.png");
-    //beeIMG = new  QPixmap(":/images /images/Indiv_Bee.png");
-    beeIMG = beeIMG.scaled(beeSize,beeSize,Qt::KeepAspectRatio);
-    bee = new QGraphicsPixmapItem(beeIMG);
-
-    //Connect
-    QTimer *timer = new QTimer();
-    connect(timer,SIGNAL(timeout()), this,SLOT(move()));
-
-    timer->start(10);//every 100ms timeout changes
-
-
-}
-
-
 //this constructor is being used
 AnimatedBee::AnimatedBee(int board, bool type)
 {
@@ -61,17 +39,6 @@ AnimatedBee::AnimatedBee(int board, bool type)
     buzz->setMedia(QUrl("qrc:/sounds/sound/beeSound.wav"));
 }
 
-
-
-
-/**
- * @brief AnimatedBee::playSound - This method plays the bee sounds on the GUI
- */
-void AnimatedBee::playSound(){
-    if (buzz->isAvailable()){
-        buzz->play();
-    }
-}
 
 
 
@@ -448,16 +415,6 @@ void AnimatedBee::move(){
 
     }
 
-}
-
-
-
-/**
- * @brief AnimatedBee::getGate - This method returns the hive gate
- * @return
- */
-int AnimatedBee::getGate(){
-    return gate;
 }
 
 /**

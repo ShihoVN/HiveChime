@@ -39,6 +39,7 @@ private:
     string content; // contains all website information
     QString url = "http://tomcollinsresearch.net/research/rpa/fakeudp/fakeudpmgate.html";
     QString translate;
+    QString allContent;
 
     unsigned int i = 0;
 private slots:

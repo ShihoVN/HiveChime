@@ -16,6 +16,7 @@ MainWindowRT::MainWindowRT(QWidget *parent) :
 
     timer->start(5000); //start timer
     timer2->start(20000);
+    on_pushButton_clicked();
 
     decoder = new DataDecoder(&container);
 }
@@ -73,10 +74,14 @@ void MainWindowRT::downloadFinished(QNetworkReply *reply){
             decoder->decode(udps.at(i));
         }
 
+
+
         //converts final udp to str
         str = QString::fromStdString(finalUDP);
+
+        allContent += str;
         //changes the label
-        ui->Label->setText(str);  //set URL text to Label
+        ui->Label->setText(allContent);  //set URL text to Label
 
     }
 
