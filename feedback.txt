@@ -8,3 +8,17 @@ The terminal output is readable, looks good.
 
 Grade:4/5
 
+
+Deliverables 2 and 3
+
+You did a good job with the DB and UI aspects of the project. The thing missing from the DB deliverable was the table requested by the customer (columns for id, msg, runId). You had a good go at the artistic aspect of deliverable no.3, but I didn't see a co-opting/rewriting of code from openprocessing.org or similar to produce a truly artistic visualization -- rather you stayed pretty close to a literal visualization of what was going on.
+
+Grade: 4/5
+Grade: 4.5/5
+
+
+Project presentation
+This was very good. You told us who your main users were and showed us what you'd done well.
+
+Grade: 14.5/15
+
